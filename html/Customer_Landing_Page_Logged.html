@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Artist_dashboard</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="images/favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/favicons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/favicons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/favicons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/favicons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/favicons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="images/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="images/favicons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="images/favicons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="images/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="images/favicons/manifest.json">
+    <link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="images/favicons/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/jquery.bxslider.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link href='https://fonts.googleapis.com/css?family=Martel:400,200,300,600,700,800,900' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <header class="wow fadeInDown dashbrd">
+        <div class="container-fluid">
+            <div class="header_bottom text-center">
+                <div class="logo_header">
+                    <ul>
+                        <li class="with_search">
+                            <a href="index.html"><img src="images/black-logo.png" alt=""></a>
+                        </li>
+                        <li class="lastt">
+                            <button class="tgle" type="button" name="message" value="Hide" id="toggle-message"><img src="images/search_icon.png" alt=""></button>
+                            <input type="text" name="search" id="message" value="" />
+                        </li>
+                    </ul>
+                </div>
+                <div class="header_nav">
+                    <div class="middle_footer">
+                        <ul>
+                            <li><a href="">Browse Music</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="dshbrd_prfle pull-right">
+                    <ul>
+                        <li>
+                            <a href=""><img src="images/dash_prof.png" alt="" /></a>
+                        </li>
+                        <li>
+                            <button type="button" class="drop_header">
+                                <h3>Greg Keegan</h3>
+                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="drop_cntnt" style="display:none;">
+                    <ul>
+                        <li><a href="">Account Settings</a></li>
+                        <li><a href="">My Earnings</a></li>
+                        <li><a href="">My Music</a></li>
+                        <li><a href="">Submissions</a></li>
+                        <li><a href="">Contact</a></li>
+                        <li><a class="logout" href="">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="cstmr_cont header-margin">
+        <div class="container-fluid pdngg container-full">
+            <div class="banner_image wow fadeIn animated mrgn_srch" style="background-image: url('images/premi_bnnr.jpg');">
+                <div class="content_banner_inner text-center">
+                    <h2>Welcome</h2>
+                    <p>Hi Greg ! </p>
+                </div>
+            </div>
+            <div class="music-bar">
+                <figure><img title="" alt="" src="images/music-bar.jpg"></figure>
+            </div>
+            <div class="lft_sidebar">
+                <div class="your_music">
+                    <h3 class="rt_hdng">YOUR MUSIC</h3>
+                    <ul>
+                        <li><a href="">Hearted</a></li>
+                        <li><a href="">Artists</a></li>
+                        <li><a href="">Songs</a></li>
+                    </ul>
+                </div>
+                <div class="searchh your_music">
+                    <h3 class="rt_hdng"> SEARCH</h3>
+                    <div class="panel-group user_acc" id="accordion">
+                        <div class="panel panel-default">
+                            <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Mood</a></h3>
+                            <div id="collapseOne" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li><a href="">Angst</a></li>
+                                        <li><a href="">Chilled</a></li>
+                                        <li><a href="">Quiet</a></li>
+                                        <li><a href="">Series</a></li>
+                                        <li><a href="">Tense</a></li>
+                                        <li><a href="">Thoughful</a></li>
+                                        <li><a href="">Thrilled</a></li>
+                                        <li><a href="">Upset</a></li>
+                                        <li><a href="">Uplisting</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Energy </a></h3>
+                            <div id="collapseTwo" class="panel-collapse collapse">
+                                <div class="panel-body"><img src="images/music_level.jpg" alt=""></div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <h3 class="rt_hdng"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Instruments </a> </h3>
+                            <div id="collapseThree" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li><a href="">Angst</a></li>
+                                        <li><a href="">Chilled</a></li>
+                                        <li><a href="">Quiet</a></li>
+                                        <li><a href="">Series</a></li>
+                                        <li><a href="">Tense</a></li>
+                                        <li><a href="">Thoughful</a></li>
+                                        <li><a href="">Thrilled</a></li>
+                                        <li><a href="">Upset</a></li>
+                                        <li><a href="">Uplisting</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapsefv">Genre</a></h3>
+                            <div id="collapsefv" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li><a href="">Angst</a></li>
+                                        <li><a href="">Chilled</a></li>
+                                        <li><a href="">Quiet</a></li>
+                                        <li><a href="">Series</a></li>
+                                        <li><a href="">Tense</a></li>
+                                        <li><a href="">Thoughful</a></li>
+                                        <li><a href="">Thrilled</a></li>
+                                        <li><a href="">Upset</a></li>
+                                        <li><a href="">Uplisting</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapsefour">Artists</a></h3>
+                            <div id="collapsefour" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li><a href="">Angst</a></li>
+                                        <li><a href="">Chilled</a></li>
+                                        <li><a href="">Quiet</a></li>
+                                        <li><a href="">Series</a></li>
+                                        <li><a href="">Tense</a></li>
+                                        <li><a href="">Thoughful</a></li>
+                                        <li><a href="">Thrilled</a></li>
+                                        <li><a href="">Upset</a></li>
+                                        <li><a href="">Uplisting</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapsefour">Instrumental</a><input type="checkbox"></h3>
+                            <div id="collapsefour" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li><a href="">Angst</a></li>
+                                        <li><a href="">Chilled</a></li>
+                                        <li><a href="">Quiet</a></li>
+                                        <li><a href="">Series</a></li>
+                                        <li><a href="">Tense</a></li>
+                                        <li><a href="">Thoughful</a></li>
+                                        <li><a href="">Thrilled</a></li>
+                                        <li><a href="">Upset</a></li>
+                                        <li><a href="">Uplisting</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <h3 class="rt_hdng"> <a class="accordion-toggle" contextmenu=""href="#">Vocal</a></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="your_music bottm_music">
+                    <h3 class="rt_hdng playlist-icon">PLAYLISTS</h3>
+                    <ul>
+                        <li><a href="#">Songs</a></li>
+                        <li><a href="#">Artists</a></li>
+                        <li><a href="#">Songs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="rt_sidebar pull-right">
+                <div class="cont_artist">
+                    <div class="slider_cnt">
+                        <div class="slider-col">
+                            <h2 class="heading_artist slider_hdng frst-hdng">Recently listened</h2>
+                            <div id="owl-example" class="owl-carousel effect_img">
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist1.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist2.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist3.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist4.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist5.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist6.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist7.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist6.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist9.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist10.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist1.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist3.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider-col">
+                            <h2 class="heading_artist slider_hdng">Recently Added</h2>
+                            <div id="owl-example" class="owl-carousel effect_img">
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist1.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist2.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist3.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist4.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist5.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist6.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist7.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist6.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist9.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist10.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist1.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist3.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                            <span>My Time is now</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider-col">
+                            <h2 class="heading_artist slider_hdng">Our Suggestions</h2>
+                            <div id="owl-example" class="owl-carousel effect_img">
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist1.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist2.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist3.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist4.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist5.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist6.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist7.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist6.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist9.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist10.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist1.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist3.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slider-col">
+                            <h2 class="heading_artist slider_hdng">Followed artists</h2>
+                            <div id="owl-example" class="owl-carousel effect_img">
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist1.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist2.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist3.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist4.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist5.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist6.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist7.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist6.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist9.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist10.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist1.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="">
+                                        <div class="img_inner"><img src="images/artist3.jpg" alt=""></div>
+                                        <div class="carousel-caption-custom">
+                                            <p>Claim Snide</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.bxslider.js"></script>
+        <script src="js/toggle.js"></script>
+        <script src="https://use.typekit.net/auo4nbe.js"></script>
+        <script>
+            try {
+                Typekit.load({
+                    async: true
+                });
+            } catch (e) {}
+        </script>
+        <script src="js/wow.js"></script>
+        <script src="js/jquery.paginate.js"></script>
+        <script src="js/owl.carousel.js"></script>
+        <script>
+            //call paginate
+            $('#example').paginate();
+        </script>
+        <script>
+            var wow = new WOW({
+                boxClass: 'wow', // animated element css class (default is wow)
+                animateClass: 'animated', // animation css class (default is animated)
+                offset: 0, // distance to the element when triggering the animation (default is 0)
+                mobile: true, // trigger animations on mobile devices (default is true)
+                live: true, // act on asynchronously loaded content (default is true)
+                callback: function (box) {
+                    // the callback is fired every time an animation is started
+                    // the argument that is passed in is the DOM node being animated
+                },
+                scrollContainer: null // optional scroll container selector, otherwise use window
+            });
+            wow.init();
+        </script>
+        <script>
+            wow = new WOW({
+                animateClass: 'animated',
+                offset: 100,
+                callback: function (box) {
+                    console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
+                }
+            });
+            wow.init();
+            document.getElementById('moar').onclick = function () {
+                var section = document.createElement('section');
+                section.className = 'section--purple wow fadeInDown';
+                this.parentNode.insertBefore(section, this);
+            };
+        </script>
+        <script>
+            $(window).scroll(function () {
+
+                if ($(this).scrollTop() > 0) {
+                    $('header').addClass('off-canvas');
+                } else {
+                    $('header').removeClass('off-canvas');
+                }
+            });
+        </script>
+        <script>
+            $('document').ready(function () {
+                $('.drop_header').click(function () {
+                    $('.drop_cntnt').slideToggle();
+                });
+            });
+        </script>
+        <script>
+            function toggleChevron(e) {
+                $(e.target)
+                    .prev('.panel-heading')
+                    .find('i.indicator')
+                    .toggleClass('glyphicon-minus glyphicon-plus');
+                //$('#accordion .panel-heading').css('background-color', 'green');
+                $('#accordion .panel-heading').removeClass('highlight');
+                $(e.target).prev('.panel-heading').addClass('highlight');
+            }
+            $('#accordion').on('hidden.bs.collapse', toggleChevron);
+            $('#accordion').on('shown.bs.collapse', toggleChevron);
+        </script>
+
+        <script>
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 0,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: true
+                    },
+                    600: {
+                        items: 3,
+                        nav: false
+                    },
+                    1000: {
+                        items: 4,
+                        nav: true,
+                        loop: false
+                    }
+                }
+            })
+        </script>
+
+
+</body>
+
+</html>

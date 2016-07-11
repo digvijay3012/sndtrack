@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Artist_dashboard</title>
+    <link rel="icon" href="images/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/jquery.bxslider.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Martel:400,200,300,600,700,800,900' rel='stylesheet' type='text/css'>
+</head>
+
+<body class="music_library">
+    <header class="wow fadeInDown dashbrd">
+        <div class="container-fluid">
+            <div class="header_bottom text-center">
+                <div class="logo_header">
+                    <ul>
+                        <li class="with_search">
+                            <a href="index.html"><img src="images/black-logo.png" alt=""></a>
+                        </li>
+                        <li class="lastt">
+                            <button class="tgle" type="button" name="message" value="Hide" id="toggle-message"><img src="images/search_icon.png" alt=""></button>
+                            <input type="text" name="search" id="message" value="" />
+                        </li>
+                    </ul>
+                </div>
+                <div class="header_nav">
+                    <div class="middle_footer">
+                        <ul>
+                            <li><a href="">Browse Music</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="dshbrd_prfle pull-right">
+                    <ul>
+                        <li>
+                            <a href=""><img src="images/clem.png" alt="" /></a>
+                        </li>
+                        <li>
+                            <button type="button" class="drop_header">
+                                <h3>Clem Snide</h3>
+                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="drop_cntnt" style="display:none;">
+                    <ul>
+                        <li><a href="">Account Settings</a></li>
+                        <li><a href="">My Earnings</a></li>
+                        <li><a href="">My Music</a></li>
+                        <li><a href="">Submissions</a></li>
+                        <li><a href="">Contact</a></li>
+                        <li><a class="logout" href="">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="dashboard_cont">
+        <div class="container">
+            <div class="welcom_strip tex-center">
+                <h2 class="pull-left">Clem Snide</h2>
+                <h2 class="text-center">Your Music</h2>
+            </div>
+            <div class="artist_draft_cont">
+                <ul class="nav nav-tabs">
+
+                    <li class="active"><a data-toggle="tab" href="#mnu1">Songs</a></li>
+                    <li><a data-toggle="tab" href="#mnu2">Albums</a></li>
+                </ul>
+                <h2 class=" artst_drft_table">Track</h2>
+                <div class="tab-content">
+
+                    <div id="mnu1" class="tab-pane fade in active">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td class="input_chckbox table_padding width_input">
+                                            <img src="images/play.png" alt="">
+                                        </td>
+                                        <td class="width_tittle nme_user">Kurt Ville</td>
+                                        <td>21 January 2016</td>
+                                        <td>3:54</td>
+                                        <td>31MB</td>
+                                        <td class="lst_data">
+                                            <a href="">Download Original</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input_chckbox table_padding width_input">
+                                            <img src="images/play.png" alt="">
+                                        </td>
+                                        <td class="nme_user">Kurt Ville</td>
+                                        <td>21 January 2016</td>
+                                        <td>3:54</td>
+                                        <td>31MB</td>
+                                        <td class="lst_data">
+                                            <a href="">Download Original</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input_chckbox table_padding width_input">
+                                            <img src="images/play.png" alt="">
+                                        </td>
+                                        <td class="nme_user">Kurt Ville</td>
+                                        <td>21 January 2016</td>
+                                        <td>3:54</td>
+                                        <td>31MB</td>
+                                        <td class="lst_data">
+                                            <a href="">Download Original</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="input_chckbox table_padding width_input">
+                                            <img src="images/play.png" alt="">
+                                        </td>
+                                        <td class="nme_user">Kurt Ville</td>
+                                        <td>21 January 2016</td>
+                                        <td>3:54</td>
+                                        <td>31MB</td>
+                                        <td class="lst_data">
+                                            <a href="">Download Original</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="mnu2" class="tab-pane fade">
+                        <div class="album_info pull-left col-sm-6 col-xs-12 pdngg-right">
+                            <div class="albu_image">
+                                <img src="images/album_image.jpg" alt="">
+                            </div>
+                            <div class="album_nam">
+                                <ul>
+                                    <li>Album Name:</li>
+                                    <li>Avalanche</li>
+                                </ul>
+                                <ul>
+                                    <li>Release Date:</li>
+                                    <li>21 January 2016 </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="pull-right album_playlist col-sm-6 col-xs-12 pdngg-left">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        <tr class="border_table">
+                                            <td class="input_chckbox table_padding width_input">
+                                                <img src="images/play.png" alt="">
+                                            </td>
+                                            <td class="text-rt">Kurt Ville</td>
+                                            <td class="rt_txt">3:54</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="input_chckbox table_padding width_input">
+                                                <img src="images/play.png" alt="">
+                                            </td>
+                                            <td class="text-rt">Kurt Ville</td>
+                                            <td class="rt_txt">3:54</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="input_chckbox table_padding width_input">
+                                                <img src="images/play.png" alt="">
+                                            </td>
+                                            <td class="text-rt">Kurt Ville</td>
+                                            <td class="rt_txt">3:54</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="input_chckbox table_padding width_input">
+                                                <img src="images/play.png" alt="">
+                                            </td>
+                                            <td class="text-rt">Kurt Ville</td>
+                                            <td class="rt_txt">3:54</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container-fluid">
+            <div class="footer_logo">
+                <ul>
+                    <li>
+                        <a href="index.html"><img src="images/black-logo.png" alt=""></a>
+                    </li>
+                    <li>
+                        <p>2016</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="middle_footer">
+                <ul>
+                    <li><a href="">Browse</a></li>
+                    <li><a href="">Journal</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+                <ul class="social_icons">
+                    <li><a href=""><i aria-hidden="true" class="fa fa-facebook"></i></a></li>
+                    <li><a href=""><i aria-hidden="true" class="fa fa-twitter"></i></a></li>
+                    <li><a href=""><i aria-hidden="true" class="fa fa-instagram"></i></a></li>
+                </ul>
+            </div>
+            <div class="footer_nav">
+                <ul>
+                    <li><a href="">Private</a></li>
+                    <li><a href="">License Terms</a></li>
+                    <li><a href="">FAQ</a></li>
+                    <li><a href="">Terms &amp; Conditions</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.bxslider.js"></script>
+    <script src="js/toggle.js"></script>
+    <script src="https://use.typekit.net/auo4nbe.js"></script>
+    <script>
+        try {
+            Typekit.load({
+                async: true
+            });
+        } catch (e) {}
+    </script>
+    <script src="js/wow.js"></script>
+    <script>
+        var wow = new WOW({
+            boxClass: 'wow', // animated element css class (default is wow)
+            animateClass: 'animated', // animation css class (default is animated)
+            offset: 0, // distance to the element when triggering the animation (default is 0)
+            mobile: true, // trigger animations on mobile devices (default is true)
+            live: true, // act on asynchronously loaded content (default is true)
+            callback: function (box) {
+                // the callback is fired every time an animation is started
+                // the argument that is passed in is the DOM node being animated
+            },
+            scrollContainer: null // optional scroll container selector, otherwise use window
+        });
+        wow.init();
+    </script>
+    <script>
+        wow = new WOW({
+            animateClass: 'animated',
+            offset: 100,
+            callback: function (box) {
+                console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
+            }
+        });
+        wow.init();
+        document.getElementById('moar').onclick = function () {
+            var section = document.createElement('section');
+            section.className = 'section--purple wow fadeInDown';
+            this.parentNode.insertBefore(section, this);
+        };
+    </script>
+    <script>
+        $('.bxslider').bxSlider({
+            minSlides: 3,
+            maxSlides: 4,
+            slideWidth: 365,
+            slideMargin: 30
+        });
+    </script>
+    <script>
+        $(window).scroll(function () {
+
+            if ($(this).scrollTop() > 0) {
+                $('header').addClass('off-canvas');
+            } else {
+                $('header').removeClass('off-canvas');
+            }
+        });
+    </script>
+    <script>
+        $('document').ready(function () {
+            $('.drop_header').click(function () {
+                $('.drop_cntnt').slideToggle();
+            });
+        });
+    </script>
+
+</body>
+
+</html>

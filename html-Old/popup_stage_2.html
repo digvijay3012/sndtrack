@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Artist_dashboard</title>
+    <link rel="icon" href="images/favicn.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/jquery.bxslider.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Martel:400,200,300,600,700,800,900' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Modal Example</h2>
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <!--button type="button" class="close" data-dismiss="modal">&times;</button-->
+                    <div class="modal-body">
+                        <div class="logo text-center">
+                            <a href="">
+                                <p>Sndtrack</p>
+                                <span>music licensing</span>
+                            </a>
+                        </div>
+                        <div class="login_text text-center">
+                            <p>Please sign up to complete your order. </p>
+                        </div>
+
+
+                        <form class="login_form">
+                            <div class="google_logo popup_logo_ggle">
+                                <a href="">
+                                    <img alt="" src="images/google_btn.png">
+                                </a>
+                                <a href="">
+                                    <img alt="" src="images/facebook_btn.png">
+                                </a>
+
+                            </div>
+                            <ul>
+                                <li>
+                                    <input type="text" placeholder="First Name" required="">
+                                </li>
+                                <li>
+                                    <input type="text" placeholder="Last Name">
+                                </li>
+                                <li>
+                                    <input type="text" placeholder="Email address" required="">
+                                </li>
+                                <li>
+                                    <input type="password" placeholder="Password" required="">
+                                </li>
+                                <li>
+                                    <button class="sbmt hover_btn" type="submit" id="send" name="submit" required="">Create Account</button>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.bxslider.js"></script>
+    <script src="js/toggle.js"></script>
+    <script src="https://use.typekit.net/auo4nbe.js"></script>
+    <script>
+        try {
+            Typekit.load({
+                async: true
+            });
+        } catch (e) {}
+    </script>
+    <script src="js/wow.js"></script>
+    <script>
+        var wow = new WOW({
+            boxClass: 'wow', // animated element css class (default is wow)
+            animateClass: 'animated', // animation css class (default is animated)
+            offset: 0, // distance to the element when triggering the animation (default is 0)
+            mobile: true, // trigger animations on mobile devices (default is true)
+            live: true, // act on asynchronously loaded content (default is true)
+            callback: function (box) {
+                // the callback is fired every time an animation is started
+                // the argument that is passed in is the DOM node being animated
+            },
+            scrollContainer: null // optional scroll container selector, otherwise use window
+        });
+        wow.init();
+    </script>
+    <script>
+        wow = new WOW({
+            animateClass: 'animated',
+            offset: 100,
+            callback: function (box) {
+                console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
+            }
+        });
+        wow.init();
+        document.getElementById('moar').onclick = function () {
+            var section = document.createElement('section');
+            section.className = 'section--purple wow fadeInDown';
+            this.parentNode.insertBefore(section, this);
+        };
+    </script>
+    <script>
+        $('.bxslider').bxSlider({
+            minSlides: 3,
+            maxSlides: 4,
+            slideWidth: 365,
+            slideMargin: 30
+        });
+    </script>
+    <script>
+        $(window).scroll(function () {
+
+            if ($(this).scrollTop() > 0) {
+                $('header').addClass('off-canvas');
+            } else {
+                $('header').removeClass('off-canvas');
+            }
+        });
+    </script>
+    <script>
+        $('document').ready(function () {
+            $('.drop_header').click(function () {
+                $('.drop_cntnt').slideToggle();
+            });
+        });
+    </script>
+
+</body>
+
+</html>

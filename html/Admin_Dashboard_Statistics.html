@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Artist_dashboard</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="images/favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/favicons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/favicons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/favicons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/favicons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/favicons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="images/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="images/favicons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="images/favicons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="images/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="images/favicons/manifest.json">
+    <link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="images/favicons/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/jquery.bxslider.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="wow fadeInDown dashbrd">
+        <div class="container-fluid">
+            <div class="header_bottom text-center">
+                <div class="logo_header">
+                    <ul>
+                        <li class="with_search">
+                            <a href="index.html"><img src="images/black-logo.png" alt=""></a>
+                        </li>
+                        <li class="lastt">
+                            <button class="tgle" type="button" name="message" value="Hide" id="toggle-message"><img src="images/search_icon.png" alt=""></button>
+                            <input type="text" name="search" id="message" value="" placeholder="search here..." />
+                        </li>
+                    </ul>
+                </div>
+                <div class="header_nav">
+                    <div class="middle_footer">
+                        <ul>
+                            <li><a href="">Dashboard</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="dshbrd_prfle pull-right">
+                    <ul>
+                        <li>
+                            <a href=""><img src="images/guy.jpg" alt="" /></a>
+                        </li>
+                        <li>
+                            <button type="button" class="drop_header">
+                                <h3>Guy Harvey</h3>
+                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="drop_cntnt" style="display:none;">
+                    <ul>
+                        <li><a href="">Account Settings</a></li>
+                        <li><a href="">My Earnings</a></li>
+                        <li><a href="">My Music</a></li>
+                        <li><a href="">Submissions</a></li>
+                        <li><a href="">Contact</a></li>
+                        <li><a class="logout" href="">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="dashboard_cont sales_mn">
+        <div class="container">
+            <div class="welcom_strip tex-center">
+                <h2 class="pull-left">Clem Snide</h2>
+                <h2 class="text-center">Sales</h3>
+            </div>
+            <div class="date_range_col">
+                <div class="sales_songs_cnt text-center">
+                    <h2>Web Traffic</h2>
+                <div class="date_range">
+                    <h3>Date Range:</h3>
+                    <select>
+                        <option>Apr 2016</option>
+                        <option>Apr 2016</option>
+                        <option>Apr 2016</option>
+                    </select>
+                    <p>to</p>
+                    <select>
+                        <option>Aug 2016</option>
+                        <option>Aug 2016</option>
+                        <option>Aug 2016</option>
+                    </select>
+                </div>
+                <div class="chcbox_sales">
+                    <input type="checkbox" class="css-checkbox" id="input7">
+                    <label class="css-label lite-blue-check" for="input7"></label>
+                </div>
+            </div>
+            <div class="graph"><img src="images/graph.jpg" alt=""></div>
+        </div>
+        <div class="date_range_col">
+            <div class="sales_songs_cnt text-center">
+                <h2>Streams</h2>
+                <div class="date_range">
+                    <h3>Date Range:</h3>
+                    <select>
+                        <option>Apr 2016</option>
+                        <option>Apr 2016</option>
+                        <option>Apr 2016</option>
+                    </select>
+                    <p>to</p>
+                    <select>
+                        <option>Aug 2016</option>
+                        <option>Aug 2016</option>
+                        <option>Aug 2016</option>
+                    </select>
+                </div>
+                <div class="chcbox_sales">
+                    <input type="checkbox" class="css-checkbox" id="input9">
+                    <label class="css-label lite-blue-check" for="input9"></label>
+                </div>
+            </div>
+            <div class="graph"><img src="images/graph.jpg" alt="" /></div>
+        </div>
+        <div class="date_range_col">
+            <div class="sales_songs_cnt text-center">
+                <h2>No. of Customers</h2>
+                <div class="date_range">
+                    <h3>Date Range:</h3>
+                    <select>
+                        <option>Apr 2016</option>
+                        <option>Apr 2016</option>
+                        <option>Apr 2016</option>
+                    </select>
+                    <p>to</p>
+                    <select>
+                        <option>Aug 2016</option>
+                        <option>Aug 2016</option>
+                        <option>Aug 2016</option>
+                    </select>
+                </div>
+                <div class="chcbox_sales">
+                    <input type="checkbox" class="css-checkbox" id="input6">
+                    <label class="css-label lite-blue-check" for="input6"></label>
+                </div>
+            </div>
+            <div class="graph"><img src="images/graph.jpg" alt="" /></div>
+        </div>
+        <div class="date_range_table">
+            <h2>Sales</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th colspan="2" class="nme_user">Track</th>
+                            <th>Release Date</th>
+                            <th>Personal sales</th>
+                            <th>Lite sales</th>
+                            <th>standard sales </th>
+                            <th>Premium Sales</th>
+                            <th>Other Sales</th>
+                            <th>Total Sales</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="input_chckbox table_padding width_input">
+                                <input type="checkbox" class="css-checkbox" id="input1">
+                                <label class="css-label lite-blue-check" for="input1"></label>
+                            </td>
+                            <td class="nme_user">Clem Snide
+                                <p>Route 66</p>
+                            </td>
+                            <td>21 January 2016</td>
+                            <td>232</td>
+                            <td>1,188</td>
+                            <td>894</td>
+                            <td>2451</td>
+                            <td>88</td>
+                            <td>4888</td>
+                        </tr>
+                        <tr>
+                            <td class="input_chckbox table_padding width_input">
+                                <input type="checkbox" class="css-checkbox" id="input2">
+                                <label class="css-label lite-blue-check" for="input2"></label>
+                            </td>
+                            <td class="nme_user">Clem Snide
+                                <p>Route 66</p>
+                            </td>
+                            <td>22 January 2016</td>
+                            <td>232</td>
+                            <td>1,188</td>
+                            <td>894</td>
+                            <td>2451</td>
+                            <td>88</td>
+                            <td>4888</td>
+                        </tr>
+                        <tr>
+                            <td class="input_chckbox table_padding width_input">
+                                <input type="checkbox" class="css-checkbox" id="input3">
+                                <label class="css-label lite-blue-check" for="input3"></label>
+                            </td>
+                            <td class="nme_user">Clem Snide
+                                <p>Route 66</p>
+                            </td>
+                            <td>23 January 2016</td>
+                            <td>232</td>
+                            <td>1,188</td>
+                            <td>894</td>
+                            <td>2451</td>
+                            <td>88</td>
+                            <td>4888</td>
+                        </tr>
+                        <tr>
+                            <td class="input_chckbox table_padding width_input">
+                                <input type="checkbox" class="css-checkbox" id="input4">
+                                <label class="css-label lite-blue-check" for="input4"></label>
+                            </td>
+                            <td class="nme_user">Clem Snide
+                                <p>Route 66</p>
+                            </td>
+                            <td>24 January 2016</td>
+                            <td>232</td>
+                            <td>1,188</td>
+                            <td>894</td>
+                            <td>2451</td>
+                            <td>88</td>
+                            <td>4888</td>
+                        </tr>
+                        <tr>
+                            <td class="input_chckbox table_padding width_input">
+                                <input type="checkbox" class="css-checkbox" id="input5">
+                                <label class="css-label lite-blue-check" for="input5"></label>
+                            </td>
+                            <td class="nme_user">Clem Snide
+                                <p>Route 66</p>
+                            </td>
+                            <td>21 January 2016</td>
+                            <td>232</td>
+                            <td>1,188</td>
+                            <td>894</td>
+                            <td>2451</td>
+                            <td>88</td>
+                            <td>4888</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table total">
+                    <tbody>
+                        <tr>
+                            <td>Total</td>
+                            <td>12980</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+    <footer>
+        <div class="container-fluid">
+            <div class="footer_logo">
+                <ul>
+                    <li>
+                        <a href="index.html"><img src="images/black-logo.png" alt=""></a>
+                    </li>
+                    <li>
+                        <p>2016</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="middle_footer">
+                <ul>
+                    <li><a href="">Browse</a></li>
+                    <li><a href="">Journal</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+                <ul class="social_icons">
+                    <li><a href=""><i aria-hidden="true" class="fa fa-facebook"></i></a></li>
+                    <li><a href=""><i aria-hidden="true" class="fa fa-twitter"></i></a></li>
+                    <li><a href=""><i aria-hidden="true" class="fa fa-instagram"></i></a></li>
+                </ul>
+            </div>
+            <div class="footer_nav">
+                <ul>
+                    <li><a href="">Private</a></li>
+                    <li><a href="">License Terms</a></li>
+                    <li><a href="">FAQ</a></li>
+                    <li><a href="">Terms &amp; Conditions</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.bxslider.js"></script>
+    <script src="js/toggle.js"></script>
+    <script src="https://use.typekit.net/auo4nbe.js"></script>
+    <script>
+        try {
+            Typekit.load({
+                async: true
+            });
+        } catch (e) {}
+    </script>
+    <script src="js/wow.js"></script>
+    <script>
+        var wow = new WOW({
+            boxClass: 'wow', // animated element css class (default is wow)
+            animateClass: 'animated', // animation css class (default is animated)
+            offset: 0, // distance to the element when triggering the animation (default is 0)
+            mobile: true, // trigger animations on mobile devices (default is true)
+            live: true, // act on asynchronously loaded content (default is true)
+            callback: function (box) {
+                // the callback is fired every time an animation is started
+                // the argument that is passed in is the DOM node being animated
+            },
+            scrollContainer: null // optional scroll container selector, otherwise use window
+        });
+        wow.init();
+    </script>
+    <script>
+        wow = new WOW({
+            animateClass: 'animated',
+            offset: 100,
+            callback: function (box) {
+                console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
+            }
+        });
+        wow.init();
+        document.getElementById('moar').onclick = function () {
+            var section = document.createElement('section');
+            section.className = 'section--purple wow fadeInDown';
+            this.parentNode.insertBefore(section, this);
+        };
+    </script>
+    <script>
+        $('.bxslider').bxSlider({
+            minSlides: 3,
+            maxSlides: 4,
+            slideWidth: 365,
+            slideMargin: 30
+        });
+    </script>
+    <script>
+        $(window).scroll(function () {
+
+            if ($(this).scrollTop() > 0) {
+                $('header').addClass('off-canvas');
+            } else {
+                $('header').removeClass('off-canvas');
+            }
+        });
+    </script>
+    <script>
+        $('document').ready(function () {
+            $('.drop_header').click(function () {
+                $('.drop_cntnt').slideToggle();
+            });
+        });
+    </script>
+
+</body>
+
+</html>

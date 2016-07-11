@@ -1,0 +1,15 @@
+[16-Jun-2016 07:23:39 America/Chicago] PHP Fatal error:  Call to undefined function base_url() in /home/imarkclients/public_html/sndtrack/application/views/home_view.php on line 46
+[16-Jun-2016 07:23:39 America/Chicago] PHP Fatal error:  Call to undefined function base_url() in /home/imarkclients/public_html/sndtrack/application/views/home_view.php on line 46
+[16-Jun-2016 07:23:46 America/Chicago] PHP Fatal error:  Call to undefined function base_url() in /home/imarkclients/public_html/sndtrack/application/views/home_view.php on line 46
+[16-Jun-2016 07:26:50 America/Chicago] PHP Fatal error:  Call to a member function helper() on a non-object in /home/imarkclients/public_html/sndtrack/application/controllers/Home.php on line 22
+[16-Jun-2016 07:26:52 America/Chicago] PHP Fatal error:  Call to a member function helper() on a non-object in /home/imarkclients/public_html/sndtrack/application/controllers/Home.php on line 22
+[16-Jun-2016 07:26:53 America/Chicago] PHP Fatal error:  Call to a member function helper() on a non-object in /home/imarkclients/public_html/sndtrack/application/controllers/Home.php on line 22
+[16-Jun-2016 07:27:06 America/Chicago] PHP Fatal error:  Call to a member function helper() on a non-object in /home/imarkclients/public_html/sndtrack/application/controllers/Home.php on line 22
+[16-Jun-2016 07:27:40 America/Chicago] PHP Fatal error:  Call to a member function helper() on a non-object in /home/imarkclients/public_html/sndtrack/application/controllers/Home.php on line 22
+[16-Jun-2016 08:15:16 America/Chicago] PHP Fatal error:  Call to undefined function mysqli_init() in /home/imarkclients/public_html/sndtrack/system/database/drivers/mysqli/mysqli_driver.php on line 136
+[16-Jun-2016 08:15:19 America/Chicago] PHP Fatal error:  Call to undefined function mysqli_init() in /home/imarkclients/public_html/sndtrack/system/database/drivers/mysqli/mysqli_driver.php on line 136
+[16-Jun-2016 08:15:57 America/Chicago] PHP Fatal error:  Call to undefined function mysqli_init() in /home/imarkclients/public_html/sndtrack/system/database/drivers/mysqli/mysqli_driver.php on line 136
+[16-Jun-2016 08:35:33 America/Chicago] PHP Fatal error:  Call to undefined function mysqli_init() in /home/imarkclients/public_html/sndtrack/system/database/drivers/mysqli/mysqli_driver.php on line 136
+[16-Jun-2016 08:36:09 America/Chicago] PHP Fatal error:  Call to undefined function mysqli_init() in /home/imarkclients/public_html/sndtrack/system/database/drivers/mysqli/mysqli_driver.php on line 136
+[16-Jun-2016 08:36:10 America/Chicago] PHP Fatal error:  Call to undefined function mysqli_init() in /home/imarkclients/public_html/sndtrack/system/database/drivers/mysqli/mysqli_driver.php on line 136
+[16-Jun-2016 08:38:53 America/Chicago] PHP Fatal error:  Call to undefined function mysqli_init() in /home/imarkclients/public_html/sndtrack/system/database/drivers/mysqli/mysqli_driver.php on line 136
