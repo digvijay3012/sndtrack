@@ -18,7 +18,7 @@ if(!empty($AdminData)){
                 <ul>
                     <li><a href="">Sales</a></li>
                     <li><a href="">Statistics</a></li>
-                    <li><a href="">Accounts</a></li>
+                    <li><a href="<?php echo base_url(); ?>administrator/accounts">Accounts</a></li>
                 </ul>
             </div>
         </div>

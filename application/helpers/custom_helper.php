@@ -19,3 +19,22 @@ if ( ! function_exists('get_album_tracks')){
        }
    }
 }
+if ( ! function_exists('get_trackcount')){
+   function get_trackcount($artistId){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database
+       $query = $ci->db->get_where('snd_artist_music',array('artist_id'=>$artistId));
+       
+       if($query->num_rows() > 0){
+           $result = $query->num_rows();
+           return $result;
+       }else{
+           return false;
+       }
+   }
+}

@@ -34,6 +34,14 @@
     </footer>
 
     <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
+	<script src="<?php echo base_url(); ?>js/jquery.dataTables.min.js"></script>
+<script>
+ $(document).ready(function() {
+	setTimeout(function(){  $(".tab-pane:last").removeClass("in"); $(".tab-pane:last").removeClass("active"); $('#customer_table').DataTable(); }, 1000);
+    $('#artist_table').DataTable();
+	
+} );	
+</script>
     <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>js/jquery.bxslider.js"></script>
     <script src="<?php echo base_url(); ?>js/toggle.js"></script>
@@ -101,6 +109,8 @@
             });
         });
     </script>
+
+
 
 </body>
 
