@@ -16,17 +16,61 @@
 			?>
                     <ul>
 						<li>
-							<input type="text" placeholder="Password" name="password">
+							<input type="password"  name="old_password" placeholder="Current Password">
+							<?php  echo form_error('old_password'); ?>
+						</li>
+						<li>
+							<input type="password" placeholder="Password" name="password">
+							<?php  echo form_error('password'); ?>
 						</li>
 							 <li>
-								<input type="text" placeholder="Confirm Password Name" name="cpassword">
+								<input type="password" placeholder="Confirm Password Name" name="cpassword">
+								<?php  echo form_error('cpassword'); ?>
 							</li>
 						
                         <li>
-                            <button class="sbmt hover_btn" type="submit" id="send" name="submit" required="">Send</button>
+                            <button class="sbmt hover_btn" type="submit" id="send" name="submit" required="">Submit</button>
                         </li>
                     </ul>
                <?php echo form_close(); ?>   
 			</div>
 	 </div>
 </div>
+<script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
+   <script>
+(function($,W,D)
+{
+    var JQUERY4U = {};
+
+    JQUERY4U.UTIL =
+    {
+        setupFormValidation: function()
+        {
+            //form validation rules
+            $("#reset_password_form").validate({
+                rules: {
+					old_password: "required",
+					password: "required",
+                    cpassword: "required"
+                   
+                },
+                messages: {
+					old_password: "Please enter your old Password.",
+                    password: "Please enter your Password.",
+                    cpassword: "Please confirm your Password."
+					
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        }
+    }
+
+    //when the dom has loaded setup form validation rules
+    $(D).ready(function($) {
+        JQUERY4U.UTIL.setupFormValidation();
+    });
+
+})(jQuery, window, document);
+</script> 

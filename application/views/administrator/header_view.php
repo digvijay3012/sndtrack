@@ -66,7 +66,7 @@ if(!empty($ArtistData)){
                 <div class="header_nav">
                     <div class="middle_footer">
                         <ul>
-                            <li><a href="<?php echo base_url(); ?>artist/artist_dashboard">Dashboard</a></li>
+                            <li><a href="<?php echo base_url(); ?>administrator/">Dashboard</a></li>
                         </ul>
                     </div>
                 </div>

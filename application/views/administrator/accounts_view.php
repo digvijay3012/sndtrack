@@ -1,7 +1,17 @@
+<?php
+$ArtistData	=	$this->ion_auth->user()->row();
+if(!empty($ArtistData)){
+	$artistID 		=		$ArtistData->user_id;
+	$artistEmail 	=		$ArtistData->email;
+	$first_name 	=		$ArtistData->first_name;
+	$last_name 		=		$ArtistData->last_name;
+}
+			
+?>
 <div class="dashboard_cont">
         <div class="container">
             <div class="welcom_strip tex-center">
-                <h2 class="pull-left">Clem Snide</h2>
+                <h2 class="pull-left"><?php echo $first_name." ".$last_name;  ?></h2>
                 <h2 class="text-center">User Accounts</h3>
             </div>
          <div class="artist_draft_cont">
@@ -9,6 +19,7 @@
                     <li class="active"><a data-toggle="tab" href="#mnu1">Artists</a></li>
                     <li><a data-toggle="tab" href="#mnu2">Customers</a></li>
                 </ul>
+				<?php echo $this->session->flashdata('message'); ?>
              <h2 class=" artst_drft_table">Account Detail</h2>
                 <div class="tab-content">
                     <div id="mnu1" class="tab-pane fade in active">
@@ -65,7 +76,7 @@
                                         <td><?php $trackCount =	get_trackcount($artistID); if($trackCount!=0){ echo $trackCount; }else{ echo '0'; }?></td>
                                         <td>10</td>
                                         <td class="lst_data">
-                                            <a href="">Reset Password</a>
+                                      <a href="<?php echo base_url(); ?>administrator/accounts/reset_password/<?php echo $artistID; ?>">Reset Password</a>
                                         </td>
 								</tr>
 								

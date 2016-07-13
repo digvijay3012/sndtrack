@@ -26,24 +26,31 @@ class Accounts extends CI_Controller {
 			redirect('administrator/accounts');
 		}
 		if(!empty($_POST)){
-					 $this->form_validation->set_rules('password', 'Password', 'required|trim');
+					$this->form_validation->set_rules('old_password', 'Current Password', 'required|trim');
+					$this->form_validation->set_rules('password', 'Password', 'min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|required|trim');
 					$this->form_validation->set_rules('cpassword', 'Confirm Password', 'required|trim|matches[password]');
 					if ($this->form_validation->run() == FALSE) { 
 						$this->load->view('administrator/header_view');
 						$this->load->view('administrator/reset_password_view');
 						$this->load->view('administrator/footer_view');
 					} else {
-						
-						$album_name		=		$this->input->post('album_name');
-						$SubmitData		= 		$this->my_music_model->create_album($ArtistID,$album_name,$album_image);	
-						if($SubmitData==1){
-							$this->session->set_flashdata('item', 'Album has been created sucessfully.'); 
-							redirect("artist/music/create_album");
-						}else{
-							$this->session->set_flashdata('item', 'There is problem to create your album, Please try again..'); 
-							redirect("artist/music/create_album");
+						$ArtistData	=	$this->db->query("SELECT email FROM users WHERE id='$artistId'")->row();
+						if(!empty($ArtistData)){
+							$identity 	=		$ArtistData->email;
 						}
-						
+						$old_password	=		$this->input->post('old_password');
+						$password		=		$this->input->post('password');
+						$change = $this->ion_auth->change_password($identity, $old_password, $password);
+
+							if ($change){
+								//if the password was successfully changed
+								$this->session->set_flashdata('message', $this->ion_auth->messages());
+								redirect("administrator/accounts/");
+							}
+							else{
+								$this->session->set_flashdata('message', $this->ion_auth->errors());
+								redirect("administrator/accounts/");
+							}	
 					}
 				}
 		$this->load->view('administrator/header_view');

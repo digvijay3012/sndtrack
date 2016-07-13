@@ -16,5 +16,12 @@ class Accounts_model extends CI_Model {
 				
 				return $artistArray;		
 	}
+	function change_password($artistId,$password){
+			$hasPassword	= md5($password);
+			$data=array('password'=>$hasPassword);
+			$this->db->where('id',$artistId);
+			$this->db->update('users',$data);
+			return 1;
+	}
 	
 }
