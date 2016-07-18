@@ -13,10 +13,20 @@ class Dashboard extends CI_Controller {
 			redirect('administrator/login');
         }
     }
-	public function index()
-	{
+	public function index(){
+		$groupID	=	'';
+		if ($this->ion_auth->logged_in() ) {
+			$ID			=	$this->ion_auth->user()->row()->user_id; 
+			$groupID 	= 	$this->ion_auth->get_users_groups($ID)->row()->id;
+        }
 		$this->load->view('administrator/header_view');
-		$this->load->view('administrator/dashboard_view');
+		if($groupID==1){
+			$this->load->view('administrator/super_admin_dashboard_view');
+		}if($groupID==2){
+			$this->load->view('administrator/admin_dashboard_view');
+		}
 		$this->load->view('administrator/footer_view');
+		
+		
 	}
 }

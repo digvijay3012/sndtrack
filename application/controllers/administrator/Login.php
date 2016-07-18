@@ -12,7 +12,12 @@ class Login extends CI_Controller {
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 		$this->load->helper('form');
 		$this->lang->load('auth');
-		if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin()) {
+		$groupID	=	'';
+		if ($this->ion_auth->logged_in() ) {
+			$ID			=	$this->ion_auth->user()->row()->user_id; 
+			$groupID 	= 	$this->ion_auth->get_users_groups($ID)->row()->id;
+        }
+		if ($this->ion_auth->logged_in() && ($groupID==1 || $groupID==2)) {
 			redirect('administrator/dashboard');
         }
 	}		

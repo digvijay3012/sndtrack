@@ -32,7 +32,12 @@
 </head>
 
 <body>
-
+<?php
+$UserData	=	$this->ion_auth->user()->row();
+if(!empty($UserData)){
+	$userID 		=		$UserData->user_id;
+}
+?>
     <div class="se-pre-con"></div>
     <div class="top_header" style="background-image:url('images/bgimage.jpg')">
         <header class="wow fadeInDown">
@@ -43,7 +48,10 @@
                         <li><a href="<?php echo base_url(); ?>artist/register">Create Account</a></li>
                         <li><a href="<?php echo base_url(); ?>artist/login">Login</a></li>
                     </ul>
-						<?php }else{ ?>
+						<?php }else{
+							$user_groups = $this->ion_auth->get_users_groups($userID)->result();
+							//echo "<pre>";	print_r($user_groups);	echo "</pre>";
+						?>
 					 <ul>
 						<li><a href="<?php echo base_url(); ?>artist/artist_dashboard">Dashboard</a></li>
 						<li> </li>

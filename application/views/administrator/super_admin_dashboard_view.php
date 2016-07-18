@@ -19,6 +19,7 @@ if(!empty($AdminData)){
                     <li><a href="">Sales</a></li>
                     <li><a href="">Statistics</a></li>
                     <li><a href="<?php echo base_url(); ?>administrator/accounts">Accounts</a></li>
+					<li><a href="<?php echo base_url(); ?>administrator/add_account">Add admin accounts</a></li>
                 </ul>
             </div>
         </div>

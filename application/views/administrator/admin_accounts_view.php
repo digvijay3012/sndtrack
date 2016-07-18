@@ -16,13 +16,13 @@ if(!empty($ArtistData)){
             </div>
          <div class="artist_draft_cont">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#mnu1">Artists</a></li>
-                    <li><a data-toggle="tab" href="#mnu2">Customers</a></li>
+					<li><a data-toggle="tab" href="#mnu1">Artists</a></li>
+					 <li><a data-toggle="tab" href="#mnu2">Customers</a></li>
                 </ul>
 				<?php echo $this->session->flashdata('message'); ?>
              <h2 class=" artst_drft_table">Account Detail</h2>
                 <div class="tab-content">
-                    <div id="mnu1" class="tab-pane fade in active">
+                    <div id="mnu1" class="tab-pane fade in">
                         <div class="table-responsive">
                             <table id="artist_table" class="table">
 							
@@ -40,9 +40,9 @@ if(!empty($ArtistData)){
 							</thead>
 							
 							<tbody>
-							<?php if(!empty($data)){ 
-							//echo "<pre>";	print_r($data);  echo "</pre>";	
-								foreach($data	as  $artistData){
+							<?php if(!empty($data['artists_accounts'])){ 
+							
+								foreach($data['artists_accounts']	as  $artistData){
 									$artistID 			=	$artistData['id'];
 									$ip_address 		=	$artistData['ip_address'];
 									$artistUsername 	=	$artistData['username'];
@@ -76,7 +76,7 @@ if(!empty($ArtistData)){
                                         <td><?php $trackCount =	get_trackcount($artistID); if($trackCount!=0){ echo $trackCount; }else{ echo '0'; }?></td>
                                         <td>10</td>
                                         <td class="lst_data">
-                                      <a href="<?php echo base_url(); ?>administrator/accounts/reset_password/<?php echo $artistID; ?>">Reset Password</a>
+										<a href="<?php echo base_url(); ?>administrator/accounts/reset_password/<?php echo $artistID; ?>">Reset Password</a>
                                         </td>
 								</tr>
 								
@@ -97,6 +97,7 @@ if(!empty($ArtistData)){
                           </table>
                        </div>
                     </div>
+					
                     <div id="mnu2" class="tab-pane fade in active">
                         <div class="table-responsive">
                             <table id="customer_table" class="table">

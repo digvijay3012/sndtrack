@@ -107,7 +107,8 @@
 <script>
  $(document).ready(function() {
 	setTimeout(function(){  $(".tab-pane:last").removeClass("in"); $(".tab-pane:last").removeClass("active"); $('#customer_table').DataTable(); }, 1000);
-    $('#artist_table').DataTable();
+	setTimeout(function(){  $(".tab-pane:last").removeClass("in"); $(".tab-pane:last").removeClass("active"); $('#artist_table').DataTable(); }, 1000);
+    $('#admin_table').DataTable();
 	
 } );	
 </script>

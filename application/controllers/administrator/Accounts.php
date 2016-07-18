@@ -17,9 +17,18 @@ class Accounts extends CI_Controller {
 	public function index()
 	{
 		$data		=	$this->accounts_model->get_artist();
+		$ID			=	$this->ion_auth->user()->row()->user_id; 
+		$groupID 	= 	$this->ion_auth->get_users_groups($ID)->row()->id;
 		$this->load->view('administrator/header_view');
-		$this->load->view('administrator/accounts_view', array('data' => $data));
+		if($groupID==1){
+			$this->load->view('administrator/super_admin_dashboard_view', array('data' => $data));
+		}if($groupID==2){
+			$this->load->view('administrator/admin_accounts_view', array('data' => $data));
+		}
 		$this->load->view('administrator/footer_view');
+		
+		
+		
 	}
 	public function reset_password($artistId=null){
 		if($artistId==''){

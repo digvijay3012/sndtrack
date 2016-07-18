@@ -9,6 +9,7 @@ class Home extends CI_Controller {
 		$this->load->helper(array('url','form'));
 		$this->load->library(array('ion_auth','form_validation','session'));
 		
+		$this->ion_auth->logged_in();
     }
 	public function index()
 	{
