@@ -21,9 +21,9 @@ class Dashboard extends CI_Controller {
         }
 		$this->load->view('administrator/header_view');
 		if($groupID==1){
-			$this->load->view('administrator/super_admin_dashboard_view');
+			$this->load->view('administrator/superadmin/super_admin_dashboard_view');
 		}if($groupID==2){
-			$this->load->view('administrator/admin_dashboard_view');
+			$this->load->view('administrator/admin/admin_dashboard_view');
 		}
 		$this->load->view('administrator/footer_view');
 		

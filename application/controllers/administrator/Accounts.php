@@ -8,8 +8,14 @@ class Accounts extends CI_Controller {
         parent::__construct();
 		$this->load->helper(array('url','custom_helper'));
 		$this->load->library(array('ion_auth','form_validation'));
-		$this->ion_auth->logged_in();
-		if (!$this->ion_auth->logged_in() && !$this->ion_auth->is_admin()) {
+		if (!$this->ion_auth->logged_in()) {
+			redirect('administrator/login');
+        }
+		 $ID			=	$this->ion_auth->user()->row()->user_id; 
+		 $groupID 	= 	$this->ion_auth->get_users_groups($ID)->row()->id; 
+		$groupIdArray	=	array(1,2);
+	
+		if (!in_array($groupID, $groupIdArray)){
 			redirect('administrator/login');
         }
 		$this->load->model('administrator/accounts_model');
@@ -18,12 +24,12 @@ class Accounts extends CI_Controller {
 	{
 		$data		=	$this->accounts_model->get_artist();
 		$ID			=	$this->ion_auth->user()->row()->user_id; 
-		$groupID 	= 	$this->ion_auth->get_users_groups($ID)->row()->id;
+		$groupID 	= 	$this->ion_auth->get_users_groups($ID)->row()->id; 
 		$this->load->view('administrator/header_view');
 		if($groupID==1){
-			$this->load->view('administrator/super_admin_dashboard_view', array('data' => $data));
+			$this->load->view('administrator/superadmin/super_admin_accounts_view', array('data' => $data));
 		}if($groupID==2){
-			$this->load->view('administrator/admin_accounts_view', array('data' => $data));
+			$this->load->view('administrator/admin/admin_accounts_view', array('data' => $data));
 		}
 		$this->load->view('administrator/footer_view');
 		

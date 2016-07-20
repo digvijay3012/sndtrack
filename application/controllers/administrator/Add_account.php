@@ -115,7 +115,7 @@ class Add_account extends CI_Controller {
             );
            
 
-            $this->_render_page('administrator/add_account_view', $this->data);
+            $this->_render_page('administrator/superadmin/add_account_view', $this->data);
         }
 		
 	}

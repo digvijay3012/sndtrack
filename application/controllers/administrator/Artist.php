@@ -59,7 +59,7 @@ class Artist extends CI_Controller {
 			$group_id = $this->input->post('group_id'); 
 			$group_ids = array($group_id);
         }
-        if ($this->form_validation->run() == true && $this->ion_auth->register($identity, $password, $email, $additional_data,$group_ids))
+        if ($this->form_validation->run() == true && $artistID = $this->ion_auth->register($identity, $password, $email, $additional_data,$group_ids))
         {
 				$this->load->library('email'); 
 				$from_email = "sndtrack@sndtrack.com"; 
@@ -69,11 +69,13 @@ class Artist extends CI_Controller {
 				 $this->email->subject('Sndtrack Registarion'); 
 				 $this->email->message('Thanks for registration. Your login details are: username: '.$to_email.'  And Password: '.$password.''); 
 					$this->email->send();
-        
+					$ID			=	$this->ion_auth->user()->row()->user_id; 
+			$relationData = array('admin_id'	=>  $ID , 'artist_id'=> $artistID);
+			$this-> db->insert('snd_admin_artist_group', $relationData);
             // check to see if we are creating the user
             // redirect them back to the admin page
             $this->session->set_flashdata('message', $this->ion_auth->messages());
-            redirect("administrator/artist", 'refresh');
+            redirect("administrator/accounts", 'refresh');
         }
         else
         {
@@ -115,7 +117,7 @@ class Artist extends CI_Controller {
             );
            
 
-            $this->_render_page('administrator/register_view', $this->data);
+            $this->_render_page('administrator/superadmin/add_artist_view', $this->data);
         }
 		
 	}
