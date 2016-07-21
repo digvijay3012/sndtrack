@@ -63,7 +63,7 @@
                     </ul>
 						<?php }else{ ?>
 					 <ul>
-						<li><a href="<?php echo base_url(); ?>artist/artist_dashboard">Dashboard</a></li>
+						<li><a href="<?php echo base_url(); ?>artist/dashboard">Dashboard</a></li>
 						<li> </li>
                     </ul>
 				<?php } ?>

@@ -90,7 +90,7 @@ if(!empty($ArtistData)){
                         <li><a href="<?php echo base_url(); ?>artist/music">My Music</a></li>
                         <li><a href="<?php echo base_url(); ?>artist/music_submission">Submissions</a></li>
                         <li><a href="<?php echo base_url(); ?>contact">Contact</a></li>
-                        <li><a class="logout" href="<?php echo base_url(); ?>artist/logout">Logout</a>
+                        <li><a class="logout" href="<?php echo base_url(); ?>logout">Logout</a>
                         </li>
                     </ul>
                 </div>

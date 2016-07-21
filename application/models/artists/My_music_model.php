@@ -14,7 +14,7 @@ class My_music_model extends CI_Model {
 			foreach ($getAlbum->result_array() as $getAlbumID){
 						$musicArray['album'][]	=	$getAlbumID;
 				} 
-			$Singletrackquery = $this->db->query("SELECT * FROM snd_artist_music WHERE artist_id='$artistID' AND track_status=1 AND track_type='single_track'");
+			$Singletrackquery = $this->db->query("SELECT * FROM snd_artist_music WHERE artist_id='$artistID' AND track_status=1");
 			
 			
 			foreach ($Singletrackquery->result_array() as $Trackdata){

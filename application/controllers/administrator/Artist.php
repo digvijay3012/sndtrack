@@ -116,8 +116,14 @@ class Artist extends CI_Controller {
                 'value' => $this->form_validation->set_value('password'),
             );
            
-
-            $this->_render_page('administrator/superadmin/add_artist_view', $this->data);
+				$adminID			=	$this->ion_auth->user()->row()->user_id; 
+				$groupID 			= 	$this->ion_auth->get_users_groups($adminID)->row()->id;
+					if($groupID==1){
+						 $this->_render_page('administrator/superadmin/add_artist_view', $this->data);
+					}if($groupID==2){
+						$this->_render_page('administrator/admin/add_artist_view', $this->data);
+					}
+           
         }
 		
 	}

@@ -11,9 +11,9 @@ class Browse extends CI_Controller {
 		$this->load->helper('custom_helper');
 		$this->load->library(array('ion_auth','form_validation','session'));
 		$this->ion_auth->logged_in();
-		if (! $this->ion_auth->logged_in()){
+		/* if (! $this->ion_auth->logged_in()){
 				redirect('artist/login');
-			}
+			} */
 	}
 	public function index()
 	{

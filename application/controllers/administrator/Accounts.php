@@ -22,14 +22,15 @@ class Accounts extends CI_Controller {
     }
 	public function index()
 	{
-		$data		=	$this->accounts_model->get_artist();
 		$ID			=	$this->ion_auth->user()->row()->user_id; 
 		$groupID 	= 	$this->ion_auth->get_users_groups($ID)->row()->id; 
+		$data		=	$this->accounts_model->get_artist();
+		$adminData	=	$this->accounts_model->get_artistBy_adminId($ID);
 		$this->load->view('administrator/header_view');
 		if($groupID==1){
 			$this->load->view('administrator/superadmin/super_admin_accounts_view', array('data' => $data));
 		}if($groupID==2){
-			$this->load->view('administrator/admin/admin_accounts_view', array('data' => $data));
+			$this->load->view('administrator/admin/admin_accounts_view', array('data' => $adminData));
 		}
 		$this->load->view('administrator/footer_view');
 		

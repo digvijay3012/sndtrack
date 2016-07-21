@@ -19,7 +19,7 @@ if(!empty($ArtistData)){
                 <ul class="nav nav-tabs">
 
                     <li class="active"><a data-toggle="tab" href="#mnu1">Songs</a></li>
-                    <li><a data-toggle="tab" href="#mnu2">Albums</a></li>
+                    <!--<li><a data-toggle="tab" href="#mnu2">Albums</a></li>-->
                 </ul>
                 <h2 class=" artst_drft_table">Track</h2>
                 <div class="tab-content">
@@ -32,14 +32,15 @@ if(!empty($ArtistData)){
 									$trackCounter='';
 									foreach($data['single_track'] as $getSingleTrackData){
 										 $trackId			=	$getSingleTrackData['id'];	
-										 $trackName			=	$getSingleTrackData['song_name'];
-										 $instrumentTag		=	$getSingleTrackData['instrument_tag'];
+										 $GettrackName		=	explode(".", $getSingleTrackData['song_name']);
+										 $trackName			=	$GettrackName['0'];
+										$instrumentTag		=	$getSingleTrackData['instrument_tag'];
 										 $songCredits		=	$getSingleTrackData['song_credits'];						 
 										 $songNotes			=	$getSingleTrackData['song_notes'];
 										 $songUploadDate	=	$getSingleTrackData['song_upload_date'];
 										 $modifyDate		= 	strtotime($songUploadDate);
 										 $songPublishDate	=  date('j F  Y', $modifyDate);
-										 $mp3Filename		=	$getSingleTrackData['mp3_filename'];
+										 $mp3Filename		=	$getSingleTrackData['song_name'];
 										 $trackImage		=	$getSingleTrackData['track_image'];
 										 
 											$path = getcwd();

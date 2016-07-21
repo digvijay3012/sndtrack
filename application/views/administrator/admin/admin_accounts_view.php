@@ -16,8 +16,8 @@ if(!empty($ArtistData)){
             </div>
          <div class="artist_draft_cont">
                 <ul class="nav nav-tabs">
-					<li><a data-toggle="tab" href="#mnu1">Artists</a></li>
-					 <li><a data-toggle="tab" href="#mnu2">Customers</a></li>
+					<li><a data-toggle="tab" id="atrigger" href="#mnu1">Artists</a></li>
+					 <li  class="active"><a data-toggle="tab" href="#mnu2">Customers</a></li>
                 </ul>
 				<?php echo $this->session->flashdata('message'); ?>
              <h2 class=" artst_drft_table">Account Detail</h2>
@@ -33,7 +33,7 @@ if(!empty($ArtistData)){
 										<th>Last Login</th>
 										<th>Loaction</th>
 										<th>No. of tracks</th>
-										<th>Earnings to Date</th>
+										
 										<th></th>
 										<th></th>
 									</tr>
@@ -53,7 +53,10 @@ if(!empty($ArtistData)){
 									$artistFirstname 	=	$artistData['first_name'];
 									$artistLastname 	=	$artistData['last_name'];
 									$artistPublishDate	=  date("j F  Y", $created_on);
-									$artistLastlogin	=	date("j F  Y", $last_login);
+									$artistLastlogin	=	'';
+									if($last_login!=''){
+										$artistLastlogin	=	date("j F  Y", $last_login);
+									}
 									
 									$geopluginURL='http://www.geoplugin.net/php.gp?ip='.$ip_address;
 									$addrDetailsArr = unserialize(file_get_contents($geopluginURL)); 
@@ -74,7 +77,7 @@ if(!empty($ArtistData)){
                                         <td><?php echo $artistLastlogin; ?></td>
                                         <td><?php echo $country; ?></td>
                                         <td><?php $trackCount =	get_trackcount($artistID); if($trackCount!=0){ echo $trackCount; }else{ echo '0'; }?></td>
-                                        <td>10</td>
+                                        
                                         <td class="lst_data">
 										<a href="<?php echo base_url(); ?>administrator/accounts/reset_password/<?php echo $artistID; ?>">Reset Password</a>
                                         </td>
@@ -166,3 +169,8 @@ if(!empty($ArtistData)){
             </div>
         </div>
     </div>
+<script>
+$(document).ready(function(){
+$( "#atrigger" ).trigger( "click" );
+});
+</script>

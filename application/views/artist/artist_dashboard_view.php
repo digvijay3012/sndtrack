@@ -17,9 +17,8 @@ if(!empty($ArtistData)){
             <div class="btns_dashbord">
                 <ul>
                     <li><a href="<?php echo base_url(); ?>artist/earning">Earnings</a></li>
-					<li><a href="<?php echo base_url(); ?>artist/music/create_album">Your Album</a></li>
-                    <li><a href="<?php echo base_url(); ?>artist/music">Your Music</a></li>
-                    <li><a href="<?php echo base_url(); ?>artist/music_submission">Submissions</a></li>
+					 <li><a href="<?php echo base_url(); ?>artist/music">Your Music</a></li>
+                  
                 </ul>
             </div>
         </div>

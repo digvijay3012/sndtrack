@@ -46,7 +46,7 @@ if(!empty($UserData)){
 				<?php if (! $this->ion_auth->logged_in()){  ?>
 					<ul>
                         <li><a href="<?php echo base_url(); ?>artist/register">Create Account</a></li>
-                        <li><a href="<?php echo base_url(); ?>artist/login">Login</a></li>
+                        <li><a href="<?php echo base_url(); ?>login">Login</a></li>
                     </ul>
 						<?php }else{
 							$user_groups = $this->ion_auth->get_users_groups($userID)->result();
@@ -75,7 +75,7 @@ if(!empty($UserData)){
                             <p>MUSIC FOR FILM & VIDEO</p>
                         </div>
                         <div class="banner_input">
-                            <a class="custom-button" href="">Browse music</a>
+                            <a class="custom-button" href="<?php echo base_url(); ?>browse">Browse music</a>
                         </div>
                     </div>
                 </div>

@@ -65,7 +65,7 @@ if(!empty($ArtistData)){
                 <div class="header_nav">
                     <div class="middle_footer">
                         <ul>
-                            <li><a href="<?php echo base_url(); ?>artist/artist_dashboard">Dashboard</a></li>
+                            <li><a href="<?php echo base_url(); ?>artist/dashboard">Dashboard</a></li>
                         </ul>
                     </div>
                 </div>
@@ -89,7 +89,7 @@ if(!empty($ArtistData)){
                         <li><a href="<?php echo base_url(); ?>artist/music">My Music</a></li>
                         <li><a href="<?php echo base_url(); ?>artist/music_submission">Submissions</a></li>
                         <li><a href="<?php echo base_url(); ?>contact">Contact</a></li>
-                        <li><a class="logout" href="<?php echo base_url(); ?>artist/logout">Logout</a>
+                        <li><a class="logout" href="<?php echo base_url(); ?>logout">Logout</a>
                         </li>
                     </ul>
                 </div>
