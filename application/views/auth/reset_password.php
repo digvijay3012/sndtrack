@@ -45,7 +45,7 @@
        	<div id="infoMessage"><?php echo $message;?></div>
         
 <?php 
-$attributes = array('class' => 'login_form');
+$attributes = array('class' => 'login_form', 'id' => 'reset_password_form');
 echo form_open('auth/reset_password/' . $code, $attributes);?>
 <ul>
 	<li>
@@ -68,7 +68,7 @@ echo form_open('auth/reset_password/' . $code, $attributes);?>
 </ul>
 <?php echo form_close();?>
     </div>
-
+ <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
     <script src="https://use.typekit.net/auo4nbe.js"></script>
     <script>
         try {
@@ -77,7 +77,42 @@ echo form_open('auth/reset_password/' . $code, $attributes);?>
             });
         } catch (e) {}
     </script>
-   
+ <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
+   <script>
+(function($,W,D)
+{
+    var JQUERY4U = {};
+
+    JQUERY4U.UTIL =
+    {
+        setupFormValidation: function()
+        {
+            //form validation rules
+            $("#reset_password_form").validate({
+                rules: {
+					new: "required",
+					new_confirm: "required"
+                },
+                messages: {
+                    new: "Please enter your new password.",
+					new_confirm: "Please confirm password.",
+					
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        }
+    }
+
+    //when the dom has loaded setup form validation rules
+    $(D).ready(function($) {
+        JQUERY4U.UTIL.setupFormValidation();
+    });
+
+})(jQuery, window, document);
+</script>    
+       
 </body>
 
 </html>

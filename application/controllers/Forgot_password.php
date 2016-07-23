@@ -13,7 +13,25 @@ class Forgot_password extends CI_Controller {
 		$this->load->helper('form');
 		$this->lang->load('auth');
 		if ($this->ion_auth->logged_in()){
-				redirect('artist/artist_dashboard');
+				$adminID			=	$this->ion_auth->user()->row()->user_id; 
+				 $groupID 			= 	$this->ion_auth->get_users_groups($adminID)->row()->id; 
+				 //if the login is successful
+				 if($groupID==1){
+					 $this->session->set_flashdata('message', $this->ion_auth->messages());
+						redirect('administrator/dashboard', 'refresh');
+				}elseif($groupID==2){
+					$this->session->set_flashdata('message', $this->ion_auth->messages());
+					redirect('administrator/dashboard', 'refresh');
+				}elseif($groupID==3){
+					$this->session->set_flashdata('message', $this->ion_auth->messages());
+					redirect('artist/dashboard', 'refresh');
+				}elseif($groupID==4){
+					$this->session->set_flashdata('message', $this->ion_auth->messages());
+					redirect('artist/dashboard', 'refresh');
+				}else{
+					$logout = $this->ion_auth->logout();
+					redirect('login', 'refresh');
+				}
 			}
 	}		
 
@@ -49,7 +67,7 @@ class Forgot_password extends CI_Controller {
 
 			// set any errors and display the form
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-			$this->_render_page('artist/forgot_password_view', $this->data);
+			$this->_render_page('pages/forgot_password_view', $this->data);
 		}
 		else
 		{
@@ -68,7 +86,7 @@ class Forgot_password extends CI_Controller {
 		            	}
 
 		                $this->session->set_flashdata('message', $this->ion_auth->errors());
-                		redirect("artist/forgot_password", 'refresh');
+                		redirect("forgot_password", 'refresh');
             		}
 
 			// run the forgotten password method to email an activation code to the user
@@ -78,12 +96,12 @@ class Forgot_password extends CI_Controller {
 			{
 				// if there were no errors
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect("artist/login", 'refresh'); //we should display a confirmation page here instead of the login page
+				redirect("login", 'refresh'); //we should display a confirmation page here instead of the login page
 			}
 			else
 			{
 				$this->session->set_flashdata('message', $this->ion_auth->errors());
-				redirect("artist/forgot_password", 'refresh');
+				redirect("forgot_password", 'refresh');
 			}
 		}
 		

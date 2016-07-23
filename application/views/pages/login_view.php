@@ -62,13 +62,13 @@
                 </li>
                 <li>
                     <button class="custom-button full-width" type="submit" id="send" name="submit" required="">Login</button>
-                    <a href="<?php echo base_url(); ?>artist/forgot_password" class="forgot">forgot password</a>
+                    <a href="<?php echo base_url(); ?>forgot_password" class="forgot">forgot password</a>
                 </li>
             </ul>
         <?php echo form_close();?>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>js/jquery.bxslider.js"></script>
     <script src="https://use.typekit.net/auo4nbe.js"></script>

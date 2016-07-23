@@ -50,23 +50,10 @@ if(!empty($UserData)){
                     </ul>
 						<?php }else{
 							$user_groups = $this->ion_auth->get_users_groups($userID)->result();
-								$adminID			=	$this->ion_auth->user()->row()->user_id; 
-								 $groupID 			= 	$this->ion_auth->get_users_groups($adminID)->row()->id; 
-								 //if the login is successful
-								 if($groupID==1){
-									 $redirectUrl	=	'administrator/dashboard';
-								}elseif($groupID==2){
-									$redirectUrl	=	'administrator/dashboard';
-								}elseif($groupID==3){
-									$redirectUrl	=	'artist/dashboard';
-								}elseif($groupID==4){
-									$redirectUrl	=	'artist/dashboard';
-								}else{
-									$redirectUrl	=	'';
-								}
+							//echo "<pre>";	print_r($user_groups);	echo "</pre>";
 						?>
 					 <ul>
-						<li><a href="<?php echo base_url(); ?><?php echo $redirectUrl; ?>">Dashboard</a></li>
+						<li><a href="<?php echo base_url(); ?>artist/artist_dashboard">Dashboard</a></li>
 						<li> </li>
                     </ul>
 						<?php } ?>	

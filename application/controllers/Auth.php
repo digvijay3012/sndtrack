@@ -318,7 +318,7 @@ class Auth extends CI_Controller {
 					{
 						// if the password was successfully changed
 						$this->session->set_flashdata('message', $this->ion_auth->messages());
-						redirect("artist/login", 'refresh');
+						redirect("login", 'refresh');
 					}
 					else
 					{
@@ -332,7 +332,7 @@ class Auth extends CI_Controller {
 		{
 			// if the code is invalid then send them back to the forgot password page
 			$this->session->set_flashdata('message', $this->ion_auth->errors());
-			redirect("artist/forgot_password", 'refresh');
+			redirect("forgot_password", 'refresh');
 		}
 	}
 

@@ -44,7 +44,7 @@
         </div>
 		<div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
 			<?php 
-				$attributes = array('class' => 'login_form', 'id' => 'contact_form');
+				$attributes = array('class' => 'login_form', 'id' => 'contact_form', 'name' => 'contact_form');
 				echo form_open_multipart('contact', $attributes); 
 			?>
             <ul>
@@ -71,6 +71,9 @@
                     <textarea name="message" placeholder="Message"></textarea>
 					<?php  echo form_error('message'); ?>
                 </li>
+				<li>
+				<div class="g-recaptcha" name="recaptcha" id="recaptcha" data-sitekey="6LfotyUTAAAAAFrNWYsnLEn5qW7pdjMKXOTTBBIv"></div>
+				</li>
                 <li>
                     <button class="custom-button full-width" type="submit" id="Login" name="submit" required="">Send</button>
                 </li>
@@ -162,7 +165,50 @@
 
 })(jQuery, window, document);
 </script>
-   
+<script>
+$( document ).ready(function() {
+$("#contact_form").bind('blur keydown focusout', function(){ 
+
+        var dataArray = $("#contact_form").serializeArray(),
+        dataObj = {};
+        console.dir(dataArray); //require firebug
+        //console.log(dataArray);
+
+        $(dataArray).each(function(i, field){
+          dataObj[field.name] = field.value;
+        });
+
+        var recaptcha = (dataObj['g-recaptcha-response']);
+
+        if(recaptcha != "") {
+                $( "#temp" ).remove();
+        }       
+    });
+
+    $( ".custom-button" ).click(function() {
+
+        var dataArray = $("#contact_form").serializeArray(),
+            dataObj = {};
+            console.dir(dataArray); //require firebug
+            //console.log(dataArray);
+
+        $(dataArray).each(function(i, field){
+          dataObj[field.name] = field.value;
+        });
+
+        var recaptcha = (dataObj['g-recaptcha-response']);
+
+        $( "#temp" ).remove();
+
+            if(recaptcha == "") {
+                $("#recaptcha").append('<label id="temp" style="color:red;line-height:normal;font-size: small;">This field is required.</label>');
+            }
+
+    });             
+
+});
+</script>
+ <script src='https://www.google.com/recaptcha/api.js'></script>  
 </body>
 
 </html>

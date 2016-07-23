@@ -21,6 +21,7 @@ if(!empty($AdminData)){
 					<li><a href="<?php echo base_url(); ?>administrator/artist">Add Artists</a></li>
                     <li><a href="<?php echo base_url(); ?>administrator/accounts">Accounts</a></li>
 					<li><a href="<?php echo base_url(); ?>administrator/music">Add Music</a></li>
+					<li><a href="<?php echo base_url(); ?>administrator/category">Add Category</a></li>
                 </ul>
             </div>
         </div>

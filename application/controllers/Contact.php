@@ -18,10 +18,16 @@ class Contact extends CI_Controller {
 		$this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[1]|max_length[1000]');   
 		$this->form_validation->set_rules('last_name', 'last Name', 'trim|required|min_length[1]|max_length[1000]');
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[1000]');
-		$this->form_validation->set_rules('message', 'Message', 'trim|required|min_length[1]|max_length[1000]');		
+		$this->form_validation->set_rules('message', 'Message', 'trim|required|min_length[1]|max_length[1000]');	
+		$recaptcha	=	$this->input->post('g-recaptcha-response');	 
+			
 					if ($this->form_validation->run() == FALSE) {
 						$this->load->view('pages/contact_view');
 					 }else{
+						 if($recaptcha==''){
+							$this->session->set_flashdata('item', 'Please fill captcha properly.'); 
+							redirect("contact");
+						}
 						$email		=	$this->input->post('email');
 						$firstname	=	$this->input->post('first_name');
 						$lastname	=	$this->input->post('last_name');
@@ -35,10 +41,6 @@ class Contact extends CI_Controller {
 						$this->session->set_flashdata('item', 'Your message has been sent.'); 
 						redirect("contact");
 				}
-					
-				
-				
-		
-	}
+		}
 	
 }

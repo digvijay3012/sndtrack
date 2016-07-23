@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Login</title>
+    <title>Forgot Password</title>
     <link rel="apple-touch-icon" sizes="57x57" href="<?php echo base_url(); ?>images/favicons/apple-touch-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="<?php echo base_url(); ?>images/favicons/apple-touch-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="<?php echo base_url(); ?>images/favicons/apple-touch-icon-72x72.png">
@@ -44,33 +44,23 @@
         </div>
        	<div id="infoMessage"><?php echo $message;?></div>
           <?php
-				$attributes = array('class' => 'login_form', 'id' => 'login_form');
-				echo form_open('artist/login', $attributes); ?>			
+				$attributes = array('class' => 'login_form', 'id' => 'forgot_password_form');
+				echo form_open('forgot_password', $attributes); ?>			
             <ul>
                 <li>
-				<?php  /*  echo "hhhhhh".$userId = $this->ion_auth->get_user_id(); 
-						echo "<pre>";
-						print_r($_SESSION);
-						echo "</pre>"; */
-				?>
+				
                     <input type="text"  name="identity" placeholder="Email address">
 					<?php  echo form_error('identity'); ?>
                 </li>
+                
                 <li>
-                    <input type="password"  name="password" placeholder="Password">
-					<?php  echo form_error('password'); ?>
-                </li>
-                <li>
-                    <button class="custom-button full-width" type="submit" id="send" name="submit" required="">Login</button>
-                    <a href="<?php echo base_url(); ?>artist/forgot_password" class="forgot">forgot password</a>
+                    <button class="custom-button full-width" type="submit" id="send" name="submit" required="">Submit</button>
+                    
                 </li>
             </ul>
         <?php echo form_close();?>
     </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>js/jquery.bxslider.js"></script>
+   <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
     <script src="https://use.typekit.net/auo4nbe.js"></script>
     <script>
         try {
@@ -79,7 +69,7 @@
             });
         } catch (e) {}
     </script>
-  
+ 
  <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
    <script>
 (function($,W,D)
@@ -91,15 +81,13 @@
         setupFormValidation: function()
         {
             //form validation rules
-            $("#login_form").validate({
+            $("#forgot_password_form").validate({
                 rules: {
-					identity: "required",
-					password: "required"
+					identity: "required"
 					
                 },
                 messages: {
-                    identity: "Please enter your email.",
-					password: "Please enter your password."
+                    identity: "Please enter your email."
 					
                 },
                 submitHandler: function(form) {
@@ -116,7 +104,7 @@
 
 })(jQuery, window, document);
 </script>    
-   
+     
 </body>
 
 </html>
