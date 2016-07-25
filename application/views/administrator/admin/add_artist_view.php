@@ -48,7 +48,7 @@
         
 		<?php
 		$attributes = array('class' => 'login_form', 'id' => 'register_form');
-		echo form_open('administrator/artist', $attributes); ?>
+		echo form_open_multipart('administrator/artist', $attributes); ?>
             
             <ul>
                 <li>
@@ -64,6 +64,15 @@
                     <input type="text" placeholder="Email address" value="<?php echo set_value('email'); ?>" name="email" >
 					<?php  echo form_error('email'); ?>
                 </li>
+				 <li>
+				Uplaod Artist image: <input type="file" onchange="return ValidateImageUpload('artist_image')" name="artist_image" class="mycls" id="artist_image">
+					<?php  echo form_error('artist_image'); ?>
+							
+                </li>
+				<li>
+					<textarea placeholder="Biography" name="artist_bio"></textarea>
+					<?php  echo form_error('artist_bio'); ?>
+				</li>
                 <li>
                     <input type="password" value="<?php echo set_value('password'); ?>" placeholder="Password" name="password" >
 					<?php  echo form_error('password'); ?>
@@ -78,9 +87,10 @@
             </ul>
     <?php echo form_close();?>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
-
+<link rel="stylesheet" href="<?php echo base_url(); ?>css/sweetalert.css">
+	<script src="<?php echo base_url(); ?>js/sweetalert.min.js"></script>
     <script src="https://use.typekit.net/auo4nbe.js"></script>
     <script>
         try {
@@ -109,6 +119,7 @@
                         required: true,
                         email: true
                     },
+					artist_bio: "required",
                     password: "required",
 					cpassword: "required"
 					
@@ -117,6 +128,7 @@
                     first_name: "Please enter your first name.",
                     last_name: "Please enter your last name.",
 					email: "Please enter a valid email.",
+					artist_bio: "Please enter your biography.",
                     password: "Please enter your password.",
 					cpassword: "Please confirm your password."
                 },
@@ -133,7 +145,57 @@
     });
 
 })(jQuery, window, document);
+function ValidateImageUpload($inputId) {
+var fuData = document.getElementById($inputId);
+var FileUploadPath = fuData.value;
+if (FileUploadPath == '') {
+    
+	sweetAlert('', 'Please upload an image.', 'error');
+
+} else {
+    var Extension = FileUploadPath.substring(FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+	if (Extension == "gif" || Extension == "png" || Extension == "bmp"
+                || Extension == "jpeg" || Extension == "jpg") {
+		if (fuData.files && fuData.files[0]) {
+			//jQuery('.sbmt').removeAttr("disabled");
+				var size = fuData.files[0].size;
+				//alert(size);
+				var MAX_SIZE	=	1500000;
+                if(size > MAX_SIZE){
+                  
+					sweetAlert('Oops...', 'Maximum file size exceeds.', 'error');
+                    return;
+                }
+            }
+		} 
+else {
+		sweetAlert('Oops...', 'Allows only file types of GIF, PNG, JPG, JPEG and BMP.', 'error');
+		return false;
+    }
+}}
 </script> 
+<!--************************************ Start Script use for enter Alphabets only in (Name) Text box********************-->
+<script type="text/javascript">
+jQuery(document).ready(function(){
+jQuery.noConflict();
+   jQuery("input[name='first_name']").keypress(function(event){
+       var inputValue = event.which;
+       // allow letters and whitespaces only.
+       if((inputValue > 33 && inputValue < 64) || (inputValue > 90 && inputValue < 97 ) || (inputValue > 123 && inputValue < 126)
+&& (inputValue != 32)){
+           event.preventDefault();
+       }
+   });
+    jQuery("input[name='last_name']").keypress(function(event){
+       var inputValue = event.which;
+       // allow letters and whitespaces only.
+       if((inputValue > 33 && inputValue < 64) || (inputValue > 90 && inputValue < 97 ) || (inputValue > 123 && inputValue < 126)
+&& (inputValue != 32)){
+           event.preventDefault();
+       }
+   });
+});
+</script>
 </body>
 
 </html>

@@ -13,7 +13,25 @@ class Register extends CI_Controller {
 		$this->load->helper('form');
 		$this->lang->load('auth');
 		if ($this->ion_auth->logged_in()){
-				redirect('artist/artist_dashboard');
+				 $adminID			=	$this->ion_auth->user()->row()->user_id; 
+				 $groupID 			= 	$this->ion_auth->get_users_groups($adminID)->row()->id; 
+				 //if the login is successful
+				 if($groupID==1){
+					 $this->session->set_flashdata('message', $this->ion_auth->messages());
+						redirect('administrator/dashboard', 'refresh');
+				}elseif($groupID==2){
+					$this->session->set_flashdata('message', $this->ion_auth->messages());
+					redirect('administrator/dashboard', 'refresh');
+				}elseif($groupID==3){
+					$this->session->set_flashdata('message', $this->ion_auth->messages());
+					redirect('artist/dashboard', 'refresh');
+				}elseif($groupID==4){
+					$this->session->set_flashdata('message', $this->ion_auth->messages());
+					redirect('artist/dashboard', 'refresh');
+				}else{
+					$logout = $this->ion_auth->logout();
+					redirect('login', 'refresh');
+				}
 			}
 	}
 

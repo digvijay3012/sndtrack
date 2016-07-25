@@ -8,11 +8,20 @@ class Artist extends CI_Controller {
 		$this->load->database();
 		$this->load->library(array('ion_auth','form_validation'));
 		$this->load->helper(array('url','language'));
-
+		$this->load->model('administrator/artist_model');
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 		$this->load->helper('form');
 		$this->lang->load('auth');
-		
+		if (! $this->ion_auth->logged_in()){
+				redirect('administrator/login');
+			}
+		$ID				=	$this->ion_auth->user()->row()->user_id; 
+		$groupID 		= 	$this->ion_auth->get_users_groups($ID)->row()->id; 
+		$groupIdArray	=	array(1,2);
+	
+		if (!in_array($groupID, $groupIdArray)){
+			redirect('administrator/login');
+        }
 	}
 
 	// redirect if needed, otherwise display the user list
@@ -32,6 +41,7 @@ class Artist extends CI_Controller {
         // validate form input
         $this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'required');
         $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
+		 $this->form_validation->set_rules('artist_bio', $this->lang->line('create_user_validation_lname_label'), 'required');
         if($identity_column!=='email')
         {
             $this->form_validation->set_rules('identity',$this->lang->line('create_user_validation_identity_label'),'required|is_unique['.$tables['users'].'.'.$identity_column.']');
@@ -56,6 +66,15 @@ class Artist extends CI_Controller {
                 'last_name'  => $this->input->post('last_name'),
 				'username'  => $email,
             );
+			$artist_bio = $this->input->post('artist_bio');
+			$artistImg		=	$_FILES['artist_image']['name'];
+			$artistImgTmp	=	$_FILES['artist_image']['tmp_name'];
+			
+			$artistImgName	=	'';
+			
+			if($artistImg !=''){
+				$artistImgName	=	$this->upload_image($artistImg,$artistImgTmp); 
+			}
 			$group_id = $this->input->post('group_id'); 
 			$group_ids = array($group_id);
         }
@@ -69,9 +88,9 @@ class Artist extends CI_Controller {
 				 $this->email->subject('Sndtrack Registarion'); 
 				 $this->email->message('Thanks for registration. Your login details are: username: '.$to_email.'  And Password: '.$password.''); 
 					$this->email->send();
-					$ID			=	$this->ion_auth->user()->row()->user_id; 
-			$relationData = array('admin_id'	=>  $ID , 'artist_id'=> $artistID);
-			$this-> db->insert('snd_admin_artist_group', $relationData);
+					$ID					=	$this->ion_auth->user()->row()->user_id; 
+					$submitRelData		= 		$this->artist_model->add_admin_artist_relation($ID,$artistID);	
+					$submitArtistData	= 		$this->artist_model->add_artist_info($artistID,$ID,$artist_bio,$artistImgName);	
             // check to see if we are creating the user
             // redirect them back to the admin page
             $this->session->set_flashdata('message', $this->ion_auth->messages());
@@ -128,7 +147,28 @@ class Artist extends CI_Controller {
 		
 	}
 
-	
+	public function upload_image($artistImg,$artistImgTmp){
+			if($artistImg !=''){
+						$uploaddir         		= 'artist_images/';
+						 $RandNo				=	 rand(); 
+						list($txt, $ext) 		= explode(".",$artistImg);
+						$actual_file_name 		= $txt."_".$RandNo.".".$ext;
+						$uploadfile = $uploaddir . basename($actual_file_name);
+							if (move_uploaded_file($artistImgTmp, $uploadfile)) {
+								  return $actual_file_name;
+								} else {
+								  return false;
+								}
+					}else{
+						 return false;
+					}
+	}
+	public function set_artist_type(){
+		$artistId		=	$this->input->post('artist_id');
+		$adminId		=	$this->input->post('adminID');
+		$artist_type	=	$this->input->post('artist_type');
+			return $this->artist_model->set_artist_type($artistId,$adminId,$artist_type);
+	}
 
 	function _render_page($view, $data=null, $returnhtml=false)//I think this makes more sense
 	{

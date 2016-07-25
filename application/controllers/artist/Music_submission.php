@@ -14,7 +14,7 @@ class Music_submission extends CI_Controller {
 		$this->ion_auth->logged_in();
 		
 		if (! $this->ion_auth->logged_in()){
-				redirect('artist/login');
+				redirect('login');
 			}
 	}
 	public function index()

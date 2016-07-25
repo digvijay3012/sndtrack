@@ -14,7 +14,7 @@ class Earning extends CI_Controller {
 		$this->load->library(array('ion_auth','form_validation','session'));
 		$this->ion_auth->logged_in();
 		if (! $this->ion_auth->logged_in()){
-				redirect('artist/login');
+				redirect('login');
 			}
 	}
 	public function index()

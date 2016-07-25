@@ -26,6 +26,9 @@ class Music extends CI_Controller {
 	{
 				$adminID			=	$this->ion_auth->user()->row()->user_id; 
 				$groupID 			= 	$this->ion_auth->get_users_groups($adminID)->row()->id; 
+			$this->form_validation->set_rules('artist_id', 'Select Artist', 'required');
+			$this->form_validation->set_rules('cat_id', 'Select Category', 'required');	
+			$this->form_validation->set_rules('upload_song', 'Select Category', 'required');				
 			$this->form_validation->set_rules('instrument_tag', 'Instrument tag', 'trim|required|min_length[2]|max_length[300]');
 			$this->form_validation->set_rules('song_credits', 'Song Credits tag', 'trim|required|min_length[2]|max_length[500]');        
 			$this->form_validation->set_rules('song_notes', 'Song Notes', 'trim|required|min_length[2]|max_length[1000]');    
@@ -41,29 +44,32 @@ class Music extends CI_Controller {
 				$this->load->view('administrator/footer_view');
          } else {
 				
-				$song_type		=		$this->input->post('song_type');
 				$artist_id 		= 		$this->input->post('artist_id');
+				$cat_id 		= 		$this->input->post('cat_id');
 				$instrument_tag	=		$this->input->post('instrument_tag');
 				$song_credits	=		$this->input->post('song_credits');
 				$song_notes		=		$this->input->post('song_notes');
-				$SubmitData		= 		$this->music_submission_model->add_music($adminID,$artist_id,$song_type,$instrument_tag,$song_credits,$song_notes);	
+				$SubmitData		= 		$this->music_submission_model->add_music($adminID,$artist_id,$cat_id,$instrument_tag,$song_credits,$song_notes);	
 				$this->session->set_flashdata('item', 'Music has been submit sucessfully.'); 
 				redirect("administrator/music");
 				} 
 		
 	}
-	public function upload_image(){
+	public function upload_music(){
 		if($_POST['image_form_submit'] == 1){
 		$inserStatusArr	= array();
 		$inserStatus = '';
-		$artist_id	 =	$this->input->post('artist_id');
-		$adminID	 =	$this->ion_auth->user()->row()->user_id; 
+		$cat_id	='';
+		$artist_id		 =	$this->input->post('artist_id');
+		$cat_id	 		=	$this->input->post('cat_id');
+		$column_name	=	$this->input->post('column_name');
+		$adminID	 	=	$this->ion_auth->user()->row()->user_id; 
 		$images_arr 		= array();
 		$getFileNameArr		=	array();
 		$fileCount	=	$_POST['fileCount'];
 		for($i=0;$i<$fileCount;$i++){
 			$fileName	=	"musicfiles_".$i;
-			$image_name = $_FILES[$fileName]['name'];
+			$image_name = $_FILES[$fileName]['name']; 
 			$tmp_name 	= $_FILES[$fileName]['tmp_name'];
 			$size 		= $_FILES[$fileName]['size'];
 			$type 		= $_FILES[$fileName]['type'];
@@ -77,7 +83,7 @@ class Music extends CI_Controller {
 				$images_arr[] = $target_file;
 			}
 			
-			$inserStatus	=	store_temp_mucic($adminID,$artist_id,$image_name);
+			$inserStatus	=	store_temp_mucic($adminID,$artist_id,$image_name,$cat_id,$column_name);
 			array_push($inserStatusArr, $inserStatus);
 		}
 	
@@ -85,8 +91,9 @@ class Music extends CI_Controller {
 			foreach($images_arr as $image_src){ $count++?>
 				<ul class="reorder_ul reorder-photos-list">
 				<?php 
+				//echo "daga".$column_name; die;
 					$musicFileName	=	$getFileNameArr[$count-1]; 
-					$musicID		=	get_music_id($adminID,$artist_id,$musicFileName);
+					$musicID		=	get_music_id($adminID,$artist_id,$musicFileName,$column_name);
 				?>
 					<li id="music_li_<?php echo $musicID; ?>" >
 						<a href="javascript:void(0);" style="float:none;" class="image_link"><?php echo $getFileNameArr[$count-1]; ?></a>

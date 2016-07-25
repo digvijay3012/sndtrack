@@ -1,10 +1,10 @@
 <?php
-$ArtistData	=	$this->ion_auth->user()->row();
-if(!empty($ArtistData)){
-	$artistID 		=		$ArtistData->user_id;
-	$artistEmail 	=		$ArtistData->email;
-	$first_name 	=		$ArtistData->first_name;
-	$last_name 		=		$ArtistData->last_name;
+$adminData	=	$this->ion_auth->user()->row();
+if(!empty($adminData)){
+	$superAdminID 	=		$adminData->id;
+	$adminEmail 	=		$adminData->email;
+	$first_name 	=		$adminData->first_name;
+	$last_name 		=		$adminData->last_name;
 }
 			
 ?>
@@ -21,9 +21,12 @@ if(!empty($ArtistData)){
 					 <li><a data-toggle="tab" href="#mnu2">Customers</a></li>
                 </ul>
 				<?php echo $this->session->flashdata('message'); ?>
-             <h2 class=" artst_drft_table">Account Detail</h2>
+             <h2 class="artst_drft_table">Account Detail</h2>
+			
+			 <div id="stuts-msg"></div>
                 <div class="tab-content">
                     <div id="mnu1" class="tab-pane fade in">
+					
                         <div class="table-responsive">
                             <table id="artist_table" class="table">
 							
@@ -34,7 +37,7 @@ if(!empty($ArtistData)){
 										<th>Last Login</th>
 										<th>Loaction</th>
 										<th>No. of tracks</th>
-										
+										<th>Artist Type</th>
 										<th></th>
 										<th></th>
 									</tr>
@@ -77,7 +80,9 @@ if(!empty($ArtistData)){
                                         <td><?php echo $artistLastlogin; ?></td>
                                         <td><?php echo $country; ?></td>
                                         <td><?php $trackCount =	get_trackcount($artistID); if($trackCount!=0){ echo $trackCount; }else{ echo '0'; }?></td>
-                                       
+                                        <td><input type="radio" name="artist_type" value="feautred" checked> feautred
+										<input type="radio" name="artist_type" value="trending" checked> trending
+										</td>
                                         <td class="lst_data">
 										<a href="<?php echo base_url(); ?>administrator/accounts/reset_password/<?php echo $artistID; ?>">Reset Password</a>
                                         </td>
@@ -244,3 +249,24 @@ if(!empty($ArtistData)){
             </div>
         </div>
     </div>
+<script>
+$(document).ready(function(){
+$('input[type="radio"]').click(function(){
+    if ($(this).is(':checked'))
+    {
+	  var url 		=	'<?php echo base_url(); ?>administrator/artist/set_artist_type';
+      var artist_type =	$(this).val();
+	  var artist_id	=	'<?php echo $artistID; ?>';
+	  var adminID	=	'<?php echo $superAdminID; ?>';
+	  $.ajax({
+        url: url,
+		data: {artist_type : artist_type, artist_id : artist_id, adminID : adminID},                         // Setting the data attribute of ajax with file_data
+		type: 'post',
+		success:function(data){
+				$("#stuts-msg").empty().append('Artist type has been set.');
+			}
+	});
+    }
+  });
+});
+</script>

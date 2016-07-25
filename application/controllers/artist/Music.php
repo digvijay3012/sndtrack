@@ -12,9 +12,9 @@ class Music extends CI_Controller {
 		//load custom helper 
 		$this->load->helper('custom_helper');
 		$this->load->library(array('ion_auth','form_validation','session'));
-		$this->ion_auth->logged_in();
+		
 		if (! $this->ion_auth->logged_in()){
-				redirect('artist/login');
+				redirect('login');
 			}
 	}
 	public function index()

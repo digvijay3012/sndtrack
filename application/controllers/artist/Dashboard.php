@@ -9,7 +9,7 @@ class Dashboard extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->library(array('ion_auth','form_validation'));
 		if (! $this->ion_auth->logged_in()){
-				redirect('artist/login');
+				redirect('login');
 			}
 		$ID			=	$this->ion_auth->user()->row()->user_id; 
 		$groupID 	= 	$this->ion_auth->get_users_groups($ID)->row()->id; 
