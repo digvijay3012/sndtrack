@@ -28,7 +28,7 @@ class Music extends CI_Controller {
 				$groupID 			= 	$this->ion_auth->get_users_groups($adminID)->row()->id; 
 			$this->form_validation->set_rules('artist_id', 'Select Artist', 'required');
 			$this->form_validation->set_rules('cat_id', 'Select Category', 'required');	
-			$this->form_validation->set_rules('upload_song', 'Select Category', 'required');				
+			//$this->form_validation->set_rules('upload_song', 'Select Category', 'required');				
 			$this->form_validation->set_rules('instrument_tag', 'Instrument tag', 'trim|required|min_length[2]|max_length[300]');
 			$this->form_validation->set_rules('song_credits', 'Song Credits tag', 'trim|required|min_length[2]|max_length[500]');        
 			$this->form_validation->set_rules('song_notes', 'Song Notes', 'trim|required|min_length[2]|max_length[1000]');    
@@ -36,6 +36,7 @@ class Music extends CI_Controller {
 				
 				$this->load->view('administrator/header_view');
 				if($groupID==1){
+					
 					$this->load->view('administrator/superadmin/music_submission_view');
 				}
 				if($groupID==2){
@@ -95,12 +96,22 @@ class Music extends CI_Controller {
 					$musicFileName	=	$getFileNameArr[$count-1]; 
 					$musicID		=	get_music_id($adminID,$artist_id,$musicFileName,$column_name);
 				?>
+				<?php if($musicID!=''){ ?>
 					<li id="music_li_<?php echo $musicID; ?>" >
 						<a href="javascript:void(0);" style="float:none;" class="image_link"><?php echo $getFileNameArr[$count-1]; ?></a>
 						
-						<span id="delete_file_m"  class="delete-file-handle" pid="<?php echo $musicID; ?>">
+						<span class="delete-file-handle" pid="<?php echo $musicID; ?>">
 						 X </span><span class="al-msg"><?php if (in_array($musicFileName, $inserStatusArr)){ echo "This file has been already uplaod for this artist".$musicFileName; } ?></span>
+						
 					</li>
+					<?php } else { ?>
+					<li id="music_li_del" >
+						<a href="javascript:void(0);" style="float:none;" class="image_link"><?php echo $getFileNameArr[$count-1]; ?></a>
+						
+						<span class="delete-file-handle-this">
+						 X </span><span class="al-msg"><?php if (in_array($musicFileName, $inserStatusArr)){ echo "This file has been already uplaod for this artist"; } ?></span>
+					</li>
+					<?php } ?>
 				</ul>
 				<?php }
 				}

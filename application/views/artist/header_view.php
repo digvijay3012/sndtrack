@@ -84,7 +84,7 @@ if(!empty($ArtistData)){
                 </div>
                 <div class="drop_cntnt" style="display:none;">
                     <ul>
-                        <li><a href="">Account Settings</a></li>
+                        <li><a href="<?php echo base_url(); ?>artist/account_setting">Account Settings</a></li>
                         <li><a href="<?php echo base_url(); ?>artist/earning">My Earnings</a></li>
                         <li><a href="<?php echo base_url(); ?>artist/music">My Music</a></li>
                         <li><a href="<?php echo base_url(); ?>artist/music_submission">Submissions</a></li>

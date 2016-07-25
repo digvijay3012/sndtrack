@@ -11,9 +11,9 @@ class Music_submission_model extends CI_Model {
 			$query = $this->db->query("SELECT * FROM snd_tmp_music_store WHERE admin_id='$adminID' AND artist_id='$artist_id'");
 			foreach ($query->result_array() as $musicData){
 						//$song_name	=	$musicData['file_name'];
-						echo $tempSong_id	=	$musicData['id'];
+						 $tempSong_id	=	$musicData['id'];
 						$tempCatid		=	$musicData['cat_id'];
-					echo	$watermark_format	=	$musicData['watermark_format'];
+						$watermark_format	=	$musicData['watermark_format'];
 						$lite_version		=	$musicData['lite_version'];	
 						$personal_format	=	$musicData['personal_format'];
 						$standard_licence	=	$musicData['standard_licence'];
@@ -28,8 +28,9 @@ class Music_submission_model extends CI_Model {
 						"song_upload_date" 	=> $date, 
 						"track_status" 		=> 1
 						);
-					echo	"track".$trackID 	=	$this->db->insert('snd_artist_music',$data);
-						die;
+						$this->db->insert('snd_artist_music',$data);
+						$trackID 	= $this->db->insert_id();
+					
 						$versionData = array(
 						"track_id" 		=> $trackID,
 						"watermark_format" 	=> $watermark_format,

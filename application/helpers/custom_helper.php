@@ -69,7 +69,9 @@ if ( ! function_exists('store_temp_mucic')){
 	  /* $getData = $query->row();
 	  $rowId	=	 $getData->id; */
 	   if($query->num_rows() == 0){
-		     $checkFilequery = $ci->db->query("SELECT * FROM snd_tmp_music_store WHERE '$column_name'='$file_name' AND artist_id='$artist_id'" );
+		     $checkFilequery = $ci->db->query("SELECT snd_artist_music.id FROM snd_artist_music INNER JOIN snd_musicfile_version ON snd_artist_music.id=snd_musicfile_version.track_id INNER JOIN snd_admin_artist_group ON snd_artist_music.artist_id=snd_admin_artist_group.artist_id WHERE snd_artist_music.artist_id='$artist_id' AND snd_musicfile_version.$column_name='$file_name'" );
+			/*  echo "SELECT snd_artist_music.id FROM snd_artist_music INNER JOIN snd_musicfile_version ON snd_artist_music.id=snd_musicfile_version.track_id INNER JOIN snd_admin_artist_group ON snd_artist_music.artist_id=snd_admin_artist_group.artist_id WHERE snd_artist_music.artist_id='$artist_id' AND snd_musicfile_version.$column_name='$file_name'";
+			 echo $checkFilequery->num_rows(); die; */
 			  if($checkFilequery->num_rows() != 0){
 				    return $file_name;
 			  }else{
@@ -97,8 +99,10 @@ if ( ! function_exists('get_music_id')){
 	  
 	   $query = $ci->db->query("SELECT id FROM snd_tmp_music_store WHERE $column_name='$file_name' AND artist_id='$artist_id' AND admin_id='$adminID'" );
 	  $getData = $query->row();
-	 // echo "<pre>"; print_r($getData); echo "</pre>"; die;
-	  return $getData->id;
+	if(!empty($getData)){
+		  return $getData->id;
+	}
+	
 	   
 	}
 }
@@ -138,5 +142,43 @@ if ( ! function_exists('get_allCategory')){
 					}
 				
 				return $resultArray;
+   }
+}
+if ( ! function_exists('get_admin_data')){
+   function get_admin_data($admin_id){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database
+       $query = $ci->db->get_where('snd_admin_info',array('admin_id'=>$admin_id));
+       
+       if($query->num_rows() > 0){
+           $result = $query->result_array();
+           return $result;
+       }else{
+           return false;
+       }
+   }
+}
+if ( ! function_exists('get_artist_data')){
+   function get_artist_data($artist_id){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database
+       $query = $ci->db->get_where('snd_artist_info',array('artist_id'=>$artist_id));
+       
+       if($query->num_rows() > 0){
+           $result = $query->result_array();
+           return $result;
+       }else{
+           return false;
+       }
    }
 }

@@ -274,4 +274,7 @@ $.ajax({
 			}
 	});
 });
+$(document).on('click','.delete-file-handle-this',function(){
+	$('#music_li_del').remove();
+});
 </script>

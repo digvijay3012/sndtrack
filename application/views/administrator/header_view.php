@@ -84,15 +84,26 @@ if(!empty($ArtistData)){
                     </ul>
                 </div>
                 <div class="drop_cntnt" style="display:none;">
-                    <ul>
-                        <li><a href="">Account Settings</a></li>
+			<?php	
+				 $adminID			=	$this->ion_auth->user()->row()->user_id; 
+				 $groupID 			= 	$this->ion_auth->get_users_groups($adminID)->row()->id;
+				 if($groupID==1){ ?>
+					 <ul>
+                        <li><a href="<?php echo base_url(); ?>administrator/accounts/setting">Account Settings</a></li>
                         <li><a href="<?php echo base_url(); ?>artist/earning">My Earnings</a></li>
-                        <li><a href="<?php echo base_url(); ?>artist/music">My Music</a></li>
                         <li><a href="<?php echo base_url(); ?>artist/music_submission">Submissions</a></li>
                         <li><a href="<?php echo base_url(); ?>contact">Contact</a></li>
                         <li><a class="logout" href="<?php echo base_url(); ?>logout">Logout</a>
                         </li>
                     </ul>
+				<?php } else { ?>	
+					<ul>
+                        <li><a href="<?php echo base_url(); ?>administrator/accounts/setting">Account Settings</a></li>
+						<li><a href="<?php echo base_url(); ?>contact">Contact</a></li>
+                        <li><a class="logout" href="<?php echo base_url(); ?>logout">Logout</a>
+                        </li>
+                    </ul>				
+				<?php } ?>   
                 </div>
             </div>
         </div>
