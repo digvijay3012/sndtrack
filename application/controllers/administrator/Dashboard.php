@@ -8,8 +8,14 @@ class Dashboard extends CI_Controller {
         parent::__construct();
 		$this->load->helper('url');
 		$this->load->library(array('ion_auth','form_validation'));
-		$this->ion_auth->logged_in();
-		if (!$this->ion_auth->logged_in() && !$this->ion_auth->is_admin()) {
+		if (! $this->ion_auth->logged_in()){
+				redirect('administrator/login');
+			}
+		$ID				=	$this->ion_auth->user()->row()->user_id; 
+		$groupID 		= 	$this->ion_auth->get_users_groups($ID)->row()->id; 
+		$groupIdArray	=	array(1,2);
+	
+		if (!in_array($groupID, $groupIdArray)){
 			redirect('administrator/login');
         }
     }

@@ -26,7 +26,9 @@ if(!empty($adminData)){
 			 <div id="stuts-msg"></div>
                 <div class="tab-content">
                     <div id="mnu1" class="tab-pane fade in">
-					
+					<div style="display:none" class="set_arists_status">
+						<img src="http://sndtrack.stagingdevsite.com/images/uploading.gif">
+					</div>
                         <div class="table-responsive">
                             <table id="artist_table" class="table">
 							
@@ -44,10 +46,12 @@ if(!empty($adminData)){
 							</thead>
 							
 							<tbody>
-							<?php if(!empty($data['artists_accounts'])){ 
-							//echo "<pre>";	print_r($data);  echo "</pre>";	 die;
+							<?php if(!empty($data['artists_accounts'])){
+								$counterFlag	=	'';	
+							//echo "<pre>";	print_r($data['artists_accounts']);  echo "</pre>";	 die;
 								foreach($data['artists_accounts']	as  $artistData){
 									$artistID 			=	$artistData['id'];
+									$artist_type 			=	$artistData['artist_type'];
 									$ip_address 		=	$artistData['ip_address'];
 									$artistUsername 	=	$artistData['username'];
 									$artistPassword 	=	$artistData['password'];
@@ -67,7 +71,7 @@ if(!empty($adminData)){
 									if(!$country){
 									   $country='Not Define';
 									}
-									
+								$counterFlag++;	
 							?>
 							<tr>
 								<td></td>
@@ -80,8 +84,8 @@ if(!empty($adminData)){
                                         <td><?php echo $artistLastlogin; ?></td>
                                         <td><?php echo $country; ?></td>
                                         <td><?php $trackCount =	get_trackcount($artistID); if($trackCount!=0){ echo $trackCount; }else{ echo '0'; }?></td>
-                                        <td><input type="radio" name="artist_type" value="feautred" checked> feautred
-										<input type="radio" name="artist_type" value="trending" checked> trending
+                                        <td><input class="radio-artist-cls" pid="<?php echo $artistID; ?>" type="radio" name="artist_type_<?php echo $counterFlag; ?>" value="feautred" <?php if($artist_type=='feautred'){ echo 'checked'; } ?>> feautred
+										<input type="radio" class="radio-artist-cls" pid="<?php echo $artistID; ?>" name="artist_type_<?php echo $counterFlag; ?>" value="trending" <?php if($artist_type=='trending'){ echo 'checked'; } ?>> trending
 										</td>
                                         <td class="lst_data">
 										<a href="<?php echo base_url(); ?>administrator/accounts/reset_password/<?php echo $artistID; ?>">Reset Password</a>
@@ -251,19 +255,25 @@ if(!empty($adminData)){
     </div>
 <script>
 $(document).ready(function(){
-$('input[type="radio"]').click(function(){
+$('.radio-artist-cls').click(function(){
     if ($(this).is(':checked'))
     {
+		var pid = $(this).attr('pid');
+	
 	  var url 		=	'<?php echo base_url(); ?>administrator/artist/set_artist_type';
       var artist_type =	$(this).val();
-	  var artist_id	=	'<?php echo $artistID; ?>';
+	  
 	  var adminID	=	'<?php echo $superAdminID; ?>';
+	  $('.set_arists_status').show();
 	  $.ajax({
         url: url,
-		data: {artist_type : artist_type, artist_id : artist_id, adminID : adminID},                         // Setting the data attribute of ajax with file_data
+		data: {artist_type : artist_type, artist_id : pid, adminID : adminID},                         // Setting the data attribute of ajax with file_data
 		type: 'post',
 		success:function(data){
+				$("#stuts-msg").empty();
+				$('.set_arists_status').hide();
 				$("#stuts-msg").empty().append('Artist type has been set.');
+				
 			}
 	});
     }

@@ -134,7 +134,7 @@ if ( ! function_exists('get_allCategory')){
        $ci->load->database();
        
        //get data from database 
-		$query = $ci->db->query("SELECT * FROM snd_track_category");
+		$query = $ci->db->query("SELECT * FROM snd_track_category WHERE parent_category!=0");
 
        $resultArray	=	array();
 			foreach ($query->result_array() as $row){
@@ -180,5 +180,108 @@ if ( ! function_exists('get_artist_data')){
        }else{
            return false;
        }
+   }
+}
+if ( ! function_exists('get_category')){
+   function get_category(){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database
+       $query = $ci->db->query("SELECT * FROM snd_track_category WHERE parent_category=0");
+       
+       if($query->num_rows() > 0){
+           $result = $query->result_array();
+           return $result;
+       }else{
+           return false;	
+       }
+   }
+}
+if ( ! function_exists('get_parentCatName')){
+   function get_parentCatName($catId=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       $query = $ci->db->query("SELECT parent_category FROM snd_track_category WHERE id='$catId'")->row();
+	   
+		$parentCatId 	=	$query->parent_category;
+		if($parentCatId!=0){
+			$parentQuery 	= $ci->db->query("SELECT category_name FROM snd_track_category WHERE id='$parentCatId'")->row();
+				return $parentQuery->category_name;
+		}else{
+		  return "";
+	  }
+   }
+}
+if ( ! function_exists('get_childCatName')){
+   function get_childCatName($catId=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+     
+			$parentQuery 	= $ci->db->query("SELECT * FROM snd_track_category WHERE parent_category='$catId'");
+			  $result = $parentQuery->result_array();
+				return $result;
+		
+   }
+}
+
+if ( ! function_exists('get_customer_info')){	
+   function get_customer_info($customer_id){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database
+       $query = $ci->db->get_where('snd_customer_info',array('customer_id'=>$customer_id));
+       
+       if($query->num_rows() > 0){
+           $result = $query->result_array();
+           return $result;
+       }else{
+           return false;
+       }
+   }
+}
+if ( ! function_exists('get_customer_image')){
+   function get_customer_image($customerId=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+     
+			$parentQuery 	= $ci->db->query("SELECT customer_image FROM snd_customer_info WHERE customer_id='$customerId'")->row();
+			return  $result = $parentQuery->customer_image;
+	}
+}
+if ( ! function_exists('get_suggest_artist')){
+   function get_suggest_artist(){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+		$query = $ci->db->query("SELECT snd_artist_info.artist_image, users.id, users.first_name, users.last_name from users INNER JOIN users_groups ON users.id=users_groups.user_id INNER JOIN snd_artist_info ON users.id=snd_artist_info.artist_id WHERE users_groups.group_id=3");
+
+       $resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
    }
 }

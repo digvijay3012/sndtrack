@@ -13,7 +13,7 @@ class Accounts_model extends CI_Model {
 			foreach ($slectAdminAcc->result_array() as $row){
 						$finalArray['admin_accounts'][]= $row;
 					}
-			$slectArtsistAcc = $this->db->query("SELECT users.id, users.ip_address, users.username, users.password, users.email, users.created_on, users.last_login, users.first_name, users.last_name FROM users INNER JOIN users_groups ON users.id=users_groups.user_id WHERE users_groups.group_id=3");
+			$slectArtsistAcc = $this->db->query("SELECT snd_artist_info.artist_type, users.id, users.ip_address, users.username, users.password, users.email, users.created_on, users.last_login, users.first_name, users.last_name FROM users INNER JOIN users_groups ON users.id=users_groups.user_id INNER JOIN snd_artist_info ON users.id=snd_artist_info.artist_id WHERE users_groups.group_id=3");
 			
 			foreach ($slectArtsistAcc->result_array() as $row){
 						$finalArray['artists_accounts'][]= $row;

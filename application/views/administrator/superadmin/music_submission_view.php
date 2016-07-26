@@ -105,6 +105,31 @@ if(!empty($adminData)){
 								</div>
 								<div class="gallery" id="images_preview_5"></div>
                         </li>
+						<li>
+							<select name="short_order" id="short_order">
+								<option value="">Select Order By</option>
+								<option value="Newest">Newest</option>
+								<option value="Trending">Trending</option>
+								<option value="Longest">Longest</option>
+								<option value="Shortest">Shortest</option>
+							</select>
+							<?php  echo form_error('short_order'); ?>
+						</li>
+						<li>
+							<select name="energy_level" id="energy_level">
+								<option value="">Select energy level</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+							</select>
+						</li>
                         <li>
                             <input type="text" name="instrument_tag" placeholder="instruments Tag">
 							<?php  echo form_error('instrument_tag'); ?>
@@ -180,7 +205,8 @@ if(!empty($adminData)){
                 rules: {
 					artist_id: "required",
 					cat_id: "required",
-                    upload_song: "required",
+                     short_order: "required",
+					 energy_level: "required",
                    instrument_tag: "required",
 					song_credits: "required",
 					song_notes: "required"
@@ -188,7 +214,8 @@ if(!empty($adminData)){
                 messages: {
                     artist_id: "Please select artist.",
 					cat_id: "Please select category name.",
-                    upload_song: "Please upload music file.",
+                   short_order: "Please select order by.",
+				   energy_level: "Please select energy level.",
 					instrument_tag: "Please enter tags.",
 					song_credits: "Please enter credits.",
 					song_notes: "Please enter notes.",

@@ -14,7 +14,7 @@ class Login extends CI_Controller {
 		$this->lang->load('auth');
 		if ($this->ion_auth->logged_in()){
 				 $adminID			=	$this->ion_auth->user()->row()->user_id; 
-				 $groupID 			= 	$this->ion_auth->get_users_groups($adminID)->row()->id; 
+				echo $groupID 			= 	$this->ion_auth->get_users_groups($adminID)->row()->id; die;
 				 //if the login is successful
 				 if($groupID==1){
 					 $this->session->set_flashdata('message', $this->ion_auth->messages());
@@ -27,7 +27,7 @@ class Login extends CI_Controller {
 					redirect('artist/dashboard', 'refresh');
 				}elseif($groupID==4){
 					$this->session->set_flashdata('message', $this->ion_auth->messages());
-					redirect('artist/dashboard', 'refresh');
+					redirect('dashboard', 'refresh');
 				}else{
 					$logout = $this->ion_auth->logout();
 					redirect('login', 'refresh');
@@ -66,7 +66,7 @@ class Login extends CI_Controller {
 					redirect('artist/dashboard', 'refresh');
 				}elseif($groupID==4){
 					$this->session->set_flashdata('message', $this->ion_auth->messages());
-					redirect('artist/dashboard', 'refresh');
+					redirect('dashboard', 'refresh');
 				}else{
 					$logout = $this->ion_auth->logout();
 					redirect('login', 'refresh');

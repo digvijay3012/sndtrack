@@ -28,7 +28,8 @@ class Music extends CI_Controller {
 				$groupID 			= 	$this->ion_auth->get_users_groups($adminID)->row()->id; 
 			$this->form_validation->set_rules('artist_id', 'Select Artist', 'required');
 			$this->form_validation->set_rules('cat_id', 'Select Category', 'required');	
-			//$this->form_validation->set_rules('upload_song', 'Select Category', 'required');				
+			$this->form_validation->set_rules('short_order', 'Select Order By', 'required');
+			$this->form_validation->set_rules('energy_level', 'Select Energy level', 'required');			
 			$this->form_validation->set_rules('instrument_tag', 'Instrument tag', 'trim|required|min_length[2]|max_length[300]');
 			$this->form_validation->set_rules('song_credits', 'Song Credits tag', 'trim|required|min_length[2]|max_length[500]');        
 			$this->form_validation->set_rules('song_notes', 'Song Notes', 'trim|required|min_length[2]|max_length[1000]');    
@@ -47,10 +48,12 @@ class Music extends CI_Controller {
 				
 				$artist_id 		= 		$this->input->post('artist_id');
 				$cat_id 		= 		$this->input->post('cat_id');
+				$short_order	=		$this->input->post('short_order');
+				$energy_level	=		$this->input->post('energy_level');
 				$instrument_tag	=		$this->input->post('instrument_tag');
 				$song_credits	=		$this->input->post('song_credits');
 				$song_notes		=		$this->input->post('song_notes');
-				$SubmitData		= 		$this->music_submission_model->add_music($adminID,$artist_id,$cat_id,$instrument_tag,$song_credits,$song_notes);	
+				$SubmitData		= 		$this->music_submission_model->add_music($adminID,$artist_id,$cat_id,$short_order,$energy_level,$instrument_tag,$song_credits,$song_notes);	
 				$this->session->set_flashdata('item', 'Music has been submit sucessfully.'); 
 				redirect("administrator/music");
 				} 

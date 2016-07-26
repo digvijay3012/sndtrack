@@ -28,7 +28,7 @@ class Artist_model extends CI_Model {
 			return true;
 	}
 	function set_artist_type($artistId,$adminId,$artist_type){
-			$qry =	$this->db->query("UPDATE snd_artist_info SET artist_type='$artist_type' WHERE artist_id='$artistId' AND admin_id='$adminId'");
+			$qry =	$this->db->query("UPDATE snd_artist_info SET artist_type='$artist_type' WHERE artist_id='$artistId'");
 			return 1;
-	}
+	}	
 }

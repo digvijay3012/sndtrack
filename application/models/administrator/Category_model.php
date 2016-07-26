@@ -6,10 +6,11 @@ class Category_model extends CI_Model {
         parent::__construct();
     }
 	
-	function create_category($AdminID,$category_name){
+	function create_category($AdminID,$category_name,$parent_category){
 		$date	=	date("Y-m-d");
 		$data = array(
 			"category_name" => $category_name,
+			"parent_category" => $parent_category,
 			"admin_id" 		=> $AdminID,
 			"category_date" => $date
 			);

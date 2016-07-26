@@ -34,7 +34,7 @@
     <div class="container">
         <div class="login_cont text-center">
             <div class="logo text-center wow fadeInDown">
-                <a href="">
+                <a href="<?php echo base_url(); ?>">
                     <p>Sndtrack</p>
                     <span>music licensing</span>
                 </a>
@@ -159,7 +159,7 @@ if(!empty($adminData)){
             <div class="footer_logo">
                 <ul>
                     <li>
-                        <a href="index.html"><img src="<?php echo base_url(); ?>images/black-logo.png" alt=""></a>
+                        <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>images/black-logo.png" alt="logo"></a>
                     </li>
                     <li>
                         <p>2016</p>
@@ -168,28 +168,26 @@ if(!empty($adminData)){
             </div>
             <div class="middle_footer">
                 <ul>
-                    <li><a href="">Browse</a></li>
-                    <li><a href="">Journal</a></li>
-                    <li><a href="">Contact</a></li>
+                    <li><a href="<?php echo base_url(); ?>browse">Browse</a></li>
+                    <li><a href="<?php echo base_url(); ?>journal">Journal</a></li>
+                    <li><a href="<?php echo base_url(); ?>contact">Contact</a></li>
                 </ul>
                 <ul class="social_icons">
-                    <li><a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                    <li><a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                    <li><a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                    <li><a href=""><i aria-hidden="true" class="fa fa-facebook"></i></a></li>
+                    <li><a href=""><i aria-hidden="true" class="fa fa-twitter"></i></a></li>
+                    <li><a href=""><i aria-hidden="true" class="fa fa-instagram"></i></a></li>
                 </ul>
             </div>
             <div class="footer_nav">
                 <ul>
-                    <li><a href="">Private</a></li>
-                    <li><a href="">License Terms</a></li>
-                    <li><a href="">FAQ</a></li>
-                    <li><a href="">Terms & Conditions</a></li>
-
+                    <li><a href="<?php echo base_url(); ?>private_policy">Private</a></li>
+                    <li><a href="<?php echo base_url(); ?>licence_terms">License Terms</a></li>
+                    <li><a href="<?php echo base_url(); ?>faq">FAQ</a></li>
+                    <li><a href="<?php echo base_url(); ?>Terms_and_conditions">Terms &amp; Conditions</a></li>
                 </ul>
             </div>
         </div>
     </footer>
-	
 
     <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>

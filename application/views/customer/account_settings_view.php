@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sndtrack</title>
+    <title>Customer_Account_Settings</title>
     <link rel="apple-touch-icon" sizes="57x57" href="<?php echo base_url(); ?>images/favicons/apple-touch-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="<?php echo base_url(); ?>images/favicons/apple-touch-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="<?php echo base_url(); ?>images/favicons/apple-touch-icon-72x72.png">
@@ -44,22 +44,22 @@
           	<div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
 			<?php	
 				$attributes = array('class' => 'login_form', 'id' => 'account_setting_form');
-				echo form_open_multipart('administrator/accounts/setting', $attributes); 
+				echo form_open_multipart('account', $attributes); 
 			?>
 <?php
-$adminData	=	$this->ion_auth->user()->row();
-if(!empty($adminData)){
-	$adminId 		=		$adminData->user_id;
-	$adminEmail 	=		$adminData->email;
-	$first_name 	=		$adminData->first_name;
-	$last_name 		=		$adminData->last_name;
-	$phone 			=		$adminData->phone;
-	$adminExtra 	=	get_admin_data($adminId);
-	$first_address	=	$adminExtra[0]['first_address']; 
-	$second_address	=	$adminExtra[0]['second_address']; 
-	$city			=	$adminExtra[0]['city']; 
-	$zip			=	$adminExtra[0]['zip']; 
-	$country		=	$adminExtra[0]['country']; 
+$customerData	=	$this->ion_auth->user()->row();
+if(!empty($customerData)){
+	$adminId 		=		$customerData->user_id;
+	$adminEmail 	=		$customerData->email;
+	$first_name 	=		$customerData->first_name;
+	$last_name 		=		$customerData->last_name;
+	$phone 			=		$customerData->phone;
+	$customerExtra 	=	get_customer_info($adminId);
+	$first_address	=	$customerExtra[0]['first_address']; 
+	$second_address	=	$customerExtra[0]['second_address']; 
+	$city			=	$customerExtra[0]['city']; 
+	$zip			=	$customerExtra[0]['zip']; 
+	$country		=	$customerExtra[0]['country']; 
 }
 
 ?>
@@ -114,8 +114,8 @@ if(!empty($adminData)){
 							<?php  echo form_error('email'); ?>
                         </li>
 						 <li>
-							Uplaod Admin image: <input type="file" onchange="return ValidateImageUpload('admin_image')" name="admin_image" id="admin_image">
-								<?php  echo form_error('admin_image'); ?>
+							Uplaod Admin image: <input type="file" onchange="return ValidateImageUpload('customer_image')" name="customer_image" id="customer_image">
+								<?php  echo form_error('customer_image'); ?>
 						</li>
                         <li>
                             <button class="custom-button full-width" type="submit" id="Login" name="submit" >Update</button>
@@ -126,7 +126,7 @@ if(!empty($adminData)){
 				  <?php echo form_close();?>
 			<?php	
 				$attributes = array('class' => 'login_form', 'id' => 'update_password_form');
-				echo form_open_multipart('administrator/accounts/update_account_password', $attributes); 
+				echo form_open_multipart('account/update_account_password', $attributes); 
 			?>
 			 	<?php echo $this->session->flashdata('message'); ?>
                 <div class="col-1-form col-sm-4 pdngg-right">
@@ -154,7 +154,7 @@ if(!empty($adminData)){
             </form>
         </div>
     </div>
-     <footer>
+    <footer>
         <div class="container-fluid">
             <div class="footer_logo">
                 <ul>

@@ -6,11 +6,11 @@ class Music_submission_model extends CI_Model {
         parent::__construct();
     }
 	
-	function add_music($adminID,$artist_id,$cat_id,$instrument_tag,$song_credits,$song_notes){
+	function add_music($adminID,$artist_id,$cat_id,$short_order,$energy_level,$instrument_tag,$song_credits,$song_notes){
 			$date	=	date("Y-m-d");
 			$query = $this->db->query("SELECT * FROM snd_tmp_music_store WHERE admin_id='$adminID' AND artist_id='$artist_id'");
 			foreach ($query->result_array() as $musicData){
-						//$song_name	=	$musicData['file_name'];
+						
 						 $tempSong_id	=	$musicData['id'];
 						$tempCatid		=	$musicData['cat_id'];
 						$watermark_format	=	$musicData['watermark_format'];
@@ -21,7 +21,8 @@ class Music_submission_model extends CI_Model {
 						$data = array(
 						"artist_id" 		=> $artist_id,
 						"cat_id" 			=> $tempCatid,
-						//"song_name" 		=> $song_name,
+						"short_order" 		=> $short_order,
+						"energy_level" 		=> $energy_level,
 						"instrument_tag" 	=> $instrument_tag,
 						"song_credits" 		=> $song_credits,
 						"song_notes" 		=> $song_notes,

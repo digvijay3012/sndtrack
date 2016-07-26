@@ -31,12 +31,12 @@ class Category extends CI_Controller {
 					$this->form_validation->set_rules('category_name', 'Category Name', 'trim|required|min_length[2]|max_length[100]'); 
 					if ($this->form_validation->run() == FALSE) { 
 						$this->load->view('administrator/header_view');
-						$this->load->view('administrator/superadmin/category_view');
+						$this->load->view('administrator/category_view');
 						$this->load->view('administrator/footer_view');
 					} else {
-						
+						$parent_category	=		$this->input->post('parent_category');
 						$category_name		=		$this->input->post('category_name');
-						$SubmitData		= 		$this->category_model->create_category($AdminID,$category_name);	
+						$SubmitData		= 		$this->category_model->create_category($AdminID,$category_name,$parent_category);	
 						if($SubmitData==1){
 							$this->session->set_flashdata('item', 'Category has been created sucessfully.'); 
 							redirect("administrator/category");
