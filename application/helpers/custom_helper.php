@@ -75,13 +75,13 @@ if ( ! function_exists('store_temp_mucic')){
 			  if($checkFilequery->num_rows() != 0){
 				    return $file_name;
 			  }else{
-			$data = array(
-			"admin_id" 		=> $adminID,
-			"artist_id" 	=> $artist_id,
-			"cat_id" 		=> $cat_id,
-			$column_name 	=> $file_name
-			);
-			$ci->db->insert('snd_tmp_music_store',$data); 
+					$data = array(
+					"admin_id" 		=> $adminID,
+					"artist_id" 	=> $artist_id,
+					"cat_id" 		=> $cat_id,
+					$column_name 	=> $file_name
+					);
+					$ci->db->insert('snd_tmp_music_store',$data); 
 			  }
           
        }else{
@@ -284,4 +284,111 @@ if ( ! function_exists('get_suggest_artist')){
 				
 				return $resultArray;
    }
+}	
+if ( ! function_exists('get_recently_added_music')){
+   function get_recently_added_music(){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+		$query = $ci->db->query("SELECT snd_artist_info.artist_id, users.first_name, users.last_name, snd_artist_music.id,snd_artist_info.artist_image, snd_musicfile_version.watermark_format from snd_artist_music INNER JOIN snd_musicfile_version ON snd_artist_music.id=snd_musicfile_version.track_id INNER JOIN snd_artist_info ON snd_artist_music.artist_id=snd_artist_info.artist_id INNER JOIN users ON snd_artist_music.artist_id=users.id ORDER BY snd_artist_music.id ASC");
+
+       $resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
+   }
 }
+if ( ! function_exists('get_artsit_follow_status')){
+   function get_artsit_follow_status($customerId=null, $artist_id=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+     
+			$parentQuery 	= $ci->db->query("SELECT status FROM snd_followed_artist WHERE customer_id='$customerId' AND artist_id='$artist_id'")->row();
+			if(!empty($parentQuery)){
+				return  $result = $parentQuery->status;
+			}
+			
+	}
+}
+if ( ! function_exists('get_followed_artist_by_customer')){
+   function get_followed_artist_by_customer($customerId){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+			$query = $ci->db->query("SELECT snd_artist_info.artist_image, users.id, users.first_name, users.last_name from users INNER JOIN users_groups ON users.id=users_groups.user_id INNER JOIN snd_artist_info ON users.id=snd_artist_info.artist_id INNER JOIN snd_followed_artist ON users.id=snd_followed_artist.artist_id WHERE users_groups.group_id=3 AND snd_followed_artist.customer_id='$customerId'");
+
+       $resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
+   }
+}	
+if ( ! function_exists('insert_recently_listened_music')){
+   function insert_recently_listened_music($track_id=null, $customerId=null, $artist_id=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+	   $todayDate	=	date("Y-m-d");
+		$query = $ci->db->query("SELECT listen_date FROM snd_recently_listened_music WHERE customer_id='$customerId'");
+		if(empty($query->result_array)){
+			$insertData = array(
+				"customer_id" 	=> $customerId,
+				"track_id" 		=> $track_id,
+				"artist_id" 	=> $artist_id,
+				"listen_date" 	=> $todayDate
+				);
+				$ci->db->insert('snd_recently_listened_music',$insertData);
+		} 
+		foreach ($query->result_array() as $row){
+					
+								 $listenDate	=	 $row['listen_date']; 
+								$date1=date_create($listenDate);
+								$date2=date_create($todayDate);
+								$diff=date_diff($date1,$date2);
+								 $dateDiffrenec	=	 $diff->days; 
+								if($dateDiffrenec>2){
+									
+									$query = $ci->db->query("DELETE FROM snd_recently_listened_music WHERE customer_id='$customerId'");
+										$insertData = array(
+										"customer_id" 	=> $customerId,
+										"track_id" 		=> $track_id,
+										"artist_id" 	=> $artist_id,
+										"listen_date" 	=> $todayDate
+										);
+										$ci->db->insert('snd_recently_listened_music',$insertData); 
+								}else{
+									$insertData = array(
+										"customer_id" 	=> $customerId,
+										"track_id" 		=> $track_id,
+										"artist_id" 	=> $artist_id,
+										"listen_date" 	=> $todayDate
+										);
+										$ci->db->insert('snd_recently_listened_music',$insertData);
+								}
+							
+					}
+			//die;		
+				
+	
+      
+   }
+}	

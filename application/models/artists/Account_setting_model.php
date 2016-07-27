@@ -7,7 +7,7 @@ class Account_setting_model extends CI_Model {
     }
 
 	
-	function udateAccount_setting($ID,$first_name,$lastname,$first_address,$second_address,$city,$zip,$country,$email,$phone){
+	function udateAccount_setting($ID,$first_name,$lastname,$first_address,$second_address,$city,$zip,$country,$email,$phone,$facebook_link,$twitter_link,$instagram_link){
 			if($email!=''){
 				$upadteEmail=array(
 				'username'=>$email,
@@ -46,7 +46,10 @@ class Account_setting_model extends CI_Model {
 						"second_address" => $second_address,
 						"city" 			=> $city,
 						"zip" 			=> $zip,
-						"country" 		=> $country
+						"country" 		=> $country,
+						"facebook_link" => $facebook_link,
+						"twitter_link" => $twitter_link,
+						"instagram_link" => $instagram_link
 						);
 					$this->db->insert('snd_artist_info',$insertData);
 			}else{
@@ -56,7 +59,10 @@ class Account_setting_model extends CI_Model {
 						"second_address" => $second_address,
 						"city" 			=> $city,
 						"zip" 			=> $zip,
-						"country" 		=> $country
+						"country" 		=> $country,
+						"facebook_link" => $facebook_link,
+						"twitter_link" => $twitter_link,
+						"instagram_link" => $instagram_link
 				);
 				$this->db->where('artist_id',$ID);
 				$this->db->update('snd_artist_info',$updateData);

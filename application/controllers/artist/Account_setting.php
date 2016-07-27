@@ -49,8 +49,10 @@ class Account_setting extends CI_Controller {
 						$country		=		$this->input->post('country');
 						$email			=		$this->input->post('email');
 						$phone			=		$this->input->post('phone');
-						
-						$SubmitData		= 		$this->account_setting_model->udateAccount_setting($ID,$first_name,$lastname,$first_address,$second_address,$city,$zip,$country,$email,$phone);
+						$facebook_link	=		$this->input->post('facebook_link');
+						$twitter_link	=		$this->input->post('twitter_link');
+						$instagram_link	=		$this->input->post('instagram_link');
+						$SubmitData		= 		$this->account_setting_model->udateAccount_setting($ID,$first_name,$lastname,$first_address,$second_address,$city,$zip,$country,$email,$phone,$facebook_link,$twitter_link,$instagram_link);
 						if($SubmitData==1){
 							$this->session->set_flashdata('item', 'Account has been updated sucessfully.'); 
 							redirect("artist/account_setting");

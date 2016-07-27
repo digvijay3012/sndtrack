@@ -8,14 +8,14 @@ if(!empty($customerData)){
 ?>
 <div class="cstmr_cont header-margin">
         <div class="container-fluid pdngg container-full">
-            <div class="banner_image wow fadeIn animated mrgn_srch" style="background-image: url('images/premi_bnnr.jpg');">
+            <div class="banner_image wow fadeIn animated mrgn_srch" style="background-image: url('<?php echo base_url(); ?>images/premi_bnnr.jpg');">
                 <div class="content_banner_inner text-center">
                     <h2>Welcome</h2>
                     <p>Hi <?php echo $first_name; ?> ! </p>
                 </div>
             </div>
             <div class="music-bar">
-                <figure><img title="" alt="" src="images/music-bar.jpg"></figure>
+                <figure><img title="" alt="" src="<?php echo base_url(); ?>images/music-bar.jpg"></figure>
             </div>
             <div class="lft_sidebar">
                 <div class="your_music">
@@ -62,7 +62,7 @@ if(!empty($customerData)){
                         <div class="panel panel-default">
                             <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Energy </a></h3>
                             <div id="collapseTwo" class="panel-collapse collapse">
-                                <div class="panel-body"><img src="images/music_level.jpg" alt=""></div>
+                                <div class="panel-body"><img src="<?php echo base_url(); ?>images/music_level.jpg" alt=""></div>
                             </div>
                         </div>
                        
@@ -85,7 +85,7 @@ if(!empty($customerData)){
                             <div id="owl-example" class="owl-carousel effect_img">
                                 <div>
                                     <a href="">
-                                        <div class="img_inner"><img src="images/artist1.jpg" alt=""></div>
+                                        <div class="img_inner"><img src="<?php echo base_url(); ?>images/artist1.jpg" alt=""></div>
                                         <div class="carousel-caption-custom">
                                             <p>Claim Snide</p>
                                             <span>My Time is now</span>
@@ -94,7 +94,7 @@ if(!empty($customerData)){
                                 </div>
                                 <div>
                                     <a href="">
-                                        <div class="img_inner"><img src="images/artist2.jpg" alt=""></div>
+                                        <div class="img_inner"><img src="<?php echo base_url(); ?>images/artist2.jpg" alt=""></div>
                                         <div class="carousel-caption-custom">
                                             <p>Claim Snide</p>
                                             <span>My Time is now</span>
@@ -103,7 +103,7 @@ if(!empty($customerData)){
                                 </div>
                                 <div>
                                     <a href="">
-                                        <div class="img_inner"><img src="images/artist3.jpg" alt=""></div>
+                                        <div class="img_inner"><img src="<?php echo base_url(); ?>images/artist3.jpg" alt=""></div>
                                         <div class="carousel-caption-custom">
                                             <p>Claim Snide</p>
                                             <span>My Time is now</span>
@@ -112,7 +112,7 @@ if(!empty($customerData)){
                                 </div>
                                 <div>
                                     <a href="">
-                                        <div class="img_inner"><img src="images/artist4.jpg" alt=""></div>
+                                        <div class="img_inner"><img src="<?php echo base_url(); ?>images/artist4.jpg" alt=""></div>
                                         <div class="carousel-caption-custom">
                                             <p>Claim Snide</p>
                                             <span>My Time is now</span>
@@ -121,189 +121,52 @@ if(!empty($customerData)){
                                 </div>
                                 <div>
                                     <a href="">
-                                        <div class="img_inner"><img src="images/artist5.jpg" alt=""></div>
+                                        <div class="img_inner"><img src="<?php echo base_url(); ?>images/artist5.jpg" alt=""></div>
                                         <div class="carousel-caption-custom">
                                             <p>Claim Snide</p>
                                             <span>My Time is now</span>
                                         </div>
                                     </a>
                                 </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist6.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist7.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist6.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist9.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist10.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist1.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist3.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
+                                
+                                
                             </div>
                         </div>
                         <div class="slider-col">
                             <h2 class="heading_artist slider_hdng">Recently Added</h2>
                             <div id="owl-example" class="owl-carousel effect_img">
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist1.jpg" alt=""></div>
+							<?php $recentAddedData 	=	get_recently_added_music(); 
+								if(!empty($recentAddedData)){
+									foreach($recentAddedData as $getRecentData){
+										$recentAddedfirst_name		=	$getRecentData['first_name'];
+										$recentAddedlast_name		=	$getRecentData['last_name'];
+										$recentAddedMusicId			=	$getRecentData['id'];
+										$recentAddedArtistId		=	$getRecentData['artist_id'];
+										$recentExMusic				=	explode(".", $getRecentData['watermark_format']);
+										$recentMusicName			=	$recentExMusic['0'];
+										$recentMusicFile			=	$getRecentData['watermark_format'];
+										$recentArtistImg			=	$getRecentData['artist_image'];
+										$setUrl						=	base_url()."artist_images/";
+										if($recentArtistImg!=''){
+											$addedArtistImgUrl	=	$setUrl.$recentArtistImg;
+										}else{
+											$addedArtistImgUrl	=	$setUrl."No_image.png";
+										} ?>
+								 <div>
+                                    <a href="<?php echo base_url(); ?>dashboard/artist_music/<?php echo $recentAddedMusicId; ?>">
+                                        <div class="img_inner"><img src="<?php echo base_url(); ?>timthumb.php?src=<?php echo $addedArtistImgUrl; ?>&h=183&w=363&zc=1q=100" alt="<?php echo $recentAddedfirst_name." ".$recentAddedlast_name; ?>" /></div>
                                         <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
+                                            <p><?php echo $recentAddedfirst_name." ".$recentAddedlast_name; ?></p>
+                                            <span><?php echo $recentMusicName; ?></span>
                                         </div>
                                     </a>
                                 </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist2.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist3.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist4.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist5.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist6.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist7.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist6.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist9.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist10.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist1.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist3.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
+									<?php } }else{
+										echo '<div> No data to display.</div>';
+										}
+									?>
+                               
+                               
                             </div>
                         </div>
                         <div class="slider-col">
@@ -325,8 +188,8 @@ if(!empty($customerData)){
 										$suggestArtistImgUrl	=	$setUrl."No_image.png";
 									} ?>
 									<div>
-										<a href="">
-											<div class="img_inner"><img src="<?php echo $suggestArtistImgUrl; ?>" alt=""></div>
+										<a href="<?php echo base_url(); ?>dashboard/artist/<?php echo $suggestArtistId; ?>">
+										<div class="img_inner"><img src="<?php echo base_url(); ?>timthumb.php?src=<?php echo $suggestArtistImgUrl; ?>&h=183&w=363&zc=1q=100" alt="<?php echo $suggestArtistFirstName." ".$suggestArtistLastName; ?>" /></div>
 											<div class="carousel-caption-custom">
 												<p><?php echo $suggestArtistFirstName." ".$suggestArtistLastName; ?></p>
 											</div>
@@ -343,102 +206,30 @@ if(!empty($customerData)){
                         <div class="slider-col">
                             <h2 class="heading_artist slider_hdng">Followed artists</h2>
                             <div id="owl-example" class="owl-carousel effect_img">
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist1.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist2.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist3.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist4.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist5.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist6.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist7.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist6.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist9.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist10.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist1.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="images/artist3.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                        </div>
-                                    </a>
-                                </div>
+							<?php $followArtsist	=	get_followed_artist_by_customer($customerId); 
+								if(!empty($followArtsist)){
+									foreach($followArtsist as $followData){
+									$followtArtistImg 			=	$followData['artist_image'];
+									$followArtistId 			=	$followData['id'];
+									$followArtistFirstName 		=	$followData['first_name'];
+									$followArtistLastName 		=	$followData['last_name'];
+									$setUrl						=	base_url()."artist_images/";
+									if($followtArtistImg!=''){
+										$followArtistImgUrl	=	$setUrl.$followtArtistImg;
+									}else{
+										$followArtistImgUrl	=	$setUrl."No_image.png";
+									} ?>
+								<div>
+									<a href="<?php echo base_url(); ?>dashboard/artist/<?php echo $followArtistId; ?>">
+									<div class="img_inner"><img src="<?php echo base_url(); ?>timthumb.php?src=<?php echo $followArtistImgUrl; ?>&h=183&w=363&zc=1q=100" alt="<?php echo $followArtistFirstName." ".$followArtistLastName; ?>" /></div>
+										<div class="carousel-caption-custom">
+											<p><?php echo $followArtistFirstName." ".$followArtistLastName; ?></p>
+										</div>
+									</a>
+								</div>
+							<?php } }else {  echo '<div>No data to display.</div>'; } ?>
+                           
+                               
                             </div>
                         </div>
 
@@ -449,10 +240,10 @@ if(!empty($customerData)){
             </div>
         </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.bxslider.js"></script>
-        <script src="js/toggle.js"></script>
+        <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
+        <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
+        <script src="<?php echo base_url(); ?>js/jquery.bxslider.js"></script>
+        <script src="<?php echo base_url(); ?>js/toggle.js"></script>
         <script src="https://use.typekit.net/auo4nbe.js"></script>
         <script>
             try {
@@ -461,9 +252,9 @@ if(!empty($customerData)){
                 });
             } catch (e) {}
         </script>
-        <script src="js/wow.js"></script>
-        <script src="js/jquery.paginate.js"></script>
-        <script src="js/owl.carousel.js"></script>
+        <script src="<?php echo base_url(); ?>js/wow.js"></script>
+        <script src="<?php echo base_url(); ?>js/jquery.paginate.js"></script>
+        <script src="<?php echo base_url(); ?>js/owl.carousel.js"></script>
         <script>
             //call paginate
             $('#example').paginate();

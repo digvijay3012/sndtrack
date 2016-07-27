@@ -27,7 +27,7 @@ if(!empty($adminData)){
                 <div class="tab-content">
                     <div id="mnu1" class="tab-pane fade in">
 					<div style="display:none" class="set_arists_status">
-						<img src="http://sndtrack.stagingdevsite.com/images/uploading.gif">
+						<img src="<?php echo base_url(); ?>images/uploading.gif">
 					</div>
                         <div class="table-responsive">
                             <table id="artist_table" class="table">

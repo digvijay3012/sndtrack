@@ -60,6 +60,9 @@ if(!empty($adminData)){
 	$city			=	$adminExtra[0]['city']; 
 	$zip			=	$adminExtra[0]['zip']; 
 	$country		=	$adminExtra[0]['country']; 
+	$facebook_link	=	$adminExtra[0]['facebook_link']; 
+	$twitter_link	=	$adminExtra[0]['twitter_link'];	 
+	$instagram_link	=	$adminExtra[0]['instagram_link'];
 }
 
 ?>
@@ -91,7 +94,15 @@ if(!empty($adminData)){
                             <input type="text" value="<?php echo $phone; ?>"  maxlength="15" name="phone" placeholder="Phone Number" >
 							<?php  echo form_error('phone'); ?>
                         </li>
-						
+						 <li>
+                            <input type="text" name="facebook_link" value="<?php echo $facebook_link; ?>" placeholder="Facebook Url" >
+						 </li>
+						 <li>
+                            <input type="text" name="twitter_link" value="<?php echo $twitter_link; ?>" placeholder="Twitter Url" >
+						 </li>
+						  <li>
+                            <input type="text" name="instagram_link" value="<?php echo $instagram_link; ?>" placeholder="Instagram Url" >
+						 </li>
                     </ul>
                 </div>
                 <div class="col-1-form col-sm-4">
@@ -114,7 +125,7 @@ if(!empty($adminData)){
 							<?php  echo form_error('email'); ?>
                         </li>
 						
-                        <li>
+                        <li>		
                             <button class="custom-button full-width" type="submit" id="Login" name="submit" >Update</button>
                         </li>
                     </ul>
