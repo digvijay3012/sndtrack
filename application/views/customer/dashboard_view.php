@@ -20,9 +20,37 @@ if(!empty($customerData)){
             <div class="lft_sidebar">
                 <div class="your_music">
                     <h3 class="rt_hdng">YOUR MUSIC</h3>
+					
                     <ul>
                         <li><a href="">Hearted</a></li>
-                        <li><a href="">Artists</a></li>
+                      
+						<div id="accordion2" class="panel-group user_acc">
+						<h3 class="rt_hdng"><a href="#collapseOne_22" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed" aria-expanded="false">
+						Artists																
+						</a></h3>
+						<div class="panel-collapse collapse" id="collapseOne_22" aria-expanded="false" style="height: 0px;">
+							<div class="panel-body">
+							<ul>
+							<?php $getFollowData	=	get_followed_artist_by_customer($customerId); 
+									if(!empty($getFollowData)){
+										foreach($getFollowData as $fetchFollowData){
+											$getFollowedId		=	$fetchFollowData['id'];
+											$getFollowedFname	=	$fetchFollowData['first_name'];
+											$getFollowedLname	=	$fetchFollowData['last_name'];
+										?>
+										<li><a href="<?php echo base_url(); ?>dashboard/artist/<?php echo $getFollowedId; ?>">
+											<?php echo $getFollowedFname." ".$getFollowedLname; ?>
+										</a></li>
+									<?php }}else{
+										echo '<li>No records found.</li>';
+									}
+								?>
+									
+								</ul>
+							</div>
+						</div>
+				</div>
+		  
                         <li><a href="">Songs</a></li>
                     </ul>
                 </div>
@@ -39,8 +67,14 @@ if(!empty($customerData)){
 									 $counterFlag++;
 							?>
                         <div class="panel panel-default">
-                            <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_<?php echo $counterFlag; ?>">
-								<?php echo $parentCatName; ?>
+                           
+								<?php if($parentCatName=='Instrumental'){
+									echo $parentCatName;
+									echo '<h3 class="rt_hdng"><input type="checkbox" name="Instruments" value="Instruments"></h3>';
+									}else{ ?>
+									 <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_<?php echo $counterFlag; ?>">
+										<?php echo $parentCatName; ?>
+									<?php }?>
 							
 							</a></h3>
                             <div id="collapseOne_<?php echo $counterFlag; ?>" class="panel-collapse collapse">
@@ -69,67 +103,107 @@ if(!empty($customerData)){
                     </div>
                 </div>
                 <div class="your_music bottm_music">
-                    <h3 class="rt_hdng playlist-icon">PLAYLISTS</h3>
+				 <div class="container">
+      
+     <!-- Modal -->
+        <div class="modal fade" id="playlistModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <!--button type="button" class="close" data-dismiss="modal">&times;</button-->
+                    <div class="modal-body">
+                        <div class="logo text-center">
+                            <a href="">
+                                <p>Sndtrack</p>
+                                <span>music licensing</span>
+                            </a>
+                        </div>
+                        <div class="login_text text-center">
+                            <p>Please create your playlist. </p>
+                        </div>
+
+
+							<?php	
+								$attributes = array('class' => 'login_form', 'id' => 'playlist_form');
+								echo form_open('dashboard/create_playlist', $attributes); 
+							?>
+                           
+                            <ul>
+                                <li>
+                                    <input type="text" name="playlist_name" maxlength="25" placeholder="Enter Playlist">
+                                </li>
+                               <li>
+                                 
+                                </li>
+                              
+                                <li>
+                                    <button class="sbmt hover_btn" type="submit" id="send" name="submit" required="">Create Playlist</button>
+                                </li>
+                            </ul>
+                        <?php echo form_close(); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+                    <a href="#" data-toggle="modal" data-target="#playlistModal"><h3 class="rt_hdng playlist-icon">PLAYLISTS</h3></a>
                     <ul>
-                        <li><a href="#">Songs</a></li>
-                        <li><a href="#">Artists</a></li>
-                        <li><a href="#">Songs</a></li>
+					<?php $getPlaylist	=	get_customer_playlist($customerId); 
+						if(!empty($getPlaylist)){
+							foreach($getPlaylist as $playlistData){
+								$playlistId		=	$playlistData['id'];	
+								$playlistName	=	$playlistData['playlist_name'];	
+						?>	
+							<li><a href="<?php echo base_url(); ?>playlist"><?php echo $playlistName; ?></a></li>
+						<?php } } else{
+								echo '<li>No Record to display.</li>';
+							}
+						?>
+                       
                     </ul>
                 </div>
             </div>
             <div class="rt_sidebar pull-right">
+			<div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
                 <div class="cont_artist">
                     <div class="slider_cnt">
                         <div class="slider-col">
                             <h2 class="heading_artist slider_hdng frst-hdng">Recently listened</h2>
                             <div id="owl-example" class="owl-carousel effect_img">
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="<?php echo base_url(); ?>images/artist1.jpg" alt=""></div>
+							<?php $recentlistened	=	get_recently_listened_music($customerId);
+								if(!empty($recentlistened)){
+									foreach($recentlistened as $getListenedData){
+										$listenedArtistId		=	$getListenedData['artist_id'];
+										$listenedFirstName		=	$getListenedData['first_name'];
+										$listenedLastName		=	$getListenedData['last_name'];
+										$listenedTrackId		=	$getListenedData['track_id'];
+										$listenedArtsistImg		=	$getListenedData['artist_image'];
+										$listenedMusicFormat	=	explode(".", $getListenedData['watermark_format']);
+										$listenMusicName		=	$listenedMusicFormat['0'];	
+										$listenMusicFile		=	$getListenedData['watermark_format'];
+										$setUrl					=	base_url()."artist_images/";
+										if($listenedArtsistImg!=''){
+											$listenArtistImgUrl	=	$setUrl.$listenedArtsistImg;
+										}else{
+											$listenArtistImgUrl	=	$setUrl."No_image.png";
+										}
+									?>
+								 <div>
+                                    <a href="<?php echo base_url(); ?>dashboard/artist_music/<?php echo $listenedTrackId; ?>">
+                                          <div class="img_inner"><img src="<?php echo base_url(); ?>timthumb.php?src=<?php echo $listenArtistImgUrl; ?>&h=183&w=363&zc=1q=100" alt="<?php echo $listenedFirstName." ".$listenedLastName; ?>" /></div>
                                         <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
+                                            <p><?php echo $listenedFirstName." ".$listenedLastName; ?></p>
+                                            <span><?php echo $listenMusicName; ?></span>
                                         </div>
                                     </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="<?php echo base_url(); ?>images/artist2.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="<?php echo base_url(); ?>images/artist3.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="<?php echo base_url(); ?>images/artist4.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <div class="img_inner"><img src="<?php echo base_url(); ?>images/artist5.jpg" alt=""></div>
-                                        <div class="carousel-caption-custom">
-                                            <p>Claim Snide</p>
-                                            <span>My Time is now</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                
-                                
+                                </div>	
+							<?php	}	}else{
+								echo '<div> No data to display.</div>';
+							} ?>
+                               
+                             
                             </div>
                         </div>
                         <div class="slider-col">
@@ -203,7 +277,7 @@ if(!empty($customerData)){
                             </div>
                         </div>
 
-                        <div class="slider-col">
+                        <div id="Followed_artists" class="slider-col">
                             <h2 class="heading_artist slider_hdng">Followed artists</h2>
                             <div id="owl-example" class="owl-carousel effect_img">
 							<?php $followArtsist	=	get_followed_artist_by_customer($customerId); 
@@ -255,6 +329,7 @@ if(!empty($customerData)){
         <script src="<?php echo base_url(); ?>js/wow.js"></script>
         <script src="<?php echo base_url(); ?>js/jquery.paginate.js"></script>
         <script src="<?php echo base_url(); ?>js/owl.carousel.js"></script>
+		<script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
         <script>
             //call paginate
             $('#example').paginate();
@@ -343,7 +418,37 @@ if(!empty($customerData)){
             })
         </script>
 
+<script>
+(function($,W,D)
+{
+    var JQUERY4U = {};
 
+    JQUERY4U.UTIL =
+    {
+        setupFormValidation: function()
+        {
+            //form validation rules
+            $("#playlist_form").validate({
+                rules: {
+					playlist_name: "required"
+                },
+                messages: {
+                    playlist_name: "Please enter your playlist name.",
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        }
+    }
+
+    //when the dom has loaded setup form validation rules
+    $(D).ready(function($) {
+        JQUERY4U.UTIL.setupFormValidation();
+    });
+
+})(jQuery, window, document);
+</script>
 </body>
-
+		
 </html>

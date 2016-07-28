@@ -66,7 +66,7 @@ if($profileImg==''){
                 <div class="header_nav">
                     <div class="middle_footer">
                         <ul>
-                            <li><a href="">Browse Music</a></li>
+                            <li><a href="<?php echo base_url(); ?>browse">Browse Music</a></li>
                         </ul>
                     </div>
                 </div>

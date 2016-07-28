@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
+class Playlist extends CI_Controller {
 
 
 	function __construct() {
@@ -19,10 +19,10 @@ class Dashboard extends CI_Controller {
 			redirect('login');
 		}
     }
-	public function index()
+	public function index($playListId=null)
 	{
 		$this->load->view('customer/header_view');
-		$this->load->view('customer/dashboard_view');
+		$this->load->view('customer/playlist_list_view');
 		
 	}
 	public function artist($artistId=null){

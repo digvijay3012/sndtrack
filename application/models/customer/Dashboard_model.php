@@ -39,4 +39,14 @@ class Dashboard_model extends CI_Model {
 		$this->db->insert('snd_followed_artist',$Data);
 		return 1;
 	}
+	function create_playlist($customerId,$playlist_name){
+		$currentDate	=	 date("Y-m-d");
+		$Data = array(
+				"playlist_name" => $playlist_name,
+				"customer_id" 	=> $customerId,
+				"playlist_date" => $currentDate
+			);
+		$this->db->insert('snd_customer_playlist',$Data);
+		return 1;
+	}
 }

@@ -3778,60 +3778,6 @@ header.off-canvas {
     margin: 23px 0 0;
 }
 
-.dwnld_cont {
-    width: 105px;
-}
-
-.dwnld_cont li {
-    display: inline-block;
-    margin: 0 11px 0 0;
-    vertical-align: top;
-}
-
-.dwnld_cont li:last-child {
-    margin: 0;
-}
-
-.lst_data.license {
-    width: 104px;
-}
-
-.icons_play a {
-    border: 1px solid #333333;
-    color: #333;
-    display: inline-block;
-    text-align: center;
-    vertical-align: top;
-    width: 100%;
-}
-
-.title_play {
-    width: 104px;
-}
-
-.icons_play {
-    width: 41px;
-}
-
-.nme_user.title_play {
-    text-align: left;
-    width: 102px;
-}
-
-.dwnld_cont a {
-    color: #333;
-    display: inline-block;
-    vertical-align: top;
-}
-
-table.loop_table {
-    border-bottom: 1px solid #c3c8cb;
-}
-
-table.loop_table:last-child {
-    border-bottom: 0;
-}
-
 
 /*****  Responsive CSS  *****/
 
