@@ -446,3 +446,21 @@ if ( ! function_exists('get_artists_music_by_id')){
 				return $resultArray;
    }
 }
+if ( ! function_exists('check_track_exitsin_playlist')){
+   function check_track_exitsin_playlist($playlist_id=null, $track_id=null, $customer_id=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+		$query = $ci->db->query("SELECT id FROM snd_customer_playlist_music WHERE playlist_id='$playlist_id' AND track_id='$track_id' AND customer_id=$customer_id")->row();
+
+       if(!empty($query)){
+		   return 'added';
+		}else{
+		  return  "Add to Playlist";
+	   }
+   }
+}

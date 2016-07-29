@@ -49,4 +49,33 @@ class Dashboard_model extends CI_Model {
 		$this->db->insert('snd_customer_playlist',$Data);
 		return 1;
 	}
+	function add_to_wishlist($track_id,$customerId){
+			$selQry	=	$this->db->query("SELECT id FROM snd_customer_wishlist WHERE customer_id='$customerId' AND 	track_id='$track_id'")->row();
+			if(!empty($selQry)){
+						
+				return 2;
+			}else{
+				$Data = array(
+						"customer_id	" => $customerId,
+						"track_id" 	=> $track_id
+					);
+				$this->db->insert('snd_customer_wishlist',$Data);
+				return 1;
+			}
+	}
+	function add_to_playlist($playlist_id, $track_id, $customerId){
+		$selQry	=	$this->db->query("SELECT id FROM snd_customer_playlist_music WHERE playlist_id='$playlist_id' AND 	track_id='$track_id' AND customer_id='$customerId'")->row();
+		if(!empty($selQry)){
+						
+				return 2;
+			}else{
+				$Data = array(
+						"playlist_id"	 => $playlist_id,
+						"track_id" 		 => $track_id,
+						"customer_id" 	 => $customerId
+					);
+				$this->db->insert('snd_customer_playlist_music',$Data);
+				return 1;
+			}
+	}
 }

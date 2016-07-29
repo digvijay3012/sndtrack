@@ -49,16 +49,31 @@ class Dashboard extends CI_Controller {
 		
 	}
 	public function create_playlist(){
-		$playlist_name	=	$this->input->post('playlist_name');
+		$playlist_name		=	$this->input->post('playlist_name');
+		$redirectParameter	=	$this->input->post('redirectparamtr');
 		if($playlist_name!=''){
 			$customerId		=	$this->ion_auth->user()->row()->user_id; 
 			$data			=	$this->dashboard_model->create_playlist($customerId,$playlist_name);
 			$this->session->set_flashdata('item', 'Playlist has been created sucessfully.'); 
-			redirect("dashboard");
+			$setRediection	=	'dashboard/'.$redirectParameter.'';
+			redirect($setRediection);
 		}else{
 			$this->session->set_flashdata('item', 'Please fill Playlist name properly..'); 
-			redirect("dashboard");
+			redirect($setRediection);
 		}
+		
+	}
+	public function add_to_wishlist($track_id=null){
+		$customerId		=	$this->ion_auth->user()->row()->user_id; 
+		echo $data			=	$this->dashboard_model->add_to_wishlist($track_id, $customerId);
+		
+	}
+	public function add_to_playlist($playlist_id=null,$track_id=null){
+		if($playlist_id=='' || $track_id==''){
+			echo "3";
+		}
+		$customerId		=	$this->ion_auth->user()->row()->user_id; 
+		echo $data			=	$this->dashboard_model->add_to_playlist($playlist_id, $track_id, $customerId);
 		
 	}
 }

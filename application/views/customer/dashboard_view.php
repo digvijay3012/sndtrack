@@ -134,7 +134,9 @@ if(!empty($customerData)){
                                     <input type="text" name="playlist_name" maxlength="25" placeholder="Enter Playlist">
                                 </li>
                                <li>
-                                 
+                                  <li>
+									<input type="hidden" name="redirectparamtr" value="">
+                                </li>
                                 </li>
                               
                                 <li>
@@ -448,6 +450,11 @@ if(!empty($customerData)){
     });
 
 })(jQuery, window, document);
+</script>
+<script>
+$(document).on('click','.add_to_wishlist',function(){
+	alert(0000);
+});
 </script>
 </body>
 		

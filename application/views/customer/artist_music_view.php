@@ -192,7 +192,7 @@ if(!empty($artist_data)){
                                     <input type="text" name="playlist_name" maxlength="25" placeholder="Enter Playlist">
                                 </li>
                                <li>
-                                 
+									<input type="hidden" name="redirectparamtr" value="<?php echo 'artist_music/'.$track_id.''; ?>">
                                 </li>
                               
                                 <li>
@@ -213,7 +213,7 @@ if(!empty($artist_data)){
 								$playlistId		=	$playlistData['id'];	
 								$playlistName	=	$playlistData['playlist_name'];	
 						?>	
-							<li class="trash" did="<?php echo $playlistId; ?>"><a href="<?php echo base_url(); ?>playlist"><?php echo $playlistName; ?></a></li>
+							<li class="trash" playlist_id="<?php echo $playlistId; ?>"><a href="<?php echo base_url(); ?>playlist"><?php echo $playlistName; ?></a></li>
 						<?php } } else{
 								echo '<li>No Record to display.</li>';
 							}
@@ -222,11 +222,12 @@ if(!empty($artist_data)){
                 </div>
             </div>
             <div class="rt_sidebar art_browse">
+				<div id="add_to_wishlist_msg"></div>
                 <div class="cont_artist">
                     <div class="lft_playlist pull-left">
 					<div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
                         <div class="playlist_info">
-			
+		
                             <table class="table loop_table">
 							<thead></thead>
                                 <tbody>
@@ -239,20 +240,36 @@ if(!empty($artist_data)){
 								$getMusicFileName	=	$fectchPlaylist['watermark_format'];
 							?>
 								 
-                                    <tr class="draggable">
+                                    <tr>
                                         <td class="icons_play">
                                             <a href=""><i class="fa fa-angle-right" aria-hidden="true"></i></a>
                                         </td>
-                                        <td class="nme_user title_play"><?php echo $first_name." ".$last_name; ?>
+                                        <td track_id="<?php echo $musicId; ?>" class="nme_user draggable title_play"><?php echo $first_name." ".$last_name; ?>
                                             <p><?php echo $getMusicName; ?></p>
                                         </td>
                                         <td class="text-center"><img src="images/play_vibrate.jpg" alt=""></td>
                                         <td>3:54</td>
                                         <td class="dwnld_cont">
                                             <ul>
-                                                <li clsss="dwnld_icns"><a href=""><i class="fa fa-download" aria-hidden="true"></i></a></li>
-                                                <li><a href=""><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-                                                <li><a href=""><i class="fa fa-th-list" aria-hidden="true"></i></a></li>
+                                                <li clsss="dwnld_icns">
+													<a href="">
+														<i class="fa fa-download" aria-hidden="true"></i>
+													</a>
+												</li>
+												<div style="display:none" class="wishlist_loader_<?php echo $musicId; ?>">
+													<img src="<?php echo base_url(); ?>images/uploading.gif">
+												</div>
+                                               <a href="javascript:void(0);">
+													<li class="add_to_wishlist" track_id="<?php echo $musicId; ?>">
+														<i class="fa fa-heart-o" aria-hidden="true"></i>
+													</li>
+											   </a>
+											   
+                                                <li>
+													<a class="add_to_popup_playlist" track_id="<?php echo $musicId; ?>" data-target="#addToPlaylistModal" data-toggle="modal" href="javascript:void(0);">
+														<i class="fa fa-th-list" aria-hidden="true"></i>
+													</a>
+												</li>	
                                             </ul>
 
                                         </td>
@@ -260,14 +277,76 @@ if(!empty($artist_data)){
                                             <a href="">License</a>
                                         </td>
                                     </tr>
+			
 								<?php }
 						}else{
 							echo '<tr>No data to display.</tr>';
 						}
 					?>
+	
                                 </tbody>
                             </table>
+	<!-- Modal -->
+        <div class="modal fade" id="addToPlaylistModal" role="dialog">
+            <div class="modal-dialog">
 
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <!--button type="button" class="close" data-dismiss="modal">&times;</button-->
+                    <div class="modal-body">
+                        <div class="logo text-center">
+                            <a href=""><p>Sndtrack</p></a>
+                        </div>
+						<div class="download_popup">
+						<?php $addedPlaylist 	=	get_customer_playlist($customerId);	
+							if(!empty($addedPlaylist)){
+								foreach($addedPlaylist as $getAddedplaylist){
+									$addedPlaylistId		=	$getAddedplaylist['id'];	
+									$addedPlaylistName		=	$getAddedplaylist['playlist_name'];	
+								?>
+								
+									<ul>
+										<li><?php echo $addedPlaylistName; ?></li>
+										<li class="lst_data">
+										<div style="display:none" class="playlist_loader_<?php echo $addedPlaylistId; ?>">
+													<img src="<?php echo base_url(); ?>images/uploading.gif">
+										</div>	
+										<?php 
+											$getAddstatus 	=	check_track_exitsin_playlist($addedPlaylistId, $musicId, $customerId);
+											if($getAddstatus=='added'){ ?>
+												<button  type="button">Added</button>	
+											<?php }else{ ?>
+												<button class="addedToPlayList_<?php echo $addedPlaylistId; ?>" style="display:none" type="button">Added</button>	
+												
+												<button class="addToPlayList" track_id="<?php echo $musicId; ?>" playlist_id="<?php echo $addedPlaylistId; ?>" type="button">Add to playlist</button>
+												
+											<?php } ?>
+										
+											
+										</li>
+									</ul>
+                        <?php }}?>
+						</div>
+                        <div class="login_text text-center">
+                            <p>Create new playlist. </p>
+                        </div>
+						<?php	
+							$attributes = array('class' => 'login_form');
+							echo form_open('dashboard/create_playlist_inpopup', $attributes); 
+						?>
+							<ul class="form_ul_test">		
+								<li>
+									<input type="text" name="popup_playlist_name" maxlength="25" placeholder="Enter Playlist">
+								</li>
+								<li>
+									<button class="sbmt hover_btn" type="submit"  name="submit" >Create Playlist</button>
+								</li>
+							</ul>
+						<?php echo form_close(); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
                         </div>
                         <nav class="paginate-pagination cstm_pagintn">
                             <ul>
@@ -365,15 +444,33 @@ if(!empty($artist_data)){
      $('.trash').droppable({
         accept: '.draggable',
          drop: function (event, ui) {
-            if (confirm('Are you sure you want to delete?')) {
-			 var did= $(this).attr("did");
-			 alert(did);
-			  var pid= $(this).attr("pid");
-			 alert(pid);
-              ui.draggable.draggable('option','revert',true); 
-            } else {
-                ui.draggable.draggable('option','revert',true); 
-            }
+            
+				var playlist_id= $(this).attr("playlist_id");
+				var track_id = ui.draggable.attr("track_id");
+				var loader		=	".wishlist_loader_"+track_id;
+			var url	=	'<?php echo base_url(); ?>dashboard/add_to_playlist/'+playlist_id+"/"+track_id;
+					  $(loader).show();
+					  $.ajax({
+							url: url,
+							data: {playlist_id: playlist_id, track_id : track_id},                         // Setting the data attribute of ajax with file_data
+							type: 'post',
+							success:function(data){
+								ui.draggable.draggable('option','revert',true); 
+								$("#add_to_wishlist_msg").show();
+									if(data==1){
+										$(loader).hide();
+										$("#add_to_wishlist_msg").empty().append('Added to playlist').delay(2000).fadeOut();
+									}if(data==2){
+										$(loader).hide();
+										$("#add_to_wishlist_msg").empty().append('Already Added to playlist').delay(2000).fadeOut();
+									}if(data==3){
+										$(loader).hide();
+										$("#add_to_wishlist_msg").empty().append('Please try again and drop song properly.').delay(3000).fadeOut();
+									}
+								}
+						}); 
+				
+          ui.draggable.draggable('option','revert',true); 
         }
     });
   });
@@ -521,7 +618,89 @@ if(!empty($artist_data)){
         JQUERY4U.UTIL.setupFormValidation();
     });
 
+})(jQuery, window, document);	
+(function($,W,D)
+{
+    var JQUERY4U = {};
+
+    JQUERY4U.UTIL =
+    {
+        setupFormValidation: function()
+        {
+            //form validation rules
+            $("#popup_playlist_form").validate({
+                rules: {
+					popup_playlist_name: "required"
+                },
+                messages: {
+                    popup_playlist_name: "Please enter your playlist name.",
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        }
+    }
+
+    //when the dom has loaded setup form validation rules
+    $(D).ready(function($) {
+        JQUERY4U.UTIL.setupFormValidation();
+    });
+
 })(jQuery, window, document);
+</script>
+<script>
+$(document).on('click','.add_to_wishlist',function(){
+	var track_id	=	$(this).attr('track_id');
+	var loader		=	".wishlist_loader_"+track_id;
+	
+	var url	=	'<?php echo base_url(); ?>dashboard/add_to_wishlist/'+track_id;
+					  $(loader).show();
+					  $.ajax({
+							url: url,
+							data: {track_id : track_id},                         // Setting the data attribute of ajax with file_data
+							type: 'post',
+							success:function(data){
+								$("#add_to_wishlist_msg").show();
+									if(data==1){
+										$(loader).hide();
+										$("#add_to_wishlist_msg").empty().append('Added to wishlist').delay(1000).fadeOut();
+									}if(data==2){
+										$(loader).hide();
+										$("#add_to_wishlist_msg").empty().append('Already Added to wishlist').delay(1000).fadeOut();
+									}
+								}
+						}); 
+});
+$(document).on('click','.addToPlayList',function(){	
+	var track_id	=	$(this).attr('track_id');
+	var playlist_id	=	$(this).attr('playlist_id');
+	var loader		=	".playlist_loader_"+playlist_id;
+	var addButtonMsg	=	".addedToPlayList_"+playlist_id;
+	var url	=	'<?php echo base_url(); ?>dashboard/add_to_playlist/'+playlist_id+"/"+track_id;
+					  $(loader).show();
+					  $.ajax({
+							url: url,
+							data: {playlist_id : playlist_id, track_id : track_id},                         // Setting the data attribute of ajax with file_data
+							type: 'post',
+							success:function(data){
+								//$(addButtonMsg).show();
+									if(data==1){
+										$(loader).hide();
+										$(addButtonMsg).show();
+									}
+									
+								}
+						}); 
+						$(this).remove();	
+});
+</script>
+<script>
+jQuery(document).ready(function(){		
+//alert(2222);
+	// jQuery(".login_form")
+	//jQuery(".form_ul_test").detach().appendTo('.login_form'); 
+});
 </script>
 </body>
 
