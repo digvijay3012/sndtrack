@@ -266,7 +266,7 @@ if(!empty($artist_data)){
 											   </a>
 											   
                                                 <li>
-													<a class="add_to_popup_playlist" track_id="<?php echo $musicId; ?>" data-target="#addToPlaylistModal" data-toggle="modal" href="javascript:void(0);">
+													<a class="add_to_popup_playlist" track_id="<?php echo $musicId; ?>" data-target="#addToPlaylistModal_<?php echo $musicId; ?>" data-toggle="modal" href="javascript:void(0);">
 														<i class="fa fa-th-list" aria-hidden="true"></i>
 													</a>
 												</li>	
@@ -277,17 +277,8 @@ if(!empty($artist_data)){
                                             <a href="">License</a>
                                         </td>
                                     </tr>
-			
-								<?php }
-						}else{
-							echo '<tr>No data to display.</tr>';
-						}
-					?>
-	
-                                </tbody>
-                            </table>
-	<!-- Modal -->
-        <div class="modal fade" id="addToPlaylistModal" role="dialog">
+				<!-- Modal -->
+        <div class="modal fade" id="addToPlaylistModal_<?php echo $musicId; ?>" role="dialog">
             <div class="modal-dialog">
 
                 <!-- Modal content-->
@@ -313,12 +304,16 @@ if(!empty($artist_data)){
 										</div>	
 										<?php 
 											$getAddstatus 	=	check_track_exitsin_playlist($addedPlaylistId, $musicId, $customerId);
+											echo "addedPlaylistId".$addedPlaylistId."</br>";
+											echo "musicId".$musicId."</br>";
+											echo "addedPlaylistId".$customerId."</br>";
+											echo "daga".$getAddstatus;
 											if($getAddstatus=='added'){ ?>
 												<button  type="button">Added</button>	
 											<?php }else{ ?>
 												<button class="addedToPlayList_<?php echo $addedPlaylistId; ?>" style="display:none" type="button">Added</button>	
 												
-												<button class="addToPlayList" track_id="<?php echo $musicId; ?>" playlist_id="<?php echo $addedPlaylistId; ?>" type="button">Add to playlist</button>
+												<button class="addToPlayList" playlist_id="<?php echo $addedPlaylistId; ?>" type="button" track_id="<?php echo $musicId; ?>">Add to playlist</button>
 												
 											<?php } ?>
 										
@@ -331,22 +326,23 @@ if(!empty($artist_data)){
                             <p>Create new playlist. </p>
                         </div>
 						<?php	
-							$attributes = array('class' => 'login_form');
+							$attributes = array('class' => 'login_form login_form_popup', 'id' => 'login_form_popup_id');
 							echo form_open('dashboard/create_playlist_inpopup', $attributes); 
 						?>
-							<ul class="form_ul_test">		
-								<li>
-									<input type="text" name="popup_playlist_name" maxlength="25" placeholder="Enter Playlist">
-								</li>
-								<li>
-									<button class="sbmt hover_btn" type="submit"  name="submit" >Create Playlist</button>
-								</li>
-							</ul>
 						<?php echo form_close(); ?>
                     </div>
                 </div>
             </div>
         </div>
+								<?php }
+						}else{
+							echo '<tr>No data to display.</tr>';
+						}
+					?>
+	
+                                </tbody>
+                            </table>
+
                         </div>
                         <nav class="paginate-pagination cstm_pagintn">
                             <ul>
@@ -628,7 +624,7 @@ if(!empty($artist_data)){
         setupFormValidation: function()
         {
             //form validation rules
-            $("#popup_playlist_form").validate({
+            $("#login_form_popup_id").validate({
                 rules: {
 					popup_playlist_name: "required"
                 },
@@ -648,6 +644,7 @@ if(!empty($artist_data)){
     });
 
 })(jQuery, window, document);
+
 </script>
 <script>
 $(document).on('click','.add_to_wishlist',function(){
@@ -673,9 +670,13 @@ $(document).on('click','.add_to_wishlist',function(){
 						}); 
 });
 $(document).on('click','.addToPlayList',function(){	
+//var track_id	=	$("#login_form_popup input[name=popup_track_id]").attr('trackid');	
 	var track_id	=	$(this).attr('track_id');
+	alert(track_id);
 	var playlist_id	=	$(this).attr('playlist_id');
-	var loader		=	".playlist_loader_"+playlist_id;
+	
+	alert(playlist_id);
+	/* var loader		=	".playlist_loader_"+playlist_id;
 	var addButtonMsg	=	".addedToPlayList_"+playlist_id;
 	var url	=	'<?php echo base_url(); ?>dashboard/add_to_playlist/'+playlist_id+"/"+track_id;
 					  $(loader).show();
@@ -692,14 +693,22 @@ $(document).on('click','.addToPlayList',function(){
 									
 								}
 						}); 
-						$(this).remove();	
-});
+						$(this).remove();	  */
+						
+});	
 </script>
 <script>
-jQuery(document).ready(function(){		
-//alert(2222);
-	// jQuery(".login_form")
-	//jQuery(".form_ul_test").detach().appendTo('.login_form'); 
+jQuery(document).ready(function(){
+	$(document).on('click','.add_to_popup_playlist',function(){
+			var trackId	=	$(this).attr('track_id');
+		$(".login_form_popup").empty();
+		var appendForm	=	'<ul class="form_ul_test"><li><input type="text" placeholder="Enter Playlist" maxlength="25" name="popup_playlist_name" required><input type="hidden" trackId='+trackId+' name="popup_track_id"></li><li><button name="submit" type="submit" class="sbmt hover_btn">Create Playlist</button></li></ul>';
+		
+		alert(appendForm);
+		jQuery(appendForm).detach().appendTo('.login_form_popup'); 
+		//$('#popup_track_id').attr("trackId",trackId);
+		
+	});
 });
 </script>
 </body>
