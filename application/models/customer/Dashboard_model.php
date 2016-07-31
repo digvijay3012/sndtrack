@@ -78,4 +78,23 @@ class Dashboard_model extends CI_Model {
 				return 1;
 			}
 	}
+		function create_playlist_inpopup($track_id, $popup_playlist_name, $customerId){
+			$currentDate			=	 date("Y-m-d");
+			
+		$Data = array(
+				"playlist_name" => $popup_playlist_name,
+				"customer_id" 	=> $customerId,
+				"playlist_date" => $currentDate
+			);
+		$this->db->insert('snd_customer_playlist',$Data);
+		$insertPlaylistId = $this->db->insert_id();
+		
+		$playlistData = array(
+						"playlist_id"	 => $insertPlaylistId,
+						"track_id" 		 => $track_id,
+						"customer_id" 	 => $customerId
+					);
+				$this->db->insert('snd_customer_playlist_music',$playlistData);
+				return 1;
+	}
 }

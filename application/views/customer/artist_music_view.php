@@ -325,11 +325,18 @@ if(!empty($artist_data)){
                         <div class="login_text text-center">
                             <p>Create new playlist. </p>
                         </div>
-						<?php	
-							$attributes = array('class' => 'login_form login_form_popup', 'id' => 'login_form_popup_id');
+						<?php
+							$formId	=	'login_form_popup_id_'.$musicId;
+							$attributes = array('class' => 'login_form login_form_popup', 'id' => $formId);
 							echo form_open('dashboard/create_playlist_inpopup', $attributes); 
 						?>
 						<?php echo form_close(); ?>
+						<div style="display:none" class="popup_playlist_loader_<?php echo $musicId; ?>">
+								<img src="<?php echo base_url(); ?>images/uploading.gif">
+						</div>	
+						<div style="display:none" class="error_cls_<?php echo $musicId; ?>">
+								<p>Plesae enter your playlist name.</p>
+						</div>	
                     </div>
                 </div>
             </div>
@@ -702,14 +709,43 @@ jQuery(document).ready(function(){
 	$(document).on('click','.add_to_popup_playlist',function(){
 			var trackId	=	$(this).attr('track_id');
 		$(".login_form_popup").empty();
-		var appendForm	=	'<ul class="form_ul_test"><li><input type="text" placeholder="Enter Playlist" maxlength="25" name="popup_playlist_name" required><input type="hidden" trackId='+trackId+' name="popup_track_id"></li><li><button name="submit" type="submit" class="sbmt hover_btn">Create Playlist</button></li></ul>';
+		var appendForm	=	'<ul class="form_ul_test"><li><input type="text" placeholder="Enter Playlist" maxlength="25" name="popup_playlist_name" id="popup_playlist_name" required><input type="hidden" trackId="'+trackId+'"  value="'+trackId+'" name="popup_track_id"></li><li><button name="submit" type="button" class="sbmt hover_btn create_popup_playlist">Create Playlist</button></li></ul>';
 		
 		alert(appendForm);
 		jQuery(appendForm).detach().appendTo('.login_form_popup'); 
 		//$('#popup_track_id').attr("trackId",trackId);
 		
 	});
+
 });
+	$(document).on('click','.create_popup_playlist',function(){
+		var track_id			=	$(".login_form_popup input[name=popup_track_id]").attr('trackid');
+			
+		var getplaylistname		=	"#login_form_popup_id_"+track_id+" "+"input[name=popup_playlist_name]";
+		
+		var popup_playlist_name	=	$(getplaylistname).val();
+		
+		var error_cls		=	".error_cls_"+track_id;
+		$(error_cls).hide();
+		if(popup_playlist_name!=''){
+			var loader		=	".popup_playlist_loader_"+track_id;
+				var url	=	'<?php echo base_url(); ?>dashboard/create_playlist_inpopup/'+track_id+"/"+popup_playlist_name;
+					  $(loader).show();
+					  $.ajax({
+							url: url,
+							data: {track_id : track_id,popup_playlist_name : popup_playlist_name},                         // Setting the data attribute of ajax with file_data
+							type: 'post',
+							success:function(data){
+								alert(data);
+									$(loader).hide();
+								}
+						}); 
+		}else{
+			$(error_cls).show();
+		}
+		
+						
+	});
 </script>
 </body>
 

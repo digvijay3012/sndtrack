@@ -76,4 +76,14 @@ class Dashboard extends CI_Controller {
 		echo $data			=	$this->dashboard_model->add_to_playlist($playlist_id, $track_id, $customerId);
 		
 	}
+
+	public function create_playlist_inpopup($track_id=null,$popup_playlist_name=null){
+		 
+		if($popup_playlist_name=='' || $track_id	==''){
+			echo "3";
+		}
+		$customerId		=	$this->ion_auth->user()->row()->user_id; 
+		echo $data			=	$this->dashboard_model->create_playlist_inpopup($track_id, $popup_playlist_name, $customerId);
+		
+	}
 }
