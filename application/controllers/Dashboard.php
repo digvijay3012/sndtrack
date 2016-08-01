@@ -78,12 +78,19 @@ class Dashboard extends CI_Controller {
 	}
 
 	public function create_playlist_inpopup($track_id=null,$popup_playlist_name=null){
-		 
+		 //echo "<pre>";	print_r($_POST);	echo "</pre>"; die;
+		 $track_id					=	$this->input->post('track_id');
+		 $popup_playlist_name		=	$this->input->post('popup_playlist_name');
 		if($popup_playlist_name=='' || $track_id	==''){
 			echo "3";
 		}
 		$customerId		=	$this->ion_auth->user()->row()->user_id; 
-		echo $data			=	$this->dashboard_model->create_playlist_inpopup($track_id, $popup_playlist_name, $customerId);
+		 $data			=	$this->dashboard_model->create_playlist_inpopup($track_id, $popup_playlist_name, $customerId);
+		echo '<ul><li>'.$popup_playlist_name.'</li><li class="lst_data"><button type="button">Added</button></li></ul>';
 		
+	}
+	public function filter_by_category($catid=null){
+		
+		return $this->load->view('search/category_search_view', array('catId'=>$catid));
 	}
 }

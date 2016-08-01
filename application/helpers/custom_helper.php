@@ -464,3 +464,22 @@ if ( ! function_exists('check_track_exitsin_playlist')){
 	   }
    }
 }
+if ( ! function_exists('get_artists_music_by_catid')){
+   function get_artists_music_by_catid($catId=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+		$query = $ci->db->query("SELECT snd_artist_info.artist_id, users.first_name, users.last_name, snd_artist_music.id,snd_artist_info.artist_image, snd_musicfile_version.watermark_format from snd_artist_music INNER JOIN snd_musicfile_version ON snd_artist_music.id=snd_musicfile_version.track_id INNER JOIN snd_artist_info ON snd_artist_music.artist_id=snd_artist_info.artist_id INNER JOIN users ON snd_artist_music.artist_id=users.id WHERE snd_artist_music.cat_id='$catId'");
+
+       $resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
+   }
+}	

@@ -55,112 +55,85 @@ if(!empty($artist_data)){
                     <h3 class="rt_hdng">YOUR MUSIC</h3>
                     <ul>
                         <li><a href="">Hearted</a></li>
-                        <li><a href="">Artists</a></li>
+                        <div id="accordion2" class="panel-group user_acc">
+						<h3 class="rt_hdng"><a href="#collapseOne_22" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed" aria-expanded="false">
+						Artists																
+						</a></h3>
+						<div class="panel-collapse collapse" id="collapseOne_22" aria-expanded="false" style="height: 0px;">
+							<div class="panel-body">
+							<ul>
+							<?php $getFollowData	=	get_followed_artist_by_customer($customerId); 
+									if(!empty($getFollowData)){
+										foreach($getFollowData as $fetchFollowData){
+											$getFollowedId		=	$fetchFollowData['id'];
+											$getFollowedFname	=	$fetchFollowData['first_name'];
+											$getFollowedLname	=	$fetchFollowData['last_name'];
+										?>
+										<li><a href="<?php echo base_url(); ?>dashboard/artist/<?php echo $getFollowedId; ?>">
+											<?php echo $getFollowedFname." ".$getFollowedLname; ?>
+										</a></li>
+									<?php }}else{
+										echo '<li>No records found.</li>';
+									}
+								?>
+									
+								</ul>
+							</div>
+						</div>
+				</div>
                         <li><a href="">Songs</a></li>
                     </ul>
                 </div>
                 <div class="searchh your_music">
                     <h3 class="rt_hdng"> SEARCH</h3>
                     <div class="panel-group user_acc" id="accordion">
+					<?php 
+								$getCatdata 	=	get_category(); 
+							if(!empty($getCatdata)){
+								$counterFlag=0;
+								foreach($getCatdata as $parentCatData){
+									 $parentCatName	=	$parentCatData['category_name'];
+									 $parentCatId	=	$parentCatData['id'];
+									 $counterFlag++;
+							?>
                         <div class="panel panel-default">
-                            <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Mood</a></h3>
-                            <div id="collapseOne" class="panel-collapse collapse">
+                           
+								<?php if($parentCatName=='Instrumental'){
+									echo $parentCatName;
+									echo '<h3 class="rt_hdng"><input type="checkbox" name="Instruments" value="Instruments"></h3>';
+									}else{ ?>
+									 <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_<?php echo $counterFlag; ?>">
+										<?php echo $parentCatName; ?>
+									<?php }?>
+							
+							</a></h3>
+                            <div id="collapseOne_<?php echo $counterFlag; ?>" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul>
-                                        <li><a href="">Angst</a></li>
-                                        <li><a href="">Chilled</a></li>
-                                        <li><a href="">Quiet</a></li>
-                                        <li><a href="">Series</a></li>
-                                        <li><a href="">Tense</a></li>
-                                        <li><a href="">Thoughful</a></li>
-                                        <li><a href="">Thrilled</a></li>
-                                        <li><a href="">Upset</a></li>
-                                        <li><a href="">Uplisting</a></li>
+								<?php
+								$childcatData	= get_childCatName($parentCatId);
+								if(!empty($childcatData)){
+								foreach($childcatData as $childCat){
+									 $childCatName	=	$childCat['category_name'];
+									 $childCatId	=	$childCat['id']; ?>
+                                        <a href="javascript:void(0);" ><li class="category_filter" catId="<?php echo $childCatId; ?>"><?php echo $childCatName; ?></li>	</a>
+										
+									<?php } } ?> 
                                     </ul>
                                 </div>
+								<div style="display:none" class="category_filter_loader">
+									<img src="<?php echo base_url(); ?>images/uploading.gif">
+								</div>	
                             </div>
                         </div>
+						<?php } } ?>
                         <div class="panel panel-default">
                             <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Energy </a></h3>
                             <div id="collapseTwo" class="panel-collapse collapse">
-                                <div class="panel-body"><img src="images/music_level.jpg" alt=""></div>
+                                <div class="panel-body"><img src="<?php echo base_url(); ?>images/music_level.jpg" alt=""></div>
                             </div>
                         </div>
-                        <div class="panel panel-default">
-                            <h3 class="rt_hdng"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Instruments </a> </h3>
-                            <div id="collapseThree" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li><a href="">Angst</a></li>
-                                        <li><a href="">Chilled</a></li>
-                                        <li><a href="">Quiet</a></li>
-                                        <li><a href="">Series</a></li>
-                                        <li><a href="">Tense</a></li>
-                                        <li><a href="">Thoughful</a></li>
-                                        <li><a href="">Thrilled</a></li>
-                                        <li><a href="">Upset</a></li>
-                                        <li><a href="">Uplisting</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapsefv">Genre</a></h3>
-                            <div id="collapsefv" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li><a href="">Angst</a></li>
-                                        <li><a href="">Chilled</a></li>
-                                        <li><a href="">Quiet</a></li>
-                                        <li><a href="">Series</a></li>
-                                        <li><a href="">Tense</a></li>
-                                        <li><a href="">Thoughful</a></li>
-                                        <li><a href="">Thrilled</a></li>
-                                        <li><a href="">Upset</a></li>
-                                        <li><a href="">Uplisting</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapsefour">Artists</a></h3>
-                            <div id="collapsefour" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li><a href="">Angst</a></li>
-                                        <li><a href="">Chilled</a></li>
-                                        <li><a href="">Quiet</a></li>
-                                        <li><a href="">Series</a></li>
-                                        <li><a href="">Tense</a></li>
-                                        <li><a href="">Thoughful</a></li>
-                                        <li><a href="">Thrilled</a></li>
-                                        <li><a href="">Upset</a></li>
-                                        <li><a href="">Uplisting</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapsefour">Instrumental</a><input type="checkbox"></h3>
-                            <div id="collapsefour" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li><a href="">Angst</a></li>
-                                        <li><a href="">Chilled</a></li>
-                                        <li><a href="">Quiet</a></li>
-                                        <li><a href="">Series</a></li>
-                                        <li><a href="">Tense</a></li>
-                                        <li><a href="">Thoughful</a></li>
-                                        <li><a href="">Thrilled</a></li>
-                                        <li><a href="">Upset</a></li>
-                                        <li><a href="">Uplisting</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <h3 class="rt_hdng"> <a class="accordion-toggle" contextmenu=""href="#">Vocal</a></h3>
-                        </div>
+                       
                     </div>
                 </div>
 				 <!-- Modal -->
@@ -304,15 +277,11 @@ if(!empty($artist_data)){
 										</div>	
 										<?php 
 											$getAddstatus 	=	check_track_exitsin_playlist($addedPlaylistId, $musicId, $customerId);
-											echo "addedPlaylistId".$addedPlaylistId."</br>";
-											echo "musicId".$musicId."</br>";
-											echo "addedPlaylistId".$customerId."</br>";
-											echo "daga".$getAddstatus;
+											
 											if($getAddstatus=='added'){ ?>
 												<button  type="button">Added</button>	
 											<?php }else{ ?>
-												<button class="addedToPlayList_<?php echo $addedPlaylistId; ?>" style="display:none" type="button">Added</button>	
-												
+												<button class="addedToPlayList_<?php echo $addedPlaylistId; ?>_<?php echo $musicId; ?>" style="display:none" type="button">Added</button>
 												<button class="addToPlayList" playlist_id="<?php echo $addedPlaylistId; ?>" type="button" track_id="<?php echo $musicId; ?>">Add to playlist</button>
 												
 											<?php } ?>
@@ -334,9 +303,7 @@ if(!empty($artist_data)){
 						<div style="display:none" class="popup_playlist_loader_<?php echo $musicId; ?>">
 								<img src="<?php echo base_url(); ?>images/uploading.gif">
 						</div>	
-						<div style="display:none" class="error_cls_<?php echo $musicId; ?>">
-								<p>Plesae enter your playlist name.</p>
-						</div>	
+							
                     </div>
                 </div>
             </div>
@@ -434,20 +401,25 @@ if(!empty($artist_data)){
         <script src="https://use.typekit.net/auo4nbe.js"></script>
 		<script src="<?php echo base_url(); ?>js/jquery-ui.min.js" type="text/javascript"></script>
 <script>
- $(function() {
-    $( ".draggable" ).draggable({
+/*************  Drag and Save  to playlist ************/
+ //$(function() {
+	 $(document).on('click','.draggable',function(){
+    $('.draggable').draggable({
    revert : function(event, ui) {
             $(this).data("uiDraggable").originalPosition = {
                 top : 0,
                 left : 0
             };          
-            return !event;            
-        }
+            return !event;   
+			
+        },
+		live: true
     });
+	
      $('.trash').droppable({
         accept: '.draggable',
          drop: function (event, ui) {
-            
+            ui.draggable.draggable('option','revert',true); 			
 				var playlist_id= $(this).attr("playlist_id");
 				var track_id = ui.draggable.attr("track_id");
 				var loader		=	".wishlist_loader_"+track_id;
@@ -593,6 +565,7 @@ if(!empty($artist_data)){
             })
         </script>
 <script>
+/*************  Add Form Validation************/
 (function($,W,D)
 {
     var JQUERY4U = {};
@@ -654,6 +627,7 @@ if(!empty($artist_data)){
 
 </script>
 <script>
+/*************  Add MUSIC to Wishlist ************/
 $(document).on('click','.add_to_wishlist',function(){
 	var track_id	=	$(this).attr('track_id');
 	var loader		=	".wishlist_loader_"+track_id;
@@ -676,15 +650,15 @@ $(document).on('click','.add_to_wishlist',function(){
 								}
 						}); 
 });
+/*************  Add MUSIC to playlist************/
 $(document).on('click','.addToPlayList',function(){	
 //var track_id	=	$("#login_form_popup input[name=popup_track_id]").attr('trackid');	
 	var track_id	=	$(this).attr('track_id');
-	alert(track_id);
+	
 	var playlist_id	=	$(this).attr('playlist_id');
 	
-	alert(playlist_id);
-	/* var loader		=	".playlist_loader_"+playlist_id;
-	var addButtonMsg	=	".addedToPlayList_"+playlist_id;
+	var loader		=	".playlist_loader_"+playlist_id;
+	var addButtonMsg	=	".addedToPlayList_"+playlist_id+"_"+track_id;
 	var url	=	'<?php echo base_url(); ?>dashboard/add_to_playlist/'+playlist_id+"/"+track_id;
 					  $(loader).show();
 					  $.ajax({
@@ -692,42 +666,47 @@ $(document).on('click','.addToPlayList',function(){
 							data: {playlist_id : playlist_id, track_id : track_id},                         // Setting the data attribute of ajax with file_data
 							type: 'post',
 							success:function(data){
-								//$(addButtonMsg).show();
+								//alert(data);
 									if(data==1){
 										$(loader).hide();
 										$(addButtonMsg).show();
+										
 									}
 									
 								}
 						}); 
-						$(this).remove();	  */
-						
+				$(this).remove();						
+					
 });	
 </script>
-<script>
-jQuery(document).ready(function(){
-	$(document).on('click','.add_to_popup_playlist',function(){
-			var trackId	=	$(this).attr('track_id');
-		$(".login_form_popup").empty();
-		var appendForm	=	'<ul class="form_ul_test"><li><input type="text" placeholder="Enter Playlist" maxlength="25" name="popup_playlist_name" id="popup_playlist_name" required><input type="hidden" trackId="'+trackId+'"  value="'+trackId+'" name="popup_track_id"></li><li><button name="submit" type="button" class="sbmt hover_btn create_popup_playlist">Create Playlist</button></li></ul>';
-		
-		alert(appendForm);
-		jQuery(appendForm).detach().appendTo('.login_form_popup'); 
-		//$('#popup_track_id').attr("trackId",trackId);
-		
-	});
+<script>	
+/*************  Add Play list From Popup	************/
+	
+			$(document).on('click','.add_to_popup_playlist',function(){
+				
+					var trackId	=	$(this).attr('track_id');
+				
+				$(".login_form_popup").empty();
+				var appendForm	=	'<ul class="form_ul_test"><li><input type="text" placeholder="Enter Playlist" maxlength="25" name="popup_playlist_name" id="popup_playlist_name" required><div style="display:none" class="error error_cls_'+trackId+'"><p>Plesae enter your playlist name.</p></div><input type="hidden" trackId="'+trackId+'"  value="'+trackId+'" name="popup_track_id"></li><li><button name="submit" type="button" class="sbmt hover_btn create_popup_playlist">Create Playlist</button></li></ul>';
+				//alert(appendForm);
+				jQuery(appendForm).detach().appendTo('.login_form_popup'); 
+				//$('#popup_track_id').attr("trackId",trackId);
+				
+			});
 
-});
+		
 	$(document).on('click','.create_popup_playlist',function(){
 		var track_id			=	$(".login_form_popup input[name=popup_track_id]").attr('trackid');
 			
 		var getplaylistname		=	"#login_form_popup_id_"+track_id+" "+"input[name=popup_playlist_name]";
 		
-		var popup_playlist_name	=	$(getplaylistname).val();
+		var get_popup_playlist_name	=	$(getplaylistname).val();
 		
 		var error_cls		=	".error_cls_"+track_id;
 		$(error_cls).hide();
-		if(popup_playlist_name!=''){
+		if(get_popup_playlist_name!=''){
+			var popup_playlist_name 	=	get_popup_playlist_name.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, ' ');
+		
 			var loader		=	".popup_playlist_loader_"+track_id;
 				var url	=	'<?php echo base_url(); ?>dashboard/create_playlist_inpopup/'+track_id+"/"+popup_playlist_name;
 					  $(loader).show();
@@ -736,16 +715,39 @@ jQuery(document).ready(function(){
 							data: {track_id : track_id,popup_playlist_name : popup_playlist_name},                         // Setting the data attribute of ajax with file_data
 							type: 'post',
 							success:function(data){
-								alert(data);
+								
+								$('.download_popup').append(data);
+								var get_popup_playlist_name	=	$(getplaylistname).val("");
 									$(loader).hide();
 								}
 						}); 
 		}else{
 			$(error_cls).show();
 		}
-		
-						
 	});
+$(document).on('click','.category_filter',function(){
+	var catId	=	$(this).attr('catId');
+	$('.draggable').draggable();
+	var url	=	'<?php echo base_url(); ?>dashboard/filter_by_category/'+catId;
+	  $('.category_filter_loader').show();
+	  $.ajax({
+			url: url,
+			data: {catId : catId},                         // Setting the data attribute of ajax with file_data
+			type: 'post',
+			success:function(data){
+					//alert(data);
+					$('.category_filter_loader').hide();
+					$('.lft_playlist').empty().append(data);
+					$('.draggable').draggable();
+					$('.draggable').trigger('click');
+				}
+				
+		}); 	
+		
+	});	
+$('document').ready(function () {
+	$('.draggable').trigger('click');
+});	
 </script>
 </body>
 
