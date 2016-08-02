@@ -10,18 +10,27 @@ class Browse extends CI_Controller {
 		//load custom helper 
 		$this->load->helper('custom_helper');
 		$this->load->library(array('ion_auth','form_validation','session'));
-		$this->ion_auth->logged_in();
+		$this->load->model('browse_model');
 		/* if (! $this->ion_auth->logged_in()){
 				redirect('artist/login');
 			} */
 	}
 	public function index()
 	{
-				
-				$this->load->view('artist/header_view');
-				$this->load->view('pages/browse_view');
+				$data	=	$this->browse_model->get_all_music();
+				//print_r($data); die;
+				$this->load->view('customer/browse_header_view');
+				$this->load->view('customer/browse_view',array('data'=>$data));
 				//$this->load->view('artist/footer_view');
 		
 	}
-	
+	public function filter_by_browse($short_type)
+	{
+				$data	=	$this->browse_model->filter_by_browse($short_type);
+				//print_r($data); die;
+				
+				return $this->load->view('search/browse_orderby_filter',array('data'=>$data));
+				//$this->load->view('artist/footer_view');
+		
+	}
 }

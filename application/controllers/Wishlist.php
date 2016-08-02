@@ -26,5 +26,19 @@ class Wishlist extends CI_Controller {
 		$this->load->view('customer/wishlist_view');
 		
 	}
-	
+	public function create_playlist(){
+		$playlist_name		=	$this->input->post('playlist_name');
+		$redirectParameter	=	$this->input->post('redirectparamtr');
+		if($playlist_name!=''){
+			$customerId		=	$this->ion_auth->user()->row()->user_id; 
+			$data			=	$this->dashboard_model->create_playlist($customerId,$playlist_name);
+			$this->session->set_flashdata('item', 'Playlist has been created sucessfully.'); 
+			$setRediection	=	'wishlist';
+			redirect($setRediection);
+		}else{
+			$this->session->set_flashdata('item', 'Please fill Playlist name properly..'); 
+			redirect($setRediection);
+		}
+		
+	}
 }

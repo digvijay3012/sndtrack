@@ -22,7 +22,7 @@ if(!empty($customerData)){
                     <h3 class="rt_hdng">YOUR MUSIC</h3>
 					
                     <ul>
-                        <li><a href="">Hearted</a></li>
+                        <li><a href="<?php echo base_url(); ?>wishlist">Hearted</a></li>
                       
 						<div id="accordion2" class="panel-group user_acc">
 						<h3 class="rt_hdng"><a href="#collapseOne_22" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed" aria-expanded="false">
@@ -158,7 +158,7 @@ if(!empty($customerData)){
 								$playlistId		=	$playlistData['id'];	
 								$playlistName	=	$playlistData['playlist_name'];	
 						?>	
-							<li><a href="<?php echo base_url(); ?>playlist"><?php echo $playlistName; ?></a></li>
+							<li><a href="<?php echo base_url(); ?>playlist/view/<?php echo $playlistId; ?>"><?php echo $playlistName; ?></a></li>
 						<?php } } else{
 								echo '<li>No Record to display.</li>';
 							}

@@ -482,4 +482,94 @@ if ( ! function_exists('get_artists_music_by_catid')){
 				
 				return $resultArray;
    }
+}
+if ( ! function_exists('get_customer_wishlist')){
+   function get_customer_wishlist($customerId=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+		$query = $ci->db->query("SELECT snd_artist_info.artist_id, users.first_name, users.last_name, snd_artist_music.id,snd_artist_info.artist_image, snd_musicfile_version.watermark_format from snd_artist_music INNER JOIN snd_musicfile_version ON snd_artist_music.id=snd_musicfile_version.track_id INNER JOIN snd_artist_info ON snd_artist_music.artist_id=snd_artist_info.artist_id INNER JOIN users ON snd_artist_music.artist_id=users.id INNER JOIN snd_customer_wishlist ON snd_artist_music.id=snd_customer_wishlist.track_id WHERE snd_customer_wishlist.customer_id='$customerId'");
+
+       $resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
+   }
+}
+if ( ! function_exists('filter_by_orderby')){
+   function filter_by_orderby($short_type=null, $customerId=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+		$query = $ci->db->query("SELECT snd_artist_info.artist_id, users.first_name, users.last_name, snd_artist_music.id,snd_artist_info.artist_image, snd_musicfile_version.watermark_format from snd_artist_music INNER JOIN snd_musicfile_version ON snd_artist_music.id=snd_musicfile_version.track_id INNER JOIN snd_artist_info ON snd_artist_music.artist_id=snd_artist_info.artist_id INNER JOIN users ON snd_artist_music.artist_id=users.id INNER JOIN snd_customer_wishlist ON snd_artist_music.id=snd_customer_wishlist.track_id WHERE snd_customer_wishlist.customer_id='$customerId' AND snd_artist_music.short_order='$short_type'");
+
+       $resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
+   }
 }	
+if ( ! function_exists('get_customer_playlist_music')){
+   function get_customer_playlist_music($customerId=null,$playlist_id=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+		$query = $ci->db->query("SELECT snd_artist_info.artist_id, users.first_name, users.last_name, snd_artist_music.id,snd_artist_info.artist_image, snd_musicfile_version.watermark_format from snd_artist_music INNER JOIN snd_musicfile_version ON snd_artist_music.id=snd_musicfile_version.track_id INNER JOIN snd_artist_info ON snd_artist_music.artist_id=snd_artist_info.artist_id INNER JOIN users ON snd_artist_music.artist_id=users.id INNER JOIN snd_customer_playlist_music ON snd_artist_music.id=snd_customer_playlist_music.track_id WHERE snd_customer_playlist_music.customer_id='$customerId' AND snd_customer_playlist_music.playlist_id='$playlist_id'");
+
+       $resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
+   }
+}
+if ( ! function_exists('filter_playlist_orderby')){
+   function filter_playlist_orderby($customerId=null,$playlist_id=null,$short_order=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+     
+       //get data from database 
+		$query = $ci->db->query("SELECT snd_artist_info.artist_id, users.first_name, users.last_name, snd_artist_music.id,snd_artist_info.artist_image, snd_musicfile_version.watermark_format from snd_artist_music INNER JOIN snd_musicfile_version ON snd_artist_music.id=snd_musicfile_version.track_id INNER JOIN snd_artist_info ON snd_artist_music.artist_id=snd_artist_info.artist_id INNER JOIN users ON snd_artist_music.artist_id=users.id INNER JOIN snd_customer_playlist_music ON snd_artist_music.id=snd_customer_playlist_music.track_id WHERE snd_customer_playlist_music.customer_id='$customerId' AND snd_customer_playlist_music.playlist_id='$playlist_id' AND snd_artist_music.short_order='$short_order'");
+
+       $resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
+   }
+}
+if ( ! function_exists('get_playlist_name_by_id')){
+   function get_playlist_name_by_id($playlist_id=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+     
+       //get data from database 
+		$query = $ci->db->query("SELECT playlist_name FROM snd_customer_playlist WHERE id='$playlist_id'")->row();
+		return $query->playlist_name;
+       
+   }
+}

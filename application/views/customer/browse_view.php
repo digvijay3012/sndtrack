@@ -1,11 +1,13 @@
 <?php 
+if ($this->ion_auth->logged_in()){
 $customerId			=	$this->ion_auth->user()->row()->user_id; 
 $customerData		=	$this->ion_auth->user()->row();
 if(!empty($customerData)){
 	$customerFirstName 		=		$customerData->first_name;
 	$customerLastName 		=		$customerData->last_name;
 }
-
+}
+$getPlaylist_id	= $this->uri->segment(3); 
 ?>
 <div class="cstmr_cont header-margin">
         <div class="music-bar">
@@ -23,6 +25,7 @@ if(!empty($customerData)){
 						</a></h3>
 						<div class="panel-collapse collapse" id="collapseOne_22" aria-expanded="false" style="height: 0px;">
 							<div class="panel-body">
+							<?php if ($this->ion_auth->logged_in()){ ?>
 							<ul>
 							<?php $getFollowData	=	get_followed_artist_by_customer($customerId); 
 									if(!empty($getFollowData)){
@@ -38,8 +41,9 @@ if(!empty($customerData)){
 										echo '<li>No records found.</li>';
 									}
 								?>
-									
+								
 								</ul>
+								<?php  } ?>	
 							</div>
 						</div>
 				</div>
@@ -119,7 +123,7 @@ if(!empty($customerData)){
 
 							<?php	
 								$attributes = array('class' => 'login_form', 'id' => 'playlist_form');
-								echo form_open('wishlist/create_playlist', $attributes); 
+								echo form_open('playlist/create_playlist', $attributes); 
 							?>
                            
                             <ul>
@@ -127,7 +131,7 @@ if(!empty($customerData)){
                                     <input type="text" name="playlist_name" maxlength="25" placeholder="Enter Playlist">
                                 </li>
                                <li>
-									<input type="hidden" name="redirectparamtr" value="<?php echo 'create_playlist'; ?>">
+									<input type="hidden" name="redirectparamtr" value="<?php echo $getPlaylist_id; ?>">
                                 </li>
                               
                                 <li>
@@ -140,7 +144,13 @@ if(!empty($customerData)){
             </div>
         </div>
                 <div class="your_music bottm_music">
-                     <a href="#" data-toggle="modal" data-target="#playlistModal"><h3 class="rt_hdng playlist-icon">PLAYLISTS</h3></a>
+				<?php 
+				if ($this->ion_auth->logged_in()){ ?>
+					<a href="#" data-toggle="modal" data-target="#playlistModal"><h3 class="rt_hdng playlist-icon">PLAYLISTS</h3></a>
+				<?php } else { ?>
+					<a href="#" data-target="#login_alert_popup" data-toggle="modal"><h3 class="rt_hdng playlist-icon">PLAYLISTS</h3></a>
+				<?php } ?>
+                    <?php if ($this->ion_auth->logged_in()){ ?> 
                     <ul>
                       <?php $getPlaylist	=	get_customer_playlist($customerId); 
 						if(!empty($getPlaylist)){
@@ -154,15 +164,13 @@ if(!empty($customerData)){
 							}
 						?>
                     </ul>
+					<?php } ?>
                 </div>
             </div>
             <div class="rt_sidebar browse-page">
 			<div id="add_to_wishlist_msg"></div>
                 <div class="cont_artist">
-                    <div class="wishlists-bar">
-                        <h3>Wishlists</h3>
-                        <div class="wishlists-client">For <?php echo $customerFirstName." ".$customerLastName; ?></div>
-                    </div>
+                   
                     <div class="lft_playlist lft_browse pull-left">
 					<div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
                         <div class="order_list">
@@ -193,9 +201,10 @@ if(!empty($customerData)){
 				<table class="table loop_table">
 					<thead></thead>
 						<tbody>
-						<?php $getAllMusic	=	get_customer_wishlist($customerId); 
-						if(!empty($getAllMusic)){
-							foreach($getAllMusic	as	$fectchPlaylist){
+						<?php 
+						
+						if(!empty($data)){
+							foreach($data	as	$fectchPlaylist){
 								$musicId 			=	$fectchPlaylist['id'];
 								$getMusicFileEx 	=	explode(".", $fectchPlaylist['watermark_format']);
 								$getMusicName		=	$getMusicFileEx['0'];
@@ -223,17 +232,37 @@ if(!empty($customerData)){
 												<div style="display:none" class="wishlist_loader_<?php echo $musicId; ?>">
 													<img src="<?php echo base_url(); ?>images/uploading.gif">
 												</div>
+												<?php 
+													if ($this->ion_auth->logged_in()){ ?>
                                                <a href="javascript:void(0);">
 													<li class="add_to_wishlist" track_id="<?php echo $musicId; ?>">
 														<i class="fa fa-heart-o" aria-hidden="true"></i>
 													</li>
 											   </a>
-											   
-                                                <li>
-													<a class="add_to_popup_playlist" track_id="<?php echo $musicId; ?>" data-target="#addToPlaylistModal_<?php echo $musicId; ?>" data-toggle="modal" href="javascript:void(0);">
-														<i class="fa fa-th-list" aria-hidden="true"></i>
-													</a>
-												</li>	
+											<?php } else{ ?>
+											<a  data-target="#login_alert_popup" data-toggle="modal" href="javascript:void(0);">
+													<li class="">
+														<i class="fa fa-heart-o" aria-hidden="true"></i>
+													</li>
+											   </a>
+											<?php } ?>
+											   <?php 
+													if ($this->ion_auth->logged_in()){ ?>
+														<li>
+															<a class="add_to_popup_playlist" track_id="<?php echo $musicId; ?>" data-target="#addToPlaylistModal_<?php echo $musicId; ?>" data-toggle="modal" href="javascript:void(0);">
+															<i class="fa fa-th-list" aria-hidden="true"></i>
+															</a>
+														</li>
+													<?php } else{ ?>
+														<li>
+															<a class="" data-target="#login_alert_popup" data-toggle="modal" href="javascript:void(0);">
+															<i class="fa fa-th-list" aria-hidden="true"></i>
+															</a>
+														</li>
+
+													<?php } ?>
+											  
+                                                	
                                             </ul>
 
                                         </td>
@@ -325,7 +354,43 @@ if(!empty($customerData)){
             </div>
         </div>
     </div>
+<!-- Modal -->
+<div class="modal fade" id="login_alert_popup" role="dialog">
+<div class="modal-dialog">
 
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <!--button type="button" class="close" data-dismiss="modal">&times;</button-->
+                    <div class="modal-body">
+                        <div class="logo text-center">
+                            <a href="">
+                                <p>Sndtrack</p>
+                                <span>music licensing</span>
+                            </a>
+                        </div>
+                        <div class="login_text text-center">
+                            <p>Please create your account. </p>
+                        </div>
+
+						<?php $attributes = array('class' => 'login_form');
+							echo form_open('register', $attributes);
+						?> 
+                           
+                            <ul>
+                               
+                               <li>
+									
+                                </li>
+                              
+                                <a href="<?php base_url(); ?>register"><li>
+                                    <button required="" name="submit" id="send" type="button" class="sbmt hover_btn">Create Account</button>
+                                </li></a>
+                            </ul>
+                        <?php echo form_close(); ?>                   </div>
+                </div>
+            </div>
+	</div>
+</div>
    <style>
 .draggable, .trash{
     width:50px;
@@ -638,7 +703,7 @@ $(document).on('click','.addToPlayList',function(){
 				jQuery(appendForm).detach().appendTo('.login_form_popup'); 
 				//$('#popup_track_id').attr("trackId",trackId);
 				
-			});
+			});	
 
 		
 	$(document).on('click','.create_popup_playlist',function(){
@@ -693,8 +758,9 @@ $(document).on('click','.category_filter',function(){
 	});	
 $(document).on('click','.short_order',function(){
 	var short_type	=	$(this).attr('short_type');
+	
 	$('.draggable').draggable();
-	var url	=	'<?php echo base_url(); ?>dashboard/filter_by_orderby/'+short_type;
+	var url	=	'<?php echo base_url(); ?>browse/filter_by_browse/'+short_type;
 	  $('.orderBy_filter_loader').show();
 	  $.ajax({
 			url: url,

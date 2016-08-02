@@ -1,29 +1,30 @@
  <?php 
-$getAllMusic	=	get_artists_music_by_catid($catId); 
-if(!empty($getAllMusic)){
- $customerData	=	$this->ion_auth->user()->row();
-if(!empty($customerData)){
-	$customerId 	=		$customerData->user_id;
-	$first_name 	=		$customerData->first_name;
-	$last_name 		=		$customerData->last_name;
+ if ($this->ion_auth->logged_in()){
+	$customerData	=	$this->ion_auth->user()->row();
+	 if(!empty($customerData)){
+		$customerId 	=		$customerData->user_id;
+		$first_name 	=		$customerData->first_name;
+		$last_name 		=		$customerData->last_name;
+	}
 }
- 
-
+if(!empty($data)){
  ?>
  <span class="daga">
-					<div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
+					
                         <div class="playlist_info">
 		
                             <table class="table loop_table">
 							<thead></thead>
-                                <tbody>
-								<?php $getAllMusic	=	get_artists_music_by_catid($catId); 
-						if(!empty($getAllMusic)){
-							foreach($getAllMusic	as	$fectchPlaylist){
+                                <tbody>	
+								<?php
+						if(!empty($data)){
+							foreach($data	as	$fectchPlaylist){
 								$musicId 			=	$fectchPlaylist['id'];
 								$getMusicFileEx 	=	explode(".", $fectchPlaylist['watermark_format']);
 								$getMusicName		=	$getMusicFileEx['0'];
 								$getMusicFileName	=	$fectchPlaylist['watermark_format'];
+								$first_name			=	$fectchPlaylist['first_name'];
+								$last_name			=	$fectchPlaylist['last_name'];
 							?>
 								 
                                     <tr>
@@ -45,17 +46,30 @@ if(!empty($customerData)){
 												<div style="display:none" class="wishlist_loader_<?php echo $musicId; ?>">
 													<img src="<?php echo base_url(); ?>images/uploading.gif">
 												</div>
+											<?php if ($this->ion_auth->logged_in()){ ?>
                                                <a href="javascript:void(0);">
 													<li class="add_to_wishlist" track_id="<?php echo $musicId; ?>">
 														<i class="fa fa-heart-o" aria-hidden="true"></i>
 													</li>
 											   </a>
-											   
+											<?php } else { ?>
+												<a class=""   data-target="#login_alert_popup" data-toggle="modal" href="javascript:void(0);">
+														<i class="fa fa-heart-o" aria-hidden="true"></i>
+													</a>
+											<?php } ?>
+											   <?php if ($this->ion_auth->logged_in()){ ?>
                                                 <li>
 													<a class="add_to_popup_playlist" track_id="<?php echo $musicId; ?>" data-target="#addToPlaylistModal_<?php echo $musicId; ?>" data-toggle="modal" href="javascript:void(0);">
 														<i class="fa fa-th-list" aria-hidden="true"></i>
 													</a>
 												</li>	
+											   <?php } else { ?>
+												<li>
+													<a class=""   data-target="#login_alert_popup" data-toggle="modal" href="javascript:void(0);">
+														<i class="fa fa-th-list" aria-hidden="true"></i>
+													</a>
+												</li>	
+											   <?php } ?>
                                             </ul>
 
                                         </td>
@@ -74,6 +88,7 @@ if(!empty($customerData)){
                         <div class="logo text-center">
                             <a href=""><p>Sndtrack</p></a>
                         </div>
+					<?php if ($this->ion_auth->logged_in()){ ?>
 						<div class="download_popup">
 						<?php $addedPlaylist 	=	get_customer_playlist($customerId);	
 							if(!empty($addedPlaylist)){
@@ -104,6 +119,7 @@ if(!empty($customerData)){
 									</ul>
                         <?php }}?>
 						</div>
+					<?php } ?>
                         <div class="login_text text-center">
                             <p>Create new playlist. </p>
                         </div>
@@ -130,9 +146,45 @@ if(!empty($customerData)){
                                 </tbody>
                             </table>
 
-                        </div>
-                       
+                  
+                        
                     </span>	
 <?php }else{
 	echo "No music found.";
-} ?>				
+} ?>
+<!-- Modal -->
+<div class="modal fade" id="login_alert_popup" role="dialog">
+<div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <!--button type="button" class="close" data-dismiss="modal">&times;</button-->
+                    <div class="modal-body">
+                        <div class="logo text-center">
+                            <a href="">
+                                <p>Sndtrack</p>
+                                <span>music licensing</span>
+                            </a>
+                        </div>
+                        <div class="login_text text-center">
+                            <p>Please create your account. </p>
+                        </div>
+
+						<?php $attributes = array('class' => 'login_form');
+							echo form_open('register', $attributes);
+						?> 
+                           
+                            <ul>
+                               
+                               <li>
+									
+                                </li>
+                              
+                                <a href="<?php base_url(); ?>register"><li>
+                                    <button required="" name="submit" id="send" type="button" class="sbmt hover_btn">Create Account</button>
+                                </li></a>
+                            </ul>
+                        <?php echo form_close(); ?>                   </div>
+                </div>
+            </div>
+	</div>

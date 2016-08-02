@@ -1,23 +1,22 @@
  <?php 
-$getAllMusic	=	get_artists_music_by_catid($catId); 
-if(!empty($getAllMusic)){
- $customerData	=	$this->ion_auth->user()->row();
-if(!empty($customerData)){
+$customerData	=	$this->ion_auth->user()->row();
+ if(!empty($customerData)){
 	$customerId 	=		$customerData->user_id;
 	$first_name 	=		$customerData->first_name;
 	$last_name 		=		$customerData->last_name;
 }
- 
 
+$getAllMusic	=	filter_playlist_orderby($customerId,$playlist_id,$short_type); 
+if(!empty($getAllMusic)){
  ?>
  <span class="daga">
-					<div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
+					
                         <div class="playlist_info">
 		
                             <table class="table loop_table">
 							<thead></thead>
-                                <tbody>
-								<?php $getAllMusic	=	get_artists_music_by_catid($catId); 
+                                <tbody>	
+								<?php $getAllMusic	=	filter_playlist_orderby($customerId,$playlist_id,$short_type); 
 						if(!empty($getAllMusic)){
 							foreach($getAllMusic	as	$fectchPlaylist){
 								$musicId 			=	$fectchPlaylist['id'];
@@ -130,9 +129,9 @@ if(!empty($customerData)){
                                 </tbody>
                             </table>
 
-                        </div>
-                       
+                  
+                        
                     </span>	
 <?php }else{
 	echo "No music found.";
-} ?>				
+} ?>

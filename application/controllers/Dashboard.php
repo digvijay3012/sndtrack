@@ -93,4 +93,8 @@ class Dashboard extends CI_Controller {
 		
 		return $this->load->view('search/category_search_view', array('catId'=>$catid));
 	}
+	public function filter_by_orderby($short_type=null){
+		
+		return $this->load->view('search/logged_in_wishlist_orderby_filter', array('short_type'=>$short_type));
+	}
 }
