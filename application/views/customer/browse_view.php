@@ -267,7 +267,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 
                                         </td>
                                         <td class="lst_data license">
-                                            <a href="">License</a>
+                                           <a href="javascript:void(0);" data-toggle="modal" data-target="#popup_stage_1">License</a>
                                         </td>
                                     </tr>
 										<!-- Modal -->
@@ -354,7 +354,7 @@ $getPlaylist_id	= $this->uri->segment(3);
             </div>
         </div>
     </div>
-<!-- Modal -->
+<!-- Login Modal -->
 <div class="modal fade" id="login_alert_popup" role="dialog">
 <div class="modal-dialog">
 
@@ -372,33 +372,102 @@ $getPlaylist_id	= $this->uri->segment(3);
                             <p>Please create your account. </p>
                         </div>
 
-						<?php $attributes = array('class' => 'login_form');
-							echo form_open('register', $attributes);
+						<?php $attributes = array('class' => 'login_form','id' => 'login_form_id');
+							echo form_open('login', $attributes);
 						?> 
                            
-                            <ul>
-                               
-                               <li>
-									
-                                </li>
-                              
-                                <a href="<?php base_url(); ?>register"><li>
-                                    <button required="" name="submit" id="send" type="button" class="sbmt hover_btn">Create Account</button>
-                                </li></a>
-                            </ul>
-                        <?php echo form_close(); ?>                   </div>
+                  <ul>
+				  	<label style="display:none" id="authentication_error"  generated="true" class="error email-error">Please check your details and try again.</label>
+					   <li>
+					
+							<input type="text" id="login_email_address" name="identity" placeholder="Email address">
+							<?php  echo form_error('identity'); ?>
+							<label style="display:none" for="login_email_address" generated="true" class="error email-error">Please enter your email.</label>
+					  </li>
+						<li>
+							<input type="password" id="login_password"  name="password" placeholder="Password">
+							<?php  echo form_error('password'); ?>
+							<label style="display:none" for="login_email_address" generated="true" class="error pwd-error">Please enter your password.</label>
+						</li>
+                   
+						 <li>
+							<button required="" name="submit" id="send" type="button" class="sbmt hover_btn login_button">Login</button>
+							<a class="forgot" href="<?php echo base_url(); ?>register">Register</a>
+						 </li>
+								<div style="display:none" class="login_loader">
+									<img src="<?php echo base_url(); ?>images/uploading.gif">
+								</div>
+                   </ul>
+                        <?php echo form_close(); ?>    
+						
+			</div>
                 </div>
             </div>
 	</div>
+	
+	<!-- Purchase Modal -->
+        <div class="modal fade" id="popup_stage_1" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                    <div class="modal-body">
+                        <div class="logo text-center">
+                            <a href="">
+                                <p>Sndtrack</p>
+                                <span>music licensing</span>
+                            </a>
+                        </div>
+                        <div class="content_inn_pop">
+                            <h3>License Type</h3>
+                            <div class="license_terms">
+                                <ul>
+                                    <li>
+									<input style="display:none"  lid="license_terms" class="license_type" type="radio" name="license_terms" value="personal_license">
+                                        <button type="button">Personal License - &pound;29 </button>
+                                    </li>
+                                    <li>
+									<input style="display:none" lid="lite_license" class="license_type" type="radio" name="lite_license" value="lite_license">
+                                        <button type="button">Lite License - &pound;29 </button>
+                                    </li>
+                                    <li class="active">
+									<input style="display:none" lid="standard_license" class="license_type" type="radio" name="standard_license" value="standard_license">
+                                        <button type="button">Standard License - &pound;29 </button>
+                                    </li>
+                                    <li>
+								<input style="display:none"  lid="premium_license"  class="license_type" type="radio" name="premium_license" value="premium_license">
+                                        <button type="button">Premium License - &pound;29 </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <input class="comfirm_btn hover_btn" type="button" value="Confirm">
+                            <div class="standard_info">
+                                <p>Standard License - Company, brand, product, service, promotion, event, online series</p>
+                            </div>
+                            <div class="popup_social text-center">
+                                <ul>
+                                    <li><a href="">Privacy Policy</a></li>
+                                    <li><a href="">User Agreement</a></li>
+                                    <li><a href="">Terms & Consitions</a></li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 </div>
-   <style>
-.draggable, .trash{
-    width:50px;
-    height:50px;
-    background-color:green;
-    margin-bottom:40px;
-    clear: both;
-}
+<style>
+	.draggable, .trash{
+		width:50px;
+		height:50px;
+		background-color:green;
+		margin-bottom:40px;
+		clear: both;
+	}
 </style>
         <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
         <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
@@ -472,7 +541,7 @@ $getPlaylist_id	= $this->uri->segment(3);
         <script>
             //call paginate
             $('#example').paginate();
-        </script>
+        </script>	
         <script>
             var wow = new WOW({
                 boxClass: 'wow', // animated element css class (default is wow)
@@ -637,6 +706,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 })(jQuery, window, document);
 
 </script>
+   
 <script>
 /*************  Add MUSIC to Wishlist ************/
 $(document).on('click','.add_to_wishlist',function(){
@@ -705,7 +775,7 @@ $(document).on('click','.addToPlayList',function(){
 				
 			});	
 
-		
+/*************  create popup list	************/	
 	$(document).on('click','.create_popup_playlist',function(){
 		var track_id			=	$(".login_form_popup input[name=popup_track_id]").attr('trackid');
 			
@@ -736,10 +806,11 @@ $(document).on('click','.addToPlayList',function(){
 			$(error_cls).show();
 		}
 	});
+	/*************  Category Filter	************/	
 $(document).on('click','.category_filter',function(){
 	var catId	=	$(this).attr('catId');
 	$('.draggable').draggable();
-	var url	=	'<?php echo base_url(); ?>dashboard/filter_by_category/'+catId;
+	var url	=	'<?php echo base_url(); ?>browse/filter_by_category/'+catId;
 	  $('.category_filter_loader').show();
 	  $.ajax({
 			url: url,
@@ -756,6 +827,7 @@ $(document).on('click','.category_filter',function(){
 		}); 	
 		
 	});	
+/*************  Short Order	************/		
 $(document).on('click','.short_order',function(){
 	var short_type	=	$(this).attr('short_type');
 	
@@ -776,7 +848,48 @@ $(document).on('click','.short_order',function(){
 				
 		}); 	
 		
-	});		
+	});	
+/*************  Popup Login	************/		
+$(document).on('click','.login_button',function(){
+var login_email_address	=	$('#login_email_address').val();
+var login_password		=	$('#login_password').val();
+
+if(login_email_address==''){
+	$('.email-error').show();
+}if(login_email_address!=''){
+	$('.email-error').hide();	
+}if(login_password==''){
+	$('.pwd-error').show();	
+}if(login_password!=''){
+	$('.pwd-error').hide();	
+}
+$("#authentication_error").hide();
+if(login_email_address !='' && login_password!=''){
+ var url			=	'<?php echo base_url(); ?>login/popup_login';
+ var redirectUrl	=	'<?php echo base_url(); ?>browse';	
+ $("#authentication_error").hide();
+  $('.login_loader').show();
+  $.ajax({
+		url: url,
+		data: {login_email_address : login_email_address, login_password : login_password},                         // Setting the data attribute of ajax with file_data
+		type: 'post',
+		success:function(data){
+				$('.login_loader').hide();			
+				if(data==1){
+					window.location.href=redirectUrl;
+				}if(data==2){
+					$("#authentication_error").show();
+				}
+			}
+			
+	});  
+ }	
+});
+	$(document).on('click','.comfirm_btn',function(){
+		var license_type	=	$('.license_type').attr('lid');
+		 
+		alert(license_type);
+	});
 $('document').ready(function () {
 	$('.draggable').trigger('click');
 });	

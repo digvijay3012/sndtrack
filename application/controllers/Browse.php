@@ -33,4 +33,8 @@ class Browse extends CI_Controller {
 				//$this->load->view('artist/footer_view');
 		
 	}
+	public function filter_by_category($catid=null){
+		
+		return $this->load->view('search/category_search_view', array('catId'=>$catid));
+	}
 }

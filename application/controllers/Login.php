@@ -123,6 +123,23 @@ class Login extends CI_Controller {
 
 		if ($returnhtml) return $view_html;//This will return html on 3rd argument being true
 	}
-
+	function popup_login(){
+		$remember	=	'';
+		$userEmail	=	$this->input->post('login_email_address');
+		$password	=	$this->input->post('login_password');
+		if ($getuserId 	=	$this->ion_auth->login($userEmail, $password, $remember))
+			{
+				 $adminID			=	$this->ion_auth->user()->row()->user_id; 
+				 $groupID 			= 	$this->ion_auth->get_users_groups($adminID)->row()->id; 
+				 //if the login is successful
+				if($groupID==4){
+					echo 1;
+				}
+		
+			}else{
+				echo 2;
+			}
+		
+	}
 }
 	
