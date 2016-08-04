@@ -152,7 +152,7 @@ if(!empty($data)){
 <?php }else{
 	echo "No music found.";
 } ?>
-<!-- Modal -->
+<!-- Login Modal -->
 <div class="modal fade" id="login_alert_popup" role="dialog">
 <div class="modal-dialog">
 
@@ -170,21 +170,35 @@ if(!empty($data)){
                             <p>Please create your account. </p>
                         </div>
 
-						<?php $attributes = array('class' => 'login_form');
-							echo form_open('register', $attributes);
+						<?php $attributes = array('class' => 'login_form','id' => 'login_form_id');
+							echo form_open('login', $attributes);
 						?> 
                            
-                            <ul>
-                               
-                               <li>
-									
-                                </li>
-                              
-                                <a href="<?php base_url(); ?>register"><li>
-                                    <button required="" name="submit" id="send" type="button" class="sbmt hover_btn">Create Account</button>
-                                </li></a>
-                            </ul>
-                        <?php echo form_close(); ?>                   </div>
+                  <ul>
+				  	<label style="display:none" id="authentication_error"  generated="true" class="error email-error">Please check your details and try again.</label>
+					   <li>
+					
+							<input type="text" id="login_email_address" name="identity" placeholder="Email address">
+							<?php  echo form_error('identity'); ?>
+							<label style="display:none" for="login_email_address" generated="true" class="error email-error">Please enter your email.</label>
+					  </li>
+						<li>
+							<input type="password" id="login_password"  name="password" placeholder="Password">
+							<?php  echo form_error('password'); ?>
+							<label style="display:none" for="login_email_address" generated="true" class="error pwd-error">Please enter your password.</label>
+						</li>
+                   
+						 <li>
+							<button required="" name="submit" id="send" type="button" class="sbmt hover_btn login_button">Login</button>
+							<a class="forgot" href="<?php echo base_url(); ?>register">Register</a>
+						 </li>
+								<div style="display:none" class="login_loader">
+									<img src="<?php echo base_url(); ?>images/uploading.gif">
+								</div>
+                   </ul>
+                        <?php echo form_close(); ?>    
+						
+			</div>
                 </div>
             </div>
 	</div>

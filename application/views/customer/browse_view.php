@@ -1,11 +1,15 @@
-<?php 
+<?php
+$sessionId		=	session_id();
+$loginStatus	=	'';
+$customerId		=	'';
 if ($this->ion_auth->logged_in()){
-$customerId			=	$this->ion_auth->user()->row()->user_id; 
-$customerData		=	$this->ion_auth->user()->row();
-if(!empty($customerData)){
-	$customerFirstName 		=		$customerData->first_name;
-	$customerLastName 		=		$customerData->last_name;
-}
+	$loginStatus	=	1;
+	$customerId			=	$this->ion_auth->user()->row()->user_id; 
+	$customerData		=	$this->ion_auth->user()->row();
+	if(!empty($customerData)){
+		$customerFirstName 		=		$customerData->first_name;
+		$customerLastName 		=		$customerData->last_name;
+	}
 }
 $getPlaylist_id	= $this->uri->segment(3); 
 ?>
@@ -423,23 +427,26 @@ $getPlaylist_id	= $this->uri->segment(3);
                             <div class="license_terms">
                                 <ul>
                                     <li>
-									<input style="display:none"  lid="license_terms" class="license_type" type="radio" name="license_terms" value="personal_license">
-                                        <button type="button">Personal License - &pound;29 </button>
-                                    </li>
+										<input id="license_terms" price="29" class="license_type" type="radio" name="license_type" value="Personal License - £29">
+											<label for="license_terms">Personal License - £29 </label>
+									 </li>
                                     <li>
-									<input style="display:none" lid="lite_license" class="license_type" type="radio" name="lite_license" value="lite_license">
-                                        <button type="button">Lite License - &pound;29 </button>
+									
+										<input  id="lite_license" price="39" class="license_type" type="radio" name="license_type" value="Lite License - £39">
+											<label for="lite_license">Lite License - £39 </label>
                                     </li>
                                     <li class="active">
-									<input style="display:none" lid="standard_license" class="license_type" type="radio" name="standard_license" value="standard_license">
-                                        <button type="button">Standard License - &pound;29 </button>
+									
+										<input id="standard_license" price="49" class="license_type" type="radio" name="license_type" value="Standard License - £49 ">
+										<label for="standard_license">Standard License - £49 </label>
                                     </li>
                                     <li>
-								<input style="display:none"  lid="premium_license"  class="license_type" type="radio" name="premium_license" value="premium_license">
-                                        <button type="button">Premium License - &pound;29 </button>
+										<input id="premium_license" price="59" class="license_type" type="radio" name="license_type" value="Premium License - £59 ">
+										<label for="premium_license">Premium License - £59 </label>
                                     </li>
                                 </ul>
                             </div>
+							<label style="display:none" class="error">Please select License.</label>
                             <input class="comfirm_btn hover_btn" type="button" value="Confirm">
                             <div class="standard_info">
                                 <p>Standard License - Company, brand, product, service, promotion, event, online series</p>
@@ -459,7 +466,113 @@ $getPlaylist_id	= $this->uri->segment(3);
 
             </div>
         </div>
-</div>
+	 <!-- Register Modal -->
+        <div class="modal fade" id="popup_stage_2" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <!--button type="button" class="close" data-dismiss="modal">&times;</button
+                    <div class="modal-body">
+                        <div class="logo text-center">
+                            <a href="">
+                                <p>Sndtrack</p>
+                                <span>music licensing</span>
+                            </a>
+                        </div>
+                        <div class="login_text text-center">
+                            <p>Please sign up to complete your order. </p>
+                        </div>-->
+
+
+							<?php	
+								$attributes = array('class' => 'login_form');
+								echo form_open('register', $attributes); 
+							?>
+						<label style="display:none" id="register_authentication_error"  generated="true" class="error email-error">This email has been already registered..</label>
+                            <ul>
+                                <li>
+                                    <input type="text" id="first_name" name="first_name" placeholder="First Name">
+										<label style="display:none"  generated="true" class="error first_name">Please enter your first name.</label>
+									
+                                </li>
+                                <li>
+                                    <input type="text" id="last_name" name="last_name" placeholder="Last Name">
+									<label style="display:none"  generated="true" class="error last_name">Please enter your last name.</label>
+                                </li>
+                                <li>
+                                    <input name="email" id="email" type="email" placeholder="Email address" required="">
+									<label style="display:none"  generated="true" class="error email">Please enter your email.</label>
+                                </li>
+                                <li>
+                                    <input type="password" id="password" name="password" placeholder="Password" required="">
+										<label style="display:none"  generated="true" class="error password">Please enter your password.</label>
+                                </li>
+                                <li>
+								<button class="sbmt hover_btn" id="register_popup_form" type="button" id="send" name="submit" required="">Create Account</button>
+                                </li>
+								<div style="display:none" class="register_loader">
+									<img src="<?php echo base_url(); ?>images/uploading.gif">
+								</div>
+                            </ul>
+                        <?php echo form_close(); ?>
+                    </div>
+                </div>
+            </div>
+      
+      <!--Popup satge 3 cart  Modal -->
+        <div class="modal fade" id="popup_stage_3" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <!--button type="button" class="close" data-dismiss="modal">&times;</button-->
+                    <div class="modal-body">
+                        <div class="logo text-center">
+                            <a href="">
+                                <p>Sndtrack</p>
+                                <span>music licensing</span>
+                            </a>
+                        </div>
+                        <div class="content_inn_pop">
+                            <h3>License Type</h3>
+                            <div class="confirm_purchs">
+                                <div class="list_pop">
+                                    <ul>
+                                        <li class="pull-left">Personal Licensed</li>
+                                        <li class="pull-right"> &pound;29 </li>
+                                    </ul>
+                                    <ul>
+                                        <li class="pull-left">Personal Licensed</li>
+                                        <li class="pull-right"> &pound;29 </li>
+                                    </ul>
+                                </div>
+
+                                <div class="ttl">
+                                    <ul>
+                                        <li class="pull-left">Total</li>
+                                        <li class="pull-right"> &pound;29 </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="back_btn">
+                                <a href="" class="custom-button">Back</a>
+                                <a href="" class="custom-button">Purchase</a>
+                            </div>
+                            <div class="standard_info">
+                                <p>Standard License - Company, brand, product, service, promotion, event, online series</p>
+                            </div>
+                            <div class="popup_social text-center">
+                                <ul>
+                                    <li><a href="">Privacy Policy</a></li>
+                                    <li><a href="">User Agreement</a></li>
+                                    <li><a href="">Terms & Consitions</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 <style>
 	.draggable, .trash{
 		width:50px;
@@ -885,14 +998,94 @@ if(login_email_address !='' && login_password!=''){
 	});  
  }	
 });
+
+/************* Licensce Type Popup	************/	
 	$(document).on('click','.comfirm_btn',function(){
-		var license_type	=	$('.license_type').attr('lid');
-		 
-		alert(license_type);
+		 $('.error').hide();
+		var license_type		=	'';
+		var license_type_value	=	'';
+		var amount				=	'';
+		var sessionId			=	'<?php echo $sessionId; ?>';
+		var customerId			=	'<?php echo $customerId; ?>';
+		if($('input[name=license_type]:checked').val()){
+			var license_type_value	=	$('input[name=license_type]:checked').val();
+			var license_type		=	$('input[name=license_type]:checked').attr('id');
+			var amount				=	$('input[name=license_type]:checked').attr('price');
+		}
+		
+		var loginStatus		=	'<?php echo $loginStatus; ?>';
+		 if(license_type !='' && loginStatus==1){
+			 alert(555);
+		 }if(license_type !='' && loginStatus==''){
+			 var ajaxUrl	=	'<?php echo base_url(); ?>browse/store_temp_license_type';
+			 $.ajax({
+				url: ajaxUrl,
+				data: {session_id : sessionId, license_type : license_type, customer_id : customerId, amount : amount,license_type_value : license_type_value},
+				type: 'post',
+				success:function(data){
+						//alert(data);
+					}
+				}); 
+			$('#popup_stage_1').modal('hide');
+			$('#popup_stage_2').modal('show');
+		 }else{
+			 $('.error').show();
+		 }
+		
+	});
+	/************* Register Popup	************/	
+	$(document).on('click','#register_popup_form',function(){
+		var first_name	=	$('#first_name').val();
+		var last_name	=	$('#last_name').val();
+		var email		=	$('#email').val();
+		var password	=	$('#password').val();	
+		/* alert(email);
+		alert(first_name);
+		alert(last_name);
+		alert(password); */
+		 var url		=	'<?php echo base_url(); ?>register/popup_register';
+		
+			if(first_name==''){
+				$('.first_name').show();
+			}if(last_name==''){
+				$('.last_name').show();
+			}if(email==''){
+				$('.email').show();
+			}if(password==''){
+				$('.password').show();
+			}if(first_name!=''){
+				$('.first_name').hide();
+			}if(last_name!=''){
+				$('.last_name').hide();
+			}if(email!=''){
+				$('.email').hide();
+			}if(password!=''){
+				$('.password').hide();
+			}
+			if(first_name !="" && last_name !="" && email !="" && password !=""){
+				$('.register_loader').show();
+				$.ajax({
+				url: url,
+				data: {first_name : first_name, last_name : last_name, email : email, password : password},                         // Setting the data attribute of ajax with file_data
+				type: 'post',
+				success:function(data){
+						alert(data);
+						$('.register_loader').hide();			
+						if(data==2){
+							$("#register_authentication_error").show();
+						}else{
+							$('#popup_stage_2').modal('hide');
+							$('#popup_stage_3').modal('show');
+						}
+					}
+					
+				}); 
+			}				
 	});
 $('document').ready(function () {
 	$('.draggable').trigger('click');
-});	
+});
+
 </script>
 
 </body>

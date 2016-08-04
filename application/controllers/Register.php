@@ -138,7 +138,34 @@ class Register extends CI_Controller {
         }
 		
 	}
-
+	function popup_register(){
+		
+            $email    = strtolower($this->input->post('email'));
+            $identity = $email;
+            $password = $this->input->post('password');
+			$username    = strtolower($this->input->post('email'));
+            $additional_data = array(
+                'first_name' => $this->input->post('first_name'),
+                'last_name'  => $this->input->post('last_name'),
+				'username'  => $email,
+            );
+			$group_ids = array(4);
+       
+        if ($userId =	$this->ion_auth->register($identity, $password, $email, $additional_data,$group_ids))
+        {
+				$this->load->library('email'); 
+				$from_email = "sndtrack@sndtrack.com"; 
+				$to_email = $this->input->post('email'); 
+				 $this->email->from($from_email, 'sndtrack'); 
+				 $this->email->to($to_email);
+				 $this->email->subject('Sndtrack Registarion'); 
+				 $this->email->message('Thanks for registration. Your login details are: username: '.$to_email.'  And Password: '.$password.''); 
+					$this->email->send();
+			echo $userId;
+        }else{
+			echo 2;
+		}	
+	}
 	
 
 	function _render_page($view, $data=null, $returnhtml=false)//I think this makes more sense

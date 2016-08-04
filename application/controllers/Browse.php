@@ -11,9 +11,7 @@ class Browse extends CI_Controller {
 		$this->load->helper('custom_helper');
 		$this->load->library(array('ion_auth','form_validation','session'));
 		$this->load->model('browse_model');
-		/* if (! $this->ion_auth->logged_in()){
-				redirect('artist/login');
-			} */
+		$this->load->library("session");
 	}
 	public function index()
 	{
@@ -36,5 +34,15 @@ class Browse extends CI_Controller {
 	public function filter_by_category($catid=null){
 		
 		return $this->load->view('search/category_search_view', array('catId'=>$catid));
+	}
+	public function store_temp_license_type()
+	{
+		$session_id					=	$this->input->post('session_id');
+		$license_type				=	$this->input->post('license_type');
+		$customer_id				=	$this->input->post('customer_id');
+		$amount						=	$this->input->post('amount');
+		$license_type_value			=	$this->input->post('license_type_value');	 
+		$data						=	$this->browse_model->store_temp_license_type($session_id, $license_type, $customer_id, $amount, $license_type_value);
+				
 	}
 }
