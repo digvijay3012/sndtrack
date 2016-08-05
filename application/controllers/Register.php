@@ -140,17 +140,18 @@ class Register extends CI_Controller {
 	}
 	function popup_register(){
 		
-            $email    = strtolower($this->input->post('email'));
-            $identity = $email;
-            $password = $this->input->post('password');
-			$username    = strtolower($this->input->post('email'));
+            $email    		= strtolower($this->input->post('email'));
+            $identity 		= $email;
+            $password 		= $this->input->post('password');
+			$username    	= strtolower($this->input->post('email'));
+			$sessionId 		= $this->input->post('sessionId');
             $additional_data = array(
                 'first_name' => $this->input->post('first_name'),
                 'last_name'  => $this->input->post('last_name'),
 				'username'  => $email,
             );
 			$group_ids = array(4);
-       
+			$remember	=	'';
         if ($userId =	$this->ion_auth->register($identity, $password, $email, $additional_data,$group_ids))
         {
 				$this->load->library('email'); 
@@ -160,7 +161,9 @@ class Register extends CI_Controller {
 				 $this->email->to($to_email);
 				 $this->email->subject('Sndtrack Registarion'); 
 				 $this->email->message('Thanks for registration. Your login details are: username: '.$to_email.'  And Password: '.$password.''); 
-					$this->email->send();
+				$this->email->send();
+			$qry =	$this->db->query("UPDATE snd_temp_pack_info SET customer_id='$userId' WHERE session_id='$sessionId'");
+			$this->ion_auth->login($email, $password, $remember);				
 			echo $userId;
         }else{
 			echo 2;

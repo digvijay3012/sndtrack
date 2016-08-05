@@ -25,13 +25,14 @@ class Browse_model extends CI_Model {
 				//print_r($resultArray); die;
 				return $resultArray;
 		}
-	function store_temp_license_type($session_id, $license_type, $customer_id, $amount, $license_type_value){
+	function store_temp_license_type($session_id, $license_type, $customer_id, $amount, $license_type_value,$track_id){
 			$data = array(
 				"session_id" 		=> $session_id,
 				"license_type" 		=> $license_type,
 				"customer_id" 		=> $customer_id,
 				"amount" 			=> $amount,
-				"license_type_value" 	=> $license_type_value
+				"license_type_value" => $license_type_value,
+				"track_id" 			=> $track_id
 			);
 			$this->db->insert('snd_temp_pack_info',$data);
 				return 1; 

@@ -263,7 +263,10 @@ if ( ! function_exists('get_customer_image')){
        $ci->load->database();
      
 			$parentQuery 	= $ci->db->query("SELECT customer_image FROM snd_customer_info WHERE customer_id='$customerId'")->row();
-			return  $result = $parentQuery->customer_image;
+			if(!empty($parentQuery)){
+				return  $result = $parentQuery->customer_image;
+			}
+			
 	}
 }
 if ( ! function_exists('get_suggest_artist')){
@@ -571,5 +574,23 @@ if ( ! function_exists('get_playlist_name_by_id')){
 		$query = $ci->db->query("SELECT playlist_name FROM snd_customer_playlist WHERE id='$playlist_id'")->row();
 		return $query->playlist_name;
        
+   }
+}
+if ( ! function_exists('get_cart_view_by_customerId')){
+   function get_cart_view_by_customerId($customerId=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+     
+       //get data from database 
+		$query = $ci->db->query("SELECT * FROM snd_temp_pack_info WHERE customer_id='$customerId'");
+        $resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
    }
 }

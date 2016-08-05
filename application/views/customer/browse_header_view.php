@@ -71,7 +71,7 @@ if ($this->ion_auth->logged_in()){
                         </ul>
                     </div>
                 </div>
-				<?php 
+				<?php 	
 				if ($this->ion_auth->logged_in()){ ?>
                 <div class="dshbrd_prfle pull-right">
                     <ul>

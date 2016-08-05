@@ -271,7 +271,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 
                                         </td>
                                         <td class="lst_data license">
-                                           <a href="javascript:void(0);" data-toggle="modal" data-target="#popup_stage_1">License</a>
+                                           <a href="javascript:void(0);" class="popup_stage_1_cls" music_id="<?php echo $musicId; ?>" data-toggle="modal" data-target="#popup_stage_1">License</a>
                                         </td>
                                     </tr>
 										<!-- Modal -->
@@ -425,6 +425,7 @@ $getPlaylist_id	= $this->uri->segment(3);
                         <div class="content_inn_pop">
                             <h3>License Type</h3>
                             <div class="license_terms">
+							<input type="hidden" id="get_track_id" name="get_track_id">
                                 <ul>
                                     <li>
 										<input id="license_terms" price="29" class="license_type" type="radio" name="license_type" value="Personal License - £29">
@@ -525,7 +526,21 @@ $getPlaylist_id	= $this->uri->segment(3);
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <!--button type="button" class="close" data-dismiss="modal">&times;</button-->
+                    <button  class="close close_popup_3" type="button">×</button>
+                    <div class="modal-body popup_stage3">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+<!-- Checkout Popup Modal -->
+        <div class="modal fade purhased" id="popup_stage_4" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <div class="modal-body">
                         <div class="logo text-center">
                             <a href="">
@@ -533,31 +548,74 @@ $getPlaylist_id	= $this->uri->segment(3);
                                 <span>music licensing</span>
                             </a>
                         </div>
-                        <div class="content_inn_pop">
-                            <h3>License Type</h3>
-                            <div class="confirm_purchs">
-                                <div class="list_pop">
-                                    <ul>
-                                        <li class="pull-left">Personal Licensed</li>
-                                        <li class="pull-right"> &pound;29 </li>
-                                    </ul>
-                                    <ul>
-                                        <li class="pull-left">Personal Licensed</li>
-                                        <li class="pull-right"> &pound;29 </li>
-                                    </ul>
+                        <div class="chckout_pop text-center">
+                            <p>Checkout</p>
+                        </div>
+                        <div class="login_cont text-center help_cnt cstmr_settings">
+                           <?php	
+								$attributes = array('class' => 'login_form', 'id' => 'checkout_form');
+								echo form_open('browse/checkout', $attributes); 
+							?>
+                                <div class="input_fields">
+                                    <div class="col-1-form col-sm-4 col-xs-12 pdngg-left">
+                                        <ul>
+                                            <li>
+                                                <input type="text" maxlength="25" id="full_name" name="full_name" placeholder="Full Name">
+                                            </li>
+                                            <li>
+                                                <input type="text"  id="first_line_address" name="first_line_address" placeholder="First Line Address">
+                                            </li>
+                                            <li>
+                                                <input type="text" maxlength="35" id="city" name="city" placeholder="City/State">
+                                            </li>
+                                            <li>
+                                                <select id="country" name="country">
+                                                    <option>Country</option>
+                                                    <option>India</option>
+                                                    <option>Canada</option>
+                                                </select>
+                                            </li>	
+                                        </ul>
+                                    </div>
+                                    <div class="col-1-form col-sm-4 col-xs-12">
+                                        <ul>
+                                            <li>
+                                                <input type="text" maxlength="40" id="project_name" name="project_name" placeholder="Project Name">
+                                            </li>
+                                            <li>
+                                                <input type="text"  maxlength="25" id="last_name" name="last_name" placeholder="Last Name">
+                                            </li>
+                                            <li>
+                                                <input type="text" id="second_line_add" name="second_line_add" placeholder="Second Line Address">
+                                            </li>
+                                            <li>
+                                                <input type="text"  maxlength="15" placeholder="Zip / Post Code" id="zip_code" name="zip_code">
+                                            </li>
+                                            <li>
+                                                <input type="text"  maxlength="45" placeholder="VAT (if applicable)" id="vat" name="vat">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-1-form col-sm-4 col-xs-12 pdngg-right">
+                                        <ul>
+                                            <li>
+                                                <input type="text"  maxlength="35" id="card_name" name="card_name" placeholder="Name on Card">
+                                            </li>
+                                            <li>
+                                                <input type="text"  maxlength="25" id="card_no" name="card_no" placeholder="Card Number">
+                                            </li>
+                                            <li class="expiry_dat">
+                                                <input class="pull-left" type="text" id="expiry" name="expiry" placeholder="Expiry">
+                                              <input type="text" id="security_code" name="security_code" placeholder="Security Code" class="pull-right">
+                                            </li>
+                                           
+                                        </ul>
+                                    </div>
                                 </div>
-
-                                <div class="ttl">
-                                    <ul>
-                                        <li class="pull-left">Total</li>
-                                        <li class="pull-right"> &pound;29 </li>
-                                    </ul>
+                                <div class="back_btn">
+                                   <button type="submit" class="custom-button checkout_button">Purchase</button>
                                 </div>
-                            </div>
-                            <div class="back_btn">
-                                <a href="" class="custom-button">Back</a>
-                                <a href="" class="custom-button">Purchase</a>
-                            </div>
+                      <?php echo form_close(); ?>	
                             <div class="standard_info">
                                 <p>Standard License - Company, brand, product, service, promotion, event, online series</p>
                             </div>
@@ -565,7 +623,7 @@ $getPlaylist_id	= $this->uri->segment(3);
                                 <ul>
                                     <li><a href="">Privacy Policy</a></li>
                                     <li><a href="">User Agreement</a></li>
-                                    <li><a href="">Terms & Consitions</a></li>
+                                    <li><a href="">Terms &amp; Consitions</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -593,6 +651,8 @@ $getPlaylist_id	= $this->uri->segment(3);
 		
         <script src="https://use.typekit.net/auo4nbe.js"></script>
 		<script src="<?php echo base_url(); ?>js/jquery-ui.min.js" type="text/javascript"></script>
+		
+
 <script>
 /*************  Drag and Save  to playlist ************/
  //$(function() {
@@ -787,7 +847,62 @@ $getPlaylist_id	= $this->uri->segment(3);
         JQUERY4U.UTIL.setupFormValidation();
     });
 
-})(jQuery, window, document);	
+})(jQuery, window, document);
+/*************  checkout Form Validation************/	
+(function($,W,D)
+{
+    var JQUERY4U = {};
+
+    JQUERY4U.UTIL =
+    {
+        setupFormValidation: function()
+        {
+            //form validation rules
+            $("#checkout_form").validate({
+                rules: {
+					full_name: "required",
+					first_line_address: "required",
+					city: "required",
+					country: "required",
+					project_name: "required",
+					last_name: "required",
+					second_line_add: "required",
+					zip_code: "required",
+					vat: "required",
+					card_name: "required",
+					card_no: "required",
+					expiry: "required",
+					security_code: "required",
+                },
+                messages: {
+                    full_name: "Please enter your full name.",
+					first_line_address: "Please enter your first line address.",
+					city: "Please enter your city name.",
+					country: "Please enter your country name.",
+					project_name: "Please enter your project name.",
+					last_name: "Please enter your last name.",
+					second_line_add: "Please enter your second line address.",
+					zip_code: "Please enter your zip code.",
+					vat: "Please enter your Vat.",
+					card_name: "Please enter your card Name.",
+					card_no: "Please enter your card number.",
+					expiry: "Please enter your expiry.",
+					security_code: "Please enter your security code.",
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        }
+    }
+
+    //when the dom has loaded setup form validation rules
+    $(D).ready(function($) {
+        JQUERY4U.UTIL.setupFormValidation();
+    });
+
+})(jQuery, window, document);
+/*************  Create Playlist Form Validation************/
 (function($,W,D)
 {
     var JQUERY4U = {};
@@ -962,6 +1077,7 @@ $(document).on('click','.short_order',function(){
 		}); 	
 		
 	});	
+	
 /*************  Popup Login	************/		
 $(document).on('click','.login_button',function(){
 var login_email_address	=	$('#login_email_address').val();
@@ -998,7 +1114,11 @@ if(login_email_address !='' && login_password!=''){
 	});  
  }	
 });
-
+/************* Set Music Id to satge 1 popup	************/	
+	$(document).on('click','.popup_stage_1_cls',function(){
+		var music_id	=	$(this).attr('music_id');
+		$('#get_track_id').val(music_id);
+	});
 /************* Licensce Type Popup	************/	
 	$(document).on('click','.comfirm_btn',function(){
 		 $('.error').hide();
@@ -1011,23 +1131,49 @@ if(login_email_address !='' && login_password!=''){
 			var license_type_value	=	$('input[name=license_type]:checked').val();
 			var license_type		=	$('input[name=license_type]:checked').attr('id');
 			var amount				=	$('input[name=license_type]:checked').attr('price');
+			var track_id			=	$('#get_track_id').val();
 		}
 		
 		var loginStatus		=	'<?php echo $loginStatus; ?>';
 		 if(license_type !='' && loginStatus==1){
-			 alert(555);
+			 var customer_id	=	'<?php echo $customerId; ?>';
+			 var ajaxUrl	=	'<?php echo base_url(); ?>browse/store_temp_license_type';
+			 var cartUrl		=	'<?php echo base_url(); ?>browse/get_cart_view_by_customer/';
+			 $.ajax({
+				url: ajaxUrl,
+				data: {session_id : sessionId, license_type : license_type, customer_id : customer_id, amount : amount,license_type_value : license_type_value, track_id : track_id},
+				type: 'post',
+				success:function(data){
+					$('#popup_stage_1').modal('hide');
+								$.ajax({
+										url: cartUrl+customer_id,
+										data: {data : data},                         // Setting the data attribute of ajax with file_data
+										type: 'post',
+										success:function(data){
+											$('.popup_stage3').empty().append(data);
+										}
+									}); 
+						$('#popup_stage_3').modal({
+								backdrop: 'static',
+								keyboard: false
+							});
+					}
+				}); 
 		 }if(license_type !='' && loginStatus==''){
 			 var ajaxUrl	=	'<?php echo base_url(); ?>browse/store_temp_license_type';
 			 $.ajax({
 				url: ajaxUrl,
-				data: {session_id : sessionId, license_type : license_type, customer_id : customerId, amount : amount,license_type_value : license_type_value},
+				data: {session_id : sessionId, license_type : license_type, customer_id : customerId, amount : amount,license_type_value : license_type_value, track_id : track_id},
 				type: 'post',
 				success:function(data){
 						//alert(data);
 					}
 				}); 
 			$('#popup_stage_1').modal('hide');
-			$('#popup_stage_2').modal('show');
+			$('#popup_stage_2').modal({
+					backdrop: 'static',
+					keyboard: false
+				});
 		 }else{
 			 $('.error').show();
 		 }
@@ -1039,12 +1185,13 @@ if(login_email_address !='' && login_password!=''){
 		var last_name	=	$('#last_name').val();
 		var email		=	$('#email').val();
 		var password	=	$('#password').val();	
+		var sessionId	=	'<?php echo $sessionId; ?>';
 		/* alert(email);
 		alert(first_name);
 		alert(last_name);
 		alert(password); */
-		 var url		=	'<?php echo base_url(); ?>register/popup_register';
-		
+		 var url			=	'<?php echo base_url(); ?>register/popup_register';
+		 var cartUrl		=	'<?php echo base_url(); ?>browse/get_cart_view_by_customer/';
 			if(first_name==''){
 				$('.first_name').show();
 			}if(last_name==''){
@@ -1066,25 +1213,48 @@ if(login_email_address !='' && login_password!=''){
 				$('.register_loader').show();
 				$.ajax({
 				url: url,
-				data: {first_name : first_name, last_name : last_name, email : email, password : password},                         // Setting the data attribute of ajax with file_data
+				data: {first_name : first_name, last_name : last_name, email : email, password : password, sessionId : sessionId},                         // Setting the data attribute of ajax with file_data
 				type: 'post',
 				success:function(data){
-						alert(data);
+					
 						$('.register_loader').hide();			
 						if(data==2){
 							$("#register_authentication_error").show();
 						}else{
 							$('#popup_stage_2').modal('hide');
-							$('#popup_stage_3').modal('show');
+									$.ajax({
+										url: cartUrl+data,
+										data: {data : data},                         // Setting the data attribute of ajax with file_data
+										type: 'post',
+										success:function(data){
+												
+												$('.popup_stage3').empty().append(data);
+											}
+										}); 
+							$('#popup_stage_3').modal({
+												backdrop: 'static',
+												keyboard: false
+											});
 						}
 					}
 					
 				}); 
 			}				
 	});
-$('document').ready(function () {
-	$('.draggable').trigger('click');
-});
+		
+	$(document).on('click','.purchase_button',function(){
+		$('#popup_stage_3').hide();
+		$('#popup_stage_4').modal({backdrop: 'static',
+									keyboard: false
+								});
+	});
+	$(document).on('click','.close_popup_3',function(){
+		/* $('#popup_stage_3').hide();
+		window.location.href	=	'<?php echo base_url(); ?>browse'; */
+	});
+	$('document').ready(function () {
+		$('.draggable').trigger('click');
+	});
 
 </script>
 

@@ -11,7 +11,7 @@ class Browse extends CI_Controller {
 		$this->load->helper('custom_helper');
 		$this->load->library(array('ion_auth','form_validation','session'));
 		$this->load->model('browse_model');
-		$this->load->library("session");
+		
 	}
 	public function index()
 	{
@@ -41,8 +41,13 @@ class Browse extends CI_Controller {
 		$license_type				=	$this->input->post('license_type');
 		$customer_id				=	$this->input->post('customer_id');
 		$amount						=	$this->input->post('amount');
-		$license_type_value			=	$this->input->post('license_type_value');	 
-		$data						=	$this->browse_model->store_temp_license_type($session_id, $license_type, $customer_id, $amount, $license_type_value);
+		$license_type_value			=	$this->input->post('license_type_value');
+		$track_id					=	$this->input->post('track_id');		
+		$data						=	$this->browse_model->store_temp_license_type($session_id, $license_type, $customer_id, $amount, $license_type_value, $track_id);
 				
+	}
+	public function get_cart_view_by_customer($customerId=null){
+		
+		return $this->load->view('cart/cart_view', array('customer_id'=>$customerId));
 	}
 }
