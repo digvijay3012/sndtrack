@@ -13,7 +13,12 @@ if ($this->ion_auth->logged_in()){
 }
 $getPlaylist_id	= $this->uri->segment(3); 
 ?>
-<div class="cstmr_cont header-margin">
+
+<link rel="stylesheet" href="<?php echo base_url(); ?>checkout_css/bootstrap-formhelpers-min.css" media="screen">
+<link rel="stylesheet" href="<?php echo base_url(); ?>checkout_css/bootstrapValidator-min.css"/>
+
+<link rel="stylesheet" href="<?php echo base_url(); ?>checkout_css/bootstrap-side-notes.css" />
+<div class="cstmr_cont header-margin">	
         <div class="music-bar">
             <figure><img src="<?php echo base_url(); ?>images/music-bar.jpg" alt="" title=""></figure>
         </div>
@@ -548,86 +553,119 @@ $getPlaylist_id	= $this->uri->segment(3);
                                 <span>music licensing</span>
                             </a>
                         </div>
-                        <div class="chckout_pop text-center">
+						<div class="chckout_pop text-center">
                             <p>Checkout</p>
                         </div>
-                        <div class="login_cont text-center help_cnt cstmr_settings">
-                           <?php	
-								$attributes = array('class' => 'login_form', 'id' => 'checkout_form');
-								echo form_open('browse/checkout', $attributes); 
-							?>
-                                <div class="input_fields">
-                                    <div class="col-1-form col-sm-4 col-xs-12 pdngg-left">
-                                        <ul>
-                                            <li>
-                                                <input type="text" maxlength="25" id="full_name" name="full_name" placeholder="Full Name">
-                                            </li>
-                                            <li>
-                                                <input type="text"  id="first_line_address" name="first_line_address" placeholder="First Line Address">
-                                            </li>
-                                            <li>
-                                                <input type="text" maxlength="35" id="city" name="city" placeholder="City/State">
-                                            </li>
-                                            <li>
-                                                <select id="country" name="country">
-                                                    <option>Country</option>
-                                                    <option>India</option>
-                                                    <option>Canada</option>
-                                                </select>
-                                            </li>	
-                                        </ul>
-                                    </div>
-                                    <div class="col-1-form col-sm-4 col-xs-12">
-                                        <ul>
-                                            <li>
-                                                <input type="text" maxlength="40" id="project_name" name="project_name" placeholder="Project Name">
-                                            </li>
-                                            <li>
-                                                <input type="text"  maxlength="25" id="last_name" name="last_name" placeholder="Last Name">
-                                            </li>
-                                            <li>
-                                                <input type="text" id="second_line_add" name="second_line_add" placeholder="Second Line Address">
-                                            </li>
-                                            <li>
-                                                <input type="text"  maxlength="15" placeholder="Zip / Post Code" id="zip_code" name="zip_code">
-                                            </li>
-                                            <li>
-                                                <input type="text"  maxlength="45" placeholder="VAT (if applicable)" id="vat" name="vat">
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-1-form col-sm-4 col-xs-12 pdngg-right">
-                                        <ul>
-                                            <li>
-                                                <input type="text"  maxlength="35" id="card_name" name="card_name" placeholder="Name on Card">
-                                            </li>
-                                            <li>
-                                                <input type="text"  maxlength="25" id="card_no" name="card_no" placeholder="Card Number">
-                                            </li>
-                                            <li class="expiry_dat">
-                                                <input class="pull-left" type="text" id="expiry" name="expiry" placeholder="Expiry">
-                                              <input type="text" id="security_code" name="security_code" placeholder="Security Code" class="pull-right">
-                                            </li>
-                                           
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="back_btn">
-                                   <button type="submit" class="custom-button checkout_button">Purchase</button>
-                                </div>
-                      <?php echo form_close(); ?>	
-                            <div class="standard_info">
-                                <p>Standard License - Company, brand, product, service, promotion, event, online series</p>
-                            </div>
-                            <div class="popup_social text-center">
-                                <ul>
-                                    <li><a href="">Privacy Policy</a></li>
-                                    <li><a href="">User Agreement</a></li>
-                                    <li><a href="">Terms &amp; Consitions</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+				<form action="" method="POST" id="payment-form" class="login_form">
+                        <div class="alert alert-danger" id="a_x200" style="display: none;"> <strong>Error!</strong> <span class="payment-errors"></span> </div>
+				<div class="input_fields">
+  <span class="payment-success">
+ 
+  </span>
+  <fieldset>
+  
+  <!-- Form Name -->
+ 
+   <div class="col-1-form col-sm-4 col-xs-12 pdngg-left">
+	<ul>
+  <!-- full_name -->
+  <li>
+      <input type="text" name="full_name" placeholder="Full Name" class="full_name">
+	
+   </li>
+  
+  <!-- City -->
+ <li>
+      <input type="text" name="first_address" placeholder="First Line Address" class="first_address">
+	  
+   </li>
+  
+  <!-- State -->
+	<li>
+	<input type="text" name="city" placeholder="City/State" class="city">
+     
+    </li>
+  
+  <!-- Country -->
+	<li>
+       <div class="country bfh-selectbox bfh-countries" name="country" placeholder="Select Country" data-flags="true" data-filter="true"> </div>
+    </li>
+  </ul>
+ </div>
+ <div class="col-1-form col-sm-4 col-xs-12">
+	<ul>
+  <!-- Street -->
+  <li>
+  <input type="text" name="project_name"  class="project_name" placeholder="Project Name">
+    
+   </li>
+  
+  <!-- City -->
+ <li>
+     
+	  <input type="text" name="last_name" placeholder="Last Name" class="last_name">
+   </li>
+  
+  <!-- State -->
+	<li>
+      <input type="text" name="second_address" placeholder="Second Line Address">
+    </li>
+  
+  <!-- Postcal Code -->
+	<li>
+      
+	  <input type="text" class="zip" placeholder="Postal Code" maxlength="9" name="zip" data-bv-field="zip">
+    </li>
+	<li>
+		<input type="text" name="vat" placeholder="VAT (if applicable)">
+	</li>
+  </ul>
+ </div>
+    
+   <div class="col-1-form col-sm-4 col-xs-12 pdngg-right">
+		<ul>
+			<li>
+			
+				 <input type="text" name="cardholdername" maxlength="70" placeholder="Card Holder Name" class="card-holder-name form-control">
+			</li>
+			<li>
+			 <input type="text" id="cardnumber" maxlength="19" placeholder="Card Number" class="card-number">
+			</li>
+			<li class="expiry_dat">
+				<select name="select2" data-stripe="exp-month" class="card-expiry-month stripe-sensitive required">
+					<option value="01" selected="selected">01</option>
+					<option value="02">02</option>
+					<option value="03">03</option>
+					<option value="04">04</option>
+					<option value="05">05</option>
+					<option value="06">06</option>
+					<option value="07">07</option>
+					<option value="08">08</option>
+					<option value="09">09</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+				  </select>
+				  <span> / </span>
+				  <select name="select2" data-stripe="exp-year" class="card-expiry-year stripe-sensitive required">
+				  </select>
+			</li>
+			<li>
+				<input type="text" id="cvv" placeholder="CVV" maxlength="4" class="card-cvc">
+			</li>
+		</ul>
+  </div>
+    <!-- Submit -->
+    <div class="control-group">
+      <div class="controls">
+        <center>
+          <button class="btn btn-success custom-button" type="submit">Pay Now</button>
+        </center>
+      </div>
+    </div>
+ 
+  </form>
+    </div>
                 </div>
             </div>
         </div>
@@ -648,10 +686,11 @@ $getPlaylist_id	= $this->uri->segment(3);
         <script src="<?php echo base_url(); ?>js/jquery.paginate.js"></script>
         <script src="<?php echo base_url(); ?>js/owl.carousel.js"></script>
 		<script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
-		
-        <script src="https://use.typekit.net/auo4nbe.js"></script>
+		<script src="https://use.typekit.net/auo4nbe.js"></script>
 		<script src="<?php echo base_url(); ?>js/jquery-ui.min.js" type="text/javascript"></script>
-		
+		<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+		<script src="<?php echo base_url(); ?>js/bootstrap-formhelpers-min.js"></script>
+		<script src="<?php echo base_url(); ?>js/bootstrapValidator-min.js"></script>
 
 <script>
 /*************  Drag and Save  to playlist ************/
@@ -704,6 +743,14 @@ $getPlaylist_id	= $this->uri->segment(3);
   });
 
 </script>
+ <script type="text/javascript">
+            var select = $(".card-expiry-year"),
+            year = new Date().getFullYear();
+ 
+            for (var i = 0; i < 12; i++) {
+                select.append($("<option value='"+(i + year)+"' "+(i === 0 ? "selected" : "")+">"+(i + year)+"</option>"))
+            }
+        </script> 
         <script>
             try {
                 Typekit.load({
@@ -1257,7 +1304,232 @@ if(login_email_address !='' && login_password!=''){
 	});
 
 </script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#payment-form').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+		submitHandler: function(validator, form, submitButton) {
+                    // createToken returns immediately - the supplied callback submits the form if there are no errors
+                    Stripe.card.createToken({
+                        number: $('.card-number').val(),
+                        cvc: $('.card-cvc').val(),
+                        exp_month: $('.card-expiry-month').val(),
+                        exp_year: $('.card-expiry-year').val(),
+			name: $('.card-holder-name').val(),
+			first_address: $('.first_address').val(),
+			address_city: $('.city').val(),
+			address_zip: $('.zip').val(),
+			address_state: $('.state').val(),
+			address_country: $('.country').val()
+                    }, stripeResponseHandler);
+                    return false; // submit from callback
+        },
+        fields: {
+            full_name: {
+                validators: {
+                    notEmpty: {
+                        message: 'The name is required and cannot be empty'
+                    },
+					stringLength: {
+                        min: 2,
+                        max: 96,
+                        message: 'The full_name must be more than 2 and less than 96 characters long'
+                    }
+                }
+            },
+			project_name: {
+                validators: {
+                    notEmpty: {
+                        message: 'The project name is required and cannot be empty'
+                    },
+					stringLength: {
+                        min: 2,
+                        max: 96,
+                        message: 'The project name must be more than 2 and less than 96 characters long'
+                    }
+                }
+            },
+			last_name: {
+                validators: {
+                    notEmpty: {
+                        message: 'The last name is required and cannot be empty'
+                    },
+					stringLength: {
+                        min: 2,
+                        max: 96,
+                        message: 'The last name must be more than 2 and less than 96 characters long'
+                    }
+                }
+            },
+            city: {
+                validators: {
+                    notEmpty: {
+                        message: 'The city is required and cannot be empty'
+                    }
+                }
+            },
+			zip: {
+                validators: {
+                    notEmpty: {
+                        message: 'The zip is required and cannot be empty'
+                    },
+					stringLength: {
+                        min: 3,
+                        max: 9,
+                        message: 'The zip must be more than 3 and less than 9 characters long'
+                    }
+                }
+            },
+           /*  email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required and can\'t be empty'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    },
+					stringLength: {
+                        min: 6,
+                        max: 65,
+                        message: 'The email must be more than 6 and less than 65 characters long'
+                    }
+                }
+            }, */
+			cardholdername: {
+                validators: {
+                    notEmpty: {
+                        message: 'The card holder name is required and can\'t be empty'
+                    },
+					stringLength: {
+                        min: 6,
+                        max: 70,
+                        message: 'The card holder name must be more than 6 and less than 70 characters long'
+                    }
+                }
+            },
+			cardnumber: {
+		selector: '#cardnumber',
+                validators: {
+                    notEmpty: {
+                        message: 'The credit card number is required and can\'t be empty'
+                    },
+					creditCard: {
+						message: 'The credit card number is invalid'
+					},
+                }
+            },
+			expMonth: {
+                selector: '[data-stripe="exp-month"]',
+                validators: {
+                    notEmpty: {
+                        message: 'The expiration month is required'
+                    },
+                    digits: {
+                        message: 'The expiration month can contain digits only'
+                    },
+                    callback: {
+                        message: 'Expired',
+                        callback: function(value, validator) {
+                            value = parseInt(value, 10);
+                            var year         = validator.getFieldElements('expYear').val(),
+                                currentMonth = new Date().getMonth() + 1,
+                                currentYear  = new Date().getFullYear();
+                            if (value < 0 || value > 12) {
+                                return false;
+                            }
+                            if (year == '') {
+                                return true;
+                            }
+                            year = parseInt(year, 10);
+                            if (year > currentYear || (year == currentYear && value > currentMonth)) {
+                                validator.updateStatus('expYear', 'VALID');
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            },
+            expYear: {
+                selector: '[data-stripe="exp-year"]',
+                validators: {
+                    notEmpty: {
+                        message: 'The expiration year is required'
+                    },
+                    digits: {
+                        message: 'The expiration year can contain digits only'
+                    },
+                    callback: {
+                        message: 'Expired',
+                        callback: function(value, validator) {
+                            value = parseInt(value, 10);
+                            var month        = validator.getFieldElements('expMonth').val(),
+                                currentMonth = new Date().getMonth() + 1,
+                                currentYear  = new Date().getFullYear();
+                            if (value < currentYear || value > currentYear + 100) {
+                                return false;
+                            }
+                            if (month == '') {
+                                return false;
+                            }
+                            month = parseInt(month, 10);
+                            if (value > currentYear || (value == currentYear && month > currentMonth)) {
+                                validator.updateStatus('expMonth', 'VALID');
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            },
+			cvv: {
+		selector: '#cvv',
+                validators: {
+                    notEmpty: {
+                        message: 'The cvv is required and can\'t be empty'
+                    },
+					cvv: {
+                        message: 'The value is not a valid CVV',
+                        creditCardField: 'cardnumber'
+                    }
+                }
+            },
+        }
+    });
+});
+</script>
+<script type="text/javascript">
+            // this identifies your website in the createToken call below
+            Stripe.setPublishableKey('pk_test_0znV1cLXheur2N6bWLlXMIdr');
+ 
+            function stripeResponseHandler(status, response) {
+                if (response.error) {
+                    // re-enable the submit button
+                    $('.submit-button').removeAttr("disabled");
+					// show hidden div
+					document.getElementById('a_x200').style.display = 'block';
+                    // show the errors on the form
+                    $(".payment-errors").html(response.error.message);
+                } else {
+                    var form$ = $("#payment-form");
+                    // token contains id, last4, and card type
+                    var token = response['id'];
+                    // insert the token into the form so it gets submitted to the server
+                    form$.append("<input type='hidden' name='stripeToken' value='" + token + "' />");
+                    // and submit
+                    form$.get(0).submit();
+                }
+            }
+ 
 
+</script>
 </body>
 
 </html>
