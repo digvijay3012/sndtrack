@@ -570,25 +570,30 @@ $getPlaylist_id	= $this->uri->segment(3);
 	<ul>
   <!-- full_name -->
   <li>
+   <div class="form-group">
       <input type="text" name="full_name" placeholder="Full Name" class="full_name">
-	
+	</div>
    </li>
   
   <!-- City -->
  <li>
-      <input type="text" name="first_address" placeholder="First Line Address" class="first_address">
-	  
-   </li>
+	<div class="form-group">
+      <input type="text" name="address_line1" placeholder="First Line Address" class="address_line1 form-control">
+	 	</div> 
+   </li>	
   
   <!-- State -->
 	<li>
-	<input type="text" name="city" placeholder="City/State" class="city">
-     
+	<div class="form-group">
+		<input type="text" name="city" placeholder="City/State" class="city form-control">
+     </div>
     </li>
   
   <!-- Country -->
 	<li>
-       <div class="country bfh-selectbox bfh-countries" name="country" placeholder="Select Country" data-flags="true" data-filter="true"> </div>
+	<div class="form-group">
+       <div class="country bfh-selectbox bfh-countries " name="country" placeholder="Select Country" data-flags="true" data-filter="true"> </div>
+	</div>
     </li>
   </ul>
  </div>
@@ -596,25 +601,29 @@ $getPlaylist_id	= $this->uri->segment(3);
 	<ul>
   <!-- Street -->
   <li>
-  <input type="text" name="project_name"  class="project_name" placeholder="Project Name">
-    
+  <div class="form-group">
+	<input type="text" name="project_name"  class="project_name form-control" placeholder="Project Name">
+  </div>  
    </li>
   
   <!-- City -->
  <li>
-     
-	  <input type="text" name="last_name" placeholder="Last Name" class="last_name">
+   <div class="form-group">
+	  <input type="text" name="last_name" placeholder="Last Name" class="last_name form-control">
    </li>
-  
+   </div> 
   <!-- State -->
 	<li>
+	<div class="form-group">
       <input type="text" name="second_address" placeholder="Second Line Address">
-    </li>
+    </div>
+	</li>
   
   <!-- Postcal Code -->
 	<li>
-      
+     <div class="form-group"> 
 	  <input type="text" class="zip" placeholder="Postal Code" maxlength="9" name="zip" data-bv-field="zip">
+	 </div>
     </li>
 	<li>
 		<input type="text" name="vat" placeholder="VAT (if applicable)">
@@ -625,13 +634,17 @@ $getPlaylist_id	= $this->uri->segment(3);
    <div class="col-1-form col-sm-4 col-xs-12 pdngg-right">
 		<ul>
 			<li>
-			
+				<div class="form-group"> 			
 				 <input type="text" name="cardholdername" maxlength="70" placeholder="Card Holder Name" class="card-holder-name form-control">
+				</div>
 			</li>
 			<li>
+			<div class="form-group"> 	
 			 <input type="text" id="cardnumber" maxlength="19" placeholder="Card Number" class="card-number">
+			 </div>
 			</li>
 			<li class="expiry_dat">
+			<div class="form-group"> 	
 				<select name="select2" data-stripe="exp-month" class="card-expiry-month stripe-sensitive required">
 					<option value="01" selected="selected">01</option>
 					<option value="02">02</option>
@@ -649,9 +662,12 @@ $getPlaylist_id	= $this->uri->segment(3);
 				  <span> / </span>
 				  <select name="select2" data-stripe="exp-year" class="card-expiry-year stripe-sensitive required">
 				  </select>
+			</div>
 			</li>
 			<li>
+			<div class="form-group"> 
 				<input type="text" id="cvv" placeholder="CVV" maxlength="4" class="card-cvc">
+			</div>
 			</li>
 		</ul>
   </div>
@@ -1321,7 +1337,7 @@ $(document).ready(function() {
                         exp_month: $('.card-expiry-month').val(),
                         exp_year: $('.card-expiry-year').val(),
 			name: $('.card-holder-name').val(),
-			first_address: $('.first_address').val(),
+			address_line1: $('.address_line1').val(),
 			address_city: $('.city').val(),
 			address_zip: $('.zip').val(),
 			address_state: $('.state').val(),
@@ -1524,12 +1540,24 @@ $(document).ready(function() {
                     // insert the token into the form so it gets submitted to the server
                     form$.append("<input type='hidden' name='stripeToken' value='" + token + "' />");
                     // and submit
-                    form$.get(0).submit();
+					url		=	'http://sndtrack.stagingdevsite.com/payment.php';
+					var formData	=	$('#payment-form').serialize();
+					$.ajax({
+						url: url,
+						data: formData,                         // Setting the data attribute of ajax with file_data
+						type: 'post',
+						success:function(data){
+								
+								//$('.popup_stage3').empty().append(data);
+							}
+					}); 
+					alert(formData);	
+                    //form$.get(0).submit();
                 }
             }
  
 
 </script>
 </body>
-
+	
 </html>
