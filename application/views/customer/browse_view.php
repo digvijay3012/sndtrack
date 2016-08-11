@@ -514,6 +514,7 @@ $getPlaylist_id	= $this->uri->segment(3);
                                     <input type="password" id="password" name="password" placeholder="Password" required="">
 										<label style="display:none"  generated="true" class="error password">Please enter your password.</label>
                                 </li>
+								<input type="hidden" id="stage2_track_id" name="stage2_track_id">
                                 <li>
 								<button class="sbmt hover_btn" id="register_popup_form" type="button" id="send" name="submit" required="">Create Account</button>
                                 </li>
@@ -574,7 +575,7 @@ $getPlaylist_id	= $this->uri->segment(3);
       <input type="text" name="full_name" placeholder="Full Name" class="full_name">
 	</div>
    </li>
-  
+  <input type="hidden" name="stage4_track_id" id="stage4_track_id" value="">
   <!-- City -->
  <li>
 	<div class="form-group">
@@ -1209,7 +1210,7 @@ if(login_email_address !='' && login_password!=''){
 				success:function(data){
 					$('#popup_stage_1').modal('hide');
 								$.ajax({
-										url: cartUrl+customer_id,
+										url: cartUrl+customer_id+"/"+track_id,
 										data: {data : data},                         // Setting the data attribute of ajax with file_data
 										type: 'post',
 										success:function(data){
@@ -1233,10 +1234,12 @@ if(login_email_address !='' && login_password!=''){
 					}
 				}); 
 			$('#popup_stage_1').modal('hide');
+			
 			$('#popup_stage_2').modal({
 					backdrop: 'static',
 					keyboard: false
 				});
+				$('#stage2_track_id').val(track_id);
 		 }else{
 			 $('.error').show();
 		 }
@@ -1249,6 +1252,7 @@ if(login_email_address !='' && login_password!=''){
 		var email		=	$('#email').val();
 		var password	=	$('#password').val();	
 		var sessionId	=	'<?php echo $sessionId; ?>';
+		var trackID		=	$('#stage2_track_id').val();
 		/* alert(email);
 		alert(first_name);
 		alert(last_name);
@@ -1286,7 +1290,7 @@ if(login_email_address !='' && login_password!=''){
 						}else{
 							$('#popup_stage_2').modal('hide');
 									$.ajax({
-										url: cartUrl+data,
+										url: cartUrl+data+"/"+trackID,
 										data: {data : data},                         // Setting the data attribute of ajax with file_data
 										type: 'post',
 										success:function(data){
@@ -1298,6 +1302,7 @@ if(login_email_address !='' && login_password!=''){
 												backdrop: 'static',
 												keyboard: false
 											});
+											
 						}
 					}
 					
@@ -1306,10 +1311,12 @@ if(login_email_address !='' && login_password!=''){
 	});
 		
 	$(document).on('click','.purchase_button',function(){
+		var get_track_id	=	$('#get_track_id').val();	
 		$('#popup_stage_3').hide();
 		$('#popup_stage_4').modal({backdrop: 'static',
 									keyboard: false
 								});
+		$('#stage4_track_id').val(get_track_id);					
 	});
 	$(document).on('click','.close_popup_3',function(){
 		/* $('#popup_stage_3').hide();
@@ -1540,7 +1547,7 @@ $(document).ready(function() {
                     // insert the token into the form so it gets submitted to the server
                     form$.append("<input type='hidden' name='stripeToken' value='" + token + "' />");
                     // and submit
-					url		=	'http://sndtrack.stagingdevsite.com/payment.php';
+					url		=	'<?php echo base_url(); ?>stripe/payment.php';
 					var formData	=	$('#payment-form').serialize();
 					$.ajax({
 						url: url,

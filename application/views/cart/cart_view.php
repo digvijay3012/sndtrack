@@ -34,6 +34,7 @@
 
                                 <div class="ttl">
                                     <ul>
+									<input type="hidden" name="get_track_id" value="<?php echo $track_id; ?>" id="get_track_id">
                                         <li class="pull-left">Total</li>
                                         <li class="pull-right"> &pound;<?php echo $amount; ?> </li>
                                     </ul>

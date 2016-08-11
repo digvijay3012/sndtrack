@@ -46,8 +46,8 @@ class Browse extends CI_Controller {
 		$data						=	$this->browse_model->store_temp_license_type($session_id, $license_type, $customer_id, $amount, $license_type_value, $track_id);
 				
 	}
-	public function get_cart_view_by_customer($customerId=null){
+	public function get_cart_view_by_customer($customerId=null,$track_id=null){
 		
-		return $this->load->view('cart/cart_view', array('customer_id'=>$customerId));
+		return $this->load->view('cart/cart_view', array('customer_id'=>$customerId, 'track_id'=>$track_id));
 	}
 }
