@@ -1,13 +1,13 @@
 <?php
 require 'lib/Stripe.php';
-
+/* 
  echo "<pre>";
  print_r($_POST);
  echo "</pre>";
- 	
+ 	 */
 if ($_POST) {
-echo "daga";	
-  Stripe::setApiKey("sk_test_dlRBa2orDqy8K2UypiDxgDtX");
+	
+  Stripe::setApiKey("sk_test_Bs3DpFMgLHm0KHGAQzqYyFEC");
   $error = '';
   $success = '';
 
@@ -21,18 +21,21 @@ echo "daga";
                                 "currency" => "eur",
                                 "card" => $_POST['stripeToken'],
 								"description" => $_POST['full_name']));
-								echo "dagatvvvry";	
-    $success = '<div class="alert alert-success">
-                <strong>Success!</strong> Your payment was successful.
-				</div>';
+							 $return = $_POST;
+  
+							  //Do what you need to do with the info. The following are some examples.
+							  //if ($return["favorite_beverage"] == ""){
+							  //  $return["favorite_beverage"] = "Coke";
+							  //}
+							  //$return["favorite_restaurant"] = "McDonald's";
+							  
+							  $return["json"] = json_encode($return);
+							  echo json_encode($return);
 				
   }
   catch (Exception $e) {
-	  echo "dagacatch".$e->getMessage();	
-	$error = '<div class="alert alert-danger">
-			  <strong>Error!</strong> '.$e->getMessage().'
-			  </div>';
-
+	  $e->getMessage();	
+	echo '2'; 
   }
   die;
 }

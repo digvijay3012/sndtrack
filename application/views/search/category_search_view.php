@@ -71,8 +71,8 @@ if(!empty($customerData)){
 
                                         </td>
                                         <td class="lst_data license">
-                                            <a href="">License</a>
-                                        </td>
+                                           <a href="javascript:void(0);" class="popup_stage_1_cls" music_id="<?php echo $musicId; ?>" data-toggle="modal" data-target="#popup_stage_1">License</a>
+                                        </td>		
                                     </tr>
 				<!-- Modal -->
         <div class="modal fade" id="addToPlaylistModal_<?php echo $musicId; ?>" role="dialog">

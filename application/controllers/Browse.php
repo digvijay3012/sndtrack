@@ -50,4 +50,28 @@ class Browse extends CI_Controller {
 		
 		return $this->load->view('cart/cart_view', array('customer_id'=>$customerId, 'track_id'=>$track_id));
 	}
+	public function save_cart(){
+		$data 					= 	json_decode(file_get_contents('php://input'), true);
+		$full_name				=	$data['full_name'];
+		$stage4_track_id		=	$data['stage4_track_id'];
+		$stage4_customer_id		=	$data['stage4_customer_id'];
+		$stage4_music_amount	=	$data['stage4_music_amount'];
+		$address_line1			=	$data['address_line1'];
+		$city					=	$data['city'];
+		$project_name			=	$data['project_name'];
+		$last_name				=	$data['last_name'];
+		$second_address			=	$data['second_address'];
+		$zip					=	$data['zip'];
+		$vat					=	$data['vat'];
+		$cardholdername			=	$data['cardholdername'];
+		$selectYear				=	$data['select2'];
+		$stripeToken			=	$data['stripeToken'];
+		$license_type_id		=	get_license_type_by_amount($stage4_music_amount);
+		
+		$model					=	$this->browse_model->save_cart_value($stage4_track_id, $stage4_customer_id, $stage4_music_amount, $full_name, $address_line1, $city, $project_name, $last_name, $second_address, $zip, $vat, $cardholdername, $selectYear, $stripeToken,$license_type_id);	
+		/* echo "<pre>";
+		print_r($daga);
+		echo "</pre>"; die; */
+		return $this->load->view('cart/thank_you_popup', array('data'=>$data));
+	}
 }

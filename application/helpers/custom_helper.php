@@ -594,3 +594,64 @@ if ( ! function_exists('get_cart_view_by_customerId')){
 				return $resultArray;
    }
 }
+if ( ! function_exists('get_license_types')){
+   function get_license_types(){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+     
+       //get data from database 
+		$query = $ci->db->query("SELECT * FROM snd_license_type_price");
+
+       $resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
+   }
+}
+if ( ! function_exists('get_license_type_by_amount')){
+   function get_license_type_by_amount($license_amount=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+     
+       //get data from database 
+		$query = $ci->db->query("SELECT id FROM snd_license_type_price WHERE license_amount='$license_amount'")->row();
+		return $query->id;
+ }
+}
+if ( ! function_exists('get_license_typeName_by_amount')){
+   function get_license_typeName_by_amount($license_amount=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+     
+       //get data from database 
+		$query = $ci->db->query("SELECT license_type FROM snd_license_type_price WHERE license_amount='$license_amount'")->row();
+		return $query->license_type;
+ }
+}
+if ( ! function_exists('get_music_to_download')){
+   function get_music_to_download($track_id=null, $license_type=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+     
+       //get data from database 
+	   //echo "SELECT $license_type FROM snd_musicfile_version WHERE track_id='$track_id'"; die;
+		$query = $ci->db->query("SELECT $license_type FROM snd_musicfile_version WHERE track_id='$track_id'")->row();
+		if(!empty($query)){
+			return	$query->$license_type;
+		}
+ }
+}

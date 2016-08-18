@@ -35,6 +35,8 @@
                                 <div class="ttl">
                                     <ul>
 									<input type="hidden" name="get_track_id" value="<?php echo $track_id; ?>" id="get_track_id">
+									<input type="hidden" name="get_customer_id" value="<?php echo $customer_id; ?>" id="get_customer_id">
+									<input type="hidden" name="get_music_amount" value="<?php echo $amount; ?>" id="get_music_amount">
                                         <li class="pull-left">Total</li>
                                         <li class="pull-right"> &pound;<?php echo $amount; ?> </li>
                                     </ul>

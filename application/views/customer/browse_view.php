@@ -432,25 +432,16 @@ $getPlaylist_id	= $this->uri->segment(3);
                             <div class="license_terms">
 							<input type="hidden" id="get_track_id" name="get_track_id">
                                 <ul>
-                                    <li>
-										<input id="license_terms" price="29" class="license_type" type="radio" name="license_type" value="Personal License - £29">
-											<label for="license_terms">Personal License - £29 </label>
+								<?php 
+									$getlicenceData 	=	get_license_types();
+									foreach($getlicenceData as $licenceData){ ?>
+										 <li>
+											<input id="<?php echo $licenceData['license_type']; ?>" price="<?php echo $licenceData['license_amount']; ?>" class="license_type" type="radio" name="license_type" value="<?php echo $licenceData['license_description']; ?>">
+												<label for="license_terms"><?php echo $licenceData['license_description']; ?></label>
 									 </li>
-                                    <li>
-									
-										<input  id="lite_license" price="39" class="license_type" type="radio" name="license_type" value="Lite License - £39">
-											<label for="lite_license">Lite License - £39 </label>
-                                    </li>
-                                    <li class="active">
-									
-										<input id="standard_license" price="49" class="license_type" type="radio" name="license_type" value="Standard License - £49 ">
-										<label for="standard_license">Standard License - £49 </label>
-                                    </li>
-                                    <li>
-										<input id="premium_license" price="59" class="license_type" type="radio" name="license_type" value="Premium License - £59 ">
-										<label for="premium_license">Premium License - £59 </label>
-                                    </li>
-                                </ul>
+									<?php } ?>
+                                  
+                                </ul>	
                             </div>
 							<label style="display:none" class="error">Please select License.</label>
                             <input class="comfirm_btn hover_btn" type="button" value="Confirm">
@@ -576,6 +567,8 @@ $getPlaylist_id	= $this->uri->segment(3);
 	</div>
    </li>
   <input type="hidden" name="stage4_track_id" id="stage4_track_id" value="">
+  <input type="hidden" name="stage4_customer_id" id="stage4_customer_id" value="">
+  <input type="hidden" name="stage4_music_amount" id="stage4_music_amount" value="">
   <!-- City -->
  <li>
 	<div class="form-group">
@@ -684,6 +677,22 @@ $getPlaylist_id	= $this->uri->segment(3);
   </form>
     </div>
                 </div>
+            </div>
+        </div>
+ </div>
+    <!--Thank you  Modal Popup -->
+        <div class="modal fade" id="popup_stage_5" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <div class="modal-body popup_stage_5_thank">
+                       
+
+                    </div>
+                </div>
+
             </div>
         </div>
 <style>
@@ -1311,13 +1320,19 @@ if(login_email_address !='' && login_password!=''){
 	});
 		
 	$(document).on('click','.purchase_button',function(){
-		var get_track_id	=	$('#get_track_id').val();	
+		var get_track_id		=	$('#get_track_id').val();
+		var get_customer_id		=	$('#get_customer_id').val();
+		var get_music_amount	=	$('#get_music_amount').val();
+	
 		$('#popup_stage_3').hide();
 		$('#popup_stage_4').modal({backdrop: 'static',
 									keyboard: false
 								});
-		$('#stage4_track_id').val(get_track_id);					
-	});
+		$('#stage4_track_id').val(get_track_id);
+		$('#stage4_customer_id').val(get_customer_id);
+		$('#stage4_music_amount').val(get_music_amount);
+	
+	});	
 	$(document).on('click','.close_popup_3',function(){
 		/* $('#popup_stage_3').hide();
 		window.location.href	=	'<?php echo base_url(); ?>browse'; */
@@ -1530,7 +1545,7 @@ $(document).ready(function() {
 </script>
 <script type="text/javascript">
             // this identifies your website in the createToken call below
-            Stripe.setPublishableKey('pk_test_0znV1cLXheur2N6bWLlXMIdr');
+            Stripe.setPublishableKey('pk_test_Ggl7xyWJ2YazeoQf9nOCXWh6');
  
             function stripeResponseHandler(status, response) {
                 if (response.error) {
@@ -1547,18 +1562,34 @@ $(document).ready(function() {
                     // insert the token into the form so it gets submitted to the server
                     form$.append("<input type='hidden' name='stripeToken' value='" + token + "' />");
                     // and submit
-					url		=	'<?php echo base_url(); ?>stripe/payment.php';
+					url				=	'<?php echo base_url(); ?>stripe/payment.php';
+					save_cartUrl	=	'<?php echo base_url(); ?>browse/save_cart';
 					var formData	=	$('#payment-form').serialize();
 					$.ajax({
 						url: url,
 						data: formData,                         // Setting the data attribute of ajax with file_data
 						type: 'post',
 						success:function(data){
-								
-								//$('.popup_stage3').empty().append(data);
-							}
+							if(data==2){
+								alert('Payment Failure! Please check your payment details and try again.');
+							}else{
+								$.ajax({
+									url: save_cartUrl,
+									data: data,                    
+									type: 'post',
+									success:function(data){
+											$('.popup_stage_5_thank').empty().append(data);
+										}
+									}); 
+									$('#popup_stage_4').modal('hide');
+									$('#popup_stage_5').modal({
+												backdrop: 'static',
+												keyboard: false
+											});
+								}
+						}
 					}); 
-					alert(formData);	
+					//alert(formData);	
                     //form$.get(0).submit();
                 }
             }

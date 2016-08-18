@@ -37,4 +37,27 @@ class Browse_model extends CI_Model {
 			$this->db->insert('snd_temp_pack_info',$data);
 				return 1; 
 		}
+	function save_cart_value($stage4_track_id, $stage4_customer_id, $stage4_music_amount, $full_name, $address_line1, $city, $project_name, $last_name, $second_address, $zip, $vat, $cardholdername, $selectYear, $stripeToken, $license_type_id){
+			$order_date 	=	date("Y-m-d");
+			$data = array(
+				"track_id" 			=> $stage4_track_id,
+				"customer_id" 		=> $stage4_customer_id,
+				"order_amount" 		=> $stage4_music_amount,
+				"full_name" 		=> $full_name,
+				"address_line1" 	=> $address_line1,
+				"city" 				=> $city,
+				"project_name" 		=> $project_name,
+				"last_name" 		=> $last_name,
+				"second_address" 	=> $second_address,
+				"zip" 				=> $zip,
+				"vat" 				=> $vat,
+				"cardholdername" 	=> $cardholdername,
+				"expire_year" 		=> $selectYear,
+				"stripeToken" 		=> $stripeToken,
+				"order_date" 		=> $order_date,
+				"license_type_id" 	=> $license_type_id
+			);
+			$this->db->insert('snd_music_orders',$data);
+				return 1; 
+		}
 }
