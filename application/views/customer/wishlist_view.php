@@ -43,7 +43,7 @@ if(!empty($customerData)){
 							</div>
 						</div>
 				</div>
-                        <li><a href="">Songs</a></li>
+                          <li><a href="<?php echo base_url(); ?>browse/customer_songs">Songs</a></li>
                     </ul>
                 </div>
                 <div class="searchh your_music">

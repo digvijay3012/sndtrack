@@ -74,4 +74,17 @@ class Browse extends CI_Controller {
 		echo "</pre>"; die; */
 		return $this->load->view('cart/thank_you_popup', array('data'=>$data));
 	}
+	public function customer_songs()
+	{
+		if (! $this->ion_auth->logged_in()){
+				redirect('login');
+			}
+				$speakerId			=	$this->ion_auth->user()->row()->user_id; 
+				$data	=	$this->browse_model->customer_songs($speakerId);
+				//print_r($data); die;
+				$this->load->view('customer/browse_header_view');
+				$this->load->view('customer/customer_songs_view',array('data'=>$data));
+				//$this->load->view('artist/footer_view');
+		
+	}
 }

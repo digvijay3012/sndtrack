@@ -1,62 +1,24 @@
-<?php 
-//echo "<pre>";		print_r($artist_data);		echo "</pre>";
-if(!empty($artist_data)){
-	$artist_bio 		=	$artist_data['0']['artist_bio'];
-	$facebook_link 		=	$artist_data['0']['facebook_link'];
-	$twitter_link 		=	$artist_data['0']['twitter_link'];
-	$instagram_link 	=	$artist_data['0']['instagram_link'];
-	$artist_image 		=	$artist_data['0']['artist_image'];
-	$artist_id 			=	$artist_data['0']['id'];
-	$first_name 		=	$artist_data['0']['first_name'];		
-	$last_name 			=	$artist_data['0']['last_name'];
-	$sessionId		=	session_id();
+<?php
+$sessionId		=	session_id();
 $loginStatus	=	'';
 $customerId		=	'';
 if ($this->ion_auth->logged_in()){
 	$loginStatus	=	1;
-	$ArtistID				= 	$this->uri->segment(3); 
-	$customerId			=	$this->ion_auth->user()->row()->user_id;  
+	$customerId			=	$this->ion_auth->user()->row()->user_id; 
 	$customerData		=	$this->ion_auth->user()->row();
 	if(!empty($customerData)){
 		$customerFirstName 		=		$customerData->first_name;
 		$customerLastName 		=		$customerData->last_name;
 	}
 }
+$getPlaylist_id	= $this->uri->segment(3); 
 ?>
-<div class="cstmr_cont header-margin">
 
-        <div class="banner_artist" style="background-image: url('<?php echo base_url(); ?>timthumb.php?src=<?php echo base_url(); ?>artist_images/<?php echo $artist_image; ?>&h=420&w=1920&zc=1q=100');">
-            <div class="banner_art_cntnt">
-                <div class="scl_icns_banner">
-                    <h2><?php echo $first_name." ".$last_name; ?></h2>
-                    <ul>
-                        <li><a target='_blank' href="<?php echo $facebook_link; ?>"><i aria-hidden="true" class="fa fa-facebook"></i></a></li>
-                        <li><a target='_blank' href="<?php echo $twitter_link; ?>"><i aria-hidden="true" class="fa fa-twitter"></i></a></li>
-                        <li><a target='_blank' href="<?php echo $instagram_link; ?>"><i aria-hidden="true" class="fa fa-instagram"></i></a></li>
-                    </ul>
-                </div>
-                <p class="middle_cntnt"><?php echo $artist_bio; ?></p>
-                <!--<div class="instrumnt_bnnr">
-                    <h3>Instruments</h3>
-                    <p>Lorem Ipsum, Electric guitar, piano, drums, bass</p>
-                </div>-->
-            </div>
-            <div class="follow pull-right">
-			 <div style="display:none" class="set_arists_status">
-						<img src="<?php echo base_url(); ?>images/uploading.gif">
-					</div>
-			<?php 
-				$customerId		=	$this->ion_auth->user()->row()->user_id;
-				$followStatus 	=	get_artsit_follow_status($customerId, $artist_id);
-				if($followStatus=='follow'){
-					echo '<button type="button" class="follow_button">Followed</button>';
-				}else{
-					echo '<button type="button" style="display:none" class="follow_button dis-follow">Followed</button> <button type="button" customerId="'.$customerId.'" artist_id="'.$artist_id.'" class="follow_button start-follow">Follow</button>';
-				}
-			?>
-               
-            </div>
-        </div>
+<link rel="stylesheet" href="<?php echo base_url(); ?>checkout_css/bootstrap-formhelpers-min.css" media="screen">
+<link rel="stylesheet" href="<?php echo base_url(); ?>checkout_css/bootstrapValidator-min.css"/>
+
+<link rel="stylesheet" href="<?php echo base_url(); ?>checkout_css/bootstrap-side-notes.css" />
+<div class="cstmr_cont header-margin">	
         <div class="music-bar">
             <figure><img src="<?php echo base_url(); ?>images/music-bar.jpg" alt="" title=""></figure>
         </div>
@@ -178,7 +140,7 @@ if ($this->ion_auth->logged_in()){
                                     <input type="text" name="playlist_name" maxlength="25" placeholder="Enter Playlist">
                                 </li>
                                <li>
-									<input type="hidden" name="redirectparamtr" value="<?php //echo $getPlaylist_id; ?>">
+									<input type="hidden" name="redirectparamtr" value="<?php echo $getPlaylist_id; ?>">
                                 </li>
                               
                                 <li>
@@ -217,6 +179,9 @@ if ($this->ion_auth->logged_in()){
             <div class="rt_sidebar browse-page">
 			<div id="add_to_wishlist_msg"></div>
                 <div class="cont_artist">
+				<div class="wishlists-bar">
+                        <h3>Your Songs</h3>
+                    </div>
                   <div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
                         <div class="order_list">
                             <div class="ordr_tabs">
@@ -239,6 +204,7 @@ if ($this->ion_auth->logged_in()){
                                     </li>
                                 </ul>
                             </div>
+							
 			 <div class="lft_playlist lft_browse pull-left">
 				<div class="list_wishlist_info">				
 				<div class="ordr_inner">
@@ -248,8 +214,8 @@ if ($this->ion_auth->logged_in()){
 					<thead></thead>
 						<tbody>
 						<?php 
-						$data 	=	get_artists_music_by_id($ArtistID);
-						if(!empty($data)){		
+						
+						if(!empty($data)){
 							foreach($data	as	$fectchPlaylist){
 								$musicId 			=	$fectchPlaylist['id'];
 								$getMusicFileEx 	=	explode(".", $fectchPlaylist['watermark_format']);
@@ -351,6 +317,8 @@ if ($this->ion_auth->logged_in()){
 																		<button class="addToPlayList" playlist_id="<?php echo $addedPlaylistId; ?>" type="button" track_id="<?php echo $musicId; ?>">Add to playlist</button>
 																		
 																	<?php } ?>
+																
+																	
 																</li>
 															</ul>
 												<?php }}?>
@@ -558,7 +526,7 @@ if ($this->ion_auth->logged_in()){
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <!--<button  class="close close_popup_3" type="button">Ã—</button>-->
+                    <!--<button  class="close close_popup_3" type="button">×</button>-->
                     <div class="modal-body popup_stage3">
                         
                     </div>
@@ -1166,7 +1134,7 @@ $(document).on('click','.category_filter',function(){
 /*************  Short Order	************/		
 $(document).on('click','.short_order',function(){
 	var short_type	=	$(this).attr('short_type');
-
+	
 	$('.draggable').draggable();
 	var url	=	'<?php echo base_url(); ?>browse/filter_by_browse/'+short_type;
 	  $('.orderBy_filter_loader').show();
@@ -1295,7 +1263,7 @@ if(login_email_address !='' && login_password!=''){
 		var last_name	=	$('#last_name').val();
 		var email		=	$('#email').val();
 		var password	=	$('#password').val();	
-		var sessionId	=	"<?php echo $sessionId; ?>";
+		var sessionId	=	'<?php echo $sessionId; ?>';
 		var trackID		=	$('#stage2_track_id').val();
 		/* alert(email);
 		alert(first_name);
@@ -1633,5 +1601,4 @@ $(document).ready(function() {
 </script>
 </body>
 	
-</html>  
-<?php } ?>
+</html>

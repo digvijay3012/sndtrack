@@ -27,7 +27,7 @@ $getPlaylist_id	= $this->uri->segment(3);
               <div class="your_music">
                     <h3 class="rt_hdng">YOUR MUSIC</h3>
                     <ul>
-                        <li><a href="">Hearted</a></li>
+                        <li><a href="<?php echo base_url(); ?>wishlist">Hearted</a></li>
                         <div id="accordion2" class="panel-group user_acc">
 						<h3 class="rt_hdng"><a href="#collapseOne_22" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed" aria-expanded="false">
 						Artists																
@@ -56,7 +56,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 							</div>
 						</div>
 				</div>
-                        <li><a href="">Songs</a></li>
+                        <li><a href="<?php echo base_url(); ?>browse/customer_songs">Songs</a></li>
                     </ul>
                 </div>
                 <div class="searchh your_music">
@@ -75,7 +75,7 @@ $getPlaylist_id	= $this->uri->segment(3);
                            
 								<?php if($parentCatName=='Instrumental'){
 									echo $parentCatName;
-									echo '<h3 class="rt_hdng"><input type="checkbox" name="Instruments" value="Instruments"></h3>';
+									echo '<h3 class="rt_hdng"><input type="checkbox" name="Instruments" value="Instruments" class="category_filter" catId="'.$parentCatId.'"></h3>';
 									}else{ ?>
 									 <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_<?php echo $counterFlag; ?>">
 										<?php echo $parentCatName; ?>
@@ -179,9 +179,7 @@ $getPlaylist_id	= $this->uri->segment(3);
             <div class="rt_sidebar browse-page">
 			<div id="add_to_wishlist_msg"></div>
                 <div class="cont_artist">
-                   
-                    <div class="lft_playlist lft_browse pull-left">
-					<div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
+                  <div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
                         <div class="order_list">
                             <div class="ordr_tabs">
                                 <ul>
@@ -203,11 +201,12 @@ $getPlaylist_id	= $this->uri->segment(3);
                                     </li>
                                 </ul>
                             </div>
-			 <div class="list_wishlist_info">				
-           <div class="ordr_inner">
+			 <div class="lft_playlist lft_browse pull-left">
+				<div class="list_wishlist_info">				
+				<div class="ordr_inner">
            
 		
-				<table class="table loop_table">
+					<table class="table loop_table">
 					<thead></thead>
 						<tbody>
 						<?php 
@@ -523,7 +522,7 @@ $getPlaylist_id	= $this->uri->segment(3);
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <button  class="close close_popup_3" type="button">×</button>
+                    <!--<button  class="close close_popup_3" type="button">×</button>-->
                     <div class="modal-body popup_stage3">
                         
                     </div>
@@ -1205,6 +1204,8 @@ if(login_email_address !='' && login_password!=''){
 			var license_type		=	$('input[name=license_type]:checked').attr('id');
 			var amount				=	$('input[name=license_type]:checked').attr('price');
 			var track_id			=	$('#get_track_id').val();
+		}else{
+			 $('.error').show();
 		}
 		
 		var loginStatus		=	'<?php echo $loginStatus; ?>';
@@ -1249,8 +1250,6 @@ if(login_email_address !='' && login_password!=''){
 					keyboard: false
 				});
 				$('#stage2_track_id').val(track_id);
-		 }else{
-			 $('.error').show();
 		 }
 		
 	});
