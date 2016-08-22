@@ -11,7 +11,29 @@ if(!empty($customerData)){
 
  ?>
  <span class="daga">
+ 
 					<div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
+				 <div class="order_list">
+					   <div class="ordr_tabs">
+                                <ul>
+                                    <li>Order by:</li>
+									<div style="display:none" class="orderBy_filter_loader">
+									<img src="<?php echo base_url(); ?>images/uploading.gif">
+								</div>
+                                    <li>
+                                        <button class="short_order" short_cat_id="<?php echo $catId; ?>" short_type="Newest" type="button">Newest</button>
+                                    </li>
+                                    <li>
+                                        <button class="short_order" short_cat_id="<?php echo $catId; ?>" short_type="Trending" class="active" type="button">Trending</button>
+                                    </li>
+                                    <li>
+                                        <button class="short_order" short_cat_id="<?php echo $catId; ?>" short_type="Longest" type="button">Longest</button>
+                                    </li>
+                                    <li>
+                                        <button class="short_order" short_cat_id="<?php echo $catId; ?>" short_type="Shortest"  type="button">Shortest</button>
+                                    </li>
+                                </ul>
+                            </div>
                         <div class="playlist_info">
 		
                             <table class="table loop_table">
@@ -142,7 +164,7 @@ if(!empty($customerData)){
                             </table>
 
                         </div>
-                       
+                        </div>
                     </span>	
 <?php }else{
 	echo "No music found.";

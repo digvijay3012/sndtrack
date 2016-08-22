@@ -22,9 +22,11 @@ class Browse extends CI_Controller {
 				//$this->load->view('artist/footer_view');
 		
 	}
-	public function filter_by_browse($short_type)
+	public function filter_by_browse()
 	{
-				$data	=	$this->browse_model->filter_by_browse($short_type);
+				$short_type					=	$this->input->post('short_type');
+				$short_cat_id				=	$this->input->post('short_cat_id');
+				$data	=	$this->browse_model->filter_by_browse($short_type, $short_cat_id);
 				//print_r($data); die;
 				
 				return $this->load->view('search/browse_orderby_filter',array('data'=>$data));

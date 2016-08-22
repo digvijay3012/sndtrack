@@ -180,7 +180,9 @@ $getPlaylist_id	= $this->uri->segment(3);
 			<div id="add_to_wishlist_msg"></div>
                 <div class="cont_artist">
                   <div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
+				   <div class="lft_playlist lft_browse pull-left">
                         <div class="order_list">
+						
                             <div class="ordr_tabs">
                                 <ul>
                                     <li>Order by:</li>
@@ -201,7 +203,7 @@ $getPlaylist_id	= $this->uri->segment(3);
                                     </li>
                                 </ul>
                             </div>
-			 <div class="lft_playlist lft_browse pull-left">
+			
 				<div class="list_wishlist_info">				
 				<div class="ordr_inner">
            
@@ -1129,21 +1131,32 @@ $(document).on('click','.category_filter',function(){
 	});	
 /*************  Short Order	************/		
 $(document).on('click','.short_order',function(){
+	var short_cat_id	=	'';
+	
 	var short_type	=	$(this).attr('short_type');
+	var short_cat_id	=	$(this).attr('short_cat_id');	
 	
 	$('.draggable').draggable();
-	var url	=	'<?php echo base_url(); ?>browse/filter_by_browse/'+short_type;
+	var url	=	'<?php echo base_url(); ?>browse/filter_by_browse';
 	  $('.orderBy_filter_loader').show();
 	  $.ajax({
 			url: url,
-			data: {short_type : short_type},                         // Setting the data attribute of ajax with file_data
+			data: {short_type : short_type, short_cat_id: short_cat_id},                         // Setting the data attribute of ajax with file_data
 			type: 'post',
-			success:function(data){	
-					
-					$('.orderBy_filter_loader').hide();
-					$('.list_wishlist_info').empty().append(data);
-					$('.draggable').draggable();
-					$('.draggable').trigger('click');
+			success:function(data){
+					if(short_cat_id !=''){
+						$('.orderBy_filter_loader').hide();
+						$('.playlist_info').empty().append(data);
+						$('.draggable').draggable();
+						$('.draggable').trigger('click');
+					}else{
+		
+						//playlist_info
+						$('.orderBy_filter_loader').hide();
+						$('.list_wishlist_info').empty().append(data);
+						$('.draggable').draggable();
+						$('.draggable').trigger('click');
+					}
 				}
 				
 		}); 	

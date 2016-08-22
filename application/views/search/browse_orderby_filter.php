@@ -8,6 +8,7 @@
 	}
 }
 if(!empty($data)){
+	
  ?>
  <span class="daga">
 					
@@ -151,6 +152,7 @@ if(!empty($data)){
                     </span>	
 <?php }else{
 	echo "No music found.";
+	exit;
 } ?>
 <!-- Login Modal -->
 <div class="modal fade" id="login_alert_popup" role="dialog">
