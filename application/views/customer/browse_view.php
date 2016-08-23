@@ -1144,14 +1144,15 @@ $(document).on('click','.short_order',function(){
 			data: {short_type : short_type, short_cat_id: short_cat_id},                         // Setting the data attribute of ajax with file_data
 			type: 'post',
 			success:function(data){
-					if(short_cat_id !=''){
+					if( typeof short_cat_id  !== "undefined"){
+						alert(data);
+						alert(short_cat_id);
 						$('.orderBy_filter_loader').hide();
 						$('.playlist_info').empty().append(data);
 						$('.draggable').draggable();
 						$('.draggable').trigger('click');
 					}else{
-		
-						//playlist_info
+	
 						$('.orderBy_filter_loader').hide();
 						$('.list_wishlist_info').empty().append(data);
 						$('.draggable').draggable();
