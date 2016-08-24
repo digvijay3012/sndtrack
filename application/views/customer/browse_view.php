@@ -177,7 +177,7 @@ $getPlaylist_id	= $this->uri->segment(3);
                 </div>
             </div>
             <div class="rt_sidebar browse-page">
-			<div id="add_to_wishlist_msg"></div>
+			
                 <div class="cont_artist">
                   <div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
 				   <div class="lft_playlist lft_browse pull-left">
@@ -242,6 +242,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 												<div style="display:none" class="wishlist_loader_<?php echo $musicId; ?>">
 													<img src="<?php echo base_url(); ?>images/uploading.gif">
 												</div>
+												<div id="add_to_wishlist_msg_<?php echo $musicId; ?>"></div>
 												<?php 
 													if ($this->ion_auth->logged_in()){ ?>
                                                <a href="javascript:void(0);">
@@ -742,6 +743,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 				var playlist_id= $(this).attr("playlist_id");
 				var track_id = ui.draggable.attr("track_id");
 				var loader		=	".wishlist_loader_"+track_id;
+				var add_to_wishlist_msg = "#add_to_wishlist_msg_"+track_id;
 			var url	=	'<?php echo base_url(); ?>dashboard/add_to_playlist/'+playlist_id+"/"+track_id;
 					  $(loader).show();
 					  $.ajax({
@@ -750,16 +752,16 @@ $getPlaylist_id	= $this->uri->segment(3);
 							type: 'post',
 							success:function(data){
 								ui.draggable.draggable('option','revert',true); 
-								$("#add_to_wishlist_msg").show();
+								$(add_to_wishlist_msg).show();
 									if(data==1){
 										$(loader).hide();
-										$("#add_to_wishlist_msg").empty().append('Added to playlist').delay(2000).fadeOut();
+										$(add_to_wishlist_msg).empty().append('Added to playlist').delay(2000).fadeOut();
 									}if(data==2){
 										$(loader).hide();
-										$("#add_to_wishlist_msg").empty().append('Already Added to playlist').delay(2000).fadeOut();
+										$(add_to_wishlist_msg).empty().append('Already Added to playlist').delay(2000).fadeOut();
 									}if(data==3){
 										$(loader).hide();
-										$("#add_to_wishlist_msg").empty().append('Please try again and drop song properly.').delay(3000).fadeOut();
+										$(add_to_wishlist_msg).empty().append('Please try again and drop song properly.').delay(3000).fadeOut();
 									}
 								}
 						}); 
@@ -1014,7 +1016,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 $(document).on('click','.add_to_wishlist',function(){
 	var track_id	=	$(this).attr('track_id');
 	var loader		=	".wishlist_loader_"+track_id;
-	
+	var add_to_wishlist_msg ="#add_to_wishlist_msg_"+track_id;
 	var url	=	'<?php echo base_url(); ?>dashboard/add_to_wishlist/'+track_id;
 					  $(loader).show();
 					  $.ajax({
@@ -1022,13 +1024,13 @@ $(document).on('click','.add_to_wishlist',function(){
 							data: {track_id : track_id},                         // Setting the data attribute of ajax with file_data
 							type: 'post',
 							success:function(data){
-								$("#add_to_wishlist_msg").show();
+								$(add_to_wishlist_msg).show();
 									if(data==1){
 										$(loader).hide();
-										$("#add_to_wishlist_msg").empty().append('Added to wishlist').delay(1000).fadeOut();
+										$(add_to_wishlist_msg).empty().append('Added to wishlist').delay(1000).fadeOut();
 									}if(data==2){
 										$(loader).hide();
-										$("#add_to_wishlist_msg").empty().append('Already Added to wishlist').delay(1000).fadeOut();
+										$(add_to_wishlist_msg).empty().append('Already Added to wishlist').delay(1000).fadeOut();
 									}
 								}
 						}); 
@@ -1145,14 +1147,11 @@ $(document).on('click','.short_order',function(){
 			type: 'post',
 			success:function(data){
 					if( typeof short_cat_id  !== "undefined"){
-						alert(data);
-						alert(short_cat_id);
 						$('.orderBy_filter_loader').hide();
 						$('.playlist_info').empty().append(data);
 						$('.draggable').draggable();
 						$('.draggable').trigger('click');
 					}else{
-	
 						$('.orderBy_filter_loader').hide();
 						$('.list_wishlist_info').empty().append(data);
 						$('.draggable').draggable();
@@ -1371,12 +1370,12 @@ $(document).ready(function() {
                         cvc: $('.card-cvc').val(),
                         exp_month: $('.card-expiry-month').val(),
                         exp_year: $('.card-expiry-year').val(),
-			name: $('.card-holder-name').val(),
-			address_line1: $('.address_line1').val(),
-			address_city: $('.city').val(),
-			address_zip: $('.zip').val(),
-			address_state: $('.state').val(),
-			address_country: $('.country').val()
+						name: $('.card-holder-name').val(),
+						address_line1: $('.address_line1').val(),
+						address_city: $('.city').val(),
+						address_zip: $('.zip').val(),
+						address_state: $('.state').val(),
+						address_country: $('.country').val()
                     }, stripeResponseHandler);
                     return false; // submit from callback
         },
