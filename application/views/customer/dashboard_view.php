@@ -5,7 +5,7 @@ if(!empty($customerData)){
 	$first_name 	=		$customerData->first_name;
 	$last_name 		=		$customerData->last_name;
 }
-?>
+?>		
 <div class="cstmr_cont header-margin">
         <div class="container-fluid pdngg container-full">
             <div class="banner_image wow fadeIn animated mrgn_srch" style="background-image: url('<?php echo base_url(); ?>images/premi_bnnr.jpg');">

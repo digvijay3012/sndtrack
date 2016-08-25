@@ -13,7 +13,7 @@ if(!empty($artist_data)){
 	$customerId			=	$this->ion_auth->user()->row()->user_id;
 	$inserRecentListData	=	insert_recently_listened_music($track_id, $customerId, $artist_id);
 ?>
-<div class="cstmr_cont header-margin">
+<div class="cstmr_cont header-margin">		
 
         <div class="banner_artist" style="background-image: url('<?php echo base_url(); ?>timthumb.php?src=<?php echo base_url(); ?>artist_images/<?php echo $artist_image; ?>&h=420&w=1920&zc=1q=100');">
             <div class="banner_art_cntnt">

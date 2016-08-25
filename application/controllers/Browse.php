@@ -13,7 +13,7 @@ class Browse extends CI_Controller {
 		$this->load->model('browse_model');
 		
 	}
-	public function index()
+	public function index()		
 	{
 				$data	=	$this->browse_model->get_all_music();
 				//print_r($data); die;

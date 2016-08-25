@@ -12,7 +12,7 @@ if ($this->ion_auth->logged_in()){
 	}
 }
 $getPlaylist_id	= $this->uri->segment(3); 
-?>
+?>		
 
 <link rel="stylesheet" href="<?php echo base_url(); ?>checkout_css/bootstrap-formhelpers-min.css" media="screen">
 <link rel="stylesheet" href="<?php echo base_url(); ?>checkout_css/bootstrapValidator-min.css"/>
