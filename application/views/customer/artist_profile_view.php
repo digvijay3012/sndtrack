@@ -1,6 +1,6 @@
 <?php 
 //echo "<pre>";		print_r($artist_data);		echo "</pre>";
-if(!empty($artist_data)){	
+if(!empty($artist_data)){
 	$artist_bio 		=	$artist_data['0']['artist_bio'];
 	$facebook_link 		=	$artist_data['0']['facebook_link'];
 	$twitter_link 		=	$artist_data['0']['twitter_link'];
@@ -215,10 +215,10 @@ if ($this->ion_auth->logged_in()){
                 </div>
             </div>
             <div class="rt_sidebar browse-page">
-			<div id="add_to_wishlist_msg"></div>
+			 <div class="lft_playlist lft_browse pull-left">
+			
                 <div class="cont_artist">
                   <div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
-				  	 <div class="lft_playlist lft_browse pull-left">
                         <div class="order_list">
                             <div class="ordr_tabs">
                                 <ul>
@@ -240,7 +240,7 @@ if ($this->ion_auth->logged_in()){
                                     </li>
                                 </ul>
                             </div>
-		
+			
 				<div class="list_wishlist_info">				
 				<div class="ordr_inner">
            
@@ -279,6 +279,7 @@ if ($this->ion_auth->logged_in()){
 												<div style="display:none" class="wishlist_loader_<?php echo $musicId; ?>">
 													<img src="<?php echo base_url(); ?>images/uploading.gif">
 												</div>
+												<div id="add_to_wishlist_msg_<?php echo $musicId; ?>"></div>
 												<?php 
 													if ($this->ion_auth->logged_in()){ ?>
                                                <a href="javascript:void(0);">
@@ -286,12 +287,12 @@ if ($this->ion_auth->logged_in()){
 														<i class="fa fa-heart-o" aria-hidden="true"></i>
 													</li>
 											   </a>
-											<?php } else{ ?>
-											<a  data-target="#login_alert_popup" data-toggle="modal" href="javascript:void(0);">
+											<?php } else { ?>
+											<a data-target="#login_alert_popup" data-toggle="modal" href="javascript:void(0);">
 													<li class="">
 														<i class="fa fa-heart-o" aria-hidden="true"></i>
 													</li>
-											   </a>
+											</a>
 											<?php } ?>
 											   <?php 
 													if ($this->ion_auth->logged_in()){ ?>
@@ -387,6 +388,8 @@ if ($this->ion_auth->logged_in()){
 				</div>
                         </div>
                     </div>
+					</div>
+					 </div>
                     <div class="rgt_browse pull-right">
                         <div class="browse-right-box">
                             <h3>Clem Snide</h3>
@@ -395,8 +398,8 @@ if ($this->ion_auth->logged_in()){
                             <a href="#" class="btn-trns ">More from this Artist</a>
                         </div>
                     </div>
-                </div>
-            </div>
+               
+            
         </div>
     </div>
 <!-- Login Modal -->
@@ -774,9 +777,10 @@ if ($this->ion_auth->logged_in()){
         accept: '.draggable',
          drop: function (event, ui) {
             ui.draggable.draggable('option','revert',true); 			
-				var playlist_id= $(this).attr("playlist_id");
-				var track_id = ui.draggable.attr("track_id");
-				var loader		=	".wishlist_loader_"+track_id;
+				var playlist_id			= $(this).attr("playlist_id");
+				var track_id 			= ui.draggable.attr("track_id");
+				var loader				=	".wishlist_loader_"+track_id;
+				var add_to_wishlist_msg = "#add_to_wishlist_msg_"+track_id;
 			var url	=	'<?php echo base_url(); ?>dashboard/add_to_playlist/'+playlist_id+"/"+track_id;
 					  $(loader).show();
 					  $.ajax({
@@ -785,16 +789,16 @@ if ($this->ion_auth->logged_in()){
 							type: 'post',
 							success:function(data){
 								ui.draggable.draggable('option','revert',true); 
-								$("#add_to_wishlist_msg").show();
+								$(add_to_wishlist_msg).show();
 									if(data==1){
 										$(loader).hide();
-										$("#add_to_wishlist_msg").empty().append('Added to playlist').delay(2000).fadeOut();
+										$(add_to_wishlist_msg).empty().append('Added to playlist').delay(2000).fadeOut();
 									}if(data==2){
 										$(loader).hide();
-										$("#add_to_wishlist_msg").empty().append('Already Added to playlist').delay(2000).fadeOut();
+										$(add_to_wishlist_msg).empty().append('Already Added to playlist').delay(2000).fadeOut();
 									}if(data==3){
 										$(loader).hide();
-										$("#add_to_wishlist_msg").empty().append('Please try again and drop song properly.').delay(3000).fadeOut();
+										$(add_to_wishlist_msg).empty().append('Please try again and drop song properly.').delay(3000).fadeOut();
 									}
 								}
 						}); 
@@ -1047,9 +1051,9 @@ if ($this->ion_auth->logged_in()){
 <script>
 /*************  Add MUSIC to Wishlist ************/
 $(document).on('click','.add_to_wishlist',function(){
-	var track_id	=	$(this).attr('track_id');
-	var loader		=	".wishlist_loader_"+track_id;
-	
+	var track_id			=	$(this).attr('track_id');
+	var loader				=	".wishlist_loader_"+track_id;
+	var add_to_wishlist_msg = "#add_to_wishlist_msg_"+track_id;
 	var url	=	'<?php echo base_url(); ?>dashboard/add_to_wishlist/'+track_id;
 					  $(loader).show();
 					  $.ajax({
@@ -1057,13 +1061,13 @@ $(document).on('click','.add_to_wishlist',function(){
 							data: {track_id : track_id},                         // Setting the data attribute of ajax with file_data
 							type: 'post',
 							success:function(data){
-								$("#add_to_wishlist_msg").show();
+								$(add_to_wishlist_msg).show();
 									if(data==1){
 										$(loader).hide();
-										$("#add_to_wishlist_msg").empty().append('Added to wishlist').delay(1000).fadeOut();
+										$(add_to_wishlist_msg).empty().append('Added to wishlist').delay(1000).fadeOut();
 									}if(data==2){
 										$(loader).hide();
-										$("#add_to_wishlist_msg").empty().append('Already Added to wishlist').delay(1000).fadeOut();
+										$(add_to_wishlist_msg).empty().append('Already Added to wishlist').delay(1000).fadeOut();
 									}
 								}
 						}); 
@@ -1167,11 +1171,481 @@ $(document).on('click','.category_filter',function(){
 /*************  Short Order	************/		
 $(document).on('click','.short_order',function(){
 	var short_cat_id	=	'';
-	var short_type		=	$(this).attr('short_type');
+	
+	var short_type	=	$(this).attr('short_type');
 	var short_cat_id	=	$(this).attr('short_cat_id');	
+	
 	$('.draggable').draggable();
 	var url	=	'<?php echo base_url(); ?>browse/filter_by_browse';
 	  $('.orderBy_filter_loader').show();
 	  $.ajax({
 			url: url,
-			data: {short_type : short_type, short_cat_id: short_cat_id},                         // Setting the data attribute 
+			data: {short_type : short_type, short_cat_id: short_cat_id},                         // Setting the data attribute of ajax with file_data
+			type: 'post',
+			success:function(data){
+					if( typeof short_cat_id  !== "undefined"){
+						$('.orderBy_filter_loader').hide();
+						$('.playlist_info').empty().append(data);
+						$('.draggable').draggable();
+						$('.draggable').trigger('click');
+					}else{
+						$('.orderBy_filter_loader').hide();
+						$('.list_wishlist_info').empty().append(data);
+						$('.draggable').draggable();
+						$('.draggable').trigger('click');
+					}
+				}
+				
+		}); 	
+		
+	});	
+	
+/*************  Popup Login	************/		
+$(document).on('click','.login_button',function(){
+var login_email_address	=	$('#login_email_address').val();
+var login_password		=	$('#login_password').val();
+
+if(login_email_address==''){
+	$('.email-error').show();
+}if(login_email_address!=''){
+	$('.email-error').hide();	
+}if(login_password==''){
+	$('.pwd-error').show();	
+}if(login_password!=''){
+	$('.pwd-error').hide();	
+}
+$("#authentication_error").hide();
+if(login_email_address !='' && login_password!=''){
+ var url			=	'<?php echo base_url(); ?>login/popup_login';
+ var redirectUrl	=	'<?php echo base_url(); ?>browse';	
+ $("#authentication_error").hide();
+  $('.login_loader').show();
+  $.ajax({
+		url: url,
+		data: {login_email_address : login_email_address, login_password : login_password},                         // Setting the data attribute of ajax with file_data
+		type: 'post',
+		success:function(data){
+				$('.login_loader').hide();			
+				if(data==1){
+					window.location.href=redirectUrl;
+				}if(data==2){
+					$("#authentication_error").show();
+				}
+			}
+			
+	});  
+ }	
+});
+/************* Set Music Id to satge 1 popup	************/	
+	$(document).on('click','.popup_stage_1_cls',function(){
+		var music_id	=	$(this).attr('music_id');
+		$('#get_track_id').val(music_id);
+	});
+/************* Licensce Type Popup	************/	
+	$(document).on('click','.comfirm_btn',function(){
+		 $('.error').hide();
+		var license_type		=	'';
+		var license_type_value	=	'';
+		var amount				=	'';
+		var sessionId			=	'<?php echo $sessionId; ?>';
+		var customerId			=	'<?php echo $customerId; ?>';
+		if($('input[name=license_type]:checked').val()){
+			var license_type_value	=	$('input[name=license_type]:checked').val();
+			var license_type		=	$('input[name=license_type]:checked').attr('id');
+			var amount				=	$('input[name=license_type]:checked').attr('price');
+			var track_id			=	$('#get_track_id').val();
+		}else{
+			 $('.error').show();
+		}
+		
+		var loginStatus		=	'<?php echo $loginStatus; ?>';
+		 if(license_type !='' && loginStatus==1){
+			 var customer_id	=	'<?php echo $customerId; ?>';
+			 var ajaxUrl	=	'<?php echo base_url(); ?>browse/store_temp_license_type';
+			 var cartUrl		=	'<?php echo base_url(); ?>browse/get_cart_view_by_customer/';
+			 $.ajax({
+				url: ajaxUrl,
+				data: {session_id : sessionId, license_type : license_type, customer_id : customer_id, amount : amount,license_type_value : license_type_value, track_id : track_id},
+				type: 'post',
+				success:function(data){
+					$('#popup_stage_1').modal('hide');
+								$.ajax({
+										url: cartUrl+customer_id+"/"+track_id,
+										data: {data : data},                         // Setting the data attribute of ajax with file_data
+										type: 'post',
+										success:function(data){
+											$('.popup_stage3').empty().append(data);
+										}
+									}); 
+						$('#popup_stage_3').modal({
+								backdrop: 'static',
+								keyboard: false
+							});
+					}
+				}); 
+		 }if(license_type !='' && loginStatus==''){
+			 var ajaxUrl	=	'<?php echo base_url(); ?>browse/store_temp_license_type';
+			 $.ajax({
+				url: ajaxUrl,
+				data: {session_id : sessionId, license_type : license_type, customer_id : customerId, amount : amount,license_type_value : license_type_value, track_id : track_id},
+				type: 'post',
+				success:function(data){
+						//alert(data);
+					}
+				}); 
+			$('#popup_stage_1').modal('hide');
+			
+			$('#popup_stage_2').modal({
+					backdrop: 'static',
+					keyboard: false
+				});
+				$('#stage2_track_id').val(track_id);
+		 }
+		
+	});
+	/************* Register Popup	************/	
+	$(document).on('click','#register_popup_form',function(){
+		var first_name	=	$('#first_name').val();
+		var last_name	=	$('#last_name').val();
+		var email		=	$('#email').val();
+		var password	=	$('#password').val();	
+		var sessionId	=	"<?php echo $sessionId; ?>";
+		var trackID		=	$('#stage2_track_id').val();
+		/* alert(email);
+		alert(first_name);
+		alert(last_name);
+		alert(password); */
+		 var url			=	'<?php echo base_url(); ?>register/popup_register';
+		 var cartUrl		=	'<?php echo base_url(); ?>browse/get_cart_view_by_customer/';
+			if(first_name==''){
+				$('.first_name').show();
+			}if(last_name==''){
+				$('.last_name').show();
+			}if(email==''){
+				$('.email').show();
+			}if(password==''){
+				$('.password').show();
+			}if(first_name!=''){
+				$('.first_name').hide();
+			}if(last_name!=''){
+				$('.last_name').hide();
+			}if(email!=''){
+				$('.email').hide();
+			}if(password!=''){
+				$('.password').hide();
+			}
+			if(first_name !="" && last_name !="" && email !="" && password !=""){
+				$('.register_loader').show();
+				$.ajax({
+				url: url,
+				data: {first_name : first_name, last_name : last_name, email : email, password : password, sessionId : sessionId},                         // Setting the data attribute of ajax with file_data
+				type: 'post',
+				success:function(data){
+					
+						$('.register_loader').hide();			
+						if(data==2){
+							$("#register_authentication_error").show();
+						}else{
+							$('#popup_stage_2').modal('hide');
+									$.ajax({
+										url: cartUrl+data+"/"+trackID,
+										data: {data : data},                         // Setting the data attribute of ajax with file_data
+										type: 'post',
+										success:function(data){
+												
+												$('.popup_stage3').empty().append(data);
+											}
+										}); 
+							$('#popup_stage_3').modal({
+												backdrop: 'static',
+												keyboard: false
+											});
+											
+						}
+					}
+					
+				}); 
+			}				
+	});
+		
+	$(document).on('click','.purchase_button',function(){
+		var get_track_id		=	$('#get_track_id').val();
+		var get_customer_id		=	$('#get_customer_id').val();
+		var get_music_amount	=	$('#get_music_amount').val();
+	
+		$('#popup_stage_3').hide();
+		$('#popup_stage_4').modal({backdrop: 'static',
+									keyboard: false
+								});
+		$('#stage4_track_id').val(get_track_id);
+		$('#stage4_customer_id').val(get_customer_id);
+		$('#stage4_music_amount').val(get_music_amount);
+	
+	});	
+	$(document).on('click','.close_popup_3',function(){
+		/* $('#popup_stage_3').hide();
+		window.location.href	=	'<?php echo base_url(); ?>browse'; */
+	});
+	$('document').ready(function () {
+		$('.draggable').trigger('click');
+	});
+
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#payment-form').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+		submitHandler: function(validator, form, submitButton) {
+                    // createToken returns immediately - the supplied callback submits the form if there are no errors
+                    Stripe.card.createToken({
+                        number: $('.card-number').val(),
+                        cvc: $('.card-cvc').val(),
+                        exp_month: $('.card-expiry-month').val(),
+                        exp_year: $('.card-expiry-year').val(),
+			name: $('.card-holder-name').val(),
+			address_line1: $('.address_line1').val(),
+			address_city: $('.city').val(),
+			address_zip: $('.zip').val(),
+			address_state: $('.state').val(),
+			address_country: $('.country').val()
+                    }, stripeResponseHandler);
+                    return false; // submit from callback
+        },
+        fields: {
+            full_name: {
+                validators: {
+                    notEmpty: {
+                        message: 'The name is required and cannot be empty'
+                    },
+					stringLength: {
+                        min: 2,
+                        max: 96,
+                        message: 'The full_name must be more than 2 and less than 96 characters long'
+                    }
+                }
+            },
+			project_name: {
+                validators: {
+                    notEmpty: {
+                        message: 'The project name is required and cannot be empty'
+                    },
+					stringLength: {
+                        min: 2,
+                        max: 96,
+                        message: 'The project name must be more than 2 and less than 96 characters long'
+                    }
+                }
+            },
+			last_name: {
+                validators: {
+                    notEmpty: {
+                        message: 'The last name is required and cannot be empty'
+                    },
+					stringLength: {
+                        min: 2,
+                        max: 96,
+                        message: 'The last name must be more than 2 and less than 96 characters long'
+                    }
+                }
+            },
+            city: {
+                validators: {
+                    notEmpty: {
+                        message: 'The city is required and cannot be empty'
+                    }
+                }
+            },
+			zip: {
+                validators: {
+                    notEmpty: {
+                        message: 'The zip is required and cannot be empty'
+                    },
+					stringLength: {
+                        min: 3,
+                        max: 9,
+                        message: 'The zip must be more than 3 and less than 9 characters long'
+                    }
+                }
+            },
+           /*  email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required and can\'t be empty'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    },
+					stringLength: {
+                        min: 6,
+                        max: 65,
+                        message: 'The email must be more than 6 and less than 65 characters long'
+                    }
+                }
+            }, */
+			cardholdername: {
+                validators: {
+                    notEmpty: {
+                        message: 'The card holder name is required and can\'t be empty'
+                    },
+					stringLength: {
+                        min: 6,
+                        max: 70,
+                        message: 'The card holder name must be more than 6 and less than 70 characters long'
+                    }
+                }
+            },
+			cardnumber: {
+		selector: '#cardnumber',
+                validators: {
+                    notEmpty: {
+                        message: 'The credit card number is required and can\'t be empty'
+                    },
+					creditCard: {
+						message: 'The credit card number is invalid'
+					},
+                }
+            },
+			expMonth: {
+                selector: '[data-stripe="exp-month"]',
+                validators: {
+                    notEmpty: {
+                        message: 'The expiration month is required'
+                    },
+                    digits: {
+                        message: 'The expiration month can contain digits only'
+                    },
+                    callback: {
+                        message: 'Expired',
+                        callback: function(value, validator) {
+                            value = parseInt(value, 10);
+                            var year         = validator.getFieldElements('expYear').val(),
+                                currentMonth = new Date().getMonth() + 1,
+                                currentYear  = new Date().getFullYear();
+                            if (value < 0 || value > 12) {
+                                return false;
+                            }
+                            if (year == '') {
+                                return true;
+                            }
+                            year = parseInt(year, 10);
+                            if (year > currentYear || (year == currentYear && value > currentMonth)) {
+                                validator.updateStatus('expYear', 'VALID');
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            },
+            expYear: {
+                selector: '[data-stripe="exp-year"]',
+                validators: {
+                    notEmpty: {
+                        message: 'The expiration year is required'
+                    },
+                    digits: {
+                        message: 'The expiration year can contain digits only'
+                    },
+                    callback: {
+                        message: 'Expired',
+                        callback: function(value, validator) {
+                            value = parseInt(value, 10);
+                            var month        = validator.getFieldElements('expMonth').val(),
+                                currentMonth = new Date().getMonth() + 1,
+                                currentYear  = new Date().getFullYear();
+                            if (value < currentYear || value > currentYear + 100) {
+                                return false;
+                            }
+                            if (month == '') {
+                                return false;
+                            }
+                            month = parseInt(month, 10);
+                            if (value > currentYear || (value == currentYear && month > currentMonth)) {
+                                validator.updateStatus('expMonth', 'VALID');
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            },
+			cvv: {
+		selector: '#cvv',
+                validators: {
+                    notEmpty: {
+                        message: 'The cvv is required and can\'t be empty'
+                    },
+					cvv: {
+                        message: 'The value is not a valid CVV',
+                        creditCardField: 'cardnumber'
+                    }
+                }
+            },
+        }
+    });
+});
+</script>
+<script type="text/javascript">
+            // this identifies your website in the createToken call below
+            Stripe.setPublishableKey('pk_test_Ggl7xyWJ2YazeoQf9nOCXWh6');
+ 
+            function stripeResponseHandler(status, response) {
+                if (response.error) {
+                    // re-enable the submit button
+                    $('.submit-button').removeAttr("disabled");
+					// show hidden div
+					document.getElementById('a_x200').style.display = 'block';
+                    // show the errors on the form
+                    $(".payment-errors").html(response.error.message);
+                } else {
+                    var form$ = $("#payment-form");
+                    // token contains id, last4, and card type
+                    var token = response['id'];
+                    // insert the token into the form so it gets submitted to the server
+                    form$.append("<input type='hidden' name='stripeToken' value='" + token + "' />");
+                    // and submit
+					url				=	'<?php echo base_url(); ?>stripe/payment.php';
+					save_cartUrl	=	'<?php echo base_url(); ?>browse/save_cart';
+					var formData	=	$('#payment-form').serialize();
+					$.ajax({
+						url: url,
+						data: formData,                         // Setting the data attribute of ajax with file_data
+						type: 'post',
+						success:function(data){
+							if(data==2){
+								alert('Payment Failure! Please check your payment details and try again.');
+							}else{
+								$.ajax({
+									url: save_cartUrl,
+									data: data,                    
+									type: 'post',
+									success:function(data){
+											$('.popup_stage_5_thank').empty().append(data);
+										}
+									}); 
+									$('#popup_stage_4').modal('hide');
+									$('#popup_stage_5').modal({
+												backdrop: 'static',
+												keyboard: false
+											});
+								}
+						}
+					}); 
+					//alert(formData);	
+                    //form$.get(0).submit();
+                }
+            }
+ 
+
+</script>
+</body>
+	
+</html>  
+<?php } ?>

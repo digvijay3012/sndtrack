@@ -69,6 +69,7 @@ if(!empty($customerData)){
 												<div style="display:none" class="wishlist_loader_<?php echo $musicId; ?>">
 													<img src="<?php echo base_url(); ?>images/uploading.gif">
 												</div>
+												<div id="add_to_wishlist_msg_<?php echo $musicId; ?>"></div>
 												<?php if ($this->ion_auth->logged_in()){ ?>
                                                <a href="javascript:void(0);">
 													<li class="add_to_wishlist" track_id="<?php echo $musicId; ?>">
