@@ -230,16 +230,16 @@ if ($this->ion_auth->logged_in()){
 									<img src="<?php echo base_url(); ?>images/uploading.gif">
 								</div>
                                     <li>
-                                        <button class="short_order" short_type="Newest" type="button">Newest</button>
+                                        <button artist_id="<?php echo $artist_id; ?>" class="short_order" short_type="Newest" type="button">Newest</button>
                                     </li>
                                     <li>
-                                        <button class="short_order" short_type="Trending" class="active" type="button">Trending</button>
+                                        <button class="short_order" artist_id="<?php echo $artist_id; ?>" short_type="Trending" class="active" type="button">Trending</button>
                                     </li>
                                     <li>
-                                        <button class="short_order" short_type="Longest" type="button">Longest</button>
+                                        <button class="short_order" artist_id="<?php echo $artist_id; ?>" short_type="Longest" type="button">Longest</button>
                                     </li>
                                     <li>
-                                        <button class="short_order" short_type="Shortest"  type="button">Shortest</button>
+                                        <button class="short_order" artist_id="<?php echo $artist_id; ?>" short_type="Shortest"  type="button">Shortest</button>
                                     </li>
                                 </ul>
                             </div>
@@ -1154,8 +1154,9 @@ $(document).on('click','.addToPlayList',function(){
 $(document).on('click','.category_filter',function(){
 	var catId		=	$(this).attr('catId');
 	var artist_id	=	$(this).attr('artist_id');
+	
 	$('.draggable').draggable();
-	var url	=	'<?php echo base_url(); ?>browse/filter_by_category/'+catId;
+	var url	=	'<?php echo base_url(); ?>browse/filter_by_category/'+catId+"/"+artist_id;
 	  $('.category_filter_loader').show();
 	  $.ajax({
 			url: url,
@@ -1176,15 +1177,15 @@ $(document).on('click','.category_filter',function(){
 $(document).on('click','.short_order',function(){
 	var short_cat_id	=	'';
 	
-	var short_type	=	$(this).attr('short_type');
+	var short_type		=	$(this).attr('short_type');
 	var short_cat_id	=	$(this).attr('short_cat_id');	
-	
+	var artist_id		=	$(this).attr('artist_id');	
 	$('.draggable').draggable();
 	var url	=	'<?php echo base_url(); ?>browse/filter_by_browse';
 	  $('.orderBy_filter_loader').show();
 	  $.ajax({
 			url: url,
-			data: {short_type : short_type, short_cat_id: short_cat_id},                         // Setting the data attribute of ajax with file_data
+			data: {short_type : short_type, short_cat_id: short_cat_id, artist_id: artist_id},                         // Setting the data attribute of ajax with file_data
 			type: 'post',
 			success:function(data){
 					if( typeof short_cat_id  !== "undefined"){

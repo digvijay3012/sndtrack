@@ -39,7 +39,14 @@ if(!empty($customerData)){
                             <table class="table loop_table">
 							<thead></thead>
                                 <tbody>
-								<?php $getAllMusic	=	get_artists_music_by_catid($catId); 
+								<?php 
+								if($artistsId !='' && $catId !=''){
+									$getAllMusic	=	get_single_artist_music_by_catid($catId,$artistsId); 
+								}
+								if($artistsId =='' && $catId !=''){
+									$getAllMusic	=	get_artists_music_by_catid($catId); 
+								}
+								
 						if(!empty($getAllMusic)){
 							foreach($getAllMusic	as	$fectchPlaylist){
 								$musicId 			=	$fectchPlaylist['id'];
