@@ -33,6 +33,28 @@ class Browse_model extends CI_Model {
 				//print_r($resultArray); die;
 				return $resultArray;
 		}
+	function filter_by_browse_wishlist($short_type, $wishlist_userId){
+
+			$myQuery	= "SELECT snd_artist_info.artist_id, users.first_name, users.last_name, snd_artist_music.id,snd_artist_info.artist_image, snd_musicfile_version.watermark_format from snd_artist_music INNER JOIN snd_musicfile_version ON snd_artist_music.id=snd_musicfile_version.track_id INNER JOIN snd_artist_info ON snd_artist_music.artist_id=snd_artist_info.artist_id INNER JOIN users ON snd_artist_music.artist_id=users.id INNER JOIN snd_customer_wishlist ON snd_artist_music.id=snd_customer_wishlist.track_id WHERE snd_customer_wishlist.customer_id='$wishlist_userId' AND snd_artist_music.short_order='$short_type'";
+			$query = $this->db->query($myQuery);
+			$resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				//print_r($resultArray); die;
+				return $resultArray;
+	}
+	function filter_by_browse_playlist($short_type, $playlist_id){
+			$myQuery	= "SELECT snd_artist_info.artist_id, users.first_name, users.last_name, snd_artist_music.id,snd_artist_info.artist_image, snd_musicfile_version.watermark_format from snd_artist_music INNER JOIN snd_musicfile_version ON snd_artist_music.id=snd_musicfile_version.track_id INNER JOIN snd_artist_info ON snd_artist_music.artist_id=snd_artist_info.artist_id INNER JOIN users ON snd_artist_music.artist_id=users.id INNER JOIN snd_customer_playlist_music ON snd_artist_music.id=snd_customer_playlist_music.track_id WHERE snd_customer_playlist_music.playlist_id='$playlist_id' AND snd_artist_music.short_order='$short_type'"; 
+			
+			$query = $this->db->query($myQuery);
+			$resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				//print_r($resultArray); die;
+				return $resultArray;
+	}
 	function store_temp_license_type($session_id, $license_type, $customer_id, $amount, $license_type_value,$track_id){
 			$data = array(
 				"session_id" 		=> $session_id,

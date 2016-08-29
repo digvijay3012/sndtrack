@@ -28,12 +28,18 @@ class Browse extends CI_Controller {
 				$short_type					=	$this->input->post('short_type');
 				$short_cat_id				=	$this->input->post('short_cat_id');
 				$artist_id					=	$this->input->post('artist_id');
-				$data	=	$this->browse_model->filter_by_browse($short_type, $short_cat_id,$artist_id);
-				//print_r($data); die;
-				
-				return $this->load->view('search/browse_orderby_filter',array('data'=>$data));
-				//$this->load->view('artist/footer_view');
-		
+				$wishlist_userId			=	$this->input->post('wishlist_userId');
+				$playlist_id				=	$this->input->post('playlist_id'); 
+				if($wishlist_userId !=""){
+					$data	=	$this->browse_model->filter_by_browse_wishlist($short_type, $wishlist_userId);
+					return $this->load->view('search/wishlist_browse_orderby_filter',array('data'=>$data));
+				}elseif($playlist_id !=''){
+					$data	=	$this->browse_model->filter_by_browse_playlist($short_type, $playlist_id);
+					return $this->load->view('search/playlist_browse_orderby_filter',array('data'=>$data));
+				}else{
+					$data	=	$this->browse_model->filter_by_browse($short_type, $short_cat_id,$artist_id);
+					return $this->load->view('search/browse_orderby_filter',array('data'=>$data));
+				}		
 	}
 	public function filter_by_category($catid=null, $artistsId=null){
 		

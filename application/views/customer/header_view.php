@@ -29,6 +29,9 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery.bxslider.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/owl.carousel.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap-formhelpers.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap-countries-flag.css"> 
+	<link rel="stylesheet" href="<?php echo base_url(); ?>css/curriency_flags.css"> 
     <link href='https://fonts.googleapis.com/css?family=Martel:400,200,300,600,700,800,900' rel='stylesheet' type='text/css'>
 </head>
 <?php

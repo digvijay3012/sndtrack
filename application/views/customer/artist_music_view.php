@@ -579,7 +579,7 @@ if ($this->ion_auth->logged_in()){
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    
                     <div class="modal-body">
                         <div class="logo text-center">
                             <a href="">
@@ -628,7 +628,9 @@ if ($this->ion_auth->logged_in()){
   <!-- Country -->
 	<li>
 	<div class="form-group">
-       <div class="country bfh-selectbox bfh-countries " name="country" placeholder="Select Country" data-flags="true" data-filter="true"> </div>
+      <div class="country bfh-selectbox bfh-countries" name="country" placeholder="Select Country" data-flags="true" data-filter="true"> 
+	   
+	   </div>
 	</div>
     </li>
   </ul>
@@ -757,9 +759,8 @@ if ($this->ion_auth->logged_in()){
 		<script src="https://use.typekit.net/auo4nbe.js"></script>
 		<script src="<?php echo base_url(); ?>js/jquery-ui.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-		<script src="<?php echo base_url(); ?>js/bootstrap-formhelpers-min.js"></script>
+		<script src="<?php echo base_url(); ?>js/bootstrap-formhelpers.js"></script>
 		<script src="<?php echo base_url(); ?>js/bootstrapValidator-min.js"></script>
-
 <script>
 /*************  Drag and Save  to playlist ************/
  //$(function() {
@@ -1357,14 +1358,13 @@ if(login_email_address !='' && login_password!=''){
 										data: {data : data},                         // Setting the data attribute of ajax with file_data
 										type: 'post',
 										success:function(data){
-												
 												$('.popup_stage3').empty().append(data);
 											}
 										}); 
 							$('#popup_stage_3').modal({
 												backdrop: 'static',
 												keyboard: false
-											});
+							});
 											
 						}
 					}

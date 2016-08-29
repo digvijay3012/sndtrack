@@ -190,16 +190,16 @@ $getPlaylist_id	= $this->uri->segment(3);
 									<img src="<?php echo base_url(); ?>images/uploading.gif">
 								</div>
                                     <li>
-                                        <button class="short_order" short_type="Newest" type="button">Newest</button>
+                                        <button class="short_order" wishlist_userId="<?php echo $customerId; ?>" short_type="Newest" type="button">Newest</button>
                                     </li>
                                     <li>
-                                        <button class="short_order" short_type="Trending" class="active" type="button">Trending</button>
+                                        <button class="short_order" wishlist_userId="<?php echo $customerId; ?>" short_type="Trending" class="active" type="button">Trending</button>
                                     </li>
                                     <li>
-                                        <button class="short_order" short_type="Longest" type="button">Longest</button>
+                                        <button class="short_order" wishlist_userId="<?php echo $customerId; ?>" short_type="Longest" type="button">Longest</button>
                                     </li>
                                     <li>
-                                        <button class="short_order" short_type="Shortest"  type="button">Shortest</button>
+                                        <button class="short_order" wishlist_userId="<?php echo $customerId; ?>" short_type="Shortest"  type="button">Shortest</button>
                                     </li>
                                 </ul>
                             </div>
@@ -1082,15 +1082,15 @@ $(document).on('click','.category_filter',function(){
 $(document).on('click','.short_order',function(){
 	var short_cat_id	=	'';
 	
-	var short_type	=	$(this).attr('short_type');
+	var short_type		=	$(this).attr('short_type');
 	var short_cat_id	=	$(this).attr('short_cat_id');	
-	
+	var wishlist_userId	=	$(this).attr('wishlist_userId');	
 	$('.draggable').draggable();
 	var url	=	'<?php echo base_url(); ?>browse/filter_by_browse';
 	  $('.orderBy_filter_loader').show();
 	  $.ajax({
 			url: url,
-			data: {short_type : short_type, short_cat_id: short_cat_id},                         // Setting the data attribute of ajax with file_data
+			data: {short_type : short_type, short_cat_id: short_cat_id, wishlist_userId: wishlist_userId},                         // Setting the data attribute of ajax with file_data
 			type: 'post',
 			success:function(data){
 					if( typeof short_cat_id  !== "undefined"){
