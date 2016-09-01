@@ -1486,7 +1486,8 @@ footer .middle_footer {
 .dashboard_cont .btns_dashbord li a:hover,
 .license_terms button:hover,
 .lst_data button:hover,
-.lst_data a:hover {
+.lst_data a:hover,
+.added_pop .lst_data .added {
     background: rgb(229, 75, 79) none repeat scroll 0 0;
     border: 1px solid #d03236;
     color: #fff;
@@ -1675,6 +1676,7 @@ header .logo_header li.without_search {
     font-family: "proxima-nova";
     font-size: 18px;
     font-weight: lighter;
+    height: 49px;
 }
 
 .custom-button.full-width {
@@ -2612,6 +2614,37 @@ h2.heading_artist {
     font-weight: 400;
 }
 
+.your_music a:hover,
+h3 a.accordion-toggle,
+.panel h3.rt_hdng a.accordion-toggle:hover {
+    color: #e54b4f;
+}
+
+.wishlist-loaderCls .wishlist_loader_style {
+    bottom: -37px;
+    left: -49px;
+    position: absolute;
+    top: auto;
+    width: 132px;
+}
+
+.wishlist-loaderCls {
+    position: relative;
+}
+
+.wshlist-add {
+    font-size: 15px;
+    left: -55px;
+    position: absolute;
+    top: 30px;
+    width: 167px;
+    color: #e54b4f;
+}
+
+h3 a.accordion-toggle.collapsed {
+    color: #333;
+}
+
 .your_music a:hover {
     color: #e54b4f;
 }
@@ -2620,13 +2653,18 @@ h2.heading_artist {
     margin: 0;
 }
 
-.searchh.your_music li a {
+.searchh.your_music li a,
+.artist_accord .panel-body a {
     font-family: proxima-nova;
     font-size: 13px;
     font-weight: 100;
 }
 
-.searchh .panel-collapse {
+.your_music .artist_accord .panel-body {
+    margin: 9px 0 0px;
+}
+
+.searchh .panel-collapse .panel-body {
     margin-bottom: 10px;
 }
 
@@ -3429,7 +3467,7 @@ table.table tr .pdngg-top {
 
 .download_popup {
     display: inline-block;
-    margin: 0 0 0px;
+    margin: 40px 0;
     width: 100%;
 }
 
@@ -3521,13 +3559,14 @@ ul li.expiry_dat input {
     margin: 0 6px 0 0;
 }
 
-.order_list button {
+.order_list .ordr_tabs button {
     background: transparent none repeat scroll 0 0;
     border: 1px solid #333;
     padding: 0 7px;
 }
 
-.order_list button.active {
+.order_list button.active,
+.order_list button:hover {
     background: #e54b4f;
     color: #fff;
 }
@@ -3537,6 +3576,23 @@ ul li.expiry_dat input {
     margin-bottom: 10px;
     vertical-align: top;
     width: 100%;
+    position: relative;
+}
+
+.ordr_tabs .orderBy_filter_loader {
+    position: absolute;
+    height: 14px;
+    top: -20px;
+    left: 0;
+    right: 35%;
+    margin: auto;
+    text-align: center;
+}
+
+.artist_accord .panel-group,
+.artist_accord .panel-group h3,
+.artist_accord .panel-group a {
+    margin: 0;
 }
 
 table.table tr td.nme_user {
@@ -3733,6 +3789,7 @@ header.off-canvas {
     font-weight: 600;
     padding: 4px 20px;
     vertical-align: top;
+    float: right;
 }
 
 .confirm_purchs,
@@ -3830,6 +3887,182 @@ table.loop_table {
 
 table.loop_table:last-child {
     border-bottom: 0;
+}
+
+
+/*======================changes==============================*/
+
+.added_pop {
+    display: inline-block;
+    margin: 0 0 5px;
+    min-height: 35px;
+    vertical-align: top;
+    width: 100%;
+}
+
+.loader_gif {
+    height: 10px;
+    left: 0;
+    line-height: normal;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+
+.rt_playlist-nam {
+    display: inline-block;
+    font-family: "freight-display-pro";
+    font-size: 18px;
+    font-weight: 300;
+    padding-right: 15px;
+    vertical-align: middle;
+    width: 62.9%;
+}
+
+.lst_data.lft_playlst {
+    display: inline-block;
+    text-align: right;
+    vertical-align: middle;
+    width: 36%;
+    min-height: 36px;
+    position: relative;
+}
+
+.added_pop .lst_data button {
+    font-family: "freight-display-pro";
+    font-size: 18px;
+    font-weight: 300;
+    padding: 4px 0;
+    width: 100%;
+}
+
+.added-playlist .create-play input {
+    border-right: 0 none;
+    padding: 10px 20px;
+}
+
+.order_list .create-play {
+    margin: 0;
+    width: 64%;
+}
+
+.order_list .creat_btn {
+    margin: 0;
+    width: 36%;
+}
+
+.added-playlist .login_form ul,
+.added-playlist .login_form,
+.added-playlist .login_text {
+    margin: 0;
+}
+
+.popup_playlist_loader_3 {
+    margin: auto;
+    text-align: center;
+}
+
+.modal-backdrop {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+}
+
+.lst_data.lft_playlst.a {
+    margin: 0 0 0 3.5px;
+}
+
+.col-1-form .form-group.has-feedback,
+.col-1-form .bfh-selectbox {
+    line-height: 0;
+    margin: 0;
+}
+
+.col-1-form .has-feedback .form-control {
+    border-radius: 0;
+    box-shadow: none;
+    padding-right: 0;
+}
+
+.col-1-form .bfh-selectbox {
+    display: inline-block;
+    height: auto;
+    position: relative;
+    width: 100%;
+}
+
+.col-1-form .bfh-selectbox > .bfh-selectbox-toggle {
+    background-color: #fff;
+    color: #555;
+    border-radius: 0;
+    border: 1px solid #95989a;
+    display: inline-block;
+    font-family: "proxima-nova";
+    font-size: 18px;
+    font-weight: lighter;
+    height: 49px;
+    line-height: normal;
+    padding: 12px 20px;
+    width: 100%;
+}
+
+.col-1-form span.bfh-selectbox-option {
+    height: auto;
+    min-height: inherit;
+}
+
+.col-1-form .has-feedback .form-control.bfh-selectbox-filter {
+    border-radius: 0;
+    box-shadow: none;
+    display: block;
+    height: 36px;
+    margin: auto;
+    padding: 0;
+    width: 95%;
+}
+
+.col-1-form .bfh-selectbox > .bfh-selectbox-toggle > .caret {
+    display: none;
+    float: right;
+}
+
+.login_form li .has-feedback select {
+    background-position: 90% center;
+    background-size: 11px auto;
+    width: 45%;
+}
+
+.bfh-selectbox-options li {
+    margin: 0;
+}
+
+.has-feedback small.help-block {
+    display: none !important;
+}
+
+.has-feedback i {
+    top: 7px !important;
+}
+
+.login_form .has-error input,
+.login_form .has-error input:focus,
+.login_form .has-error select {
+    border-color: #a94442;
+    box-shadow: none;
+}
+
+.error {
+    border: 1px solid;
+    color: #d03236;
+    display: inline-block;
+    font-weight: normal;
+    margin: 0 0 17px;
+    padding: 12px 0;
+    text-align: center;
+    width: 100%;
 }
 
 

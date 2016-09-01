@@ -66,7 +66,7 @@ if ($this->ion_auth->logged_in()){
                     <h3 class="rt_hdng">YOUR MUSIC</h3>
                     <ul>
                         <li><a href="<?php echo base_url(); ?>wishlist">Hearted</a></li>
-                        <div id="accordion2" class="panel-group user_acc">
+                        <li><div id="accordion2" class="panel-group user_acc">
 						<h3 class="rt_hdng"><a href="#collapseOne_22" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed" aria-expanded="false">
 						Artists																
 						</a></h3>
@@ -93,7 +93,7 @@ if ($this->ion_auth->logged_in()){
 								<?php  } ?>	
 							</div>
 						</div>
-				</div>
+				</div></li>
                         <li><a href="<?php echo base_url(); ?>browse/customer_songs">Songs</a></li>
                     </ul>
                 </div>
@@ -112,8 +112,8 @@ if ($this->ion_auth->logged_in()){
                         <div class="panel panel-default">
                            
 								<?php if($parentCatName=='Instrumental'){
-									echo $parentCatName;
-									echo '<h3 class="rt_hdng"><input type="checkbox" name="Instruments" value="Instruments" class="category_filter" catId="'.$parentCatId.'"></h3>';
+								
+									echo '<h3 class="rt_hdng">'.$parentCatName.'<input type="checkbox" name="Instruments" value="Instruments" class="category_filter" catId="'.$parentCatId.'"></h3>';
 									}else{ ?>
 									 <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_<?php echo $counterFlag; ?>">
 										<?php echo $parentCatName; ?>
@@ -129,7 +129,7 @@ if ($this->ion_auth->logged_in()){
 								foreach($childcatData as $childCat){
 									 $childCatName	=	$childCat['category_name'];
 									 $childCatId	=	$childCat['id']; ?>
-                                        <a href="javascript:void(0);" ><li class="category_filter" catId="<?php echo $childCatId; ?>"><?php echo $childCatName; ?></li>	</a>
+                                       <li class="category_filter" catId="<?php echo $childCatId; ?>"> <a href="javascript:void(0);" ><?php echo $childCatName; ?></a></li>	
 										
 									<?php } } ?> 
                                     </ul>
@@ -221,11 +221,12 @@ if ($this->ion_auth->logged_in()){
                   <div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
                         <div class="order_list">
                             <div class="ordr_tabs">
-                                <ul>
-                                    <li>Order by:</li>
-									<div style="display:none" class="orderBy_filter_loader">
+							<div style="display:none" class="orderBy_filter_loader">
 									<img src="<?php echo base_url(); ?>images/uploading.gif">
 								</div>
+                                <ul>
+                                    <li>Order by:</li>
+									
                                     <li>
                                         <button class="short_order" short_type="Newest" type="button">Newest</button>
                                     </li>
@@ -276,17 +277,18 @@ if ($this->ion_auth->logged_in()){
 														<i class="fa fa-download" aria-hidden="true"></i>
 													</a>
 												</li>
-												<div style="display:none" class="wishlist_loader_<?php echo $musicId; ?>">
+											<?php if ($this->ion_auth->logged_in()){ ?>
+                                             <li class="add_to_wishlist wishlist-loaderCls" track_id="<?php echo $musicId; ?>">
+												<div style="display:none" class="wishlist_loader_style wishlist_loader_<?php echo $musicId; ?>">
 													<img src="<?php echo base_url(); ?>images/uploading.gif">
 												</div>
-												<div id="add_to_wishlist_msg_<?php echo $musicId; ?>"></div>
-												<?php 
-													if ($this->ion_auth->logged_in()){ ?>
-                                               <a href="javascript:void(0);">
-													<li class="add_to_wishlist" track_id="<?php echo $musicId; ?>">
+												<div class="wshlist-add" id="add_to_wishlist_msg_<?php echo $musicId; ?>">
+												</div>
+													 <a href="javascript:void(0);">
 														<i class="fa fa-heart-o" aria-hidden="true"></i>
-													</li>
-											   </a>
+													</a>
+												</li>
+											  
 											<?php } else { ?>
 											<a data-target="#login_alert_popup" data-toggle="modal" href="javascript:void(0);">
 													<li class="">
@@ -336,25 +338,27 @@ if ($this->ion_auth->logged_in()){
 															$addedPlaylistId		=	$getAddedplaylist['id'];	
 															$addedPlaylistName		=	$getAddedplaylist['playlist_name'];	
 														?>
+											<div class="added_pop">
+												<div class="rt_playlist-nam"><?php echo $addedPlaylistName; ?></div>
+												<div class="lst_data lft_playlst">
+												<div style="display:none" class="loader_gif playlist_loader_<?php echo $addedPlaylistId; ?>">
+															<img src="<?php echo base_url(); ?>images/uploading.gif">
+												</div>	
+												<?php 
+													$getAddstatus 	=	check_track_exitsin_playlist($addedPlaylistId, $musicId, $customerId);
+													
+													if($getAddstatus=='added'){ ?>
+														<button class="added"  type="button">Added</button>	
+													<?php }else{ ?>
+														<button class="addedToPlayList_<?php echo $addedPlaylistId; ?>_<?php echo $musicId; ?> added" style="display:none" type="button">Added</button>
+														<button class="addToPlayList" playlist_id="<?php echo $addedPlaylistId; ?>" type="button" track_id="<?php echo $musicId; ?>">Add to playlist</button>
 														
-															<ul>
-																<li><?php echo $addedPlaylistName; ?></li>
-																<li class="lst_data">
-																<div style="display:none" class="playlist_loader_<?php echo $addedPlaylistId; ?>">
-																			<img src="<?php echo base_url(); ?>images/uploading.gif">
-																</div>	
-																<?php 
-																	$getAddstatus 	=	check_track_exitsin_playlist($addedPlaylistId, $musicId, $customerId);
-																	
-																	if($getAddstatus=='added'){ ?>
-																		<button  type="button">Added</button>	
-																	<?php }else{ ?>
-																		<button class="addedToPlayList_<?php echo $addedPlaylistId; ?>_<?php echo $musicId; ?>" style="display:none" type="button">Added</button>
-																		<button class="addToPlayList" playlist_id="<?php echo $addedPlaylistId; ?>" type="button" track_id="<?php echo $musicId; ?>">Add to playlist</button>
-																		
-																	<?php } ?>
-																</li>
-															</ul>
+													<?php } ?>
+												
+													
+												</div>
+											</div>
+
 												<?php }}?>
 												</div>
 												<div class="login_text text-center">
@@ -389,14 +393,43 @@ if ($this->ion_auth->logged_in()){
                         </div>
                     </div>
 					</div>
-					 </div>
-                    <div class="rgt_browse pull-right">
-                        <div class="browse-right-box">
-                            <h3>Clem Snide</h3>
-                            <figure><img src="<?php echo base_url(); ?>images/browse-page-img.jpg" alt="" title=""></figure>
-                            <p>Clem grew up in California listening to The Byrds and Lou Reed. He followed in his fathers foot-steps by learning to play the guitar and banjo. At the age of 16 he was playing local shows in San-Clemente, California and released his first record in Dec 2003 to critial acclaim.</p>
-                            <a href="#" class="btn-trns ">More from this Artist</a>
-                        </div>
+					
+                  <div class="rt_playlists pull-right">
+                        <h2 class="heading_artist">Similiar Artists</h2>
+                        <ul class="effect_img">
+                            <li>
+                                <a href="">
+                                    <div class="img_inner"><img src="<?php echo base_url(); ?>images/artist1.jpg" alt=""></div>
+                                    <div class="carousel-caption-custom">
+                                        <p>Karon O</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <div class="img_inner"><img src="<?php echo base_url(); ?>images/artist2.jpg" alt=""></div>
+                                    <div class="carousel-caption-custom">
+                                        <p>Allah Las</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <div class="img_inner"><img src="<?php echo base_url(); ?>images/artist3.jpg" alt=""></div>
+                                    <div class="carousel-caption-custom">
+                                        <p>Dan Auerbach</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <div class="img_inner"><img src="<?php echo base_url(); ?>images/artist4.jpg" alt=""></div>
+                                    <div class="carousel-caption-custom">
+                                        <p>Nick Cave</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                
             
@@ -1170,8 +1203,9 @@ $(document).on('click','.category_filter',function(){
 	});	
 /*************  Short Order	************/		
 $(document).on('click','.short_order',function(){
+	$('.short_order').removeClass('active');
+	$(this).addClass('active');
 	var short_cat_id	=	'';
-	
 	var short_type	=	$(this).attr('short_type');
 	var short_cat_id	=	$(this).attr('short_cat_id');	
 	

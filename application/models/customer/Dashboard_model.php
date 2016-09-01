@@ -18,11 +18,14 @@ class Dashboard_model extends CI_Model {
 		}
 	function get_artist_profile_by_trackId($track_id){
 			$selQry	=	$this->db->query("SELECT artist_id FROM snd_artist_music WHERE id='$track_id'")->row();
+			$resultArray	=	array();
 			if(!empty($selQry)){
 				$artistId	=	$selQry->artist_id;
+			}else{
+				return $resultArray;
 			}
 			$query = $this->db->query("SELECT snd_artist_info.artist_bio, snd_artist_info.facebook_link, snd_artist_info.twitter_link, snd_artist_info.instagram_link,snd_artist_info.artist_image, users.id, users.first_name, users.last_name from users INNER JOIN users_groups ON users.id=users_groups.user_id INNER JOIN snd_artist_info ON users.id=snd_artist_info.artist_id WHERE users_groups.group_id=3 AND users.id='$artistId'");
-			$resultArray	=	array();
+			
 			$resultArray['track_id']	=	$track_id;
 			foreach ($query->result_array() as $row){
 						$resultArray[]= $row;

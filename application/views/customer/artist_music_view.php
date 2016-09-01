@@ -1,5 +1,5 @@
 <?php 
-//echo "<pre>";		print_r($artist_data);		echo "</pre>";
+//echo "<pre>";		print_r($artist_data);		echo "</pre>"; die;
 if(!empty($artist_data)){
 	$track_id 			=	$artist_data['track_id'];
 	$artist_bio 		=	$artist_data['0']['artist_bio'];
@@ -39,10 +39,7 @@ if ($this->ion_auth->logged_in()){
                     </ul>
                 </div>
                 <p class="middle_cntnt"><?php echo $artist_bio; ?></p>
-                <!--<div class="instrumnt_bnnr">
-                    <h3>Instruments</h3>
-                    <p>Lorem Ipsum, Electric guitar, piano, drums, bass</p>
-                </div>-->
+               
             </div>
             <div class="follow pull-right">
 			 <div style="display:none" class="set_arists_status">
@@ -69,7 +66,7 @@ if ($this->ion_auth->logged_in()){
                     <h3 class="rt_hdng">YOUR MUSIC</h3>
                     <ul>
                         <li><a href="<?php echo base_url(); ?>wishlist">Hearted</a></li>
-                        <div id="accordion2" class="panel-group user_acc">
+                        <li><div id="accordion2" class="panel-group user_acc">
 						<h3 class="rt_hdng"><a href="#collapseOne_22" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed" aria-expanded="false">
 						Artists																
 						</a></h3>
@@ -96,7 +93,7 @@ if ($this->ion_auth->logged_in()){
 								<?php  } ?>	
 							</div>
 						</div>
-				</div>
+				</div></li>
                         <li><a href="<?php echo base_url(); ?>browse/customer_songs">Songs</a></li>
                     </ul>
                 </div>
@@ -115,8 +112,8 @@ if ($this->ion_auth->logged_in()){
                         <div class="panel panel-default">
                            
 								<?php if($parentCatName=='Instrumental'){
-									echo $parentCatName;
-									echo '<h3 class="rt_hdng"><input type="checkbox" name="Instruments" value="Instruments" class="category_filter" artist_id="'.$artist_id.'" catId="'.$parentCatId.'"></h3>';
+									
+									echo '<h3 class="rt_hdng">'.$parentCatName.'<input type="checkbox" name="Instruments" value="Instruments" class="category_filter" artist_id="'.$artist_id.'" catId="'.$parentCatId.'"></h3>';
 									}else{ ?>
 									 <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_<?php echo $counterFlag; ?>">
 										<?php echo $parentCatName; ?>
@@ -132,7 +129,7 @@ if ($this->ion_auth->logged_in()){
 								foreach($childcatData as $childCat){
 									 $childCatName	=	$childCat['category_name'];
 									 $childCatId	=	$childCat['id']; ?>
-                                        <a href="javascript:void(0);" ><li class="category_filter" artist_id="<?php echo $artist_id; ?>" catId="<?php echo $childCatId; ?>"><?php echo $childCatName; ?></li>	</a>
+                                        <li class="category_filter" artist_id="<?php echo $artist_id; ?>" catId="<?php echo $childCatId; ?>"><a href="javascript:void(0);" ><?php echo $childCatName; ?></a></li>	
 										
 									<?php } } ?> 
                                     </ul>
@@ -279,23 +276,27 @@ if ($this->ion_auth->logged_in()){
 														<i class="fa fa-download" aria-hidden="true"></i>
 													</a>
 												</li>
-												<div style="display:none" class="wishlist_loader_<?php echo $musicId; ?>">
+													<?php 	
+													if ($this->ion_auth->logged_in()){ ?>
+                                              
+													<li class="add_to_wishlist wishlist-loaderCls" track_id="<?php echo $musicId; ?>">
+													<div style="display:none" class="wishlist_loader_style wishlist_loader_<?php echo $musicId; ?>">
 													<img src="<?php echo base_url(); ?>images/uploading.gif">
 												</div>
-												<div id="add_to_wishlist_msg_<?php echo $musicId; ?>"></div>
-												<?php 
-													if ($this->ion_auth->logged_in()){ ?>
-                                               <a href="javascript:void(0);">
-													<li class="add_to_wishlist" track_id="<?php echo $musicId; ?>">
+												<div class="wshlist-add" id="add_to_wishlist_msg_<?php echo $musicId; ?>"></div>
+													 <a href="javascript:void(0);">
 														<i class="fa fa-heart-o" aria-hidden="true"></i>
+														 </a>
 													</li>
-											   </a>
+											  
 											<?php } else { ?>
-											<a data-target="#login_alert_popup" data-toggle="modal" href="javascript:void(0);">
+											
 													<li class="">
+													<a data-target="#login_alert_popup" data-toggle="modal" href="javascript:void(0);">
 														<i class="fa fa-heart-o" aria-hidden="true"></i>
+														</a>
 													</li>
-											</a>
+											
 											<?php } ?>
 											   <?php 
 													if($this->ion_auth->logged_in()){ ?>
@@ -339,25 +340,26 @@ if ($this->ion_auth->logged_in()){
 															$addedPlaylistId		=	$getAddedplaylist['id'];	
 															$addedPlaylistName		=	$getAddedplaylist['playlist_name'];	
 														?>
+											<div class="added_pop">
+													<div class="rt_playlist-nam"><?php echo $addedPlaylistName; ?></div>
+													<div class="lst_data lft_playlst">
+													<div style="display:none" class="loader_gif playlist_loader_<?php echo $addedPlaylistId; ?>">
+																<img src="<?php echo base_url(); ?>images/uploading.gif">
+													</div>	
+													<?php 
+														$getAddstatus 	=	check_track_exitsin_playlist($addedPlaylistId, $musicId, $customerId);
 														
-															<ul>
-																<li><?php echo $addedPlaylistName; ?></li>
-																<li class="lst_data">
-																<div style="display:none" class="playlist_loader_<?php echo $addedPlaylistId; ?>">
-																			<img src="<?php echo base_url(); ?>images/uploading.gif">
-																</div>	
-																<?php 
-																	$getAddstatus 	=	check_track_exitsin_playlist($addedPlaylistId, $musicId, $customerId);
-																	
-																	if($getAddstatus=='added'){ ?>
-																		<button  type="button">Added</button>	
-																	<?php }else{ ?>
-																		<button class="addedToPlayList_<?php echo $addedPlaylistId; ?>_<?php echo $musicId; ?>" style="display:none" type="button">Added</button>
-																		<button class="addToPlayList" playlist_id="<?php echo $addedPlaylistId; ?>" type="button" track_id="<?php echo $musicId; ?>">Add to playlist</button>
-																		
-																	<?php } ?>
-																</li>
-															</ul>
+														if($getAddstatus=='added'){ ?>
+															<button class="added" type="button">Added</button>	
+														<?php }else{ ?>
+															<button class="addedToPlayList_<?php echo $addedPlaylistId; ?>_<?php echo $musicId; ?> added" style="display:none" type="button">Added</button>
+															<button class="addToPlayList" playlist_id="<?php echo $addedPlaylistId; ?>" type="button" track_id="<?php echo $musicId; ?>">Add to playlist</button>
+															
+														<?php } ?>
+													
+														
+													</div>
+												</div>
 												<?php }}?>
 												</div>
 												<div class="login_text text-center">
@@ -392,14 +394,43 @@ if ($this->ion_auth->logged_in()){
                         </div>
                     </div>
 					</div>
-					 </div>
-                    <div class="rgt_browse pull-right">
-                        <div class="browse-right-box">
-                            <h3>Clem Snide</h3>
-                            <figure><img src="<?php echo base_url(); ?>images/browse-page-img.jpg" alt="" title=""></figure>
-                            <p>Clem grew up in California listening to The Byrds and Lou Reed. He followed in his fathers foot-steps by learning to play the guitar and banjo. At the age of 16 he was playing local shows in San-Clemente, California and released his first record in Dec 2003 to critial acclaim.</p>
-                            <a href="#" class="btn-trns ">More from this Artist</a>
-                        </div>
+					
+                    <div class="rt_playlists pull-right">
+                        <h2 class="heading_artist">Similiar Artists</h2>
+                        <ul class="effect_img">
+                            <li>
+                                <a href="">
+                                    <div class="img_inner"><img src="<?php echo base_url(); ?>images/artist1.jpg" alt=""></div>
+                                    <div class="carousel-caption-custom">
+                                        <p>Karon O</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <div class="img_inner"><img src="<?php echo base_url(); ?>images/artist2.jpg" alt=""></div>
+                                    <div class="carousel-caption-custom">
+                                        <p>Allah Las</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <div class="img_inner"><img src="<?php echo base_url(); ?>images/artist3.jpg" alt=""></div>
+                                    <div class="carousel-caption-custom">
+                                        <p>Dan Auerbach</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <div class="img_inner"><img src="<?php echo base_url(); ?>images/artist4.jpg" alt=""></div>
+                                    <div class="carousel-caption-custom">
+                                        <p>Nick Cave</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                
             
@@ -574,7 +605,7 @@ if ($this->ion_auth->logged_in()){
         </div>
 		
 <!-- Checkout Popup Modal -->
-        <div class="modal fade purhased" id="popup_stage_4" role="dialog">
+      <div class="modal fade purhased" id="popup_stage_4" role="dialog">
             <div class="modal-dialog">
 
                 <!-- Modal content-->
@@ -590,6 +621,7 @@ if ($this->ion_auth->logged_in()){
 						<div class="chckout_pop text-center">
                             <p>Checkout</p>
                         </div>
+						<div class="login_cont text-center help_cnt cstmr_settings">
 				<form action="" method="POST" id="payment-form" class="login_form">
                         <div class="alert alert-danger" id="a_x200" style="display: none;"> <strong>Error!</strong> <span class="payment-errors"></span> </div>
 				<div class="input_fields">
@@ -628,9 +660,7 @@ if ($this->ion_auth->logged_in()){
   <!-- Country -->
 	<li>
 	<div class="form-group">
-      <div class="country bfh-selectbox bfh-countries" name="country" placeholder="Select Country" data-flags="true" data-filter="true"> 
-	   
-	   </div>
+       <div class="country2 bfh-selectbox bfh-countries" name="country" placeholder="Select Country" data-flags="true" data-filter="true"> </div>
 	</div>
     </li>
   </ul>
@@ -647,9 +677,9 @@ if ($this->ion_auth->logged_in()){
   <!-- City -->
  <li>
    <div class="form-group">
-	  <input type="text" name="last_name" placeholder="Last Name" class="last_name form-control">
+	  <input type="text" name="last_name" placeholder="Last Name" class="last_name form-control">  </div> 
    </li>
-   </div> 
+ 
   <!-- State -->
 	<li>
 	<div class="form-group">
@@ -683,7 +713,7 @@ if ($this->ion_auth->logged_in()){
 			</li>
 			<li class="expiry_dat">
 			<div class="form-group"> 	
-				<select name="select2" data-stripe="exp-month" class="card-expiry-month stripe-sensitive required">
+				<select name="select2" data-stripe="exp-month" class="card-expiry-month stripe-sensitive required pull-left">
 					<option value="01" selected="selected">01</option>
 					<option value="02">02</option>
 					<option value="03">03</option>
@@ -697,8 +727,8 @@ if ($this->ion_auth->logged_in()){
 					<option value="11">11</option>
 					<option value="12">12</option>
 				  </select>
-				  <span> / </span>
-				  <select name="select2" data-stripe="exp-year" class="card-expiry-year stripe-sensitive required">
+				
+				  <select name="select2" data-stripe="exp-year" class="card-expiry-year stripe-sensitive required pull-right">
 				  </select>
 			</div>
 			</li>
@@ -710,15 +740,16 @@ if ($this->ion_auth->logged_in()){
 		</ul>
   </div>
     <!-- Submit -->
-    <div class="control-group">
-      <div class="controls">
-        <center>
-          <button class="btn btn-success custom-button" type="submit">Pay Now</button>
-        </center>
+    
+      <div class="back_btn">
+  
+          <button class="custom-button" type="submit">Pay Now</button>
+       
       </div>
-    </div>
+    
  
   </form>
+    </div>	
     </div>
                 </div>
             </div>
@@ -1152,7 +1183,7 @@ $(document).on('click','.addToPlayList',function(){
 		}
 	});
 	/*************  Category Filter	************/	
-$(document).on('click','.category_filter',function(){
+$(document).on('click','.category_filter',function(){	
 	var catId		=	$(this).attr('catId');
 	var artist_id	=	$(this).attr('artist_id');
 	
@@ -1176,8 +1207,9 @@ $(document).on('click','.category_filter',function(){
 	});	
 /*************  Short Order	************/		
 $(document).on('click','.short_order',function(){
+	$('.short_order').removeClass('active');
+	$(this).addClass('active');
 	var short_cat_id	=	'';
-	
 	var short_type		=	$(this).attr('short_type');
 	var short_cat_id	=	$(this).attr('short_cat_id');	
 	var artist_id		=	$(this).attr('artist_id');	

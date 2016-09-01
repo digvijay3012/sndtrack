@@ -86,7 +86,7 @@ class Dashboard extends CI_Controller {
 		}
 		$customerId		=	$this->ion_auth->user()->row()->user_id; 
 		 $data			=	$this->dashboard_model->create_playlist_inpopup($track_id, $popup_playlist_name, $customerId);
-		echo '<ul><li>'.$popup_playlist_name.'</li><li class="lst_data"><button type="button">Added</button></li></ul>';
+		echo '<div class="added_pop"><div class="rt_playlist-nam">'.$popup_playlist_name.'</div><div class="lst_data lft_playlst a"><button type="button" class="added">Added</button></div></div>';
 		
 	}
 	public function filter_by_category($catid=null){

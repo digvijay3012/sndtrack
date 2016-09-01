@@ -24,7 +24,7 @@ $getPlaylist_id	= $this->uri->segment(3);
                     <h3 class="rt_hdng">YOUR MUSIC</h3>
                     <ul>
                         <li><a href="<?php echo base_url(); ?>wishlist">Hearted</a></li>
-                        <div id="accordion2" class="panel-group user_acc">
+                        <li><div id="accordion2" class="panel-group user_acc">
 						<h3 class="rt_hdng"><a href="#collapseOne_22" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed" aria-expanded="false">
 						Artists																
 						</a></h3>
@@ -51,7 +51,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 								<?php  } ?>	
 							</div>
 						</div>
-				</div>
+				</div></li>
                         <li><a href="<?php echo base_url(); ?>browse/customer_songs">Songs</a></li>
                     </ul>
                 </div>
@@ -70,8 +70,8 @@ $getPlaylist_id	= $this->uri->segment(3);
                         <div class="panel panel-default">
                            
 								<?php if($parentCatName=='Instrumental'){
-									echo $parentCatName;
-									echo '<h3 class="rt_hdng"><input type="checkbox" name="Instruments" value="Instruments" class="category_filter" catId="'.$parentCatId.'"></h3>';
+									
+									echo '<h3 class="rt_hdng">'.$parentCatName.'<input type="checkbox" name="Instruments" value="Instruments" class="category_filter" catId="'.$parentCatId.'"></h3>';
 									}else{ ?>
 									 <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_<?php echo $counterFlag; ?>">
 										<?php echo $parentCatName; ?>
@@ -87,7 +87,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 								foreach($childcatData as $childCat){
 									 $childCatName	=	$childCat['category_name'];
 									 $childCatId	=	$childCat['id']; ?>
-                                        <a href="javascript:void(0);" ><li class="category_filter" catId="<?php echo $childCatId; ?>"><?php echo $childCatName; ?></li>	</a>
+                                        <li class="category_filter" catId="<?php echo $childCatId; ?>"><a href="javascript:void(0);" ><?php echo $childCatName; ?></a></li>	
 										
 									<?php } } ?> 
                                     </ul>
@@ -184,11 +184,12 @@ $getPlaylist_id	= $this->uri->segment(3);
                         <div class="order_list">
 						
                             <div class="ordr_tabs">
+								<div style="display:none" class="orderBy_filter_loader">
+												<img src="<?php echo base_url(); ?>images/uploading.gif">
+								</div>
                                 <ul>
                                     <li>Order by:</li>
-										<div style="display:none" class="orderBy_filter_loader">
-											<img src="<?php echo base_url(); ?>images/uploading.gif">
-										</div>
+										
                                     <li>
                                         <button class="short_order" playlist_id="<?php echo $getPlaylist_id; ?>" short_type="Newest" type="button">Newest</button>
                                     </li>
@@ -239,18 +240,19 @@ $getPlaylist_id	= $this->uri->segment(3);
 														<i class="fa fa-download" aria-hidden="true"></i>
 													</a>
 												</li>
-												<div style="display:none" class="wishlist_loader_<?php echo $musicId; ?>">
+												<?php if ($this->ion_auth->logged_in()){ ?>
+                                             <li class="add_to_wishlist wishlist-loaderCls" track_id="<?php echo $musicId; ?>">
+												<div style="display:none" class="wishlist_loader_style wishlist_loader_<?php echo $musicId; ?>">
 													<img src="<?php echo base_url(); ?>images/uploading.gif">
 												</div>
-												<div id="add_to_wishlist_msg_<?php echo $musicId; ?>"></div>
-												<?php 	
-													if ($this->ion_auth->logged_in()){ ?>
-                                               <a href="javascript:void(0);">
-													<li class="add_to_wishlist" track_id="<?php echo $musicId; ?>">
+												<div class="wshlist-add" id="add_to_wishlist_msg_<?php echo $musicId; ?>">
+												</div>
+													 <a href="javascript:void(0);">
 														<i class="fa fa-heart-o" aria-hidden="true"></i>
-													</li>
-											   </a>
-											<?php } else{ ?>
+													</a>
+												</li>
+											  
+											<?php } else { ?>
 											<a  data-target="#login_alert_popup" data-toggle="modal" href="javascript:void(0);">
 													<li class="">
 														<i class="fa fa-heart-o" aria-hidden="true"></i>
@@ -282,7 +284,7 @@ $getPlaylist_id	= $this->uri->segment(3);
                                         </td>
                                     </tr>
 										<!-- Modal -->
-								<div class="modal fade" id="addToPlaylistModal_<?php echo $musicId; ?>" role="dialog">
+								<div class="modal fade added-playlist" id="addToPlaylistModal_<?php echo $musicId; ?>" role="dialog">
 									<div class="modal-dialog">
 
 										<!-- Modal content-->
@@ -300,26 +302,26 @@ $getPlaylist_id	= $this->uri->segment(3);
 															$addedPlaylistName		=	$getAddedplaylist['playlist_name'];	
 														?>
 														
-															<ul>
-																<li><?php echo $addedPlaylistName; ?></li>
-																<li class="lst_data">
-																<div style="display:none" class="playlist_loader_<?php echo $addedPlaylistId; ?>">
+															<div class="added_pop">
+																<div class="rt_playlist-nam"><?php echo $addedPlaylistName; ?></div>
+																<div class="lst_data lft_playlst">
+																<div style="display:none" class="loader_gif playlist_loader_<?php echo $addedPlaylistId; ?>">
 																			<img src="<?php echo base_url(); ?>images/uploading.gif">
 																</div>	
 																<?php 
 																	$getAddstatus 	=	check_track_exitsin_playlist($addedPlaylistId, $musicId, $customerId);
 																	
 																	if($getAddstatus=='added'){ ?>
-																		<button  type="button">Added</button>	
+																		<button class="added"  type="button">Added</button>	
 																	<?php }else{ ?>
-																		<button class="addedToPlayList_<?php echo $addedPlaylistId; ?>_<?php echo $musicId; ?>" style="display:none" type="button">Added</button>
+																		<button class="addedToPlayList_<?php echo $addedPlaylistId; ?>_<?php echo $musicId; ?> added" style="display:none" type="button">Added</button>
 																		<button class="addToPlayList" playlist_id="<?php echo $addedPlaylistId; ?>" type="button" track_id="<?php echo $musicId; ?>">Add to playlist</button>
 																		
 																	<?php } ?>
 																
 																	
-																</li>
-															</ul>
+																</div>
+															</div>
 												<?php }}?>
 												</div>
 												<div class="login_text text-center">
@@ -645,15 +647,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 
             </div>
         </div>
- <style>
-	.draggable, .trash{
-		width:50px;
-		height:50px;
-		background-color:green;
-		margin-bottom:40px;
-		clear: both;
-	}
-</style>
+
         <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
         <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
         <script src="<?php echo base_url(); ?>js/jquery.bxslider.js"></script>
@@ -1020,7 +1014,7 @@ $(document).on('click','.addToPlayList',function(){
 					var trackId	=	$(this).attr('track_id');
 				
 				$(".login_form_popup").empty();
-				var appendForm	=	'<ul class="form_ul_test"><li><input type="text" placeholder="Enter Playlist" maxlength="25" name="popup_playlist_name" id="popup_playlist_name" required><div style="display:none" class="error error_cls_'+trackId+'"><p>Plesae enter your playlist name.</p></div><input type="hidden" trackId="'+trackId+'"  value="'+trackId+'" name="popup_track_id"></li><li><button name="submit" type="button" class="sbmt hover_btn create_popup_playlist">Create Playlist</button></li></ul>';
+				var appendForm	=	'<ul class="form_ul_test"><li class="create-play"><input type="text" placeholder="Enter Playlist" maxlength="25" name="popup_playlist_name" id="popup_playlist_name" required><div style="display:none" class="error error_cls_'+trackId+'"><p>Plesae enter your playlist name.</p></div><input type="hidden" trackId="'+trackId+'"  value="'+trackId+'" name="popup_track_id"></li><li class="creat_btn"><button name="submit" type="button" class="sbmt hover_btn create_popup_playlist">Create Playlist</button></li></ul>';
 				//alert(appendForm);
 				jQuery(appendForm).detach().appendTo('.login_form_popup'); 
 				//$('#popup_track_id').attr("trackId",trackId);
@@ -1081,8 +1075,9 @@ $(document).on('click','.category_filter',function(){
 	});	
 /*************  Short Order	************/		
 $(document).on('click','.short_order',function(){
+	$('.short_order').removeClass('active');
+	$(this).addClass('active');
 	var short_cat_id	=	'';
-	
 	var short_type		=	$(this).attr('short_type');
 	var short_cat_id	=	$(this).attr('short_cat_id');	
 	var playlist_id		=	$(this).attr('playlist_id');	

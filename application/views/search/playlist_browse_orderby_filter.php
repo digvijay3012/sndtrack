@@ -49,11 +49,13 @@ if(!empty($data)){
 												</div>
 												<div id="add_to_wishlist_msg_<?php echo $musicId; ?>"></div>
 											<?php if ($this->ion_auth->logged_in()){ ?>
-                                               <a href="javascript:void(0);">
+                                               
 													<li class="add_to_wishlist" track_id="<?php echo $musicId; ?>">
-														<i class="fa fa-heart-o" aria-hidden="true"></i>
+														<a href="javascript:void(0);">
+															<i class="fa fa-heart-o" aria-hidden="true"></i>
+														</a>
 													</li>
-											   </a>
+											   
 											<?php } else { ?>
 												<a class=""   data-target="#login_alert_popup" data-toggle="modal" href="javascript:void(0);">
 														<i class="fa fa-heart-o" aria-hidden="true"></i>
@@ -99,26 +101,26 @@ if(!empty($data)){
 									$addedPlaylistName		=	$getAddedplaylist['playlist_name'];	
 								?>
 								
-									<ul>
-										<li><?php echo $addedPlaylistName; ?></li>
-										<li class="lst_data">
-										<div style="display:none" class="playlist_loader_<?php echo $addedPlaylistId; ?>">
-													<img src="<?php echo base_url(); ?>images/uploading.gif">
-										</div>	
-										<?php 
-											$getAddstatus 	=	check_track_exitsin_playlist($addedPlaylistId, $musicId, $customerId);
-											
-											if($getAddstatus=='added'){ ?>
-												<button  type="button">Added</button>	
-											<?php }else{ ?>
-												<button class="addedToPlayList_<?php echo $addedPlaylistId; ?>_<?php echo $musicId; ?>" style="display:none" type="button">Added</button>
-												<button class="addToPlayList" playlist_id="<?php echo $addedPlaylistId; ?>" type="button" track_id="<?php echo $musicId; ?>">Add to playlist</button>
-												
-											<?php } ?>
+								<div class="added_pop">
+								<div class="rt_playlist-nam"><?php echo $addedPlaylistName; ?></div>
+								<div class="lst_data lft_playlst">
+								<div style="display:none" class="loader_gif playlist_loader_<?php echo $addedPlaylistId; ?>">
+											<img src="<?php echo base_url(); ?>images/uploading.gif">
+								</div>	
+								<?php 
+									$getAddstatus 	=	check_track_exitsin_playlist($addedPlaylistId, $musicId, $customerId);
+									
+									if($getAddstatus=='added'){ ?>
+										<button class="added" type="button">Added</button>	
+									<?php }else{ ?>
+										<button class="addedToPlayList_<?php echo $addedPlaylistId; ?>_<?php echo $musicId; ?> added" style="display:none" type="button">Added</button>
+										<button class="addToPlayList" playlist_id="<?php echo $addedPlaylistId; ?>" type="button" track_id="<?php echo $musicId; ?>">Add to playlist</button>
 										
-											
-										</li>
-									</ul>
+									<?php } ?>
+								
+									
+								</div>
+							</div>
                         <?php }}?>
 						</div>
 					<?php } ?>

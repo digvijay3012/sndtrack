@@ -15,11 +15,12 @@ if(!empty($customerData)){
 					<div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
 				 <div class="order_list">
 					   <div class="ordr_tabs">
+					   <div style="display:none" class="orderBy_filter_loader">
+									<img src="<?php echo base_url(); ?>images/uploading.gif">
+						</div>
                                 <ul>
                                     <li>Order by:</li>
-									<div style="display:none" class="orderBy_filter_loader">
-									<img src="<?php echo base_url(); ?>images/uploading.gif">
-								</div>
+								
                                     <li>
                                         <button class="short_order" short_cat_id="<?php echo $catId; ?>" short_type="Newest" type="button">Newest</button>
                                     </li>
@@ -73,17 +74,19 @@ if(!empty($customerData)){
 														<i class="fa fa-download" aria-hidden="true"></i>
 													</a>
 												</li>
-												<div style="display:none" class="wishlist_loader_<?php echo $musicId; ?>">
+															<?php if ($this->ion_auth->logged_in()){ ?>
+                                             <li class="add_to_wishlist wishlist-loaderCls" track_id="<?php echo $musicId; ?>">
+												<div style="display:none" class="wishlist_loader_style wishlist_loader_<?php echo $musicId; ?>">
 													<img src="<?php echo base_url(); ?>images/uploading.gif">
 												</div>
-												<div id="add_to_wishlist_msg_<?php echo $musicId; ?>"></div>
-												<?php if ($this->ion_auth->logged_in()){ ?>
-                                               <a href="javascript:void(0);">
-													<li class="add_to_wishlist" track_id="<?php echo $musicId; ?>">
+												<div class="wshlist-add" id="add_to_wishlist_msg_<?php echo $musicId; ?>">
+												</div>
+													 <a href="javascript:void(0);">
 														<i class="fa fa-heart-o" aria-hidden="true"></i>
-													</li>
-											   </a>
-											    <?php } else { ?>
+													</a>
+												</li>
+											  
+											<?php } else { ?>
 													<a href="#" data-target="#login_alert_popup" data-toggle="modal">
 														<i class="fa fa-heart-o" aria-hidden="true"></i>
 													</a>
@@ -123,26 +126,26 @@ if(!empty($customerData)){
 									$addedPlaylistName		=	$getAddedplaylist['playlist_name'];	
 								?>
 								
-									<ul>
-										<li><?php echo $addedPlaylistName; ?></li>
-										<li class="lst_data">
-										<div style="display:none" class="playlist_loader_<?php echo $addedPlaylistId; ?>">
-													<img src="<?php echo base_url(); ?>images/uploading.gif">
-										</div>	
-										<?php 
-											$getAddstatus 	=	check_track_exitsin_playlist($addedPlaylistId, $musicId, $customerId);
-											
-											if($getAddstatus=='added'){ ?>
-												<button  type="button">Added</button>	
-											<?php }else{ ?>
-												<button class="addedToPlayList_<?php echo $addedPlaylistId; ?>_<?php echo $musicId; ?>" style="display:none" type="button">Added</button>
-												<button class="addToPlayList" playlist_id="<?php echo $addedPlaylistId; ?>" type="button" track_id="<?php echo $musicId; ?>">Add to playlist</button>
-												
-											<?php } ?>
+									<div class="added_pop">
+									<div class="rt_playlist-nam"><?php echo $addedPlaylistName; ?></div>
+									<div class="lst_data lft_playlst">
+									<div style="display:none" class="loader_gif playlist_loader_<?php echo $addedPlaylistId; ?>">
+												<img src="<?php echo base_url(); ?>images/uploading.gif">
+									</div>	
+									<?php 
+										$getAddstatus 	=	check_track_exitsin_playlist($addedPlaylistId, $musicId, $customerId);
 										
+										if($getAddstatus=='added'){ ?>
+											<button class="added" type="button">Added</button>	
+										<?php }else{ ?>
+											<button class="addedToPlayList_<?php echo $addedPlaylistId; ?>_<?php echo $musicId; ?> added" style="display:none" type="button">Added</button>
+											<button class="addToPlayList" playlist_id="<?php echo $addedPlaylistId; ?>" type="button" track_id="<?php echo $musicId; ?>">Add to playlist</button>
 											
-										</li>
-									</ul>
+										<?php } ?>
+									
+										
+									</div>
+								</div>
                         <?php }}?>
 						</div>
                         <div class="login_text text-center">
