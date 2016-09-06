@@ -674,3 +674,93 @@ if ( ! function_exists('get_single_artist_music_by_catid')){
 				return $resultArray;
    }
 }
+if ( ! function_exists('get_track_personal_sale')){
+   function get_track_personal_sale($tarckId=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+		$query = $ci->db->query("SELECT  SUM(snd_music_orders.order_amount) AS personal_sale1  FROM snd_music_orders INNER JOIN snd_license_type_price ON snd_music_orders.license_type_id=snd_license_type_price.id WHERE snd_music_orders.track_id='$tarckId' AND snd_music_orders.license_type_id='1'");
+			$resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
+   }
+}
+if ( ! function_exists('get_track_lite_sale')){
+   function get_track_lite_sale($tarckId=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+		$query = $ci->db->query("SELECT  SUM(snd_music_orders.order_amount) AS lite_sale FROM snd_music_orders INNER JOIN snd_license_type_price ON snd_music_orders.license_type_id=snd_license_type_price.id WHERE snd_music_orders.track_id='$tarckId' AND snd_music_orders.license_type_id='2'");
+			$resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
+   }
+}
+if ( ! function_exists('get_track_standard_sale')){
+   function get_track_standard_sale($tarckId=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+		$query = $ci->db->query("SELECT  SUM(snd_music_orders.order_amount) AS standard_sale FROM snd_music_orders INNER JOIN snd_license_type_price ON snd_music_orders.license_type_id=snd_license_type_price.id WHERE snd_music_orders.track_id='$tarckId' AND snd_music_orders.license_type_id='3'");
+			$resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
+   }
+}
+if ( ! function_exists('get_track_premium_sale')){
+   function get_track_premium_sale($tarckId=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+		$query = $ci->db->query("SELECT  SUM(snd_music_orders.order_amount) AS premium_sale1 FROM snd_music_orders INNER JOIN snd_license_type_price ON snd_music_orders.license_type_id=snd_license_type_price.id WHERE snd_music_orders.track_id='$tarckId' AND snd_music_orders.license_type_id='4'");
+			$resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
+   }
+}
+if ( ! function_exists('get_total_sale_for_artist')){
+   function get_total_sale_for_artist($artistid=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+		$query = $ci->db->query("SELECT MONTHNAME(snd_music_orders.order_date) as monthName, SUM(snd_music_orders.order_amount) AS total_amount, snd_music_orders.order_date FROM snd_artist_music INNER JOIN snd_musicfile_version ON snd_artist_music.id=snd_musicfile_version.track_id INNER JOIN snd_music_orders ON snd_artist_music.id=snd_music_orders.track_id WHERE snd_artist_music.artist_id='$artistid' AND track_status=1 GROUP BY YEAR(snd_music_orders.order_date), MONTH(snd_music_orders.order_date)");
+			$resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
+   }
+}

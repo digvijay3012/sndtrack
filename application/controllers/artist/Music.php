@@ -11,11 +11,16 @@ class Music extends CI_Controller {
 		$this->load->helper(array('url','form'));
 		//load custom helper 
 		$this->load->helper('custom_helper');
-		$this->load->library(array('ion_auth','form_validation','session'));
-		
+		$this->load->library(array('ion_auth','form_validation'));
 		if (! $this->ion_auth->logged_in()){
 				redirect('login');
 			}
+		$ID			=	$this->ion_auth->user()->row()->user_id; 
+		$groupID 	= 	$this->ion_auth->get_users_groups($ID)->row()->id; 
+		if($groupID!=3){
+			$logout = $this->ion_auth->logout();
+			redirect('login');
+		}
 	}
 	public function index()
 	{

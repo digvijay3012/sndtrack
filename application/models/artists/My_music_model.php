@@ -14,13 +14,11 @@ class My_music_model extends CI_Model {
 			foreach ($getAlbum->result_array() as $getAlbumID){
 						$musicArray['album'][]	=	$getAlbumID;
 				} 
-			$Singletrackquery = $this->db->query("SELECT * FROM snd_artist_music WHERE artist_id='$artistID' AND track_status=1");
-			
-			
-			foreach ($Singletrackquery->result_array() as $Trackdata){
-				$musicArray['single_track'][]= $Trackdata;
-			}
-					return $musicArray;
+			$Singletrackquery = $this->db->query("SELECT snd_artist_music.id, snd_artist_music.song_upload_date,snd_musicfile_version.watermark_format, snd_musicfile_version.premium_licence FROM snd_artist_music INNER JOIN snd_musicfile_version ON snd_artist_music.id=snd_musicfile_version.track_id WHERE snd_artist_music.artist_id='$artistID' AND track_status=1");
+				foreach ($Singletrackquery->result_array() as $Trackdata){
+					$musicArray['single_track'][]= $Trackdata;
+				}
+						return $musicArray;
 		}
 	function create_album($ArtistID,$album_name,$album_image){
 		$date	=	date("Y-m-d");

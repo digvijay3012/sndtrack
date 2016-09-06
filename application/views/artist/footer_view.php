@@ -32,7 +32,7 @@
             </div>
         </div>
     </footer>
-
+<link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>css/jquery-ui.css"/>
     <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>js/jquery.bxslider.js"></script>
@@ -101,7 +101,14 @@
             });
         });
     </script>
-
+	  <script src="<?php echo base_url(); ?>js/jquery-ui.js"></script>
+        <script type="text/javascript">
+				// When the document is ready
+			$( function() {
+				$( "#from_datepicker" ).datepicker();
+				$( "#to_datepicker" ).datepicker();
+			} );
+        </script>	
 </body>
 
 </html>

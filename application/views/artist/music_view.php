@@ -32,17 +32,15 @@ if(!empty($ArtistData)){
 									$trackCounter='';
 									foreach($data['single_track'] as $getSingleTrackData){
 										 $trackId			=	$getSingleTrackData['id'];	
-										 $GettrackName		=	explode(".", $getSingleTrackData['song_name']);
+										 $GettrackName		=	explode(".", $getSingleTrackData['watermark_format']);
 										 $trackName			=	$GettrackName['0'];
-										$instrumentTag		=	$getSingleTrackData['instrument_tag'];
-										 $songCredits		=	$getSingleTrackData['song_credits'];						 
-										 $songNotes			=	$getSingleTrackData['song_notes'];
+										
 										 $songUploadDate	=	$getSingleTrackData['song_upload_date'];
 										 $modifyDate		= 	strtotime($songUploadDate);
 										 $songPublishDate	=  date('j F  Y', $modifyDate);
-										 $mp3Filename		=	$getSingleTrackData['song_name'];
+										 $mp3Filename		=	$getSingleTrackData['watermark_format'];
 										 $trackImage		=	$getSingleTrackData['track_image'];
-										 
+										 $originalFile		=	$getSingleTrackData['premium_licence'];
 											$path = getcwd();
 											$getID3 = new getID3;
 											$time_start = microtime(true);
@@ -79,7 +77,7 @@ if(!empty($ArtistData)){
 											<td><?php echo $playTime; ?></td>
 											<td><?php echo $mbSize; ?>MB</td>
 											<td class="lst_data">
-												<a href="<?php echo base_url()."music/".$mp3Filename?>" download>Download Original</a>
+												<a href="<?php echo base_url()."music/".$originalFile?>" download>Download Original</a>
 											</td>
 											<audio id="sound<?php echo $trackCounter; ?>">
 												<source src="<?php echo base_url()."music/".$mp3Filename?>" type="audio/mp3" />

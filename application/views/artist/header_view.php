@@ -31,6 +31,7 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>css/sweetalert.css">
 	<script src="<?php echo base_url(); ?>js/sweetalert.min.js"></script>
 	<script src="<?php echo base_url(); ?>js/jquery-1.11.0.min.js"></script>
+
 </head>
 
 <body>
