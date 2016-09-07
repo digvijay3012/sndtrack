@@ -105,8 +105,8 @@
         <script type="text/javascript">
 				// When the document is ready
 			$( function() {
-				$( "#from_datepicker" ).datepicker();
-				$( "#to_datepicker" ).datepicker();
+				$( "#from_datepicker" ).datepicker({dateFormat: "yy-mm-dd"});
+				$( "#to_datepicker" ).datepicker({dateFormat: "yy-mm-dd"});
 			} );
         </script>	
 </body>

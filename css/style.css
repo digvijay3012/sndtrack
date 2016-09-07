@@ -4237,3 +4237,9 @@ table.loop_table:last-child {
         width: 48%;
     }
 }
+.canvasjs-chart-container {
+  min-height: 330px;
+}
+.canvasjs-chart-credit {
+  display: none;
+}

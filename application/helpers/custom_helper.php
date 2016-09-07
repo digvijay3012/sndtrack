@@ -764,3 +764,21 @@ if ( ! function_exists('get_total_sale_for_artist')){
 				return $resultArray;
    }
 }
+if ( ! function_exists('get_singal_tracksale_for_artist')){
+   function get_singal_tracksale_for_artist($artistid=null, $track_id=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+		$query = $ci->db->query("SELECT MONTHNAME(snd_music_orders.order_date) as monthName, SUM(snd_music_orders.order_amount) AS total_amount, snd_music_orders.order_date FROM snd_artist_music INNER JOIN snd_musicfile_version ON snd_artist_music.id=snd_musicfile_version.track_id INNER JOIN snd_music_orders ON snd_artist_music.id=snd_music_orders.track_id WHERE snd_artist_music.artist_id='$artistid' AND track_status=1 AND snd_music_orders.track_id='$track_id' GROUP BY YEAR(snd_music_orders.order_date), MONTH(snd_music_orders.order_date)");
+			$resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
+   }
+}

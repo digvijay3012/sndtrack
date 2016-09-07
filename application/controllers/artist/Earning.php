@@ -32,6 +32,22 @@ class Earning extends CI_Controller {
 				$this->load->view('artist/footer_view');
 		
 	}
-	
-	
+	public function single_track_graph()
+	{
+				$track_id	=	$this->input->post('track_id');
+				$atistId	=	$this->input->post('atistId');
+				
+				return $this->load->view('artist/single_track_graph_view', array('track_id' => $track_id, 'atistId' => $atistId));
+				
+		
+	}
+	public function date_range_graph()
+	{
+				$track_id				=	$this->input->post('track_id');
+				$atistId				=	$this->input->post('atistId');
+				$from_datepicker		=	$this->input->post('from_datepicker');
+				$to_datepicker			=	$this->input->post('to_datepicker');
+				$data					=	$this->Earnings_model->date_range_graph($track_id, $atistId, $from_datepicker, $to_datepicker);
+				return $this->load->view('artist/date_range_graph_view', array('data' => $data));
+	}
 }

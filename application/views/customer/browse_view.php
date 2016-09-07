@@ -215,6 +215,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 						<?php 
 						
 						if(!empty($data)){
+							
 							foreach($data	as	$fectchPlaylist){
 								$musicId 			=	$fectchPlaylist['id'];
 								$getMusicFileEx 	=	explode(".", $fectchPlaylist['watermark_format']);
@@ -226,13 +227,27 @@ $getPlaylist_id	= $this->uri->segment(3);
 								 
                                     <tr>
                                         <td class="icons_play">
-                                            <a href=""><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                           
                                         </td>
-                                        <td track_id="<?php echo $musicId; ?>" class="nme_user draggable title_play"><?php echo $first_name." ".$last_name; ?>
-                                            <p><?php echo $getMusicName; ?></p>
-                                        </td>
+                                   
                                         <td class="text-center"><img src="images/play_vibrate.jpg" alt=""></td>
-                                        <td>3:54</td>
+                                        <td>
+										 <div id="ag1_<?php echo $musicId; ?>" class="audiogallery" style="opacity:0; padding-top: 70px;">
+												<div class="items">	
+													<div class="audioplayer-tobe" style="width:100%; " data-bgimage="pimg/bg.jpg" data-scrubbg="waves/scrubprog.png" data-scrubprog="waves/scrubprog.png" data-videoTitle="Audio Video" data-type="normal" data-source="<?php echo base_url(); ?>music/<?php echo $getMusicFileName; ?>" data-sourceogg="sounds/adg3.ogg">
+														<div track_id="<?php echo $musicId; ?>" class="meta-artist nme_user draggable title_play">
+														  <span class="the-artist"><?php echo $first_name." ".$last_name; ?></span><br/><span class="the-name"><?php echo $getMusicName; ?>
+														</div>
+														<div class="menu-description">
+															<div class="menu-item-thumb-con"><div class="menu-item-thumb" style="background-image: url(pimg/adg3.jpg)"></div></div>
+															<span class="the-artist">Mick Jagger</span>
+															<span class="the-name">Revenge</span>
+														</div>
+													</div>
+													
+												</div>
+												</div>
+											</td>
                                         <td class="dwnld_cont">
                                             <ul>
                                                 <li clsss="dwnld_icns">
@@ -700,6 +715,9 @@ $getPlaylist_id	= $this->uri->segment(3);
 
             </div>
         </div>
+
+	
+</div>
 <style>
 	.draggable, .trash{
 		width:50px;
@@ -708,6 +726,12 @@ $getPlaylist_id	= $this->uri->segment(3);
 		margin-bottom:40px;
 		clear: both;
 	}
+.ap-controls{
+	padding-left:0 !important;
+}
+.meta-artist-con{
+	overflow: visible !important;
+}
 </style>
         <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
         <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
@@ -722,6 +746,29 @@ $getPlaylist_id	= $this->uri->segment(3);
 		<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 		<script src="<?php echo base_url(); ?>js/bootstrap-formhelpers-min.js"></script>
 		<script src="<?php echo base_url(); ?>js/bootstrapValidator-min.js"></script>
+<link rel='stylesheet' type="text/css" href="<?php echo base_url(); ?>audioplayer/audioplayer.css"/>
+    <script src="<?php echo base_url(); ?>audioplayer/audioplayer.js" type="text/javascript"></script>
+	<?php 
+		if(!empty($data)){
+			foreach($data	as	$fectchAgainPlaylist){
+				$getTrackIds 			=	$fectchAgainPlaylist['id'];
+				?>
+					<script>
+						jQuery(document).ready(function ($) {
+							var settings_ap = {
+								disable_volume: 'off'
+								,disable_scrub: 'default'
+								,design_skin: 'skin-wave'
+								,skinwave_dynamicwaves:'on'
+							};
+							dzsag_init('#ag1_<?php echo $getTrackIds; ?>',{
+								'transition':'fade'
+								,'autoplay' : 'off'
+								,'settings_ap':settings_ap
+							});
+						});
+					</script>
+	<?php }} ?>
 
 <script>
 /*************  Drag and Save  to playlist ************/

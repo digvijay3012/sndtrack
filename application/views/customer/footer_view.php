@@ -101,7 +101,21 @@
             });
         });
     </script>
-
+<script>
+jQuery(document).ready(function ($) {
+var settings_ap = {
+disable_volume: 'off'
+,disable_scrub: 'default'
+,design_skin: 'skin-wave'
+,skinwave_dynamicwaves:'on'
+};
+dzsag_init('#ag1',{
+'transition':'fade'
+,'autoplay' : 'on'
+,'settings_ap':settings_ap
+});
+});
+</script>
 </body>
 
 </html>
