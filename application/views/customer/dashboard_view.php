@@ -176,6 +176,7 @@ $getPlaylist_id='';
 		<div class="landing_view_cls">	
             <div class="rt_sidebar pull-right">
 			<div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
+			<div id="no_data_found_cat" style="display:none">No data found.</div>
                 <div class="cont_artist">
                     <div class="slider_cnt">
                         <div class="slider-col">
@@ -657,7 +658,18 @@ $getPlaylist_id='';
 
             </div>
         </div>
- 
+ <style>
+.loop_table .audioplayer.skin-wave .ap-controls .scrubbar .scrub-prog-reflect, .loop_table .audioplayer.skin-wave-mode-small .ap-controls .scrubbar .scrub-bg-reflect, .audioplayer.skin-wave-mode-small .ap-controls .scrubbar .scrub-prog-reflect {
+    display: none!important;
+	opacity: 0 !important;
+}
+.ap-controls{
+	padding-left:0 !important;
+}
+.meta-artist-con{
+	overflow: visible !important;
+}
+</style>
         <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
         <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
         <script src="<?php echo base_url(); ?>js/jquery.bxslider.js"></script>
@@ -671,8 +683,68 @@ $getPlaylist_id='';
 		<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 		<script src="<?php echo base_url(); ?>js/bootstrap-formhelpers-min.js"></script>
 		<script src="<?php echo base_url(); ?>js/bootstrapValidator-min.js"></script>
+<link rel='stylesheet' type="text/css" href="<?php echo base_url(); ?>audioplayer/audioplayer.css"/>
+    <script src="<?php echo base_url(); ?>audioplayer/audioplayer.js" type="text/javascript"></script>
+	
+			<section class="dzsap-sticktobottom dzsap-sticktobottom-for-skin-wave">
+				<div id="ap1" class="audioplayer-tobe" style="width:100%; " data-bgimage="img/bg.jpg" data-scrubbg="<?php echo base_url(); ?>waves/scrubbg.png" data-scrubprog="<?php echo base_url(); ?>waves/scrubprog.png" data-type="fake" data-source="fake" data-sourceogg="sounds/itsabeautifulday.ogg">
+					<!--  data-sourceogg="sounds/adg3.ogg"  -->
+					<div class="the-comments">
+					</div>	
+					<div class="meta-artist"><span class="the-artist">Tim McMorris</span><span class="the-name"><a href="http://codecanyon.net/item/zoomsounds-wordpress-audio-player/6181433?ref=ZoomIt" target="_blank">It's a beautiful day</a></span>
+					</div>
+				</div>
+			</section>	
+							<script>
+					 function action_audio_play_func(arg){
+					//        console.info("action_audio_play_func", arg);
 
+					//        setTimeout(function(){
+					//            console.info("playmedia()", arg);
+					//           arg.get(0).api_play_media({
+					//               'api_report_play_media' : false
+					//           });
+					//        },2000);
+						}
+					jQuery(document).ready(function ($) {
+
+						var settings_ap = {
+							disable_volume: 'off'
+							,autoplay: 'off'
+							,cue: 'off'
+							,disable_scrub: 'default'
+							,design_skin: 'skin-wave'
+							,skinwave_dynamicwaves:'on'
+							,skinwave_enableSpectrum: "off"
+							,settings_backup_type:'full'
+							,settings_useflashplayer:'auto'
+							,skinwave_spectrummultiplier: '4'
+							,skinwave_comments_enable:'off'
+							,skinwave_mode: 'small'
+							,scrubbar_tweak_overflow_hidden : "on"
+						};
+						dzsap_init('#ap1',settings_ap);
+					});
+				</script>
 <script>
+$(document).on('click','.change-artst-bio',function(){
+	var track_id	=	$(this).attr('track_artst_id'); 
+	//alert(track_id);
+	 var url	=	'<?php echo base_url(); ?>browse/set_arists_bio';
+					  $('.set_arists_bio').show();
+					  $.ajax({
+							url: url,
+							data: {track_id : track_id},                         // Setting the data attribute of ajax with file_data
+							type: 'post',
+							success:function(data){
+									
+									$(".artist-append-cls").empty().append(data);
+									$('.set_arists_bio').hide();
+								}
+						}); 
+});
+
+/******************** End Get Artist Bio on Track click  ***********/
 /*************  Drag and Save  to playlist ************/
  //$(function() {
 	 $(document).on('click','.draggable',function(){
@@ -1066,18 +1138,23 @@ $(document).on('click','.addToPlayList',function(){
 $(document).on('click','.category_filter',function(){
 	var catId	=	$(this).attr('catId');
 	$('.draggable').draggable();
-	var url	=	'<?php echo base_url(); ?>browse/filter_by_category/'+catId;
+	var url	=	'<?php echo base_url(); ?>browse/filter_from_dashboard_by_category/'+catId;
 	  $('.category_filter_loader').show();
 	  $.ajax({
 			url: url,
 			data: {catId : catId},                         // Setting the data attribute of ajax with file_data
 			type: 'post',
 			success:function(data){
-					//alert(data);
-					$('.category_filter_loader').hide();
-					$('.lft_playlist').empty().append(data);
-					$('.draggable').draggable();
-					$('.draggable').trigger('click');
+					if(data==2){
+						$("#no_data_found_cat").show();
+						$('.category_filter_loader').hide();
+					}else{
+						$("#no_data_found_cat").hide();
+						$('.category_filter_loader').hide();
+						$('.landing_view_cls').empty().append(data);
+						$('.draggable').draggable();
+						$('.draggable').trigger('click');
+					}
 				}
 				
 		}); 	

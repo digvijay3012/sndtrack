@@ -1,0 +1,294 @@
+ <?php 
+$getAllMusic	=	get_artists_music_by_catid($catId); 
+if(!empty($getAllMusic)){
+ $customerData	=	$this->ion_auth->user()->row();
+if(!empty($customerData)){
+	$customerId 	=		$customerData->user_id;
+	$first_name 	=		$customerData->first_name;
+	$last_name 		=		$customerData->last_name;
+}
+ 
+
+ ?>
+<div class="rt_sidebar browse-page">
+			
+                <div class="cont_artist">
+                
+					<div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
+					     <div class="lft_playlist lft_browse pull-left">
+                        <div class="order_list">
+						
+                            <div class="ordr_tabs">
+								<div style="display:none" class="orderBy_filter_loader">
+										<img src="<?php echo base_url(); ?>images/uploading.gif">
+								</div>
+                                <ul>
+                                    <li>Order by:</li>
+									
+                                    <li>
+                                        <button class="short_order" wishlist_userId="<?php echo $customerId; ?>" short_type="Newest" type="button">Newest</button>
+                                    </li>
+                                    <li>
+                                        <button class="short_order" wishlist_userId="<?php echo $customerId; ?>" short_type="Trending" class="active" type="button">Trending</button>
+                                    </li>
+                                    <li>
+                                        <button class="short_order" wishlist_userId="<?php echo $customerId; ?>" short_type="Longest" type="button">Longest</button>
+                                    </li>
+                                    <li>
+                                        <button class="short_order" wishlist_userId="<?php echo $customerId; ?>" short_type="Shortest"  type="button">Shortest</button>
+                                    </li>
+                                </ul>
+                            </div>
+			
+				<div class="list_wishlist_info">				
+				<div class="ordr_inner">
+           
+		
+					<table class="table loop_table">
+					<thead></thead>
+						<tbody>
+						<?php 
+						$data = $getAllMusic;
+						if(!empty($data)){
+							foreach($data	as	$fectchPlaylist){
+								$musicId 			=	$fectchPlaylist['id'];
+								$getMusicFileEx 	=	explode(".", $fectchPlaylist['watermark_format']);
+								$getMusicName		=	$getMusicFileEx['0'];
+								$getMusicFileName	=	$fectchPlaylist['watermark_format'];
+								$first_name			=	$fectchPlaylist['first_name'];
+								$last_name			=	$fectchPlaylist['last_name'];
+							?>
+			 <tr>
+				 <td>
+						<div class="audioplayer-tobe change-artst-bio auto-init" track_artst_id="<?php echo $musicId; ?>"  style="width:100%; margin-top:10px; margin-bottom: 10px;" data-bgimage="img/bg.jpg" data-scrubbg="<?php echo base_url(); ?>waves/scrubbg.png" data-scrubprog="<?php echo base_url(); ?>waves/scrubprog.png" data-type="audio"data-source="<?php echo base_url(); ?>music/<?php echo $getMusicFileName; ?>" data-fakeplayer="#ap1" data-sourceogg="<?php echo base_url(); ?>music/<?php echo $getMusicFileName; ?>" data-options='{
+							disable_volume: "off"
+							,autoplay: "off"
+							,cue: "on"
+							,disable_scrub: "default"
+							,design_skin: "skin-wave"
+							,skinwave_dynamicwaves:"on"
+							,skinwave_enableSpectrum: "off"
+							,settings_backup_type:"full"
+							,settings_useflashplayer:"auto"
+							,skinwave_spectrummultiplier: "4"
+							,skinwave_comments_enable:"on"
+							,skinwave_mode: "small"
+							,action_audio_play: action_audio_play_func
+							}'>
+
+							<!--  data-sourceogg="sounds/adg3.ogg"  -->
+							<div class="the-comments">
+							</div>
+							<div track_id="<?php echo $musicId; ?>" class="meta-artist  nme_user draggable title_play"><span class="the-artist"><?php echo $first_name." ".$last_name; ?></span><span class="the-name"><?php echo $getMusicName; ?></span>
+							</div>
+						</div>
+					</td>
+									  
+                                        <td class="dwnld_cont">
+                                            <ul>
+                                                <li clsss="dwnld_icns">
+													<a href="">
+														<i class="fa fa-download" aria-hidden="true"></i>
+													</a>
+												</li>
+												
+												<?php 	
+													if ($this->ion_auth->logged_in()){ ?>
+                                              
+													<li class="add_to_wishlist wishlist-loaderCls" track_id="<?php echo $musicId; ?>">
+													<div style="display:none" class="wishlist_loader_style wishlist_loader_<?php echo $musicId; ?>">
+													<img src="<?php echo base_url(); ?>images/uploading.gif">
+												</div>
+												<div class="wshlist-add" id="add_to_wishlist_msg_<?php echo $musicId; ?>"></div>
+													 <a href="javascript:void(0);">
+														<i class="fa fa-heart-o" aria-hidden="true"></i>
+														 </a>
+													</li>
+											  
+											<?php } else{ ?>
+											<a  data-target="#login_alert_popup" data-toggle="modal" href="javascript:void(0);">
+													<li class="">
+														<i class="fa fa-heart-o" aria-hidden="true"></i>
+													</li>
+											   </a>
+											<?php } ?>
+											   <?php 
+													if ($this->ion_auth->logged_in()){ ?>
+														<li>
+															<a class="add_to_popup_playlist" track_id="<?php echo $musicId; ?>" data-target="#addToPlaylistModal_<?php echo $musicId; ?>" data-toggle="modal" href="javascript:void(0);">
+															<i class="fa fa-th-list" aria-hidden="true"></i>
+															</a>
+														</li>
+													<?php } else{ ?>
+														<li>
+															<a class="" data-target="#login_alert_popup" data-toggle="modal" href="javascript:void(0);">
+															<i class="fa fa-th-list" aria-hidden="true"></i>
+															</a>
+														</li>
+
+													<?php } ?>
+											  
+                                                	
+                                            </ul>
+
+                                        </td>
+                                        <td class="lst_data license">
+                                           <a href="javascript:void(0);" class="popup_stage_1_cls" music_id="<?php echo $musicId; ?>" data-toggle="modal" data-target="#popup_stage_1">License</a>
+                                        </td>
+                                    </tr>
+										<!-- Modal -->
+								<div class="modal fade added-playlist" id="addToPlaylistModal_<?php echo $musicId; ?>" role="dialog">
+									<div class="modal-dialog">
+
+										<!-- Modal content-->
+										<div class="modal-content">
+											<!--button type="button" class="close" data-dismiss="modal">&times;</button-->
+											<div class="modal-body">
+												<div class="logo text-center">
+													<a href=""><p>Sndtrack</p></a>
+												</div>
+												<div class="download_popup popu_added">
+												<?php $addedPlaylist 	=	get_customer_playlist($customerId);	
+													if(!empty($addedPlaylist)){
+														foreach($addedPlaylist as $getAddedplaylist){
+															$addedPlaylistId		=	$getAddedplaylist['id'];	
+															$addedPlaylistName		=	$getAddedplaylist['playlist_name'];	
+														?>
+														
+															<div class="added_pop">
+																<div class="rt_playlist-nam"><?php echo $addedPlaylistName; ?></div>
+																<div class="lst_data lft_playlst">
+																<div style="display:none" class="loader_gif playlist_loader_<?php echo $addedPlaylistId; ?>">
+																			<img src="<?php echo base_url(); ?>images/uploading.gif">
+																</div>	
+																<?php 
+																	$getAddstatus 	=	check_track_exitsin_playlist($addedPlaylistId, $musicId, $customerId);
+																	
+																	if($getAddstatus=='added'){ ?>
+																		<button class="added" type="button">Added</button>	
+																	<?php }else{ ?>
+																		<button class="addedToPlayList_<?php echo $addedPlaylistId; ?>_<?php echo $musicId; ?> added" style="display:none" type="button">Added</button>
+																		<button class="addToPlayList" playlist_id="<?php echo $addedPlaylistId; ?>" type="button" track_id="<?php echo $musicId; ?>">Add to playlist</button>
+																		
+																	<?php } ?>
+																
+																	
+																</div>
+															</div>
+												<?php }}?>
+												</div>
+												<div class="login_text text-center">
+													<p>Create new playlist. </p>
+												</div>
+												<?php
+													$formId	=	'login_form_popup_id_'.$musicId;
+													$attributes = array('class' => 'login_form login_form_popup', 'id' => $formId);
+													echo form_open('dashboard/create_playlist_inpopup', $attributes); 
+												?>
+												<?php echo form_close(); ?>
+												<div style="display:none" class="popup_playlist_loader_<?php echo $musicId; ?>">
+														<img src="<?php echo base_url(); ?>images/uploading.gif">
+												</div>	
+													
+											</div>
+										</div>
+									</div>
+								</div>
+								<?php }
+						}else{
+							echo '<tr>No data to display.</tr>';
+						}
+					?>
+	
+			</tbody>
+		</table>
+
+		</div>
+     </div>
+   </div>
+</div>		
+                    <div class="rgt_browse pull-right">
+					<div style="display:none" class="set_arists_bio">
+								<img src="<?php echo base_url(); ?>images/uploading.gif">
+						</div>	
+					<div class="artist-append-cls">
+						
+                           <?php  
+						 
+							 function limit_text($text, $limit) {
+								  if (str_word_count($text, 0) > $limit) {
+									  $words = str_word_count($text, 2);
+									  $pos = array_keys($words);
+									  $text = substr($text, 0, $pos[$limit]) . '...';
+								  }
+								  return $text;
+								}
+								$getArdata 	=	get_arists_bio($musicId);
+								if(!empty($getArdata)){
+									foreach($getArdata as $getData){
+										$artistId				=	$getData['id'];	
+										$first_name				=	$getData['first_name'];	
+										$last_name				=	$getData['last_name'];	
+										$artist_image			=	$getData['artist_image'];	
+										$artist_bio				=	$getData['artist_bio'];	
+									?>
+										 <div class="browse-right-box">
+										 <div style="display:none" class="set_arists_bio">
+												<img src="<?php echo base_url(); ?>images/uploading.gif">
+										</div>	
+										<h3><?php echo $first_name." ".$last_name; ?></h3>
+										<?php if($artist_image !=''){
+											echo '<figure><img src="'.base_url().'artist_images/'.$artist_image.'" alt="'.$first_name.'" title=""></figure>';
+										}
+										?>
+										
+										<p><?php echo limit_text($artist_bio, 100)  ?></p>
+										<a href="<?php echo base_url(); ?>dashboard/artist/<?php echo $artistId; ?>" class="btn-trns ">More from this Artist</a>
+										</div>
+								<?php }}else{
+									echo "No data";
+								}
+								?>
+						   
+					</div>
+                    </div>
+                </div>
+            </div>
+<?php } else { 
+	echo '2';
+	exit;
+} ?>
+<link rel='stylesheet' type="text/css" href="<?php echo base_url(); ?>audioplayer/audioplayer.css"/>
+    <script src="<?php echo base_url(); ?>audioplayer/audioplayer.js" type="text/javascript"></script>
+	
+				<script>
+					 function action_audio_play_func(arg){
+					//        console.info("action_audio_play_func", arg);
+
+					//        setTimeout(function(){
+					//            console.info("playmedia()", arg);
+					//           arg.get(0).api_play_media({
+					//               'api_report_play_media' : false
+					//           });
+					//        },2000);
+						}
+					jQuery(document).ready(function ($) {
+
+						var settings_ap = {
+							disable_volume: 'off'
+							,autoplay: 'off'
+							,cue: 'off'
+							,disable_scrub: 'default'
+							,design_skin: 'skin-wave'
+							,skinwave_dynamicwaves:'on'
+							,skinwave_enableSpectrum: "off"
+							,settings_backup_type:'full'
+							,settings_useflashplayer:'auto'
+							,skinwave_spectrummultiplier: '4'
+							,skinwave_comments_enable:'off'
+							,skinwave_mode: 'small'
+							,scrubbar_tweak_overflow_hidden : "on"
+						};
+						dzsap_init('#ap1',settings_ap);
+					});
+				</script>

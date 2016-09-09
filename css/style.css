@@ -4065,6 +4065,12 @@ table.loop_table:last-child {
     width: 100%;
 }
 
+table .scrubbar .scrub-bg-img,
+table .scrub-prog .scrub-prog-img {
+    height: auto !important;
+    margin: 24px 0 0;
+}
+
 
 /*****  Responsive CSS  *****/
 
@@ -4237,9 +4243,18 @@ table.loop_table:last-child {
         width: 48%;
     }
 }
+
+
+/*=============================temp==================*/
+
 .canvasjs-chart-container {
-  min-height: 330px;
+    min-height: 330px;
 }
+
 .canvasjs-chart-credit {
-  display: none;
+    display: none;
+}
+
+.scrub-bg-reflect {
+    display: none!important;
 }

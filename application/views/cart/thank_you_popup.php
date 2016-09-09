@@ -1,4 +1,13 @@
 <?php //$data	=	get_cart_view_by_customerId($customer_id); 
+if ($this->ion_auth->logged_in()){
+
+	$customerId			=	$this->ion_auth->user()->row()->user_id; 
+	$customerData		=	$this->ion_auth->user()->row();
+	if(!empty($customerData)){
+		$customerFirstName 		=		$customerData->first_name;
+		$customerLastName 		=		$customerData->last_name;
+	}
+}
 	if(!empty($data)){
 		$track_id				=	$data['stage4_track_id'];
 		$customer_id			=	$data['stage4_customer_id'];
@@ -30,7 +39,7 @@
 		</a>
 	</div>
 	<div class="login_text text-center">
-		<p>Thanks Greg !</p>
+		<p>Thanks <?php echo $customerFirstName." ".$customerLastName; ?> !</p>
 		<p>Your receipt will be emailed to you shortly.</p>
 	</div>	
 
@@ -46,7 +55,7 @@
 			
 		</div>
 		<div class="modal-footer back_btn">
-			<button type="button" data-dismiss="modal">Close</button>
+			<button type="button" class="cls-close-last-popup" data-dismiss="modal">Close</button>
 		</div>
 		<div class="popup_social text-center">
 			<ul>

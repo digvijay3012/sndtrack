@@ -782,3 +782,21 @@ if ( ! function_exists('get_singal_tracksale_for_artist')){
 				return $resultArray;
    }
 }
+if ( ! function_exists('get_arists_bio')){
+   function get_arists_bio($track_id=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+		$query = $ci->db->query("SELECT users.id, users.first_name, users.last_name, snd_artist_info.artist_image, snd_artist_info.artist_bio from snd_artist_info INNER JOIN snd_artist_music ON snd_artist_info.artist_id=snd_artist_music.artist_id INNER JOIN users ON snd_artist_music.artist_id = users.id WHERE snd_artist_music.id='$track_id'");
+			$resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
+   }
+}

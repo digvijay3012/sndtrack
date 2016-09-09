@@ -15,9 +15,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 
 ?>
 <div class="cstmr_cont header-margin">
-        <div class="music-bar">
-            <figure><img src="<?php echo base_url(); ?>images/music-bar.jpg" alt="" title=""></figure>
-        </div>
+   
         <div class="container-fluid pdngg container-full">
             <div class="lft_sidebar">
               <div class="your_music">	
@@ -223,16 +221,32 @@ $getPlaylist_id	= $this->uri->segment(3);
 								$first_name			=	$fectchPlaylist['first_name'];
 								$last_name			=	$fectchPlaylist['last_name'];
 							?>
-								 
-                                    <tr>
-                                        <td class="icons_play">
-                                            <a href=""><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                                        </td>
-                                        <td track_id="<?php echo $musicId; ?>" class="nme_user draggable title_play"><?php echo $first_name." ".$last_name; ?>
-                                            <p><?php echo $getMusicName; ?></p>
-                                        </td>
-                                        <td class="text-center"><img src="images/play_vibrate.jpg" alt=""></td>
-                                        <td>3:54</td>
+			 <tr>
+				 <td>
+						<div class="audioplayer-tobe change-artst-bio auto-init" track_artst_id="<?php echo $musicId; ?>"  style="width:100%; margin-top:10px; margin-bottom: 10px;" data-bgimage="img/bg.jpg" data-scrubbg="<?php echo base_url(); ?>waves/scrubbg.png" data-scrubprog="<?php echo base_url(); ?>waves/scrubprog.png" data-type="audio"data-source="<?php echo base_url(); ?>music/<?php echo $getMusicFileName; ?>" data-fakeplayer="#ap1" data-sourceogg="<?php echo base_url(); ?>music/<?php echo $getMusicFileName; ?>" data-options='{
+							disable_volume: "off"
+							,autoplay: "off"
+							,cue: "on"
+							,disable_scrub: "default"
+							,design_skin: "skin-wave"
+							,skinwave_dynamicwaves:"on"
+							,skinwave_enableSpectrum: "off"
+							,settings_backup_type:"full"
+							,settings_useflashplayer:"auto"
+							,skinwave_spectrummultiplier: "4"
+							,skinwave_comments_enable:"on"
+							,skinwave_mode: "small"
+							,action_audio_play: action_audio_play_func
+							}'>
+
+							<!--  data-sourceogg="sounds/adg3.ogg"  -->
+							<div class="the-comments">
+							</div>
+							<div track_id="<?php echo $musicId; ?>" class="meta-artist  nme_user draggable title_play"><span class="the-artist"><?php echo $first_name." ".$last_name; ?></span><span class="the-name"><?php echo $getMusicName; ?></span>
+							</div>
+						</div>
+					</td>
+									  
                                         <td class="dwnld_cont">
                                             <ul>
                                                 <li clsss="dwnld_icns">
@@ -357,12 +371,15 @@ $getPlaylist_id	= $this->uri->segment(3);
    </div>
 </div>		
                     <div class="rgt_browse pull-right">
+					<div style="display:none" class="set_arists_bio">
+								<img src="<?php echo base_url(); ?>images/uploading.gif">
+						</div>	
+					<div class="artist-append-cls">
+						
                         <div class="browse-right-box">
-                            <h3>Clem Snide</h3>
-                            <figure><img src="<?php echo base_url(); ?>images/browse-page-img.jpg" alt="" title=""></figure>
-                            <p>Clem grew up in California listening to The Byrds and Lou Reed. He followed in his fathers foot-steps by learning to play the guitar and banjo. At the age of 16 he was playing local shows in San-Clemente, California and released his first record in Dec 2003 to critial acclaim.</p>
-                            <a href="#" class="btn-trns ">More from this Artist</a>
+                            
                         </div>
+					</div>
                     </div>
                 </div>
             </div>
@@ -674,7 +691,9 @@ $getPlaylist_id	= $this->uri->segment(3);
     <!-- Submit -->
     
       <div class="back_btn">
-  
+	   <div style="display:none" class="pay_amount_loader">
+						<img src="<?php echo base_url(); ?>images/uploading.gif">
+				 </div>	
           <button class="custom-button" type="submit">Pay Now</button>
        
       </div>
@@ -688,12 +707,12 @@ $getPlaylist_id	= $this->uri->segment(3);
         </div>
  </div>
     <!--Thank you  Modal Popup -->
-        <div class="modal fade" id="popup_stage_5" role="dialog">
+        <div class="modal fade" id="popup_stage_5" role="dialog">	
             <div class="modal-dialog">
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close cls-close-last-popup"  data-dismiss="modal">&times;</button>
                     <div class="modal-body popup_stage_5_thank">
                        
 
@@ -702,8 +721,18 @@ $getPlaylist_id	= $this->uri->segment(3);
 
             </div>
         </div>
-
-
+<style>
+.loop_table .audioplayer.skin-wave .ap-controls .scrubbar .scrub-prog-reflect, .loop_table .audioplayer.skin-wave-mode-small .ap-controls .scrubbar .scrub-bg-reflect, .audioplayer.skin-wave-mode-small .ap-controls .scrubbar .scrub-prog-reflect {
+    display: none!important;
+	opacity: 0 !important;
+}
+.ap-controls{
+	padding-left:0 !important;
+}
+.meta-artist-con{
+	overflow: visible !important;
+}
+</style>
         <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
         <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
         <script src="<?php echo base_url(); ?>js/jquery.bxslider.js"></script>
@@ -717,8 +746,83 @@ $getPlaylist_id	= $this->uri->segment(3);
 		<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 		<script src="<?php echo base_url(); ?>js/bootstrap-formhelpers-min.js"></script>
 		<script src="<?php echo base_url(); ?>js/bootstrapValidator-min.js"></script>
+<link rel='stylesheet' type="text/css" href="<?php echo base_url(); ?>audioplayer/audioplayer.css"/>
+    <script src="<?php echo base_url(); ?>audioplayer/audioplayer.js" type="text/javascript"></script>
+	
+			<section class="dzsap-sticktobottom dzsap-sticktobottom-for-skin-wave">
+				<div id="ap1" class="audioplayer-tobe" style="width:100%; " data-bgimage="img/bg.jpg" data-scrubbg="<?php echo base_url(); ?>waves/scrubbg.png" data-scrubprog="<?php echo base_url(); ?>waves/scrubprog.png" data-type="fake" data-source="fake" data-sourceogg="sounds/itsabeautifulday.ogg">
+					<!--  data-sourceogg="sounds/adg3.ogg"  -->
+					<div class="the-comments">
+					</div>	
+					<div class="meta-artist"><span class="the-artist">Tim McMorris</span><span class="the-name"><a href="http://codecanyon.net/item/zoomsounds-wordpress-audio-player/6181433?ref=ZoomIt" target="_blank">It's a beautiful day</a></span>
+					</div>
+				</div>
+			</section>	
+							<script>
+					 function action_audio_play_func(arg){
+					//        console.info("action_audio_play_func", arg);
 
+					//        setTimeout(function(){
+					//            console.info("playmedia()", arg);
+					//           arg.get(0).api_play_media({
+					//               'api_report_play_media' : false
+					//           });
+					//        },2000);
+						}
+					jQuery(document).ready(function ($) {
+
+						var settings_ap = {
+							disable_volume: 'off'
+							,autoplay: 'off'
+							,cue: 'off'
+							,disable_scrub: 'default'
+							,design_skin: 'skin-wave'
+							,skinwave_dynamicwaves:'on'
+							,skinwave_enableSpectrum: "off"
+							,settings_backup_type:'full'
+							,settings_useflashplayer:'auto'
+							,skinwave_spectrummultiplier: '4'
+							,skinwave_comments_enable:'off'
+							,skinwave_mode: 'small'
+							,scrubbar_tweak_overflow_hidden : "on"
+						};
+						dzsap_init('#ap1',settings_ap);
+					});
+				</script>
 <script>
+/******************** Get Artist Bio on Track click  ***********/
+
+$(window).load(function() {
+	var track_id	=	'<?php echo $musicId; ?>'; 
+	
+	 var url	=	'<?php echo base_url(); ?>browse/set_arists_bio';
+					
+					  $.ajax({
+							url: url,
+							data: {track_id : track_id},                         // Setting the data attribute of ajax with file_data
+							type: 'post',
+							success:function(data){
+									$(".artist-append-cls").empty().append(data);
+							}
+						}); 
+$(document).on('click','.change-artst-bio',function(){
+	var track_id	=	$(this).attr('track_artst_id'); 
+	//alert(track_id);
+	 var url	=	'<?php echo base_url(); ?>browse/set_arists_bio';
+					  $('.set_arists_bio').show();
+					  $.ajax({
+							url: url,
+							data: {track_id : track_id},                         // Setting the data attribute of ajax with file_data
+							type: 'post',
+							success:function(data){
+									
+									$(".artist-append-cls").empty().append(data);
+									$('.set_arists_bio').hide();
+								}
+						}); 
+});
+});	
+/******************** End Get Artist Bio on Track click  ***********/
 /*************  Drag and Save  to playlist ************/
  //$(function() {
 	 $(document).on('click','.draggable',function(){
@@ -1523,6 +1627,7 @@ $(document).ready(function() {
 					url				=	'<?php echo base_url(); ?>stripe/payment.php';
 					save_cartUrl	=	'<?php echo base_url(); ?>browse/save_cart';
 					var formData	=	$('#payment-form').serialize();
+					$('.pay_amount_loader').show();
 					$.ajax({
 						url: url,
 						data: formData,                         // Setting the data attribute of ajax with file_data
@@ -1552,7 +1657,10 @@ $(document).ready(function() {
                 }
             }
  
-
+$(document).on('click','.cls-close-last-popup',function(){
+		 $('#popup_stage_5').hide();
+		window.location.href	=	'<?php echo base_url(); ?>wishlist'; 
+	});
 </script>
 
 </body>

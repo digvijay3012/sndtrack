@@ -89,6 +89,7 @@ class Browse extends CI_Controller {
 		if (! $this->ion_auth->logged_in()){
 				redirect('login');
 			}
+			
 				$speakerId			=	$this->ion_auth->user()->row()->user_id; 
 				$data	=	$this->browse_model->customer_songs($speakerId);
 				//print_r($data); die;
@@ -96,5 +97,14 @@ class Browse extends CI_Controller {
 				$this->load->view('customer/customer_songs_view',array('data'=>$data));
 				//$this->load->view('artist/footer_view');
 		
+	}
+	public function set_arists_bio(){
+		$track_id		=	$this->input->post('track_id');
+		$data			=	$this->browse_model->set_arists_bio($track_id);
+		return $this->load->view('customer/set_arists_bio_view',array('data'=>$data));
+	}
+	public function filter_from_dashboard_by_category($catid=null, $artistsId=null){
+		
+		return $this->load->view('search/dashboard_category_search_view', array('catId'=>$catid, 'artistsId'=>$artistsId));
 	}
 }

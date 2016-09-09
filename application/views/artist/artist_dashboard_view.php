@@ -18,7 +18,7 @@ if(!empty($ArtistData)){
                 <ul>
                     <li><a href="<?php echo base_url(); ?>artist/earning">Earnings</a></li>
 					 <li><a href="<?php echo base_url(); ?>artist/music">Your Music</a></li>
-                  
+					<li><a href="<?php echo base_url(); ?>artist/payout">Payout Form</a></li> 
                 </ul>
             </div>
         </div>

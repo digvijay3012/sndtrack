@@ -99,4 +99,13 @@ class Browse_model extends CI_Model {
 				//print_r($resultArray); die;
 				return $resultArray;
 		}
+		function set_arists_bio($track_id){
+			$query = $this->db->query("SELECT users.id, users.first_name, users.last_name, snd_artist_info.artist_image, snd_artist_info.artist_bio from snd_artist_info INNER JOIN snd_artist_music ON snd_artist_info.artist_id=snd_artist_music.artist_id INNER JOIN users ON snd_artist_music.artist_id = users.id WHERE snd_artist_music.id='$track_id'");
+			$resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				//print_r($resultArray); die;
+				return $resultArray;
+		}
 }
