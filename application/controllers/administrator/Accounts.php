@@ -73,6 +73,42 @@ class Accounts extends CI_Controller {
 		$this->load->view('administrator/reset_password_view');
 		$this->load->view('administrator/footer_view');
 	}
+	public function customer_reset_password($customerId=null){
+		if($customerId==''){
+			redirect('administrator/accounts');
+		}
+		if(!empty($_POST)){
+					$this->form_validation->set_rules('old_password', 'Current Password', 'required|trim');
+					$this->form_validation->set_rules('password', 'Password', 'min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|required|trim');
+					$this->form_validation->set_rules('cpassword', 'Confirm Password', 'required|trim|matches[password]');
+					if ($this->form_validation->run() == FALSE) { 
+						$this->load->view('administrator/header_view');
+						$this->load->view('administrator/reset_password_view');
+						$this->load->view('administrator/footer_view');
+					} else {
+						$ArtistData	=	$this->db->query("SELECT email FROM users WHERE id='$customerId'")->row();
+						if(!empty($ArtistData)){
+							$identity 	=		$ArtistData->email;
+						}
+						$old_password	=		$this->input->post('old_password');
+						$password		=		$this->input->post('password');
+						$change = $this->ion_auth->change_password($identity, $old_password, $password);
+
+							if ($change){
+								//if the password was successfully changed
+								$this->session->set_flashdata('message', $this->ion_auth->messages());
+								redirect("administrator/accounts/");
+							}
+							else{
+								$this->session->set_flashdata('message', $this->ion_auth->errors());
+								redirect("administrator/accounts/");
+							}	
+					}
+				}
+		$this->load->view('administrator/header_view');
+		$this->load->view('administrator/reset_password_view');
+		$this->load->view('administrator/footer_view');
+	}
 	public function setting(){
 		$ID			=	$this->ion_auth->user()->row()->user_id; 
 		$groupID 	= 	$this->ion_auth->get_users_groups($ID)->row()->id; 

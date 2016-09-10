@@ -126,7 +126,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 
 							<?php	
 								$attributes = array('class' => 'login_form', 'id' => 'playlist_form');
-								echo form_open('playlist/create_playlist', $attributes); 
+								echo form_open('playlist/create_playlist_from_wishlist', $attributes); 
 							?>
                            
                             <ul>
@@ -134,7 +134,7 @@ $getPlaylist_id	= $this->uri->segment(3);
                                     <input type="text" name="playlist_name" maxlength="25" placeholder="Enter Playlist">
                                 </li>
                                <li>
-									<input type="hidden" name="redirectparamtr" value="<?php echo $getPlaylist_id; ?>">
+									<input type="hidden" name="redirectparamtr" value="wishlist">
                                 </li>
                               
                                 <li>

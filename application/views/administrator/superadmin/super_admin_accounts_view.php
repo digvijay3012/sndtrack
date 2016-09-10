@@ -21,7 +21,7 @@ if(!empty($adminData)){
 					 <li><a data-toggle="tab" href="#mnu2">Customers</a></li>
                 </ul>
 				<?php echo $this->session->flashdata('message'); ?>
-             <h2 class="artst_drft_table">Account Detail</h2>
+             <h2 class="artst_drft_table">Accounts Detail</h2>
 			
 			 <div id="stuts-msg"></div>
                 <div class="tab-content">
@@ -194,57 +194,67 @@ if(!empty($adminData)){
                                         <th>Signup Date</th>
                                         <th>Last Login</th>
                                         <th>Loaction</th>
-                                        <th>Sale to Date</th>
+                                       
 										<th></th>
 										<th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-									<td></td>
-                                        <td class="input_chckbox table_padding width_input">
-                                            <input type="checkbox" class="css-checkbox" id="input13">
-                                            <label class="css-label lite-blue-check" for="input13"></label>
-                                        </td>
-                                        <td class="nme_user">Kurt Ville</td>
-                                        <td>21 January 2016</td>
-                                        <td>28 Jan 2016</td>
-                                        <td>UK</td>
-                                        <td>3,882</td>
-                                        <td class="lst_data">
-                                            <a href="">Reset Password</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-									<td></td>
-                                        <td class="input_chckbox table_padding width_input">
-                                            <input type="checkbox" class="css-checkbox" id="input14">
-                                            <label class="css-label lite-blue-check" for="input14"></label>
-                                        </td>
-                                        <td class="nme_user">Kurt Ville</td>
-                                        <td>21 January 2016</td>
-                                        <td>28 Jan 2016</td>
-                                        <td>UK</td>
-                                        <td>3,882</td>
-                                        <td class="lst_data">
-                                            <a href="">Reset Password</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
+								<?php if(!empty($data['customer_accounts'])){ 
+							//echo "<pre>";	print_r($data);  echo "</pre>";	
+								foreach($data['customer_accounts']	as  $customerAccData){
+									$customerID 		=	$customerAccData['id'];
+									$ip_address 		=	$customerAccData['ip_address'];
+									$customerUsername 	=	$customerAccData['username'];
+									$customerPassword 	=	$customerAccData['password'];
+									$customerEmail 		=	$customerAccData['email'];
+									$created_on 		=	$customerAccData['created_on'];
+									$last_login 		=	$customerAccData['last_login'];
+									$customerFirstname 	=	$customerAccData['first_name'];
+									$customerLastname 	=	$customerAccData['last_name'];
+									$customerPublishDate=  date("j F  Y", $created_on);
+									if($last_login!=''){
+										$customerLastlogin	=	date("j F  Y", $last_login);
+									}else{
+										$customerLastlogin	=	'';
+									}
+									$geopluginURL='http://www.geoplugin.net/php.gp?ip='.$ip_address;
+									$addrDetailsArr = unserialize(file_get_contents($geopluginURL)); 
+									$country = $addrDetailsArr['geoplugin_countryCode'];
+									if(!$country){
+									   $country='Not Define';
+									}
+									
+							?>
+                                <tr>
 									<td></td>
                                         <td class="input_chckbox table_padding width_input">
                                             <input type="checkbox" class="css-checkbox" id="input15">
                                             <label class="css-label lite-blue-check" for="input15"></label>
                                         </td>
-                                        <td class="nme_user">Kurt Ville</td>
-                                        <td>21 January 2016</td>
-                                        <td>28 Jan 2016</td>
-                                        <td>UK</td>
-                                        <td>3,882</td>
+                                        <td class="nme_user"><?php echo $customerFirstname." ".$customerLastname; ?></td>
+                                        <td><?php echo $customerPublishDate; ?></td>
+                                        <td><?php echo $customerLastlogin; ?></td>
+                                        <td><?php echo $country; ?></td>
+                                      
                                         <td class="lst_data">
-                                            <a href="">Reset Password</a>
+                                            <a href="<?php echo base_url(); ?>administrator/accounts/customer_reset_password/<?php echo $customerID; ?>">Reset Password</a>
                                         </td>
                                     </tr>
+								<?php } }else{ ?>
+									
+								<tr>
+								<td></td>
+								<td></td>
+                                <td></td>
+                                <td></td>
+                                <td>No Records found</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+							</tr>
+								<?php } ?>
                                 </tbody>
                             </table>
                         </div>

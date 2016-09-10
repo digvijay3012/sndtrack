@@ -15,6 +15,7 @@ if(!empty($customerData)){
                 <div class="cont_artist">
                 
 					<div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
+						<div id="no_data_found_cat" style="display:none">No data found.</div>
 					     <div class="lft_playlist lft_browse pull-left">
                         <div class="order_list">
 						

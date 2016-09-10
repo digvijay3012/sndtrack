@@ -19,6 +19,11 @@ class Accounts_model extends CI_Model {
 						$finalArray['artists_accounts'][]= $row;
 					}
 				
+		$slectCustomertAcc = $this->db->query("SELECT users.id, users.ip_address, users.username, users.password, users.email, users.created_on, users.last_login, users.first_name, users.last_name FROM users INNER JOIN users_groups ON users.id=users_groups.user_id WHERE users_groups.group_id=4");
+		
+		foreach ($slectCustomertAcc->result_array() as $row){
+					$finalArray['customer_accounts'][]= $row;
+				}
 				return $finalArray;		
 	}
 		function get_artistBy_adminId($adminID=null){

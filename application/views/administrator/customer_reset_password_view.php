@@ -22,8 +22,8 @@
 		
 			<div class="login_cont text-center">
 			<?php 
-					$artistId = $this->uri->segment(4);
-					$actionUrl 	=	"administrator/accounts/reset_password/".$artistId;
+					$customerId = $this->uri->segment(4);
+					$actionUrl 	=	"administrator/accounts/customer_reset_password/".$customerId;
 					$attributes = array('class' => 'login_form', 'id' => 'reset_password_form');
 					echo form_open($actionUrl, $attributes); 
 			?>
