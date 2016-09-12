@@ -15,7 +15,7 @@
   <h2 class="date_jrnl text-center"><?php echo $publishDate; ?></h2>
     <div class="banner_image wow fadeIn animated mrgn_srch jrnl_bnr" style="background-image: url('<?php echo base_url(); ?>post_images/<?php echo $post_image_name; ?>');">
         <div class="content_banner_inner text-center">
-            <h2><a href="<?php echo base_url(); ?>journal/view/<?php echo $getPageData['id']; ?>"><?php echo $post_title; ?></a></h2>
+            <h2><?php echo $post_title; ?></h2>
             <p><?php echo $image_text; ?></p>
         </div>
     </div>

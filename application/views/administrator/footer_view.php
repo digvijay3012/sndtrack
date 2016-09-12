@@ -109,14 +109,11 @@
 	setTimeout(function(){  $(".tab-pane:last").removeClass("in"); $(".tab-pane:last").removeClass("active"); $('#customer_table').DataTable(); }, 1000);
 	setTimeout(function(){  $(".tab-pane:last").removeClass("in"); $(".tab-pane:last").removeClass("active"); $('#artist_table').DataTable(); }, 1000);
     $('#admin_table').DataTable();
-	
+	$('#listCategory').DataTable();
+	$('#page_list_table').DataTable();
 } );	
 </script>
-<script>
-$(document).ready(function() {
-    $('#listCategory').DataTable();
-} );	
-</script>
+
 </body>
 
 </html>
