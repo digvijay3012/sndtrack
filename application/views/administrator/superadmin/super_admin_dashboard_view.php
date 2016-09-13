@@ -24,6 +24,7 @@ if(!empty($AdminData)){
 					<li><a href="<?php echo base_url(); ?>administrator/music">Add Music</a></li>
 					<li><a href="<?php echo base_url(); ?>administrator/category">Add Category</a></li>
 					<li><a href="<?php echo base_url(); ?>administrator/Journal">Manage Journal </a></li>
+					<li><a href="<?php echo base_url(); ?>administrator/pages">Manage Pages </a></li>
                 </ul>
             </div>
         </div>

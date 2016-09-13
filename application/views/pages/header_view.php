@@ -38,7 +38,7 @@
                 <div class="logo_header">
                     <ul>
                         <li class="with_search">
-                            <a href="index.html"><img src="images/black-logo.png" alt=""></a>
+                            <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>images/black-logo.png" alt=""></a>
                         </li>
                         <li class="lastt">
                             <button class="tgle" type="button" name="message" value="Hide" id="toggle-message"><img src="<?php echo base_url(); ?>images/search_icon.png" alt=""></button>

@@ -49,15 +49,18 @@
 			?>
             <ul>
                 <li>
-                    <input type="text" name="first_name" placeholder="First Name" >
+                    <input type="text" id="first_name" name="first_name" placeholder="First Name" >
+					<label for="first_name" style="display:none" generated="true" class="error first_namee">Please enter your first name.</label>
 					<?php  echo form_error('first_name'); ?>
                 </li>
                 <li>
-                    <input type="text"  name="last_name" placeholder="Last Name">
+                    <input type="text"  name="last_name" id="last_name" placeholder="Last Name">
+					<label  style="display:none" generated="true" class="error last_namee">Please enter your last name.</label>
 					<?php  echo form_error('last_name'); ?>
                 </li>
                 <li>
-                    <input type="text" name="email" placeholder="Email address">
+                    <input type="email" name="email" id="email" placeholder="Email address">
+						<label  style="display:none" generated="true" class="error email-e">Please enter your email.</label>
 					<?php  echo form_error('email'); ?>
                 </li>
                 <li>
@@ -68,11 +71,13 @@
                     </select>
                 </li>
                 <li>
-                    <textarea name="message" placeholder="Message"></textarea>
+                    <textarea name="message" id="user_message" placeholder="Message"></textarea>
+					<label style="display:none" generated="true" class="error msg-e">Please enter your message.</label>
 					<?php  echo form_error('message'); ?>
                 </li>
 				<li>
 				<div class="g-recaptcha" name="recaptcha" id="recaptcha" data-sitekey="6LfotyUTAAAAAFrNWYsnLEn5qW7pdjMKXOTTBBIv"></div>
+				<label  style="display:none" generated="true" class="error captcha_err">Please fill captcha.</label>
 				</li>
                 <li>
                     <button class="custom-button full-width" type="submit" id="Login" name="submit" required="">Send</button>
@@ -124,88 +129,52 @@
 		});
 	} catch (e) {}
 </script>
-<script>
-(function($,W,D)
-{
-    var JQUERY4U = {};
 
-    JQUERY4U.UTIL =
-    {
-        setupFormValidation: function()
-        {
-            //form validation rules
-            $("#contact_form").validate({
-                rules: {
-					first_name: "required",
-                    last_name: "required",
-                    email: {
-                        required: true,
-                        email: true
-                    },
-                    message: "required"
-                },
-                messages: {
-                    first_name: "Please select your first name.",
-                    last_name: "Please select your last name.",
-					email: "Please enter valid email.",
-                    message: "Please enter your message.",
-					
-                },
-                submitHandler: function(form) {
-                    form.submit();
-                }
-            });
-        }
-    }
-
-    //when the dom has loaded setup form validation rules
-    $(D).ready(function($) {
-        JQUERY4U.UTIL.setupFormValidation();
-    });
-
-})(jQuery, window, document);
-</script>
 <script>
 $( document ).ready(function() {
-$("#contact_form").bind('blur keydown focusout', function(){ 
+$('#contact_form').on('submit', function(e) {
+	$first_name 		=		$('#first_name').val();
+	$last_name 			=		$('#last_name').val();
+	$email 				=		$('#email').val();
 
-        var dataArray = $("#contact_form").serializeArray(),
-        dataObj = {};
-        console.dir(dataArray); //require firebug
-        //console.log(dataArray);
-
-        $(dataArray).each(function(i, field){
-          dataObj[field.name] = field.value;
-        });
-
-        var recaptcha = (dataObj['g-recaptcha-response']);
-
-        if(recaptcha != "") {
-                $( "#temp" ).remove();
-        }       
-    });
-
-    $( ".custom-button" ).click(function() {
-
-        var dataArray = $("#contact_form").serializeArray(),
-            dataObj = {};
-            console.dir(dataArray); //require firebug
-            //console.log(dataArray);
-
-        $(dataArray).each(function(i, field){
-          dataObj[field.name] = field.value;
-        });
-
-        var recaptcha = (dataObj['g-recaptcha-response']);
-
-        $( "#temp" ).remove();
-
-            if(recaptcha == "") {
-                $("#recaptcha").append('<label id="temp" style="color:red;line-height:normal;font-size: small;">This field is required.</label>');
-            }
-
-    });             
-
+	$user_message 		=		$('#user_message').val();
+	if($first_name ==""){
+		e.preventDefault();
+		$('.first_namee').show();
+	}else{
+			$('.first_namee').hide();
+	}
+	if($last_name ==""){
+		e.preventDefault();
+		$('.last_namee').show();
+	}else{
+			$('.last_namee').hide();
+	}
+	if($email ==""){
+		e.preventDefault();
+		$('.email-e').show();
+	}else{
+			$('.email-e').hide();
+	}
+	if($email ==""){
+		e.preventDefault();
+		$('.email-e').show();
+	}else{
+			$('.email-e').hide();
+	}
+	if($user_message ==""){
+		e.preventDefault();
+		$('.msg-e').show();
+	}else{
+			$('.msg-e').hide();
+	}
+  if(grecaptcha.getResponse() == "") {
+    e.preventDefault();
+   $('.captcha_err').show();
+  } else {
+    $('.captcha_err').hide();
+  }
+});
 });
 </script>
  <script src='https://www.google.com/recaptcha/api.js'></script>  

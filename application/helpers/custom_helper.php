@@ -800,3 +800,57 @@ if ( ! function_exists('get_arists_bio')){
 				return $resultArray;
    }
 }
+if ( ! function_exists('get_page_data_by_id')){
+   function get_page_data_by_id($page_id=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+		$query = $ci->db->query("SELECT * FROM snd_pages WHERE id='$page_id'");
+			$resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
+   }
+}
+if ( ! function_exists('get_home_page_data')){
+   function get_home_page_data($page_id=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+		$query = $ci->db->query("SELECT * FROM snd_home_page WHERE id='$page_id'");
+			$resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
+   }
+}
+if ( ! function_exists('get_homepage_featured_artist')){
+   function get_homepage_featured_artist(){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+		$query = $ci->db->query("SELECT users.id, users.first_name, users.last_name, snd_artist_info.artist_image from snd_artist_info INNER JOIN users ON snd_artist_info.artist_id = users.id WHERE snd_artist_info.artist_type='feautred'");
+			$resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
+   }
+}	

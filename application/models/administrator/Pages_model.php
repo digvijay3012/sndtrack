@@ -76,4 +76,63 @@ class Pages_model extends CI_Model {
 		$delQry = $this->db->query("DELETE FROM snd_Journal_posts WHERE id='$post_id'");
 		return true;
 	}
+	function get_all_pages(){
+		$finalArray	=	array();
+			$slectPages = $this->db->query("SELECT id, page_title FROM snd_pages");
+			
+			foreach ($slectPages->result_array() as $row){
+						$finalArray[]= $row;
+					}
+		
+				return $finalArray;		
+	}
+	function get_page_data($page_id){
+		$finalArray	=	array();
+			$slectPages = $this->db->query("SELECT * FROM snd_pages WHERE id='$page_id'");
+			
+			foreach ($slectPages->result_array() as $row){
+						$finalArray[]= $row;
+					}
+		
+				return $finalArray;		
+	}
+	function update_page_content($page_id, $page_title, $page_content){
+		$data = array(
+				"page_title" 		=> $page_title,
+				"page_content" 	=> $page_content
+			);
+				$this->db->where('id',$page_id);
+				$this->db->update('snd_pages',$data);
+				return 1; 
+	}	
+	function get_home_page_data($page_id){
+		$finalArray	=	array();
+			$slectPages = $this->db->query("SELECT * FROM snd_home_page WHERE id='$page_id'");
+			
+			foreach ($slectPages->result_array() as $row){
+						$finalArray[]= $row;
+					}
+		
+				return $finalArray;		
+	}
+	function update_home_page_content($page_id, $post_image_name, $text_1, $text_2, $text_3){
+		if($post_image_name==""){
+			$data = array(
+					"text_1" 		=> $text_1,
+					"text_2" 		=> $text_2,
+					"text_3" 		=> $text_3
+				);
+		}else{
+			$data = array(
+					"image_1"		=> $post_image_name,
+					"text_1" 		=> $text_1,
+					"text_2" 		=> $text_2,
+					"text_3" 		=> $text_3
+				);
+		}
+			
+				$this->db->where('id',$page_id);
+				$this->db->update('snd_home_page',$data);
+				return 1; 
+	}	
 }

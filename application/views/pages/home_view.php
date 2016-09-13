@@ -38,8 +38,22 @@ if(!empty($UserData)){
 	$userID 		=		$UserData->user_id;
 }
 ?>
+<?php 
+	$data = get_home_page_data(5);
+	if(!empty($data)){
+	foreach($data	as  $pagesData){
+			$image_1 		=	$pagesData['image_1'];
+			$text_1 		=	$pagesData['text_1'];
+			$text_2 		=	$pagesData['text_2'];
+			$text_3 		=	$pagesData['text_3'];
+	}}else{
+		$image_1 		=	'';
+		$text_1 		=	'';
+		$text_2 		=	'';
+		$text_3 		=	'';
+	}?>
     <div class="se-pre-con"></div>
-    <div class="top_header" style="background-image:url('images/bgimage.jpg')">
+    <div class="top_header" style="background-image:url('<?php echo base_url(); ?>post_images/<?php echo $image_1; ?>')">
         <header class="wow fadeInDown">
             <div class="container-fluid">
                 <div class="create_account pull-right">
@@ -72,7 +86,7 @@ if(!empty($UserData)){
                 <div class="text-center content_banner">
                     <div class="banner_cont">
                         <div class="music_for">
-                            <p>MUSIC FOR FILM & VIDEO</p>
+                            <p><?php echo $text_1; ?></p>
                         </div>
                         <div class="banner_input">
                             <a class="custom-button" href="<?php echo base_url(); ?>browse">Browse music</a>
@@ -84,14 +98,7 @@ if(!empty($UserData)){
     </div>
     <div class="middle_content text-center ">
         <div class="container">
-            <div class="middle_logo">
-                <span>S</span>
-            </div>
-            <p>
-                Sndtrack is a musician led creative team based in London.</p>
-            <p> We understand that at the heart of every great film there should be great music.</p>
-            <p> We’re here to help this statement ring true.</p>
-            <!--p>I must explain to you how all this mistaken.</p-->
+          <?php echo $text_2; ?>
 
         </div>
     </div>
@@ -377,9 +384,7 @@ if(!empty($UserData)){
             </div>
             <div class="rt_prt">
                 <div class="news_ltr_text pull-right">
-                    <p>Our music is highly curated to ensure it adds value to your project.</p>
-                    <p>We work with the loveliest, most passionate artists and bands and</p>
-                    <p>We try our best to pass on that passion to our customers.</p>
+                    <?php echo $text_3; ?>
                 </div>
             </div>
         </div>
