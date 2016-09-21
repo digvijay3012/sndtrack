@@ -90,8 +90,8 @@ $getPlaylist_id	= $this->uri->segment(3);
 									<?php } } ?> 
                                     </ul>
                                 </div>
-								<div style="display:none" class="category_filter_loader">
-									<img src="<?php echo base_url(); ?>images/uploading.gif">
+								<div style="display:none" class="category_filter_loader loader-custom ">
+									<img src="<?php echo base_url(); ?>images/uploading.svg">
 								</div>	
                             </div>
                         </div>
@@ -182,8 +182,8 @@ $getPlaylist_id	= $this->uri->segment(3);
                         <div class="order_list">
 						
                             <div class="ordr_tabs">
-								<div style="display:none" class="orderBy_filter_loader">
-										<img src="<?php echo base_url(); ?>images/uploading.gif">
+								<div style="display:none" class="orderBy_filter_loader loader-custom ">
+										<img src="<?php echo base_url(); ?>images/uploading.svg">
 								</div>
                                 <ul>
                                     <li>Order by:</li>
@@ -223,7 +223,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 							?>
 			 <tr>
 				 <td>
-						<div class="audioplayer-tobe change-artst-bio auto-init" track_artst_id="<?php echo $musicId; ?>"  style="width:100%; margin-top:10px; margin-bottom: 10px;" data-bgimage="img/bg.jpg" data-scrubbg="<?php echo base_url(); ?>waves/scrubbg.png" data-scrubprog="<?php echo base_url(); ?>waves/scrubprog.png" data-type="audio"data-source="<?php echo base_url(); ?>music/<?php echo $getMusicFileName; ?>" data-fakeplayer="#ap1" data-sourceogg="<?php echo base_url(); ?>music/<?php echo $getMusicFileName; ?>" data-options='{
+						<div class="audioplayer-tobe change-artst-bio auto-init" track_artst_id="<?php echo $musicId; ?>"  data-bgimage="img/bg.jpg" data-scrubbg="<?php echo base_url(); ?>waves/scrubbg.png" data-scrubprog="<?php echo base_url(); ?>waves/scrubprog.png" data-type="audio"data-source="<?php echo base_url(); ?>music/<?php echo $getMusicFileName; ?>" data-fakeplayer="#ap1" data-sourceogg="<?php echo base_url(); ?>music/<?php echo $getMusicFileName; ?>" data-options='{
 							disable_volume: "off"
 							,autoplay: "off"
 							,cue: "on"
@@ -259,8 +259,8 @@ $getPlaylist_id	= $this->uri->segment(3);
 													if ($this->ion_auth->logged_in()){ ?>
                                               
 													<li class="add_to_wishlist wishlist-loaderCls" track_id="<?php echo $musicId; ?>">
-													<div style="display:none" class="wishlist_loader_style wishlist_loader_<?php echo $musicId; ?>">
-													<img src="<?php echo base_url(); ?>images/uploading.gif">
+													<div style="display:none" class="loader-custom wishlist_loader_style wishlist_loader_<?php echo $musicId; ?>">
+													<img src="<?php echo base_url(); ?>images/uploading.svg">
 												</div>
 												<div class="wshlist-add" id="add_to_wishlist_msg_<?php echo $musicId; ?>"></div>
 													 <a href="javascript:void(0);">
@@ -321,8 +321,8 @@ $getPlaylist_id	= $this->uri->segment(3);
 															<div class="added_pop">
 																<div class="rt_playlist-nam"><?php echo $addedPlaylistName; ?></div>
 																<div class="lst_data lft_playlst">
-																<div style="display:none" class="loader_gif playlist_loader_<?php echo $addedPlaylistId; ?>">
-																			<img src="<?php echo base_url(); ?>images/uploading.gif">
+																<div style="display:none" class="loader-custom  loader_gif playlist_loader_<?php echo $addedPlaylistId; ?>">
+																			<img src="<?php echo base_url(); ?>images/uploading.svg">
 																</div>	
 																<?php 
 																	$getAddstatus 	=	check_track_exitsin_playlist($addedPlaylistId, $musicId, $customerId);
@@ -349,8 +349,8 @@ $getPlaylist_id	= $this->uri->segment(3);
 													echo form_open('dashboard/create_playlist_inpopup', $attributes); 
 												?>
 												<?php echo form_close(); ?>
-												<div style="display:none" class="popup_playlist_loader_<?php echo $musicId; ?>">
-														<img src="<?php echo base_url(); ?>images/uploading.gif">
+												<div style="display:none" class="loader-custom  popup_playlist_loader_<?php echo $musicId; ?>">
+														<img src="<?php echo base_url(); ?>images/uploading.svg">
 												</div>	
 													
 											</div>
@@ -365,15 +365,15 @@ $getPlaylist_id	= $this->uri->segment(3);
 	
 			</tbody>
 		</table>
-
+<div style="display:none" class="set_arists_bio">
+								<img src="<?php echo base_url(); ?>images/uploading.svg">
+						</div>	
 		</div>
      </div>
    </div>
 </div>		
                     <div class="rgt_browse pull-right">
-					<div style="display:none" class="set_arists_bio">
-								<img src="<?php echo base_url(); ?>images/uploading.gif">
-						</div>	
+					
 					<div class="artist-append-cls">
 						
                         <div class="browse-right-box">
@@ -425,8 +425,8 @@ $getPlaylist_id	= $this->uri->segment(3);
 							<button required="" name="submit" id="send" type="button" class="sbmt hover_btn login_button">Login</button>
 							<a class="forgot" href="<?php echo base_url(); ?>register">Register</a>
 						 </li>
-								<div style="display:none" class="login_loader">
-									<img src="<?php echo base_url(); ?>images/uploading.gif">
+								<div style="display:none" class="loader-custom  login_loader">
+									<img src="<?php echo base_url(); ?>images/uploading.svg">
 								</div>
                    </ul>
                         <?php echo form_close(); ?>    
@@ -531,8 +531,8 @@ $getPlaylist_id	= $this->uri->segment(3);
                                 <li>
 								<button class="sbmt hover_btn" id="register_popup_form" type="button" id="send" name="submit" required="">Create Account</button>
                                 </li>
-								<div style="display:none" class="register_loader">
-									<img src="<?php echo base_url(); ?>images/uploading.gif">
+								<div style="display:none" class="register_loader loader-custom ">
+									<img src="<?php echo base_url(); ?>images/uploading.svg">
 								</div>
                             </ul>
                         <?php echo form_close(); ?>
@@ -691,8 +691,8 @@ $getPlaylist_id	= $this->uri->segment(3);
     <!-- Submit -->
     
       <div class="back_btn">
-	   <div style="display:none" class="pay_amount_loader">
-						<img src="<?php echo base_url(); ?>images/uploading.gif">
+	   <div style="display:none" class="pay_amount_loader loader-custom ">
+						<img src="<?php echo base_url(); ?>images/uploading.svg">
 				 </div>	
           <button class="custom-button" type="submit">Pay Now</button>
        

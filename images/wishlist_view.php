@@ -1,7 +1,7 @@
-<?php
+<?php 
 $sessionId		=	session_id();
 $loginStatus	=	'';
-$customerId		=	'';
+
 if ($this->ion_auth->logged_in()){
 	$loginStatus	=	1;
 	$customerId			=	$this->ion_auth->user()->row()->user_id; 
@@ -12,24 +12,18 @@ if ($this->ion_auth->logged_in()){
 	}
 }
 $getPlaylist_id	= $this->uri->segment(3); 
+
 ?>
-
-<link rel="stylesheet" href="<?php echo base_url(); ?>checkout_css/bootstrap-formhelpers-min.css" media="screen">
-<link rel="stylesheet" href="<?php echo base_url(); ?>checkout_css/bootstrapValidator-min.css"/>
-
-<link rel="stylesheet" href="<?php echo base_url(); ?>checkout_css/bootstrap-side-notes.css" />
-<div class="cstmr_cont header-margin">	
-        <div class="music-bar">
-            <figure><img src="<?php echo base_url(); ?>images/music-bar.jpg" alt="" title=""></figure>
-        </div>
+<div class="cstmr_cont header-margin">
+   
         <div class="container-fluid pdngg container-full">
             <div class="lft_sidebar">
-              <div class="your_music">
+              <div class="your_music">	
                     <h3 class="rt_hdng">YOUR MUSIC</h3>
                     <ul>
                         <li><a href="<?php echo base_url(); ?>wishlist">Hearted</a></li>
-                        <div id="accordion2" class="panel-group user_acc">
-						<h3 class="rt_hdng"><a href="#collapseOne_22" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed" aria-expanded="false">
+                        <li class="artist_accord"><div id="accordion2" class="panel-group user_acc">
+						<h3 class="rt_hdng"><a href="#collapseOne_22" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle collapsed collapsed" aria-expanded="false">
 						Artists																
 						</a></h3>
 						<div class="panel-collapse collapse" id="collapseOne_22" aria-expanded="false" style="height: 0px;">
@@ -55,7 +49,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 								<?php  } ?>	
 							</div>
 						</div>
-				</div>
+				</div></li>
                         <li><a href="<?php echo base_url(); ?>browse/customer_songs">Songs</a></li>
                     </ul>
                 </div>
@@ -74,10 +68,10 @@ $getPlaylist_id	= $this->uri->segment(3);
                         <div class="panel panel-default">
                            
 								<?php if($parentCatName=='Instrumental'){
-									echo $parentCatName;
-									echo '<h3 class="rt_hdng"><input type="checkbox" name="Instruments" value="Instruments" class="category_filter" catId="'.$parentCatId.'"></h3>';
+									
+									echo '<h3 class="rt_hdng">'.$parentCatName.'<input type="checkbox" name="Instruments" value="Instruments" class="category_filter" catId="'.$parentCatId.'"></h3>';
 									}else{ ?>
-									 <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_<?php echo $counterFlag; ?>">
+									 <h3 class="rt_hdng"><a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_<?php echo $counterFlag; ?>">
 										<?php echo $parentCatName; ?>
 									<?php }?>
 							
@@ -91,19 +85,19 @@ $getPlaylist_id	= $this->uri->segment(3);
 								foreach($childcatData as $childCat){
 									 $childCatName	=	$childCat['category_name'];
 									 $childCatId	=	$childCat['id']; ?>
-                                        <a href="javascript:void(0);" ><li class="category_filter" catId="<?php echo $childCatId; ?>"><?php echo $childCatName; ?></li>	</a>
+                                        <li class="category_filter" catId="<?php echo $childCatId; ?>"><a href="javascript:void(0);" ><?php echo $childCatName; ?></a></li>	
 										
 									<?php } } ?> 
                                     </ul>
                                 </div>
 								<div style="display:none" class="category_filter_loader">
-									<img src="<?php echo base_url(); ?>images/uploading.gif">
+									<img src="<?php echo base_url(); ?>images/uploading.svg">
 								</div>	
                             </div>
                         </div>
 						<?php } } ?>
                         <div class="panel panel-default">
-                            <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Energy </a></h3>
+                            <h3 class="rt_hdng"><a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Energy </a></h3>
                             <div id="collapseTwo" class="panel-collapse collapse">
                                 <div class="panel-body"><img src="<?php echo base_url(); ?>images/music_level.jpg" alt=""></div>
                             </div>
@@ -132,7 +126,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 
 							<?php	
 								$attributes = array('class' => 'login_form', 'id' => 'playlist_form');
-								echo form_open('playlist/create_playlist', $attributes); 
+								echo form_open('playlist/create_playlist_from_wishlist', $attributes); 
 							?>
                            
                             <ul>
@@ -140,7 +134,7 @@ $getPlaylist_id	= $this->uri->segment(3);
                                     <input type="text" name="playlist_name" maxlength="25" placeholder="Enter Playlist">
                                 </li>
                                <li>
-									<input type="hidden" name="redirectparamtr" value="<?php echo $getPlaylist_id; ?>">
+									<input type="hidden" name="redirectparamtr" value="wishlist">
                                 </li>
                               
                                 <li>
@@ -177,35 +171,37 @@ $getPlaylist_id	= $this->uri->segment(3);
                 </div>
             </div>
             <div class="rt_sidebar browse-page">
-			<div id="add_to_wishlist_msg"></div>
+			
                 <div class="cont_artist">
-				<div class="wishlists-bar">
-                        <h3>Your Songs</h3>
+                   <div class="wishlists-bar">
+                        <h3>Wishlists</h3>
+                        <div class="wishlists-client">For <?php echo $customerFirstName." ".$customerLastName; ?></div>
                     </div>
-                  <div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
-				   <div class="lft_playlist lft_browse pull-left">
+					<div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
+					     <div class="lft_playlist lft_browse pull-left">
                         <div class="order_list">
+						
                             <div class="ordr_tabs">
+								<div style="display:none" class="orderBy_filter_loader">
+										<img src="<?php echo base_url(); ?>images/uploading.svg">
+								</div>
                                 <ul>
                                     <li>Order by:</li>
-									<div style="display:none" class="orderBy_filter_loader">
-									<img src="<?php echo base_url(); ?>images/uploading.gif">
-								</div>
+									
                                     <li>
-                                        <button class="short_order" short_type="Newest" type="button">Newest</button>
+                                        <button class="short_order" wishlist_userId="<?php echo $customerId; ?>" short_type="Newest" type="button">Newest</button>
                                     </li>
                                     <li>
-                                        <button class="short_order" short_type="Trending" class="active" type="button">Trending</button>
+                                        <button class="short_order" wishlist_userId="<?php echo $customerId; ?>" short_type="Trending" class="active" type="button">Trending</button>
                                     </li>
                                     <li>
-                                        <button class="short_order" short_type="Longest" type="button">Longest</button>
+                                        <button class="short_order" wishlist_userId="<?php echo $customerId; ?>" short_type="Longest" type="button">Longest</button>
                                     </li>
                                     <li>
-                                        <button class="short_order" short_type="Shortest"  type="button">Shortest</button>
+                                        <button class="short_order" wishlist_userId="<?php echo $customerId; ?>" short_type="Shortest"  type="button">Shortest</button>
                                     </li>
                                 </ul>
                             </div>
-							
 			
 				<div class="list_wishlist_info">				
 				<div class="ordr_inner">
@@ -215,9 +211,8 @@ $getPlaylist_id	= $this->uri->segment(3);
 					<thead></thead>
 						<tbody>
 						<?php 
-						//echo "<pre>";	print_r($data);	echo "</pre>";
+						$data = get_customer_wishlist($customerId);
 						if(!empty($data)){
-							
 							foreach($data	as	$fectchPlaylist){
 								$musicId 			=	$fectchPlaylist['id'];
 								$getMusicFileEx 	=	explode(".", $fectchPlaylist['watermark_format']);
@@ -225,36 +220,54 @@ $getPlaylist_id	= $this->uri->segment(3);
 								$getMusicFileName	=	$fectchPlaylist['watermark_format'];
 								$first_name			=	$fectchPlaylist['first_name'];
 								$last_name			=	$fectchPlaylist['last_name'];
-								$license_type_id	=	$fectchPlaylist['license_type_id'];
-								$musciFile 		=	get_my_purchase_track($license_type_id,$musicId);
 							?>
-								 
-                                    <tr>
-                                        <td class="icons_play">
-                                            <a href=""><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                                        </td>
-                                        <td track_id="<?php echo $musicId; ?>" class="nme_user draggable title_play"><?php echo $first_name." ".$last_name; ?>
-                                            <p><?php echo $getMusicName; ?></p>
-                                        </td>
-                                        <td class="text-center"><img src="images/play_vibrate.jpg" alt=""></td>
-                                        <td>3:54</td>
+			 <tr>
+				 <td>
+						<div class="audioplayer-tobe change-artst-bio auto-init" track_artst_id="<?php echo $musicId; ?>"  data-bgimage="img/bg.jpg" data-scrubbg="<?php echo base_url(); ?>waves/scrubbg.png" data-scrubprog="<?php echo base_url(); ?>waves/scrubprog.png" data-type="audio"data-source="<?php echo base_url(); ?>music/<?php echo $getMusicFileName; ?>" data-fakeplayer="#ap1" data-sourceogg="<?php echo base_url(); ?>music/<?php echo $getMusicFileName; ?>" data-options='{
+							disable_volume: "off"
+							,autoplay: "off"
+							,cue: "on"
+							,disable_scrub: "default"
+							,design_skin: "skin-wave"
+							,skinwave_dynamicwaves:"on"
+							,skinwave_enableSpectrum: "off"
+							,settings_backup_type:"full"
+							,settings_useflashplayer:"auto"
+							,skinwave_spectrummultiplier: "4"
+							,skinwave_comments_enable:"on"
+							,skinwave_mode: "small"
+							,action_audio_play: action_audio_play_func
+							}'>
+
+							<!--  data-sourceogg="sounds/adg3.ogg"  -->
+							<div class="the-comments">
+							</div>
+							<div track_id="<?php echo $musicId; ?>" class="meta-artist  nme_user draggable title_play"><span class="the-artist"><?php echo $first_name." ".$last_name; ?></span><span class="the-name"><?php echo $getMusicName; ?></span>
+							</div>
+						</div>
+					</td>
+									  
                                         <td class="dwnld_cont">
                                             <ul>
                                                 <li clsss="dwnld_icns">
-													<a href="<?php echo base_url(); ?>music/<?php echo $musciFile; ?>" download>
+													<a href="">
 														<i class="fa fa-download" aria-hidden="true"></i>
 													</a>
 												</li>
-												<div style="display:none" class="wishlist_loader_<?php echo $musicId; ?>">
-													<img src="<?php echo base_url(); ?>images/uploading.gif">
-												</div>
-												<?php 
+												
+												<?php 	
 													if ($this->ion_auth->logged_in()){ ?>
-                                               <a href="javascript:void(0);">
-													<li class="add_to_wishlist" track_id="<?php echo $musicId; ?>">
+                                              
+													<li class="add_to_wishlist wishlist-loaderCls" track_id="<?php echo $musicId; ?>">
+													<div style="display:none" class="wishlist_loader_style wishlist_loader_<?php echo $musicId; ?>">
+													<img src="<?php echo base_url(); ?>images/uploading.svg">
+												</div>
+												<div class="wshlist-add" id="add_to_wishlist_msg_<?php echo $musicId; ?>"></div>
+													 <a href="javascript:void(0);">
 														<i class="fa fa-heart-o" aria-hidden="true"></i>
+														 </a>
 													</li>
-											   </a>
+											  
 											<?php } else{ ?>
 											<a  data-target="#login_alert_popup" data-toggle="modal" href="javascript:void(0);">
 													<li class="">
@@ -287,7 +300,7 @@ $getPlaylist_id	= $this->uri->segment(3);
                                         </td>
                                     </tr>
 										<!-- Modal -->
-								<div class="modal fade" id="addToPlaylistModal_<?php echo $musicId; ?>" role="dialog">
+								<div class="modal fade added-playlist" id="addToPlaylistModal_<?php echo $musicId; ?>" role="dialog">
 									<div class="modal-dialog">
 
 										<!-- Modal content-->
@@ -297,7 +310,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 												<div class="logo text-center">
 													<a href=""><p>Sndtrack</p></a>
 												</div>
-												<div class="download_popup">
+												<div class="download_popup popu_added">
 												<?php $addedPlaylist 	=	get_customer_playlist($customerId);	
 													if(!empty($addedPlaylist)){
 														foreach($addedPlaylist as $getAddedplaylist){
@@ -305,26 +318,26 @@ $getPlaylist_id	= $this->uri->segment(3);
 															$addedPlaylistName		=	$getAddedplaylist['playlist_name'];	
 														?>
 														
-															<ul>
-																<li><?php echo $addedPlaylistName; ?></li>
-																<li class="lst_data">
-																<div style="display:none" class="playlist_loader_<?php echo $addedPlaylistId; ?>">
-																			<img src="<?php echo base_url(); ?>images/uploading.gif">
+															<div class="added_pop">
+																<div class="rt_playlist-nam"><?php echo $addedPlaylistName; ?></div>
+																<div class="lst_data lft_playlst">
+																<div style="display:none" class="loader_gif playlist_loader_<?php echo $addedPlaylistId; ?>">
+																			<img src="<?php echo base_url(); ?>images/uploading.svg">
 																</div>	
 																<?php 
 																	$getAddstatus 	=	check_track_exitsin_playlist($addedPlaylistId, $musicId, $customerId);
 																	
 																	if($getAddstatus=='added'){ ?>
-																		<button  type="button">Added</button>	
+																		<button class="added" type="button">Added</button>	
 																	<?php }else{ ?>
-																		<button class="addedToPlayList_<?php echo $addedPlaylistId; ?>_<?php echo $musicId; ?>" style="display:none" type="button">Added</button>
+																		<button class="addedToPlayList_<?php echo $addedPlaylistId; ?>_<?php echo $musicId; ?> added" style="display:none" type="button">Added</button>
 																		<button class="addToPlayList" playlist_id="<?php echo $addedPlaylistId; ?>" type="button" track_id="<?php echo $musicId; ?>">Add to playlist</button>
 																		
 																	<?php } ?>
 																
 																	
-																</li>
-															</ul>
+																</div>
+															</div>
 												<?php }}?>
 												</div>
 												<div class="login_text text-center">
@@ -337,7 +350,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 												?>
 												<?php echo form_close(); ?>
 												<div style="display:none" class="popup_playlist_loader_<?php echo $musicId; ?>">
-														<img src="<?php echo base_url(); ?>images/uploading.gif">
+														<img src="<?php echo base_url(); ?>images/uploading.svg">
 												</div>	
 													
 											</div>
@@ -353,18 +366,20 @@ $getPlaylist_id	= $this->uri->segment(3);
 			</tbody>
 		</table>
 
-	</div>
-     
-				</div>
-                        </div>
-                    </div>
+		</div>
+     </div>
+   </div>
+</div>		
                     <div class="rgt_browse pull-right">
+					<div style="display:none" class="set_arists_bio">
+								<img src="<?php echo base_url(); ?>images/uploading.svg">
+						</div>	
+					<div class="artist-append-cls">
+						
                         <div class="browse-right-box">
-                            <h3>Clem Snide</h3>
-                            <figure><img src="<?php echo base_url(); ?>images/browse-page-img.jpg" alt="" title=""></figure>
-                            <p>Clem grew up in California listening to The Byrds and Lou Reed. He followed in his fathers foot-steps by learning to play the guitar and banjo. At the age of 16 he was playing local shows in San-Clemente, California and released his first record in Dec 2003 to critial acclaim.</p>
-                            <a href="#" class="btn-trns ">More from this Artist</a>
+                            
                         </div>
+					</div>
                     </div>
                 </div>
             </div>
@@ -411,7 +426,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 							<a class="forgot" href="<?php echo base_url(); ?>register">Register</a>
 						 </li>
 								<div style="display:none" class="login_loader">
-									<img src="<?php echo base_url(); ?>images/uploading.gif">
+									<img src="<?php echo base_url(); ?>images/uploading.svg">
 								</div>
                    </ul>
                         <?php echo form_close(); ?>    
@@ -517,7 +532,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 								<button class="sbmt hover_btn" id="register_popup_form" type="button" id="send" name="submit" required="">Create Account</button>
                                 </li>
 								<div style="display:none" class="register_loader">
-									<img src="<?php echo base_url(); ?>images/uploading.gif">
+									<img src="<?php echo base_url(); ?>images/uploading.svg">
 								</div>
                             </ul>
                         <?php echo form_close(); ?>
@@ -530,7 +545,7 @@ $getPlaylist_id	= $this->uri->segment(3);
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <!--<button  class="close close_popup_3" type="button">×</button>-->
+                    <!--<button  class="close close_popup_3" type="button">Ã—</button>-->
                     <div class="modal-body popup_stage3">
                         
                     </div>
@@ -544,7 +559,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    
                     <div class="modal-body">
                         <div class="logo text-center">
                             <a href="">
@@ -555,6 +570,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 						<div class="chckout_pop text-center">
                             <p>Checkout</p>
                         </div>
+						<div class="login_cont text-center help_cnt cstmr_settings">
 				<form action="" method="POST" id="payment-form" class="login_form">
                         <div class="alert alert-danger" id="a_x200" style="display: none;"> <strong>Error!</strong> <span class="payment-errors"></span> </div>
 				<div class="input_fields">
@@ -593,7 +609,7 @@ $getPlaylist_id	= $this->uri->segment(3);
   <!-- Country -->
 	<li>
 	<div class="form-group">
-       <div class="country bfh-selectbox bfh-countries " name="country" placeholder="Select Country" data-flags="true" data-filter="true"> </div>
+       <div class="country2 bfh-selectbox bfh-countries" name="country" placeholder="Select Country" data-flags="true" data-filter="true"> </div>
 	</div>
     </li>
   </ul>
@@ -610,9 +626,9 @@ $getPlaylist_id	= $this->uri->segment(3);
   <!-- City -->
  <li>
    <div class="form-group">
-	  <input type="text" name="last_name" placeholder="Last Name" class="last_name form-control">
+	  <input type="text" name="last_name" placeholder="Last Name" class="last_name form-control">  </div> 
    </li>
-   </div> 
+ 
   <!-- State -->
 	<li>
 	<div class="form-group">
@@ -646,7 +662,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 			</li>
 			<li class="expiry_dat">
 			<div class="form-group"> 	
-				<select name="select2" data-stripe="exp-month" class="card-expiry-month stripe-sensitive required">
+				<select name="select2" data-stripe="exp-month" class="card-expiry-month stripe-sensitive required pull-left">
 					<option value="01" selected="selected">01</option>
 					<option value="02">02</option>
 					<option value="03">03</option>
@@ -660,8 +676,8 @@ $getPlaylist_id	= $this->uri->segment(3);
 					<option value="11">11</option>
 					<option value="12">12</option>
 				  </select>
-				  <span> / </span>
-				  <select name="select2" data-stripe="exp-year" class="card-expiry-year stripe-sensitive required">
+				
+				  <select name="select2" data-stripe="exp-year" class="card-expiry-year stripe-sensitive required pull-right">
 				  </select>
 			</div>
 			</li>
@@ -673,27 +689,30 @@ $getPlaylist_id	= $this->uri->segment(3);
 		</ul>
   </div>
     <!-- Submit -->
-    <div class="control-group">
-      <div class="controls">
-        <center>
-          <button class="btn btn-success custom-button" type="submit">Pay Now</button>
-        </center>
+    
+      <div class="back_btn">
+	   <div style="display:none" class="pay_amount_loader">
+						<img src="<?php echo base_url(); ?>images/uploading.svg">
+				 </div>	
+          <button class="custom-button" type="submit">Pay Now</button>
+       
       </div>
-    </div>
+    
  
   </form>
+    </div>
     </div>
                 </div>
             </div>
         </div>
  </div>
     <!--Thank you  Modal Popup -->
-        <div class="modal fade" id="popup_stage_5" role="dialog">
+        <div class="modal fade" id="popup_stage_5" role="dialog">	
             <div class="modal-dialog">
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close cls-close-last-popup"  data-dismiss="modal">&times;</button>
                     <div class="modal-body popup_stage_5_thank">
                        
 
@@ -703,13 +722,16 @@ $getPlaylist_id	= $this->uri->segment(3);
             </div>
         </div>
 <style>
-	.draggable, .trash{
-		width:50px;
-		height:50px;
-		background-color:green;
-		margin-bottom:40px;
-		clear: both;
-	}
+.loop_table .audioplayer.skin-wave .ap-controls .scrubbar .scrub-prog-reflect, .loop_table .audioplayer.skin-wave-mode-small .ap-controls .scrubbar .scrub-bg-reflect, .audioplayer.skin-wave-mode-small .ap-controls .scrubbar .scrub-prog-reflect {
+    display: none!important;
+	opacity: 0 !important;
+}
+.ap-controls{
+	padding-left:0 !important;
+}
+.meta-artist-con{
+	overflow: visible !important;
+}
 </style>
         <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
         <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
@@ -724,8 +746,83 @@ $getPlaylist_id	= $this->uri->segment(3);
 		<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 		<script src="<?php echo base_url(); ?>js/bootstrap-formhelpers-min.js"></script>
 		<script src="<?php echo base_url(); ?>js/bootstrapValidator-min.js"></script>
+<link rel='stylesheet' type="text/css" href="<?php echo base_url(); ?>audioplayer/audioplayer.css"/>
+    <script src="<?php echo base_url(); ?>audioplayer/audioplayer.js" type="text/javascript"></script>
+	
+			<section class="dzsap-sticktobottom dzsap-sticktobottom-for-skin-wave">
+				<div id="ap1" class="audioplayer-tobe" style="width:100%; " data-bgimage="img/bg.jpg" data-scrubbg="<?php echo base_url(); ?>waves/scrubbg.png" data-scrubprog="<?php echo base_url(); ?>waves/scrubprog.png" data-type="fake" data-source="fake" data-sourceogg="sounds/itsabeautifulday.ogg">
+					<!--  data-sourceogg="sounds/adg3.ogg"  -->
+					<div class="the-comments">
+					</div>	
+					<div class="meta-artist"><span class="the-artist">Tim McMorris</span><span class="the-name"><a href="http://codecanyon.net/item/zoomsounds-wordpress-audio-player/6181433?ref=ZoomIt" target="_blank">It's a beautiful day</a></span>
+					</div>
+				</div>
+			</section>	
+							<script>
+					 function action_audio_play_func(arg){
+					//        console.info("action_audio_play_func", arg);
 
+					//        setTimeout(function(){
+					//            console.info("playmedia()", arg);
+					//           arg.get(0).api_play_media({
+					//               'api_report_play_media' : false
+					//           });
+					//        },2000);
+						}
+					jQuery(document).ready(function ($) {
+
+						var settings_ap = {
+							disable_volume: 'off'
+							,autoplay: 'off'
+							,cue: 'off'
+							,disable_scrub: 'default'
+							,design_skin: 'skin-wave'
+							,skinwave_dynamicwaves:'on'
+							,skinwave_enableSpectrum: "off"
+							,settings_backup_type:'full'
+							,settings_useflashplayer:'auto'
+							,skinwave_spectrummultiplier: '4'
+							,skinwave_comments_enable:'off'
+							,skinwave_mode: 'small'
+							,scrubbar_tweak_overflow_hidden : "on"
+						};
+						dzsap_init('#ap1',settings_ap);
+					});
+				</script>
 <script>
+/******************** Get Artist Bio on Track click  ***********/
+
+$(window).load(function() {
+	var track_id	=	'<?php echo $musicId; ?>'; 
+	
+	 var url	=	'<?php echo base_url(); ?>browse/set_arists_bio';
+					
+					  $.ajax({
+							url: url,
+							data: {track_id : track_id},                         // Setting the data attribute of ajax with file_data
+							type: 'post',
+							success:function(data){
+									$(".artist-append-cls").empty().append(data);
+							}
+						}); 
+$(document).on('click','.change-artst-bio',function(){
+	var track_id	=	$(this).attr('track_artst_id'); 
+	//alert(track_id);
+	 var url	=	'<?php echo base_url(); ?>browse/set_arists_bio';
+					  $('.set_arists_bio').show();
+					  $.ajax({
+							url: url,
+							data: {track_id : track_id},                         // Setting the data attribute of ajax with file_data
+							type: 'post',
+							success:function(data){
+									
+									$(".artist-append-cls").empty().append(data);
+									$('.set_arists_bio').hide();
+								}
+						}); 
+});
+});	
+/******************** End Get Artist Bio on Track click  ***********/
 /*************  Drag and Save  to playlist ************/
  //$(function() {
 	 $(document).on('click','.draggable',function(){
@@ -748,6 +845,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 				var playlist_id= $(this).attr("playlist_id");
 				var track_id = ui.draggable.attr("track_id");
 				var loader		=	".wishlist_loader_"+track_id;
+				var add_to_wishlist_msg = "#add_to_wishlist_msg_"+track_id;
 			var url	=	'<?php echo base_url(); ?>dashboard/add_to_playlist/'+playlist_id+"/"+track_id;
 					  $(loader).show();
 					  $.ajax({
@@ -756,16 +854,16 @@ $getPlaylist_id	= $this->uri->segment(3);
 							type: 'post',
 							success:function(data){
 								ui.draggable.draggable('option','revert',true); 
-								$("#add_to_wishlist_msg").show();
+								$(add_to_wishlist_msg).show();
 									if(data==1){
 										$(loader).hide();
-										$("#add_to_wishlist_msg").empty().append('Added to playlist').delay(2000).fadeOut();
+										$(add_to_wishlist_msg).empty().append('Added to playlist').delay(2000).fadeOut();
 									}if(data==2){
 										$(loader).hide();
-										$("#add_to_wishlist_msg").empty().append('Already Added to playlist').delay(2000).fadeOut();
+										$(add_to_wishlist_msg).empty().append('Already Added to playlist').delay(2000).fadeOut();
 									}if(data==3){
 										$(loader).hide();
-										$("#add_to_wishlist_msg").empty().append('Please try again and drop song properly.').delay(3000).fadeOut();
+										$(add_to_wishlist_msg).empty().append('Please try again and drop song properly.').delay(3000).fadeOut();
 									}
 								}
 						}); 
@@ -928,60 +1026,7 @@ $getPlaylist_id	= $this->uri->segment(3);
     });
 
 })(jQuery, window, document);
-/*************  checkout Form Validation************/	
-(function($,W,D)
-{
-    var JQUERY4U = {};
 
-    JQUERY4U.UTIL =
-    {
-        setupFormValidation: function()
-        {
-            //form validation rules
-            $("#checkout_form").validate({
-                rules: {
-					full_name: "required",
-					first_line_address: "required",
-					city: "required",
-					country: "required",
-					project_name: "required",
-					last_name: "required",
-					second_line_add: "required",
-					zip_code: "required",
-					vat: "required",
-					card_name: "required",
-					card_no: "required",
-					expiry: "required",
-					security_code: "required",
-                },
-                messages: {
-                    full_name: "Please enter your full name.",
-					first_line_address: "Please enter your first line address.",
-					city: "Please enter your city name.",
-					country: "Please enter your country name.",
-					project_name: "Please enter your project name.",
-					last_name: "Please enter your last name.",
-					second_line_add: "Please enter your second line address.",
-					zip_code: "Please enter your zip code.",
-					vat: "Please enter your Vat.",
-					card_name: "Please enter your card Name.",
-					card_no: "Please enter your card number.",
-					expiry: "Please enter your expiry.",
-					security_code: "Please enter your security code.",
-                },
-                submitHandler: function(form) {
-                    form.submit();
-                }
-            });
-        }
-    }
-
-    //when the dom has loaded setup form validation rules
-    $(D).ready(function($) {
-        JQUERY4U.UTIL.setupFormValidation();
-    });
-
-})(jQuery, window, document);
 /*************  Create Playlist Form Validation************/
 (function($,W,D)
 {
@@ -1020,7 +1065,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 $(document).on('click','.add_to_wishlist',function(){
 	var track_id	=	$(this).attr('track_id');
 	var loader		=	".wishlist_loader_"+track_id;
-	
+	var add_to_wishlist_msg = "#add_to_wishlist_msg_"+track_id;
 	var url	=	'<?php echo base_url(); ?>dashboard/add_to_wishlist/'+track_id;
 					  $(loader).show();
 					  $.ajax({
@@ -1028,13 +1073,13 @@ $(document).on('click','.add_to_wishlist',function(){
 							data: {track_id : track_id},                         // Setting the data attribute of ajax with file_data
 							type: 'post',
 							success:function(data){
-								$("#add_to_wishlist_msg").show();
+								$(add_to_wishlist_msg).show();
 									if(data==1){
 										$(loader).hide();
-										$("#add_to_wishlist_msg").empty().append('Added to wishlist').delay(1000).fadeOut();
+										$(add_to_wishlist_msg).empty().append('Added to wishlist').delay(1000).fadeOut();
 									}if(data==2){
 										$(loader).hide();
-										$("#add_to_wishlist_msg").empty().append('Already Added to wishlist').delay(1000).fadeOut();
+										$(add_to_wishlist_msg).empty().append('Already Added to wishlist').delay(1000).fadeOut();
 									}
 								}
 						}); 
@@ -1076,7 +1121,7 @@ $(document).on('click','.addToPlayList',function(){
 					var trackId	=	$(this).attr('track_id');
 				
 				$(".login_form_popup").empty();
-				var appendForm	=	'<ul class="form_ul_test"><li><input type="text" placeholder="Enter Playlist" maxlength="25" name="popup_playlist_name" id="popup_playlist_name" required><div style="display:none" class="error error_cls_'+trackId+'"><p>Plesae enter your playlist name.</p></div><input type="hidden" trackId="'+trackId+'"  value="'+trackId+'" name="popup_track_id"></li><li><button name="submit" type="button" class="sbmt hover_btn create_popup_playlist">Create Playlist</button></li></ul>';
+				var appendForm	=	'<ul class="form_ul_test"><li class="create-play"><input type="text" placeholder="Enter Playlist" maxlength="25" name="popup_playlist_name" id="popup_playlist_name" required><div style="display:none" class="error error_cls_'+trackId+'"><p>Plesae enter your playlist name.</p></div><input type="hidden" trackId="'+trackId+'"  value="'+trackId+'" name="popup_track_id"></li><li class="creat_btn"><button name="submit" type="button" class="sbmt hover_btn create_popup_playlist">Create Playlist</button></li></ul>';
 				//alert(appendForm);
 				jQuery(appendForm).detach().appendTo('.login_form_popup'); 
 				//$('#popup_track_id').attr("trackId",trackId);
@@ -1137,17 +1182,18 @@ $(document).on('click','.category_filter',function(){
 	});	
 /*************  Short Order	************/		
 $(document).on('click','.short_order',function(){
+	$('.short_order').removeClass('active');
+	$(this).addClass('active');
 	var short_cat_id	=	'';
-	
-	var short_type	=	$(this).attr('short_type');
+	var short_type		=	$(this).attr('short_type');
 	var short_cat_id	=	$(this).attr('short_cat_id');	
-	
+	var wishlist_userId	=	$(this).attr('wishlist_userId');	
 	$('.draggable').draggable();
 	var url	=	'<?php echo base_url(); ?>browse/filter_by_browse';
 	  $('.orderBy_filter_loader').show();
-	  $.ajax({		
+	  $.ajax({
 			url: url,
-			data: {short_type : short_type, short_cat_id: short_cat_id},                         // Setting the data attribute of ajax with file_data
+			data: {short_type : short_type, short_cat_id: short_cat_id, wishlist_userId: wishlist_userId},                         // Setting the data attribute of ajax with file_data
 			type: 'post',
 			success:function(data){
 					if( typeof short_cat_id  !== "undefined"){
@@ -1164,7 +1210,6 @@ $(document).on('click','.short_order',function(){
 				}
 				
 		}); 	
-			
 		
 	});	
 	
@@ -1375,16 +1420,16 @@ $(document).ready(function() {
                         cvc: $('.card-cvc').val(),
                         exp_month: $('.card-expiry-month').val(),
                         exp_year: $('.card-expiry-year').val(),
-			name: $('.card-holder-name').val(),
-			address_line1: $('.address_line1').val(),
-			address_city: $('.city').val(),
-			address_zip: $('.zip').val(),
-			address_state: $('.state').val(),
-			address_country: $('.country').val()
-                    }, stripeResponseHandler);
-                    return false; // submit from callback
-        },
-        fields: {
+						name: $('.card-holder-name').val(),
+						address_line1: $('.address_line1').val(),
+						address_city: $('.city').val(),
+						address_zip: $('.zip').val(),
+						address_state: $('.state').val(),
+						address_country: $('.country2').val()
+								}, stripeResponseHandler);
+								return false; // submit from callback
+        },	
+        fields: {	
             full_name: {
                 validators: {
                     notEmpty: {
@@ -1582,6 +1627,7 @@ $(document).ready(function() {
 					url				=	'<?php echo base_url(); ?>stripe/payment.php';
 					save_cartUrl	=	'<?php echo base_url(); ?>browse/save_cart';
 					var formData	=	$('#payment-form').serialize();
+					$('.pay_amount_loader').show();
 					$.ajax({
 						url: url,
 						data: formData,                         // Setting the data attribute of ajax with file_data
@@ -1589,7 +1635,7 @@ $(document).ready(function() {
 						success:function(data){
 							if(data==2){
 								alert('Payment Failure! Please check your payment details and try again.');
-							}else{
+							}else{	
 								$.ajax({
 									url: save_cartUrl,
 									data: data,                    
@@ -1611,8 +1657,12 @@ $(document).ready(function() {
                 }
             }
  
-
+$(document).on('click','.cls-close-last-popup',function(){
+		 $('#popup_stage_5').hide();
+		window.location.href	=	'<?php echo base_url(); ?>wishlist'; 
+	});
 </script>
+
 </body>
-	
+
 </html>

@@ -209,7 +209,12 @@ if(!empty($adminData)){
 					 energy_level: "required",
                    instrument_tag: "required",
 					song_credits: "required",
-					song_notes: "required"
+					song_notes: "required",
+					watermark_format: "required",
+					lite_version: "required",
+					personal_format: "required",
+					standard_licence: "required",
+					premium_licence: "required"
                 },
                 messages: {
                     artist_id: "Please select artist.",

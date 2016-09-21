@@ -853,4 +853,21 @@ if ( ! function_exists('get_homepage_featured_artist')){
 				
 				return $resultArray;
    }
+}
+if ( ! function_exists('get_my_purchase_track')){
+   function get_my_purchase_track($licenceId=null,$trackId=null){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+		$query = $ci->db->query("SELECT license_type FROM snd_license_type_price WHERE id='$licenceId'")->row();
+		$license_type 	=	$query->license_type;
+		
+		$selQry			=	$ci->db->query("SELECT $license_type as musicFilename FROM snd_musicfile_version WHERE track_id='$trackId'")->row();
+		$musicFormat 	=	$selQry->musicFilename;		
+				return $musicFormat;
+   }
 }	

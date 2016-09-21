@@ -2622,10 +2622,7 @@ h3 a.accordion-toggle,
 
 .wishlist-loaderCls .wishlist_loader_style {
     bottom: -37px;
-    left: -49px;
-    position: absolute;
     top: auto;
-    width: 132px;
 }
 
 .wishlist-loaderCls {
@@ -3901,7 +3898,9 @@ table.loop_table:last-child {
 }
 
 .loader_gif {
-    height: 10px;
+    height: 30px;
+    border-radius: 50%;
+    width: 30px;
     left: 0;
     line-height: normal;
     margin: auto;
@@ -3910,6 +3909,34 @@ table.loop_table:last-child {
     top: 50%;
     transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
+    background: #e54c4f none repeat scroll 0 0;
+    text-align: center;
+}
+
+.loader-custom {
+    background: #e54c4f none repeat scroll 0 0;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    text-align: center;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute;
+}
+
+.set_arists_bio {
+    background: #e54c4f none repeat scroll 0 0;
+    border-radius: 50%;
+    height: 30px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: 30px;
 }
 
 .rt_playlist-nam {
@@ -4068,7 +4095,15 @@ table.loop_table:last-child {
 table .scrubbar .scrub-bg-img,
 table .scrub-prog .scrub-prog-img {
     height: auto !important;
-    margin: 24px 0 0;
+    margin: 0px 0 0;
+}
+
+.ordr_inner {
+    position: relative;
+}
+
+.audioplayer .ap-controls-right {
+    position: relative;
 }
 
 
