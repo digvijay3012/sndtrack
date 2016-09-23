@@ -27,7 +27,7 @@ class Login extends CI_Controller {
 					redirect('artist/dashboard', 'refresh');
 				}elseif($groupID==4){
 					$this->session->set_flashdata('message', $this->ion_auth->messages());
-					redirect('wishlist', 'refresh');
+					redirect('dashboard', 'refresh');
 				}else{
 					$logout = $this->ion_auth->logout();
 					redirect('login', 'refresh');
@@ -66,7 +66,7 @@ class Login extends CI_Controller {
 					redirect('artist/dashboard', 'refresh');
 				}elseif($groupID==4){
 					$this->session->set_flashdata('message', $this->ion_auth->messages());
-					redirect('wishlist', 'refresh');
+					redirect('dashboard', 'refresh');
 				}else{
 					$logout = $this->ion_auth->logout();
 					redirect('login', 'refresh');

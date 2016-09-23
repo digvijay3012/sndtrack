@@ -71,7 +71,7 @@
                     </select>
                 </li>
                 <li>
-                    <textarea name="message" id="user_message" placeholder="Message"></textarea>
+                    <textarea rows="4" cols="50" name="message" id="user_message" placeholder="Message"></textarea>
 					<label style="display:none" generated="true" class="error msg-e">Please enter your message.</label>
 					<?php  echo form_error('message'); ?>
                 </li>
@@ -104,9 +104,9 @@
                     <li><a href="<?php echo base_url(); ?>contact">Contact</a></li>
                 </ul>
                 <ul class="social_icons">
-                    <li><a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                    <li><a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                    <li><a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                    <li><a href="#" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="#" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                 </ul>
             </div>
             <div class="footer_nav">

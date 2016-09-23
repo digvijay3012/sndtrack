@@ -4293,3 +4293,6 @@ table .scrub-prog .scrub-prog-img {
 .scrub-bg-reflect {
     display: none!important;
 }
+.froala-box > div:last-of-type {
+  display: none !important;
+}

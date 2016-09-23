@@ -17,17 +17,16 @@
                     <li><a href="<?php echo base_url(); ?>contact">Contact</a></li>
                 </ul>
                 <ul class="social_icons">
-                    <li><a href=""><i aria-hidden="true" class="fa fa-facebook"></i></a></li>
-                    <li><a href=""><i aria-hidden="true" class="fa fa-twitter"></i></a></li>
-                    <li><a href=""><i aria-hidden="true" class="fa fa-instagram"></i></a></li>
+                    <li><a href="#" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="#" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                 </ul>
             </div>
             <div class="footer_nav">
-                <ul>
-                    <li><a href="<?php echo base_url(); ?>private_policy">Private</a></li>
-                    <li><a href="<?php echo base_url(); ?>licence_terms">License Terms</a></li>
-                    <li><a href="<?php echo base_url(); ?>faq">FAQ</a></li>
-                    <li><a href="<?php echo base_url(); ?>Terms_and_conditions">Terms &amp; Conditions</a></li>
+                <ul class="social_icons">
+                    <li><a href="https://www.facebook.com/" target="_blank"><i aria-hidden="true" class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://twitter.com" target="_blank"><i aria-hidden="true" class="fa fa-twitter"></i></a></li>
+                    <li><a href="https://www.instagram.com" target="_blank"><i aria-hidden="true" class="fa fa-instagram"></i></a></li>
                 </ul>
             </div>
         </div>

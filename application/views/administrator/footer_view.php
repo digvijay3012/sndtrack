@@ -17,9 +17,9 @@
                     <li><a href="<?php echo base_url(); ?>contact">Contact</a></li>
                 </ul>
                 <ul class="social_icons">
-                    <li><a href=""><i aria-hidden="true" class="fa fa-facebook"></i></a></li>
-                    <li><a href=""><i aria-hidden="true" class="fa fa-twitter"></i></a></li>
-                    <li><a href=""><i aria-hidden="true" class="fa fa-instagram"></i></a></li>
+                    <li><a href="https://www.facebook.com/" target="_blank"><i aria-hidden="true" class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://twitter.com" target="_blank"><i aria-hidden="true" class="fa fa-twitter"></i></a></li>
+                    <li><a href="https://www.instagram.com" target="_blank"><i aria-hidden="true" class="fa fa-instagram"></i></a></li>
                 </ul>
             </div>
             <div class="footer_nav">

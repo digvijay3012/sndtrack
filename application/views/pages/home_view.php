@@ -63,12 +63,32 @@ if(!empty($UserData)){
                         <li><a href="<?php echo base_url(); ?>login">Login</a></li>
                     </ul>
 						<?php }else{
+							echo '<ul>';
 							$user_groups = $this->ion_auth->get_users_groups($userID)->result();
-							//echo "<pre>";	print_r($user_groups);	echo "</pre>";
+							$userGroupId = $user_groups[0]->id;
+							 if($userGroupId==1){
+							echo '<li><a href="'.base_url().'administrator/dashboard">Dashboard</a></li>
+									<li><a href="'.base_url().'logout">Logout</a> </li>';
+									
+							}elseif($userGroupId==2){
+									echo '<li><a href="'.base_url().'administrator/dashboard">Dashboard</a></li>
+									<li><a href="'.base_url().'logout">Logout</a> </li>';
+								
+							}elseif($userGroupId==3){
+								echo '<li><a href="'.base_url().'artist/dashboard">Dashboard</a></li>
+									<li><a href="'.base_url().'logout">Logout</a> </li>';
+								
+							}elseif($userGroupId==4){
+								echo '<li><a href="'.base_url().'dashboard">Dashboard</a></li>
+									<li><a href="'.base_url().'logout">Logout</a> </li>';
+							
+							}else{
+								/* $logout = $this->ion_auth->logout();
+								redirect('login', 'refresh'); */
+							}
 						?>
-					 <ul>
-						<li><a href="<?php echo base_url(); ?>artist/artist_dashboard">Dashboard</a></li>
-						<li> </li>
+					
+						
                     </ul>
 						<?php } ?>	
                    
@@ -102,14 +122,17 @@ if(!empty($UserData)){
 
         </div>
     </div>
-
-
-    <div class="banner_bottom wow fadeInUp animated" style="background-image:url('images/bgimage_bottom.jpg')">
+<?php
+$getSingleArtist 	=	get_homepage_featured_artist();
+$artist_image		=	$getSingleArtist->artist_image;
+$featuredArtistId	=	$getSingleArtist->id;
+?>
+   <div class="banner_bottom wow fadeInUp animated" style="background-image:url('<?php echo base_url(); ?>artist_images/<?php echo $artist_image; ?>')">
         <div class="container">
             <div class="left_content">
                 <div class="claim_snide">
-                    <a href="">
-							Clem Snide
+                    <a href="<?php echo base_url(); ?>dashboard/artist_music/<?php echo $featuredArtistId; ?>">
+							<?php echo $getSingleArtist->first_name." ".$getSingleArtist->last_name; ?>
 						</a>
                 </div>
                 <p>Featured Artist</p>
@@ -124,174 +147,51 @@ if(!empty($UserData)){
                 <div class="carousel slide">
                     <div class="flexslider1 carousel">
                         <ul class="bxslider slides">
+						<?php $gethomepageTrendingArtist = get_homepage_trending_artist(); 
+						$trackCounter='';
+						//echo "<pre>";	print_r($homepageTrendingArtist);		echo "</pre>";
+						if(!empty($gethomepageTrendingArtist)){
+							foreach($gethomepageTrendingArtist as $homepageTrendingArtist){
+								$trendingArtistId	=	 $homepageTrendingArtist['id'];
+								$trendingFname		=	 $homepageTrendingArtist['first_name'];
+								$trendingLname		=	 $homepageTrendingArtist['last_name'];
+								$trendingArtimg		=	 $homepageTrendingArtist['artist_image'];
+								$musicFormat		=	 $homepageTrendingArtist['watermark_format'];
+								$setUrl				=	base_url()."artist_images/";
+								$musicFileUrl		=	base_url()."music/";
+								if($trendingArtimg!=''){
+									$trendingArtistImgUrl	=	$setUrl.$trendingArtimg;
+								}else{
+									$trendingArtistImgUrl	=	$setUrl."No_image.png";
+								}
+								$musicFile		= 	$musicFileUrl.$musicFormat;
+								$trackCounter++;
+						?>
                             <li>
                                 <div class="carousel-inner">
                                     <!-- Slide -->
                                     <div class="item active">
                                         <div class="frst_clmn">
                                             <a href="">
-                                                <div class="img_inner"><img src="images/img11.jpg" alt=""></div>
+                                                <div class="img_inner"><img src="<?php echo base_url(); ?>timthumb.php?src=<?php echo $trendingArtistImgUrl; ?>&h=183&w=366&zc=1q=100" alt="<?php echo $trendingFname." ".$trendingLname; ?>" /></div>
                                                 <div class="carousel-caption-custom">
-                                                    <p>Clem Snide</p><span>My Time is now</span></div>
+                                                    <p><?php echo $trendingFname." ".$trendingLname; ?></p><span>My Time is now</span>
+													
                                             </a>
+											<!--<div class="play" id="btn<?php echo $trackCounter; ?>"><img src="<?php echo base_url(); ?>images/play.png" alt=""></div>-->
+										</div>
+											<audio id="sound<?php echo $trackCounter; ?>">
+												<source src="<?php echo $musicFile; ?>" type="audio/mp3" />
+											</audio>
                                         </div>
-                                        <div class="scnd_clmn">
-                                            <a href="">
-                                                <div class="img_inner"><img src="images/img15.jpg" alt="" /></div>
-                                                <div class="carousel-caption-custom">
-                                                    <p>Clem Snide</p><span>My Time is now</span></div>
-                                            </a>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                             </li>
-                            <li>
-                                <div class="carousel-inner">
-                                    <!-- Slide -->
-                                    <div class="item active">
-                                        <div class="frst_clmn">
-                                            <a href="">
-                                                <div class="img_inner"><img src="images/img12.jpg" alt=""></div>
-                                                <div class="carousel-caption-custom">
-                                                    <p>Clem Snide</p><span>My Time is now</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="scnd_clmn">
-                                            <a href="">
-                                                <div class="img_inner"><img src="images/img16.jpg" alt="" /></div>
-                                                <div class="carousel-caption-custom">
-                                                    <p>Clem Snide</p><span>My Time is now</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="carousel-inner">
-                                    <!-- Slide -->
-                                    <div class="item active">
-                                        <div class="frst_clmn">
-                                            <a href="">
-                                                <div class="img_inner"><img src="images/img13.jpg" alt=""></div>
-                                                <div class="carousel-caption-custom">
-                                                    <p>Clem Snide</p><span>My Time is now</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="scnd_clmn">
-                                            <a href="">
-                                                <div class="img_inner"><img src="images/img17.jpg" alt="" /></div>
-                                                <div class="carousel-caption-custom">
-                                                    <p>Clem Snide</p><span>My Time is now</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="carousel-inner">
-                                    <!-- Slide -->
-                                    <div class="item active">
-                                        <div class="frst_clmn">
-                                            <a href="">
-                                                <div class="img_inner"><img src="images/img14.jpg" alt=""></div>
-                                                <div class="carousel-caption-custom">
-                                                    <p>Clem Snide</p><span>My Time is now</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="scnd_clmn">
-                                            <a href="">
-                                                <div class="img_inner"><img src="images/img18.jpg" alt="" /></div>
-                                                <div class="carousel-caption-custom">
-                                                    <p>Clem Snide</p><span>My Time is now</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="carousel-inner">
-                                    <!-- Slide -->
-                                    <div class="item active">
-                                        <div class="frst_clmn">
-                                            <a href="">
-                                                <div class="img_inner"><img src="images/img11.jpg" alt=""></div>
-                                                <div class="carousel-caption-custom">
-                                                    <p>Clem Snide</p><span>My Time is now</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="scnd_clmn">
-                                            <a href="">
-                                                <div class="img_inner"><img src="images/img15.jpg" alt="" /></div>
-                                                <div class="carousel-caption-custom">
-                                                    <p>Clem Snide</p><span>My Time is now</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="carousel-inner">
-                                    <!-- Slide -->
-                                    <div class="item active">
-                                        <div class="frst_clmn">
-                                            <a href="">
-                                                <div class="img_inner"><img src="images/img12.jpg" alt=""></div>
-                                                <div class="carousel-caption-custom">
-                                                    <p>Clem Snide</p><span>My Time is now</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="scnd_clmn">
-                                            <a href="">
-                                                <div class="img_inner"><img src="images/img16.jpg" alt="" /></div>
-                                                <div class="carousel-caption-custom">
-                                                    <p>Clem Snide</p><span>My Time is now</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="carousel-inner">
-                                    <!-- Slide -->
-                                    <div class="item active">
-                                        <div class="frst_clmn">
-                                            <a href="">
-                                                <div class="img_inner"><img src="images/img13.jpg" alt=""></div>
-                                                <div class="carousel-caption-custom">
-                                                    <p>Clem Snide</p><span>My Time is now</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="scnd_clmn">
-                                            <a href="">
-                                                <div class="img_inner"><img src="images/img17.jpg" alt="" /></div>
-                                                <div class="carousel-caption-custom">
-                                                    <p>Clem Snide</p><span>My Time is now</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="carousel-inner">
-                                    <!-- Slide -->
-                                    <div class="item active">
-                                        <div class="frst_clmn">
-                                            <a href="">
-                                                <div class="img_inner"><img src="images/img14.jpg" alt=""></div>
-                                                <div class="carousel-caption-custom">
-                                                    <p>Clem Snide</p><span>My Time is now</span></div>
-                                            </a>
-                                        </div>
-                                        <div class="scnd_clmn">
-                                            <a href="">
-                                                <div class="img_inner"><img src="images/img18.jpg" alt="" /></div>
-                                                <div class="carousel-caption-custom">
-                                                    <p>Clem Snide</p><span>My Time is now</span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+						<?php }}else{
+							echo "No record found.";
+						} ?>
+                          
                         </ul>
                     </div>
                 </div>
@@ -307,62 +207,24 @@ if(!empty($UserData)){
                 <h2>Playlists</h2>
                 <div class="flexslider carousel">
                     <ul class="bxslider slides">
+					<?php $getPlaylist 	=	get_homePage_playlist();
+							if(!empty($getPlaylist)){
+								foreach($getPlaylist as $fetchPlyalist){
+									$playlistId			=	$fetchPlyalist['id'];
+									$playlistName		=	$fetchPlyalist['playlist_name'];
+									$customer_id		=	$fetchPlyalist['customer_id'];
+								?>
                         <li>
                             <div class="inner_slider">
-                                <img src="images/bx_slider1 (1).jpg" />
+                                <img src="<?php echo base_url(); ?>images/bx_slider1 (1).jpg" />
                                 <div class="content_slider">
-                                    <span>Drive Time</span>
+                                    <span><a href="<?php echo base_url(); ?>playlist/view/<?php echo $customer_id; ?>"><?php echo $playlistName; ?></a></span>
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div class="inner_slider">
-                                <img src="images/bx_slider1 (2).jpg" />
-                                <div class="content_slider">
-                                    <span>Drive Time</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="inner_slider">
-                                <img src="images/bx_slider1 (3).jpg" />
-                                <div class="content_slider">
-                                    <span>Drive Time</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="inner_slider">
-                                <img src="images/bx_slider1 (4).jpg" />
-                                <div class="content_slider">
-                                    <span>Drive Time</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="inner_slider">
-                                <img src="images/bx_slider1 (5).jpg" />
-                                <div class="content_slider">
-                                    <span>Drive Time</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="inner_slider">
-                                <img src="images/bx_slider1 (6).jpg" />
-                                <div class="content_slider">
-                                    <span>Drive Time</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="inner_slider">
-                                <img src="images/bx_slider1 (7).jpg" />
-                                <div class="content_slider">
-                                    <span>Drive Time</span>
-                                </div>
-                            </div>
-                        </li>
+                      <?php } }else{
+						  echo '<li>No record found.</li>';
+					  } ?>
                     </ul>
                 </div>
 
@@ -394,7 +256,7 @@ if(!empty($UserData)){
         <div class="inr_bspok">
             <h2>bespoke</h2>
             <p>Need a custom score ? We can do this for you.</p>
-            <a href="" class="custom-button">Get in touch</a>
+            <a href="<?php echo base_url(); ?>contact" class="custom-button">Get in touch</a>
         </div>
     </div>
 
@@ -416,10 +278,10 @@ if(!empty($UserData)){
                     <li><a href="<?php echo base_url(); ?>journal">Journal</a></li>
                     <li><a href="<?php echo base_url(); ?>contact">Contact</a></li>
                 </ul>
-                <ul class="social_icons">
-                    <li><a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                    <li><a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                    <li><a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+              <ul class="social_icons">
+                    <li><a href="https://www.facebook.com/" target="_blank"><i aria-hidden="true" class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://twitter.com" target="_blank"><i aria-hidden="true" class="fa fa-twitter"></i></a></li>
+                    <li><a href="https://www.instagram.com" target="_blank"><i aria-hidden="true" class="fa fa-instagram"></i></a></li>
                 </ul>
             </div>
             <div class="footer_nav">
@@ -583,7 +445,25 @@ if(!empty($UserData)){
             $(".se-pre-con").fadeOut("slow");;
         });
     </script>
-
+<script>
+$('.play').click(function(){
+	
+    var $this = $(this);
+    var id = $this.attr('id').replace(/btn/, '');
+	
+    $this.toggleClass('active');
+    if($this.hasClass('active')){
+		
+        $this.html('pause'); 
+		
+        $('audio[id^="sound"]')[id-1].play();        
+    } else {
+        $this.html('<img alt="" src="<?php echo base_url(); ?>images/play.png">');
+		
+        $('audio[id^="sound"]')[id-1].pause();
+    }
+});
+</script>
 </body>
 
 </html>

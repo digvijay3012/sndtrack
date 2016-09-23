@@ -1,4 +1,5 @@
 <?php 
+
 $sessionId		=	session_id();
 $loginStatus	=	'';
 
@@ -12,7 +13,11 @@ if ($this->ion_auth->logged_in()){
 	}
 }
 $getPlaylist_id	= $this->uri->segment(3); 
-
+$data = get_customer_playlist_music($customerId,$playListId);
+if(empty($data)){
+	echo "daga";
+	die;
+}
 ?>
 <div class="cstmr_cont header-margin">
         <div class="music-bar">
@@ -284,7 +289,7 @@ $getPlaylist_id	= $this->uri->segment(3);
                                         </td>
                                     </tr>
 										<!-- Modal -->
-								<div class="modal fade added-playlist" id="addToPlaylistModal_<?php echo $musicId; ?>" role="dialog">
+								<div class="modal fade added-playlist" data-backdrop="static" data-keyboard="false" id="addToPlaylistModal_<?php echo $musicId; ?>" role="dialog">
 									<div class="modal-dialog">
 
 										<!-- Modal content-->
@@ -402,9 +407,9 @@ $getPlaylist_id	= $this->uri->segment(3);
                             </div>
                             <div class="popup_social text-center">
                                 <ul>
-                                    <li><a href="">Privacy Policy</a></li>
-                                    <li><a href="">User Agreement</a></li>
-                                    <li><a href="">Terms & Consitions</a></li>
+                                   <li><a href="<?php echo base_url(); ?>private_policy">Privacy Policy</a></li>
+                                    <li><a href="<?php echo base_url(); ?>licence_terms">User Agreement</a></li>
+                                    <li><a href="<?php echo base_url(); ?>terms_and_conditions">Terms & Consitions</a></li>
 
                                 </ul>
 
@@ -515,7 +520,7 @@ $getPlaylist_id	= $this->uri->segment(3);
   <!-- full_name -->
   <li>
    <div class="form-group">
-      <input type="text" name="full_name" placeholder="Full Name" class="full_name">
+      <input type="text" name="full_name" tabindex="2" placeholder="Full Name" class="full_name">
 	</div>
    </li>
   <input type="hidden" name="stage4_track_id" id="stage4_track_id" value="">
@@ -524,21 +529,23 @@ $getPlaylist_id	= $this->uri->segment(3);
   <!-- City -->
  <li>
 	<div class="form-group">
-      <input type="text" name="address_line1" placeholder="First Line Address" class="address_line1 form-control">
+      <input type="text" name="address_line1" tabindex="5" placeholder="First Line Address" class="address_line1 form-control">
 	 	</div> 
    </li>	
   
   <!-- State -->
 	<li>
 	<div class="form-group">
-		<input type="text" name="city" placeholder="City/State" class="city form-control">
+		<input type="text" name="city" tabindex="8" placeholder="City/State" class="city form-control">
      </div>
     </li>
   
   <!-- Country -->
 	<li>
+	(Select country)
 	<div class="form-group">
-       <div class="country bfh-selectbox bfh-countries " name="country" placeholder="Select Country" data-flags="true" data-filter="true"> </div>
+       <div class="country2 bfh-selectbox bfh-countries" name="country" placeholder="Select Country" data-flags="true" data-filter="true"> </div>
+	   
 	</div>
     </li>
   </ul>
@@ -548,31 +555,31 @@ $getPlaylist_id	= $this->uri->segment(3);
   <!-- Street -->
   <li>
   <div class="form-group">
-	<input type="text" name="project_name"  class="project_name form-control" placeholder="Project Name">
+	<input type="text" name="project_name" tabindex="1" class="project_name form-control" placeholder="Project Name">
   </div>  
    </li>
   
   <!-- City -->
  <li>
    <div class="form-group">
-	  <input type="text" name="last_name" placeholder="Last Name" class="last_name form-control">
+	  <input type="text" name="last_name" tabindex="3" placeholder="Last Name" class="last_name form-control">  </div> 
    </li>
-   </div> 
+ 
   <!-- State -->
 	<li>
 	<div class="form-group">
-      <input type="text" name="second_address" placeholder="Second Line Address">
+      <input type="text" tabindex="6" name="second_address" placeholder="Second Line Address">
     </div>
 	</li>
   
   <!-- Postcal Code -->
 	<li>
      <div class="form-group"> 
-	  <input type="text" class="zip" placeholder="Postal Code" maxlength="9" name="zip" data-bv-field="zip">
+	  <input type="text" class="zip" tabindex="9" placeholder="Postal Code" tabindex="9" maxlength="9" name="zip" data-bv-field="zip">
 	 </div>
     </li>
 	<li>
-		<input type="text" name="vat" placeholder="VAT (if applicable)">
+		<input type="text" tabindex="11" name="vat" placeholder="VAT (if applicable)">
 	</li>
   </ul>
  </div>
@@ -581,17 +588,17 @@ $getPlaylist_id	= $this->uri->segment(3);
 		<ul>
 			<li>
 				<div class="form-group"> 			
-				 <input type="text" name="cardholdername" maxlength="70" placeholder="Card Holder Name" class="card-holder-name form-control">
+				 <input type="text" name="cardholdername" tabindex="4" maxlength="70" placeholder="Card Holder Name" class="card-holder-name form-control">
 				</div>
 			</li>
 			<li>
 			<div class="form-group"> 	
-			 <input type="text" id="cardnumber" maxlength="19" placeholder="Card Number" class="card-number">
+			 <input type="text" id="cardnumber" tabindex="7" maxlength="19" placeholder="Card Number" class="card-number">
 			 </div>
 			</li>
 			<li class="expiry_dat">
 			<div class="form-group"> 	
-				<select name="select2" data-stripe="exp-month" class="card-expiry-month stripe-sensitive required">
+				<select tabindex="10" name="select2" data-stripe="exp-month" class="card-expiry-month stripe-sensitive required pull-left">
 					<option value="01" selected="selected">01</option>
 					<option value="02">02</option>
 					<option value="03">03</option>
@@ -605,14 +612,14 @@ $getPlaylist_id	= $this->uri->segment(3);
 					<option value="11">11</option>
 					<option value="12">12</option>
 				  </select>
-				  <span> / </span>
-				  <select name="select2" data-stripe="exp-year" class="card-expiry-year stripe-sensitive required">
+				
+				  <select name="select2" data-stripe="exp-year" class="card-expiry-year stripe-sensitive required pull-right">
 				  </select>
 			</div>
 			</li>
 			<li>
 			<div class="form-group"> 
-				<input type="text" id="cvv" placeholder="CVV" maxlength="4" class="card-cvc">
+				<input type="text" tabindex="12" id="cvv" placeholder="CVV" maxlength="4" class="card-cvc">
 			</div>
 			</li>
 		</ul>
@@ -1014,7 +1021,7 @@ $(document).on('click','.addToPlayList',function(){
 					var trackId	=	$(this).attr('track_id');
 				
 				$(".login_form_popup").empty();
-				var appendForm	=	'<ul class="form_ul_test"><li class="create-play"><input type="text" placeholder="Enter Playlist" maxlength="25" name="popup_playlist_name" id="popup_playlist_name" required><div style="display:none" class="error error_cls_'+trackId+'"><p>Plesae enter your playlist name.</p></div><input type="hidden" trackId="'+trackId+'"  value="'+trackId+'" name="popup_track_id"></li><li class="creat_btn"><button name="submit" type="button" class="sbmt hover_btn create_popup_playlist">Create Playlist</button></li></ul>';
+				var appendForm	=	'<ul class="form_ul_test"><li class="create-play"><input type="text" placeholder="Enter Playlist" maxlength="25" name="popup_playlist_name" id="popup_playlist_name" required><div style="display:none" class="error error_cls_'+trackId+'"><p>Plesae enter your playlist name.</p></div><input type="hidden" trackId="'+trackId+'"  value="'+trackId+'" name="popup_track_id"></li><li class="creat_btn"><button name="submit" type="button" class="sbmt hover_btn create_popup_playlist">Create Playlist</button></li></ul><button type="button" class="btn btn-primary close_playlist_mycls">Close</button>';
 				//alert(appendForm);
 				jQuery(appendForm).detach().appendTo('.login_form_popup'); 
 				//$('#popup_track_id').attr("trackId",trackId);
@@ -1549,7 +1556,9 @@ $(document).ready(function() {
                 }
             }
  
-
+$(document).on('click','.close_playlist_mycls',function(){
+		 window.location.reload(); 
+	});	
 </script>
 
 </body>

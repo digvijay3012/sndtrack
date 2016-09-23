@@ -108,7 +108,7 @@ if(!empty($customerData)){
                                         </td>		
                                     </tr>
 				<!-- Modal -->
-        <div class="modal fade" id="addToPlaylistModal_<?php echo $musicId; ?>" role="dialog">
+        <div class="modal fade" data-backdrop="static" data-keyboard="false" id="addToPlaylistModal_<?php echo $musicId; ?>" role="dialog">
             <div class="modal-dialog">
 
                 <!-- Modal content-->

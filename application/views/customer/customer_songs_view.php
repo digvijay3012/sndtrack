@@ -282,12 +282,12 @@ $getPlaylist_id	= $this->uri->segment(3);
                                             </ul>
 
                                         </td>
-                                        <td class="lst_data license">
+                                        <!--<td class="lst_data license">
                                            <a href="javascript:void(0);" class="popup_stage_1_cls" music_id="<?php echo $musicId; ?>" data-toggle="modal" data-target="#popup_stage_1">License</a>
-                                        </td>
+                                        </td>-->
                                     </tr>
 										<!-- Modal -->
-								<div class="modal fade" id="addToPlaylistModal_<?php echo $musicId; ?>" role="dialog">
+								<div class="modal fade"  data-backdrop="static" data-keyboard="false" id="addToPlaylistModal_<?php echo $musicId; ?>" role="dialog">
 									<div class="modal-dialog">
 
 										<!-- Modal content-->
@@ -457,9 +457,9 @@ $getPlaylist_id	= $this->uri->segment(3);
                             </div>
                             <div class="popup_social text-center">
                                 <ul>
-                                    <li><a href="">Privacy Policy</a></li>
-                                    <li><a href="">User Agreement</a></li>
-                                    <li><a href="">Terms & Consitions</a></li>
+                                     <li><a href="<?php echo base_url(); ?>private_policy">Privacy Policy</a></li>
+                                    <li><a href="<?php echo base_url(); ?>licence_terms">User Agreement</a></li>
+                                    <li><a href="<?php echo base_url(); ?>terms_and_conditions">Terms & Consitions</a></li>
 
                                 </ul>
 
@@ -1076,7 +1076,7 @@ $(document).on('click','.addToPlayList',function(){
 					var trackId	=	$(this).attr('track_id');
 				
 				$(".login_form_popup").empty();
-				var appendForm	=	'<ul class="form_ul_test"><li><input type="text" placeholder="Enter Playlist" maxlength="25" name="popup_playlist_name" id="popup_playlist_name" required><div style="display:none" class="error error_cls_'+trackId+'"><p>Plesae enter your playlist name.</p></div><input type="hidden" trackId="'+trackId+'"  value="'+trackId+'" name="popup_track_id"></li><li><button name="submit" type="button" class="sbmt hover_btn create_popup_playlist">Create Playlist</button></li></ul>';
+				var appendForm	=	'<ul class="form_ul_test"><li><input type="text" placeholder="Enter Playlist" maxlength="25" name="popup_playlist_name" id="popup_playlist_name" required><div style="display:none" class="error error_cls_'+trackId+'"><p>Plesae enter your playlist name.</p></div><input type="hidden" trackId="'+trackId+'"  value="'+trackId+'" name="popup_track_id"></li><li><button name="submit" type="button" class="sbmt hover_btn create_popup_playlist">Create Playlist</button></li></ul><button type="button" class="btn btn-primary close_playlist_mycls">Close</button>';
 				//alert(appendForm);
 				jQuery(appendForm).detach().appendTo('.login_form_popup'); 
 				//$('#popup_track_id').attr("trackId",trackId);
@@ -1610,7 +1610,9 @@ $(document).ready(function() {
                     //form$.get(0).submit();
                 }
             }
- 
+ $(document).on('click','.close_playlist_mycls',function(){
+		 window.location.reload(); 
+	});	
 
 </script>
 </body>

@@ -11,7 +11,22 @@ class Browse extends CI_Controller {
 		$this->load->helper('custom_helper');
 		$this->load->library(array('ion_auth','form_validation','session'));
 		$this->load->model('browse_model');
-		
+		$this->lang->load('auth');
+		if ($this->ion_auth->logged_in()){
+				 $adminID			=	$this->ion_auth->user()->row()->user_id; 
+				$groupID 			= 	$this->ion_auth->get_users_groups($adminID)->row()->id; 
+				 //if the login is successful
+				 if($groupID==1){
+					$logout = $this->ion_auth->logout();
+					redirect('login');
+				}if($groupID==2){
+					$logout = $this->ion_auth->logout();
+					redirect('login');
+				}if($groupID==3){
+					$logout = $this->ion_auth->logout();
+					redirect('login');
+				}
+			}
 	}
 	public function index()		
 	{

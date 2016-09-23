@@ -52,11 +52,11 @@
             
             <ul>
                 <li>
-                    <input type="text" value="<?php echo set_value('first_name'); ?>" placeholder="First Name" name="first_name" >
+                    <input type="text" maxlength="25" value="<?php echo set_value('first_name'); ?>" placeholder="First Name" name="first_name" >
 					<?php  echo form_error('first_name'); ?>
                 </li>
                 <li>
-                    <input type="text" placeholder="Last Name" value="<?php echo set_value('last_name'); ?>" name="last_name">
+                    <input type="text" maxlength="25" placeholder="Last Name" value="<?php echo set_value('last_name'); ?>" name="last_name">
 					<?php  echo form_error('last_name'); ?>
                 </li>
                 <li>
@@ -73,6 +73,7 @@
                 </li>
                 <li>
                     <button class="custom-button full-width" type="submit" id="send" name="submit" required="">Create Account</button>
+					<a class="forgot" href="<?php echo base_url(); ?>login">Login</a>
                 </li>
             </ul>
     <?php echo form_close();?>
@@ -132,6 +133,28 @@
 
 })(jQuery, window, document);
 </script> 
+<!--************************************ Start Script use for enter Alphabets only in (Name) Text box********************-->
+<script type="text/javascript">
+jQuery(document).ready(function(){
+jQuery.noConflict();
+   jQuery("input[name='first_name']").keypress(function(event){
+       var inputValue = event.which;
+       // allow letters and whitespaces only.
+       if((inputValue > 33 && inputValue < 64) || (inputValue > 90 && inputValue < 97 ) || (inputValue > 123 && inputValue < 126)
+&& (inputValue != 32)){
+           event.preventDefault();
+       }
+   }); 
+      jQuery("input[name='last_name']").keypress(function(event){
+       var inputValue = event.which;
+       // allow letters and whitespaces only.
+       if((inputValue > 33 && inputValue < 64) || (inputValue > 90 && inputValue < 97 ) || (inputValue > 123 && inputValue < 126)
+&& (inputValue != 32)){
+           event.preventDefault();
+       }
+   });
+});
+</script>
 </body>
 
 </html>

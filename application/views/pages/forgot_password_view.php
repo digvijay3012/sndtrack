@@ -50,7 +50,7 @@
                 <li>
 				
                     <input type="text"  name="identity" placeholder="Email address">
-					<?php  echo form_error('identity'); ?>
+					<?php  //echo form_error('identity'); ?>
                 </li>
                 
                 <li>

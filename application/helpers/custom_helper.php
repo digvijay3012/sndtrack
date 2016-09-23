@@ -552,8 +552,8 @@ if ( ! function_exists('filter_playlist_orderby')){
        $ci->load->database();
      
        //get data from database 
-		$query = $ci->db->query("SELECT snd_artist_info.artist_id, users.first_name, users.last_name, snd_artist_music.id,snd_artist_info.artist_image, snd_musicfile_version.watermark_format from snd_artist_music INNER JOIN snd_musicfile_version ON snd_artist_music.id=snd_musicfile_version.track_id INNER JOIN snd_artist_info ON snd_artist_music.artist_id=snd_artist_info.artist_id INNER JOIN users ON snd_artist_music.artist_id=users.id INNER JOIN snd_customer_playlist_music ON snd_artist_music.id=snd_customer_playlist_music.track_id WHERE snd_customer_playlist_music.customer_id='$customerId' AND snd_customer_playlist_music.playlist_id='$playlist_id' AND snd_artist_music.short_order='$short_order'");
-
+		$query = $ci->db->query("SELECT snd_artist_info.artist_id, users.first_name, users.last_name, snd_artist_music.id,snd_artist_info.artist_image, snd_musicfile_version.watermark_format from snd_artist_music INNER JOIN snd_musicfile_version ON snd_artist_music.id=snd_musicfile_version.track_id INNER JOIN snd_artist_info ON snd_artist_music.artist_id=snd_artist_info.artist_id INNER JOIN users ON snd_artist_music.artist_id=users.id WHERE snd_artist_music.short_order='Trending'");
+	
        $resultArray	=	array();
 			foreach ($query->result_array() as $row){
 						$resultArray[]= $row;
@@ -845,7 +845,22 @@ if ( ! function_exists('get_homepage_featured_artist')){
        $ci->load->database();
        
        //get data from database 
-		$query = $ci->db->query("SELECT users.id, users.first_name, users.last_name, snd_artist_info.artist_image from snd_artist_info INNER JOIN users ON snd_artist_info.artist_id = users.id WHERE snd_artist_info.artist_type='feautred'");
+		$query = $ci->db->query("SELECT users.id, users.first_name, users.last_name, snd_artist_info.artist_image from snd_artist_info INNER JOIN users ON snd_artist_info.artist_id = users.id WHERE snd_artist_info.artist_type='feautred' AND snd_artist_info.artist_image !='' ORDER BY users.id DESC")->row();
+		
+			return $query;
+   }
+}
+if ( ! function_exists('get_homepage_trending_artist')){
+   function get_homepage_trending_artist(){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+       
+       //get data from database 
+		$query = $ci->db->query("SELECT snd_artist_info.artist_id, users.first_name, users.last_name, snd_artist_music.id,snd_artist_info.artist_image, snd_musicfile_version.watermark_format from snd_artist_music INNER JOIN snd_musicfile_version ON snd_artist_music.id=snd_musicfile_version.track_id INNER JOIN snd_artist_info ON snd_artist_music.artist_id=snd_artist_info.artist_id INNER JOIN users ON snd_artist_music.artist_id=users.id WHERE  snd_artist_music.short_order='Trending' LIMIT 8");
+		
 			$resultArray	=	array();
 			foreach ($query->result_array() as $row){
 						$resultArray[]= $row;
@@ -853,7 +868,7 @@ if ( ! function_exists('get_homepage_featured_artist')){
 				
 				return $resultArray;
    }
-}
+}	
 if ( ! function_exists('get_my_purchase_track')){
    function get_my_purchase_track($licenceId=null,$trackId=null){
        //get main CodeIgniter object
@@ -869,5 +884,23 @@ if ( ! function_exists('get_my_purchase_track')){
 		$selQry			=	$ci->db->query("SELECT $license_type as musicFilename FROM snd_musicfile_version WHERE track_id='$trackId'")->row();
 		$musicFormat 	=	$selQry->musicFilename;		
 				return $musicFormat;
+   }
+}
+if ( ! function_exists('get_homePage_playlist')){
+   function get_homePage_playlist(){
+       //get main CodeIgniter object
+       $ci =& get_instance();
+       
+       //load databse library
+       $ci->load->database();
+     
+       //get data from database 
+		$query = $ci->db->query("SELECT * FROM snd_customer_playlist");
+		$resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				
+				return $resultArray;
    }
 }	
