@@ -9,10 +9,14 @@ if(!empty($customerData)){
 }
 $sessionId		=	session_id();
 $getPlaylist_id='';
+$profileImg = get_customer_image($customerId);
+if($profileImg==''){
+	$profileImg	=	'premi_bnnr.jpg';
+}
 ?>			
 <div class="cstmr_cont header-margin">
         <div class="container-fluid pdngg container-full">
-            <div class="banner_image wow fadeIn animated mrgn_srch" style="background-image: url('<?php echo base_url(); ?>images/premi_bnnr.jpg');">
+            <div class="banner_image wow fadeIn animated mrgn_srch" style="background-image: url('<?php echo base_url(); ?>customer_images/<?php echo $profileImg; ?>');">
                 <div class="content_banner_inner text-center">
                     <h2>Welcome</h2>
                     <p>Hi <?php echo $first_name; ?> ! </p>
@@ -157,7 +161,7 @@ $getPlaylist_id='';
 					<a href="#" data-target="#login_alert_popup" data-toggle="modal"><h3 class="rt_hdng playlist-icon">PLAYLISTS</h3></a>
 				<?php } ?>
                     <?php if ($this->ion_auth->logged_in()){ ?> 
-                    <ul>
+                    <ul class="playlist_display_cls">
                       <?php $getPlaylist	=	get_customer_playlist($customerId); 
 						if(!empty($getPlaylist)){
 							foreach($getPlaylist as $playlistData){
@@ -1120,6 +1124,7 @@ $(document).on('click','.addToPlayList',function(){
 		
 			var loader		=	".popup_playlist_loader_"+track_id;
 				var url	=	'<?php echo base_url(); ?>dashboard/create_playlist_inpopup/'+track_id+"/"+popup_playlist_name;
+				var nextUrl = '<?php echo base_url(); ?>dashboard/get_popup_playlistId_from_dahboard/'+popup_playlist_name;
 					  $(loader).show();
 					  $.ajax({
 							url: url,
@@ -1130,7 +1135,18 @@ $(document).on('click','.addToPlayList',function(){
 								$('.download_popup').append(data);
 								var get_popup_playlist_name	=	$(getplaylistname).val("");
 									$(loader).hide();
+									 $.ajax({
+										url: nextUrl,
+										data: {popup_playlist_name : popup_playlist_name},                         // Setting the data attribute of ajax with file_data
+										type: 'post',
+										success:function(data){
+											//alert(data);
+												$('.playlist_display_cls').append(data);
+											
+											}
+									}); 
 								}
+									
 						}); 
 		}else{
 			$(error_cls).show();
@@ -1624,7 +1640,7 @@ $(document).ready(function() {
             }
  
 $(document).on('click','.close_playlist_mycls',function(){
-		 window.location.reload(); 
+		$('.added-playlist').modal('hide');
 	});	
 </script>
 </body>

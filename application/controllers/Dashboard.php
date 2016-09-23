@@ -89,6 +89,13 @@ class Dashboard extends CI_Controller {
 		echo '<div class="added_pop"><div class="rt_playlist-nam">'.$popup_playlist_name.'</div><div class="lst_data lft_playlst a"><button type="button" class="added">Added</button></div></div>';
 		
 	}
+		public function get_popup_playlistId_from_dahboard($popup_playlist_name=null){
+		 
+		$customerId		=	$this->ion_auth->user()->row()->user_id; 
+		 $data			=	$this->dashboard_model->get_popup_playlistId_from_dahboard($customerId);
+		echo '<li playlist_id="'.$data.'" class="trash"><a href="'.base_url().'playlist/view/'.$data.'">'.$popup_playlist_name.'</a></li>';
+		
+	}
 	public function filter_by_category($catid=null){
 		
 		return $this->load->view('search/category_search_view', array('catId'=>$catid));

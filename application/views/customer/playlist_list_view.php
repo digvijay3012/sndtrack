@@ -13,11 +13,11 @@ if ($this->ion_auth->logged_in()){
 	}
 }
 $getPlaylist_id	= $this->uri->segment(3); 
-$data = get_customer_playlist_music($customerId,$playListId);
+/* $data = get_customer_playlist_music($customerId,$playListId);
 if(empty($data)){
 	echo "daga";
 	die;
-}
+} */
 ?>
 <div class="cstmr_cont header-margin">
         <div class="music-bar">

@@ -28,8 +28,14 @@ class Playlist extends CI_Controller {
 		$this->load->view('customer/playlist_list_view', array('playListId'=>$playListId));
 		
 	}
-	public function view($playListId=null)
+	public function view($playListId=null, $customerId=null)
 	{
+		$ID			=	$this->ion_auth->user()->row()->user_id; 
+		if($customerId !=null && $ID	!=	$customerId){
+			$this->session->set_flashdata('message', 'You are not autorize to see this Playlist.');
+            redirect("browse", 'refresh');
+		}
+	
 		if($playListId==''){
 			redirect('dashboard');
 		}

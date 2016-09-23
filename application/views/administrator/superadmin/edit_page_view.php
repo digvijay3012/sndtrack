@@ -116,6 +116,10 @@
 		
 		
       });
+$( document ).ready(function() {
+  $('.f-basic').next().next().hide();
+});
+
   </script>
 
 </body>

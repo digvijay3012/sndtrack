@@ -139,7 +139,7 @@ $featuredArtistId	=	$getSingleArtist->id;
             </div>
         </div>
     </div>
-
+  <div id="jquery_jplayer_1" class="jp-jplayer"></div>
     <div class="trending_cont wow fadeInUp animated">
         <div class="container">
             <div class="slider_boot pdng_inr">
@@ -149,16 +149,19 @@ $featuredArtistId	=	$getSingleArtist->id;
                         <ul class="bxslider slides">
 						<?php $gethomepageTrendingArtist = get_homepage_trending_artist(); 
 						$trackCounter='';
-						//echo "<pre>";	print_r($homepageTrendingArtist);		echo "</pre>";
+						
 						if(!empty($gethomepageTrendingArtist)){
 							foreach($gethomepageTrendingArtist as $homepageTrendingArtist){
+								//echo "<pre>";	print_r($homepageTrendingArtist);		echo "</pre>";
 								$trendingArtistId	=	 $homepageTrendingArtist['id'];
 								$trendingFname		=	 $homepageTrendingArtist['first_name'];
 								$trendingLname		=	 $homepageTrendingArtist['last_name'];
 								$trendingArtimg		=	 $homepageTrendingArtist['artist_image'];
 								$musicFormat		=	 $homepageTrendingArtist['watermark_format'];
+								$artisTid			=	 $homepageTrendingArtist['artist_id'];
 								$setUrl				=	base_url()."artist_images/";
 								$musicFileUrl		=	base_url()."music/";
+								$explodeFile 		=	explode(".",$musicFormat);
 								if($trendingArtimg!=''){
 									$trendingArtistImgUrl	=	$setUrl.$trendingArtimg;
 								}else{
@@ -172,19 +175,19 @@ $featuredArtistId	=	$getSingleArtist->id;
                                     <!-- Slide -->
                                     <div class="item active">
                                         <div class="frst_clmn">
-                                            <a href="">
-                                                <div class="img_inner"><img src="<?php echo base_url(); ?>timthumb.php?src=<?php echo $trendingArtistImgUrl; ?>&h=183&w=366&zc=1q=100" alt="<?php echo $trendingFname." ".$trendingLname; ?>" /></div>
-                                                <div class="carousel-caption-custom">
-                                                    <p><?php echo $trendingFname." ".$trendingLname; ?></p><span>My Time is now</span>
-													
-                                            </a>
-											<!--<div class="play" id="btn<?php echo $trackCounter; ?>"><img src="<?php echo base_url(); ?>images/play.png" alt=""></div>-->
-										</div>
-											<audio id="sound<?php echo $trackCounter; ?>">
-												<source src="<?php echo $musicFile; ?>" type="audio/mp3" />
-											</audio>
-                                        </div>
-                                       
+                                        <a class="play-button">
+                                                <div class="img_inner">
+													<img src="<?php echo base_url(); ?>timthumb.php?src=<?php echo $trendingArtistImgUrl; ?>&h=183&w=366&zc=1q=100" alt="<?php echo $trendingFname." ".$trendingLname; ?>" />
+												</div>
+										
+                                                <div> </div>
+										</a>
+											<input type="hidden" class="song" value="<?php echo $musicFile; ?>">
+											<div class="carousel-caption-custom">
+												<p><a href="<?php echo base_url(); ?>dashboard/artist/<?php echo $artisTid; ?>"><?php echo $trendingFname." ".$trendingLname; ?></a></p><span><?php echo $explodeFile['0']; ?></span>
+
+											</div>											
+									     </div>
                                     </div>
                                 </div>
                             </li>
@@ -209,16 +212,25 @@ $featuredArtistId	=	$getSingleArtist->id;
                     <ul class="bxslider slides">
 					<?php $getPlaylist 	=	get_homePage_playlist();
 							if(!empty($getPlaylist)){
+								$imgFlag = "";
 								foreach($getPlaylist as $fetchPlyalist){
 									$playlistId			=	$fetchPlyalist['id'];
 									$playlistName		=	$fetchPlyalist['playlist_name'];
 									$customer_id		=	$fetchPlyalist['customer_id'];
+									$imgFlag++;
 								?>
                         <li>
                             <div class="inner_slider">
-                                <img src="<?php echo base_url(); ?>images/bx_slider1 (1).jpg" />
+							<?php 
+								if($imgFlag % 2 == 0){
+									echo '<img src="'.base_url().'images/bx_slider1 (1).jpg" />';
+								}else{
+									echo '<img src="'.base_url().'images/bx_slider1 (3).jpg" />';
+								}
+							?>
+                                
                                 <div class="content_slider">
-                                    <span><a href="<?php echo base_url(); ?>playlist/view/<?php echo $customer_id; ?>"><?php echo $playlistName; ?></a></span>
+                                    <span><a href="<?php echo base_url(); ?>playlist/view/<?php echo $playlistId; ?>/<?php echo $customer_id; ?>"><?php echo $playlistName; ?></a></span>
                                 </div>
                             </div>
                         </li>
@@ -306,6 +318,9 @@ $featuredArtistId	=	$getSingleArtist->id;
     <script defer src="<?php echo base_url(); ?>js/jquery.flexslider.js"></script>
     <script src="<?php echo base_url(); ?>js/owl.carousel.js"></script>
     <script src="https://use.typekit.net/auo4nbe.js"></script>
+	   <link href="<?php echo base_url(); ?>jplayer/jplayer.blue.monday.min.css" rel="stylesheet" type="text/css" />
+     
+       <script type="text/javascript" src="<?php echo base_url(); ?>jplayer/dist/jplayer/jquery.jplayer.min.js"></script>
     <script>
         try {
             Typekit.load({
@@ -313,6 +328,59 @@ $featuredArtistId	=	$getSingleArtist->id;
             });
         } catch (e) {}
     </script>
+	<script type="text/javascript">
+  jQuery(document).ready(function () {
+	jQuery('.play-button').each(function () {
+                        jQuery(this).click(function () {
+                            //var song = $(".song").val();
+                           // alert("play clicked");
+
+                           if (jQuery(this).hasClass("pause-button")) {
+                                //alert("pause clicked");
+                                jQuery("#jquery_jplayer_1").jPlayer("pause");
+                                jQuery(this).removeClass('pause-button');
+                                jQuery(this).addClass('play-button');
+                            } else {
+                                jQuery('.pause-button').addClass('play-button');
+                                jQuery('.pause-button').removeClass('pause-button');
+
+                                jQuery(this).removeClass('play-button');
+                                jQuery(this).addClass('pause-button');
+
+                                jQuery(".jp-stop").click();
+                                jQuery("#jquery_jplayer_1").jPlayer("destroy");
+
+                                var song = jQuery(this).siblings('.song').val();
+                               // alert(song);
+                                jQuery("#jquery_jplayer_1>audio").attr("src", song);
+                                //jQuery(".jp-audio").addClass("jp-state-playing");
+                                jQuery("#jquery_jplayer_1").jPlayer({
+                                    preload: 'auto',
+                                    ready: function (event) {
+                                        jQuery(this).jPlayer("setMedia", {
+                                            title: "Bubble",
+                                            mp3: song
+                                        }).jPlayer("play");
+                                    },
+                                    swfPath: "<?php echo base_url(); ?>jplayer/dist/jplayer",
+                                    supplied: "mp3",
+                                    //supplied: "m4a, oga",
+                                    wmode: "window",
+                                    solution: "html,flash",
+                                    useStateClassSkin: true,
+                                    autoBlur: false,
+                                    smoothPlayBar: true,
+                                    keyEnabled: true,
+                                    remainingDuration: true,
+                                    toggleDuration: true,
+
+                                });
+                            } 
+                        });
+                    });
+                  
+                });
+  </script>
     <script>
         var wow = new WOW({
             boxClass: 'wow',
@@ -445,25 +513,7 @@ $featuredArtistId	=	$getSingleArtist->id;
             $(".se-pre-con").fadeOut("slow");;
         });
     </script>
-<script>
-$('.play').click(function(){
-	
-    var $this = $(this);
-    var id = $this.attr('id').replace(/btn/, '');
-	
-    $this.toggleClass('active');
-    if($this.hasClass('active')){
-		
-        $this.html('pause'); 
-		
-        $('audio[id^="sound"]')[id-1].play();        
-    } else {
-        $this.html('<img alt="" src="<?php echo base_url(); ?>images/play.png">');
-		
-        $('audio[id^="sound"]')[id-1].pause();
-    }
-});
-</script>
+  
 </body>
 
 </html>

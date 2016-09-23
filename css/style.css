@@ -4296,3 +4296,10 @@ table .scrub-prog .scrub-prog-img {
 .froala-box > div:last-of-type {
   display: none !important;
 }
+.trending_cont .item a.pause-button:hover .img_inner::after {
+  background-image: url("../images/pause.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  content: "";
+  z-index: 9;
+}

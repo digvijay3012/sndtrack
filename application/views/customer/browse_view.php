@@ -178,7 +178,7 @@ $getPlaylist_id	= $this->uri->segment(3);
                 </div>
             </div>
             <div class="rt_sidebar browse-page">
-			
+			<div class="error_Message"><?php echo $this->session->flashdata('message'); ?></div>
                 <div class="cont_artist">
                   <div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
 				   <div class="lft_playlist lft_browse pull-left">

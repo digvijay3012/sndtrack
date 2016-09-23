@@ -100,4 +100,8 @@ class Dashboard_model extends CI_Model {
 				$this->db->insert('snd_customer_playlist_music',$playlistData);
 				return 1;
 	}
+	function get_popup_playlistId_from_dahboard($customerId){
+		$selQry	=	$this->db->query("SELECT id FROM snd_customer_playlist WHERE customer_id='$customerId' ORDER BY id DESC")->row();
+		return $selQry->id;
+	}
 }

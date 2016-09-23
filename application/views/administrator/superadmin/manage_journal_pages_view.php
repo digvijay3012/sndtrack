@@ -75,7 +75,8 @@ if(!empty($adminData)){
         </div>
     </div>
 <script>
-$(document).ready(function(){
-
+$( document ).ready(function() {
+$('.f-basic').next().next().hide();
 });
+
 </script>
