@@ -106,7 +106,10 @@ $getPlaylist_id	= $this->uri->segment(3);
                         <div class="panel panel-default">
                             <h3 class="rt_hdng"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Energy </a></h3>
                             <div id="collapseTwo" class="panel-collapse collapse">
-                                <div class="panel-body"><img src="<?php echo base_url(); ?>images/music_level.jpg" alt=""></div>
+                                <div class="panel-body">
+								<span id="energy_range_val">0</span>
+										<div id="slider-range"></div>
+								</div>
                             </div>
                         </div>
                        
@@ -756,6 +759,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 		<script src="<?php echo base_url(); ?>js/bootstrap-formhelpers-min.js"></script>
 		<script src="<?php echo base_url(); ?>js/bootstrapValidator-min.js"></script>
 <link rel='stylesheet' type="text/css" href="<?php echo base_url(); ?>audioplayer/audioplayer.css"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="<?php echo base_url(); ?>audioplayer/audioplayer.js" type="text/javascript"></script>
 	
 			<section class="dzsap-sticktobottom dzsap-sticktobottom-for-skin-wave">
@@ -767,6 +771,39 @@ $getPlaylist_id	= $this->uri->segment(3);
 					</div>
 				</div>
 			</section>	
+<script>
+ $(function() {
+    $("#slider-range").slider({
+        min: 1,
+        max: 10,
+        value: 0,
+        slide: function(event, ui) {                        
+            $("#energy_range_val").empty().text(ui.value); 
+		},
+		 stop: function (event, ui) {
+					var energy_level = ui.value; 
+					
+					$('.draggable').draggable();
+						var url	=	'<?php echo base_url(); ?>browse/filter_by_energy/'+energy_level;
+						  $('.category_filter_loader').show();
+						  $.ajax({
+								url: url,
+								data: {energy_level : energy_level},                         // Setting the data attribute of ajax with file_data
+								type: 'post',
+								success:function(data){
+										//alert(data);
+										$('.category_filter_loader').hide();
+										$('.lft_playlist').empty().append(data);
+										$('.draggable').draggable();
+										$('.draggable').trigger('click');
+									}
+									
+							}); 
+				}		
+    });
+ })
+ 
+ </script>
 				<script>
 					 function action_audio_play_func(arg){
 					//        console.info("action_audio_play_func", arg);

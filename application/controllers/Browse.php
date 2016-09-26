@@ -60,6 +60,9 @@ class Browse extends CI_Controller {
 		
 		return $this->load->view('search/category_search_view', array('catId'=>$catid, 'artistsId'=>$artistsId));
 	}
+	public function filter_by_energy($energy_level=null, $artistsId=null){
+		return $this->load->view('search/energy_search_view', array('energy_level'=>$energy_level, 'artistsId'=>$artistsId));
+	}
 	public function store_temp_license_type()
 	{
 		$session_id					=	$this->input->post('session_id');
