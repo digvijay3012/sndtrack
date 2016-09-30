@@ -85,22 +85,12 @@
             });
         } catch (e) {}
     </script>
- <script src="<?php echo base_url(); ?>js/jquery.validate.min.js"></script>
+
    <script src="<?php echo base_url(); ?>/floraa/js/froala_editor.min.js"></script>
   <!--[if lt IE 9]>
     <script src="../js/froala_editor_ie8.min.js"></script>
   <![endif]-->
-  <script src="<?php echo base_url(); ?>/floraa/js/plugins/tables.min.js"></script>
-  <script src="<?php echo base_url(); ?>/floraa/js/plugins/urls.min.js"></script>
-  <script src="<?php echo base_url(); ?>/floraa/js/plugins/lists.min.js"></script>
-  <script src="<?php echo base_url(); ?>/floraa/js/plugins/colors.min.js"></script>
-  <script src="<?php echo base_url(); ?>/floraa/js/plugins/font_family.min.js"></script>
-  <script src="<?php echo base_url(); ?>/floraa/js/plugins/font_size.min.js"></script>
-  <script src="<?php echo base_url(); ?>/floraa/js/plugins/block_styles.min.js"></script>
-  <script src="<?php echo base_url(); ?>/floraa/js/plugins/media_manager.min.js"></script>
-  <script src="<?php echo base_url(); ?>/floraa/js/plugins/video.min.js"></script>
-  <script src="<?php echo base_url(); ?>/floraa/js/plugins/char_counter.min.js"></script>
-  <script src="<?php echo base_url(); ?>/floraa/js/plugins/entities.min.js"></script>
+  
 
   <script>
       $(function(){
@@ -110,7 +100,7 @@
 		countCharacters: true,
 		inlineMode: false,
 		height: 500,
-		width: 600		
+		width: 600	
 		//initOnClick:true 
 		});
 		
@@ -118,7 +108,7 @@
       });
 $( document ).ready(function() {
   $('.f-basic').next().next().hide();
-});
+}); 
 
   </script>
 

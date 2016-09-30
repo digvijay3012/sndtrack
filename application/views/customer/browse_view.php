@@ -1312,7 +1312,38 @@ $(document).on('click','.short_order',function(){
 		}); 	
 		
 	});	
+/*************  Short Order	By Energy Level************/		
+$(document).on('click','.short_order_by_energy',function(){
+	var short_cat_id	=	'';
+	$('.short_order').removeClass('active');
+	$(this).addClass('active');
+	var short_type		=	$(this).attr('short_type');
+	var energy_level	=	$(this).attr('energy_level');	
 	
+	$('.draggable').draggable();
+	var url	=	'<?php echo base_url(); ?>browse/filter_by_browse';
+	  $('.orderBy_filter_loader').show();
+	  $.ajax({
+			url: url,
+			data: {short_type : short_type, energy_level: energy_level},                         // Setting the data attribute of ajax with file_data
+			type: 'post',
+			success:function(data){
+					if( typeof energy_level  !== "undefined"){
+						$('.orderBy_filter_loader').hide();
+						$('.playlist_info').empty().append(data);
+						$('.draggable').draggable();
+						$('.draggable').trigger('click');
+					}else{
+						$('.orderBy_filter_loader').hide();
+						$('.list_wishlist_info').empty().append(data);
+						$('.draggable').draggable();
+						$('.draggable').trigger('click');
+					}
+				}
+				
+		}); 	
+		
+	});			
 /*************  Popup Login	************/		
 $(document).on('click','.login_button',function(){
 var login_email_address	=	$('#login_email_address').val();

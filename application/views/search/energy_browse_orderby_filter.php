@@ -1,65 +1,35 @@
  <?php 
-$getAllMusic	=	get_artists_music_by_energy_level($energy_level); 
-if(!empty($getAllMusic)){
- $customerData	=	$this->ion_auth->user()->row();
-if(!empty($customerData)){
-	$customerId 	=		$customerData->user_id;
-	$first_name 	=		$customerData->first_name;
-	$last_name 		=		$customerData->last_name;
+ if ($this->ion_auth->logged_in()){
+	$customerData	=	$this->ion_auth->user()->row();
+	 if(!empty($customerData)){
+		$customerId 	=		$customerData->user_id;
+		$first_name 	=		$customerData->first_name;
+		$last_name 		=		$customerData->last_name;
+	}
 }
- 
-
+if(!empty($data)){
+	
  ?>
  <span class="daga">
- 
-					<div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
-				 <div class="order_list">
-					   <div class="ordr_tabs">
-					   <div style="display:none" class="orderBy_filter_loader">
-									<img src="<?php echo base_url(); ?>images/uploading.gif">
-						</div>
-                                <ul>
-                                    <li>Order by:</li>
-								
-                                    <li>
-                                        <button class="short_order short_order_by_energy" energy_level="<?php echo $energy_level; ?>" short_type="Newest" type="button">Newest</button>
-                                    </li>
-                                    <li>
-                                        <button class="short_order short_order_by_energy" energy_level="<?php echo $energy_level; ?>" short_type="Trending" class="active" type="button">Trending</button>
-                                    </li>
-                                    <li>
-                                        <button class="short_order short_order_by_energy" energy_level="<?php echo $energy_level; ?>" short_type="Longest" type="button">Longest</button>
-                                    </li>
-                                    <li>
-                                        <button class="short_order short_order_by_energy" energy_level="<?php echo $energy_level; ?>" short_type="Shortest"  type="button">Shortest</button>
-                                    </li>
-                                </ul>
-                            </div>
+					
                         <div class="playlist_info">
 		
                             <table class="table loop_table">
 							<thead></thead>
-                                <tbody>
-								<?php 
-								if($artistsId !='' && $energy_level !=''){
-									$getAllMusic	=	get_single_artist_music_by_catid($catId,$artistsId); 
-								}
-								if($artistsId =='' && $energy_level !=''){
-									$getAllMusic	=	get_artists_music_by_energy_level($energy_level); 
-								}
-								
-							if(!empty($getAllMusic)){
-								foreach($getAllMusic	as	$fectchPlaylist){
-									$musicId 			=	$fectchPlaylist['id'];
-									$getMusicFileEx 	=	explode(".", $fectchPlaylist['watermark_format']);
-									$getMusicName		=	$getMusicFileEx['0'];
-									$getMusicFileName	=	$fectchPlaylist['watermark_format'];
-									$first_name			=	$fectchPlaylist['first_name'];
-									$last_name			=	$fectchPlaylist['last_name'];
-								?>
+                                <tbody>	
+								<?php
+						if(!empty($data)){
+							foreach($data	as	$fectchPlaylist){
+								$musicId 			=	$fectchPlaylist['id'];
+								$getMusicFileEx 	=	explode(".", $fectchPlaylist['watermark_format']);
+								$getMusicName		=	$getMusicFileEx['0'];
+								$getMusicFileName	=	$fectchPlaylist['watermark_format'];
+								$first_name			=	$fectchPlaylist['first_name'];
+								$last_name			=	$fectchPlaylist['last_name'];
+							?>
 								 
-                                    <tr>
-                                      <td>
+                    <tr>
+                       <td>
 						<div class="audioplayer-tobe change-artst-bio auto-init" track_artst_id="<?php echo $musicId; ?>"  data-bgimage="img/bg.jpg" data-scrubbg="<?php echo base_url(); ?>waves/scrubbg.png" data-scrubprog="<?php echo base_url(); ?>waves/scrubprog.png" data-type="audio"data-source="<?php echo base_url(); ?>music/<?php echo $getMusicFileName; ?>" data-fakeplayer="#ap1" data-sourceogg="<?php echo base_url(); ?>music/<?php echo $getMusicFileName; ?>" data-options='{
 							disable_volume: "off"
 							,autoplay: "off"
@@ -90,23 +60,23 @@ if(!empty($customerData)){
 														<i class="fa fa-download" aria-hidden="true"></i>
 													</a>
 												</li>
-															<?php if ($this->ion_auth->logged_in()){ ?>
-                                             <li class="add_to_wishlist wishlist-loaderCls" track_id="<?php echo $musicId; ?>">
-												<div style="display:none" class="wishlist_loader_style wishlist_loader_<?php echo $musicId; ?>">
+												<div style="display:none" class="wishlist_loader_<?php echo $musicId; ?>">
 													<img src="<?php echo base_url(); ?>images/uploading.gif">
 												</div>
-												<div class="wshlist-add" id="add_to_wishlist_msg_<?php echo $musicId; ?>">
-												</div>
-													 <a href="javascript:void(0);">
-														<i class="fa fa-heart-o" aria-hidden="true"></i>
-													</a>
-												</li>
-											  
+												<div id="add_to_wishlist_msg_<?php echo $musicId; ?>"></div>
+											<?php if ($this->ion_auth->logged_in()){ ?>
+                                               
+													<li class="add_to_wishlist" track_id="<?php echo $musicId; ?>">
+														<a href="javascript:void(0);">
+															<i class="fa fa-heart-o" aria-hidden="true"></i>
+														</a>
+													</li>
+											   
 											<?php } else { ?>
-													<a href="#" data-target="#login_alert_popup" data-toggle="modal">
+												<a class=""   data-target="#login_alert_popup" data-toggle="modal" href="javascript:void(0);">
 														<i class="fa fa-heart-o" aria-hidden="true"></i>
 													</a>
-												<?php } ?>
+											<?php } ?>
 											   <?php if ($this->ion_auth->logged_in()){ ?>
                                                 <li>
 													<a class="add_to_popup_playlist" track_id="<?php echo $musicId; ?>" data-target="#addToPlaylistModal_<?php echo $musicId; ?>" data-toggle="modal" href="javascript:void(0);">
@@ -114,14 +84,18 @@ if(!empty($customerData)){
 													</a>
 												</li>	
 											   <?php } else { ?>
-											   	<a href="#" data-target="#login_alert_popup" data-toggle="modal"><i class="fa fa-th-list" aria-hidden="true"></i></a>
+												<li>
+													<a class=""   data-target="#login_alert_popup" data-toggle="modal" href="javascript:void(0);">
+														<i class="fa fa-th-list" aria-hidden="true"></i>
+													</a>
+												</li>	
 											   <?php } ?>
                                             </ul>
 
                                         </td>
-                                        <td class="lst_data license">
+                                       <td class="lst_data license">
                                            <a href="javascript:void(0);" class="popup_stage_1_cls" music_id="<?php echo $musicId; ?>" data-toggle="modal" data-target="#popup_stage_1">License</a>
-                                        </td>		
+                                        </td>
                                     </tr>
 				<!-- Modal -->
         <div class="modal fade" data-backdrop="static" data-keyboard="false" id="addToPlaylistModal_<?php echo $musicId; ?>" role="dialog">
@@ -134,6 +108,7 @@ if(!empty($customerData)){
                         <div class="logo text-center">
                             <a href=""><p>Sndtrack</p></a>
                         </div>
+					<?php if ($this->ion_auth->logged_in()){ ?>
 						<div class="download_popup">
 						<?php $addedPlaylist 	=	get_customer_playlist($customerId);	
 							if(!empty($addedPlaylist)){
@@ -142,28 +117,29 @@ if(!empty($customerData)){
 									$addedPlaylistName		=	$getAddedplaylist['playlist_name'];	
 								?>
 								
-									<div class="added_pop">
-									<div class="rt_playlist-nam"><?php echo $addedPlaylistName; ?></div>
-									<div class="lst_data lft_playlst">
-									<div style="display:none" class="loader_gif playlist_loader_<?php echo $addedPlaylistId; ?>">
-												<img src="<?php echo base_url(); ?>images/uploading.gif">
-									</div>	
-									<?php 
-										$getAddstatus 	=	check_track_exitsin_playlist($addedPlaylistId, $musicId, $customerId);
-										
-										if($getAddstatus=='added'){ ?>
-											<button class="added" type="button">Added</button>	
-										<?php }else{ ?>
-											<button class="addedToPlayList_<?php echo $addedPlaylistId; ?>_<?php echo $musicId; ?> added" style="display:none" type="button">Added</button>
-											<button class="addToPlayList" playlist_id="<?php echo $addedPlaylistId; ?>" type="button" track_id="<?php echo $musicId; ?>">Add to playlist</button>
-											
-										<?php } ?>
+								<div class="added_pop">
+								<div class="rt_playlist-nam"><?php echo $addedPlaylistName; ?></div>
+								<div class="lst_data lft_playlst">
+								<div style="display:none" class="loader_gif playlist_loader_<?php echo $addedPlaylistId; ?>">
+											<img src="<?php echo base_url(); ?>images/uploading.gif">
+								</div>	
+								<?php 
+									$getAddstatus 	=	check_track_exitsin_playlist($addedPlaylistId, $musicId, $customerId);
 									
+									if($getAddstatus=='added'){ ?>
+										<button class="added" type="button">Added</button>	
+									<?php }else{ ?>
+										<button class="addedToPlayList_<?php echo $addedPlaylistId; ?>_<?php echo $musicId; ?> added" style="display:none" type="button">Added</button>
+										<button class="addToPlayList" playlist_id="<?php echo $addedPlaylistId; ?>" type="button" track_id="<?php echo $musicId; ?>">Add to playlist</button>
 										
-									</div>
+									<?php } ?>
+								
+									
 								</div>
+							</div>
                         <?php }}?>
 						</div>
+					<?php } ?>
                         <div class="login_text text-center">
                             <p>Create new playlist. </p>
                         </div>
@@ -190,13 +166,14 @@ if(!empty($customerData)){
                                 </tbody>
                             </table>
 
-                        </div>
-                        </div>
+                  
+                        
                     </span>	
 <?php }else{
 	echo "No music found.";
+	exit;
 } ?>
-<!-- Modal -->
+<!-- Login Modal -->
 <div class="modal fade" id="login_alert_popup" role="dialog">
 <div class="modal-dialog">
 
@@ -214,26 +191,39 @@ if(!empty($customerData)){
                             <p>Please create your account. </p>
                         </div>
 
-						<?php $attributes = array('class' => 'login_form');
-							echo form_open('register', $attributes);
+						<?php $attributes = array('class' => 'login_form','id' => 'login_form_id');
+							echo form_open('login', $attributes);
 						?> 
                            
-                            <ul>
-                               
-                               <li>
-									
-                                </li>
-                              
-                                <a href="<?php base_url(); ?>register"><li>
-                                    <button required="" name="submit" id="send" type="button" class="sbmt hover_btn">Create Account</button>
-                                </li></a>
-                            </ul>
-                        <?php echo form_close(); ?>                   </div>
+                  <ul>
+				  	<label style="display:none" id="authentication_error"  generated="true" class="error email-error">Please check your details and try again.</label>
+					   <li>
+					
+							<input type="text" id="login_email_address" name="identity" placeholder="Email address">
+							<?php  echo form_error('identity'); ?>
+							<label style="display:none" for="login_email_address" generated="true" class="error email-error">Please enter your email.</label>
+					  </li>
+						<li>
+							<input type="password" id="login_password"  name="password" placeholder="Password">
+							<?php  echo form_error('password'); ?>
+							<label style="display:none" for="login_email_address" generated="true" class="error pwd-error">Please enter your password.</label>
+						</li>
+                   
+						 <li>
+							<button required="" name="submit" id="send" type="button" class="sbmt hover_btn login_button">Login</button>
+							<a class="forgot" href="<?php echo base_url(); ?>register">Register</a>
+						 </li>
+								<div style="display:none" class="login_loader">
+									<img src="<?php echo base_url(); ?>images/uploading.gif">
+								</div>
+                   </ul>
+                        <?php echo form_close(); ?>    
+						
+			</div>
                 </div>
             </div>
 	</div>
-</div>	
-<link rel='stylesheet' type="text/css" href="<?php echo base_url(); ?>audioplayer/audioplayer.css"/>
+	<link rel='stylesheet' type="text/css" href="<?php echo base_url(); ?>audioplayer/audioplayer.css"/>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="<?php echo base_url(); ?>audioplayer/audioplayer.js" type="text/javascript"></script>
 	

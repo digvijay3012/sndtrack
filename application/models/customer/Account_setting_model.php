@@ -61,7 +61,13 @@ class Account_setting_model extends CI_Model {
 				$this->db->where('customer_id',$ID);
 				$this->db->update('snd_customer_info',$updateData);
 			}
-			
+			if($adminImgName != ''){
+				$updateImg=array(
+						"customer_image" => $adminImgName
+				);
+				$this->db->where('customer_id',$ID);
+				$this->db->update('snd_customer_info',$updateImg);
+			}
 			return 1; 	
 		}
 	

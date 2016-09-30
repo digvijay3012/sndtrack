@@ -45,12 +45,16 @@ class Browse extends CI_Controller {
 				$artist_id					=	$this->input->post('artist_id');
 				$wishlist_userId			=	$this->input->post('wishlist_userId');
 				$playlist_id				=	$this->input->post('playlist_id'); 
+				$energy_level				=	$this->input->post('energy_level'); 
 				if($wishlist_userId !=""){
 					$data	=	$this->browse_model->filter_by_browse_wishlist($short_type, $wishlist_userId);
 					return $this->load->view('search/wishlist_browse_orderby_filter',array('data'=>$data));
 				}elseif($playlist_id !=''){
 					$data	=	$this->browse_model->filter_by_browse_playlist($short_type, $playlist_id);
 					return $this->load->view('search/playlist_browse_orderby_filter',array('data'=>$data));
+				}elseif($energy_level !=''){
+					$data	=	$this->browse_model->filter_by_browse_energy($short_type, $energy_level);
+					return $this->load->view('search/energy_browse_orderby_filter',array('data'=>$data));
 				}else{
 					$data	=	$this->browse_model->filter_by_browse($short_type, $short_cat_id,$artist_id);
 					return $this->load->view('search/browse_orderby_filter',array('data'=>$data));

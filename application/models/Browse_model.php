@@ -109,4 +109,15 @@ class Browse_model extends CI_Model {
 				//print_r($resultArray); die;
 				return $resultArray;
 		}
+		function filter_by_browse_energy($short_type, $energy_level){
+			$myQuery	= "SELECT snd_artist_info.artist_id, users.first_name, users.last_name, snd_artist_music.id,snd_artist_info.artist_image, snd_musicfile_version.watermark_format from snd_artist_music INNER JOIN snd_musicfile_version ON snd_artist_music.id=snd_musicfile_version.track_id INNER JOIN snd_artist_info ON snd_artist_music.artist_id=snd_artist_info.artist_id INNER JOIN users ON snd_artist_music.artist_id=users.id WHERE snd_artist_music.energy_level='$energy_level' AND snd_artist_music.short_order='$short_type'"; 
+			
+			$query = $this->db->query($myQuery);
+			$resultArray	=	array();
+			foreach ($query->result_array() as $row){
+						$resultArray[]= $row;
+					}
+				//print_r($resultArray); die;
+				return $resultArray;
+	}
 }

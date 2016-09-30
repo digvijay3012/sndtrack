@@ -30,21 +30,6 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="login_cont text-center">
-            <div class="logo text-center wow fadeInDown">
-                <a href="<?php echo base_url(); ?>">
-                    <p>Sndtrack</p>
-                    <span>music licensing</span>
-                </a>
-            </div>
-        </div>
-        <div class="login_cont text-center help_cnt cstmr_settings">
-          	<div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
-			<?php	
-				$attributes = array('class' => 'login_form', 'id' => 'account_setting_form');
-				echo form_open_multipart('account', $attributes); 
-			?>
 <?php
 $customerData	=	$this->ion_auth->user()->row();
 if(!empty($customerData)){
@@ -59,35 +44,53 @@ if(!empty($customerData)){
 	$city			=	$customerExtra[0]['city']; 
 	$zip			=	$customerExtra[0]['zip']; 
 	$country		=	$customerExtra[0]['country']; 
+	$customer_image	=	$customerExtra[0]['customer_image']; 
+	//echo "<pre>";	print_r($customerExtra);	echo "</pre>";
 }
 
 ?>
+    <div class="container">
+        <div class="login_cont text-center">
+            <div class="logo text-center wow fadeInDown">
+                <a href="<?php echo base_url(); ?>">
+                    <p>Sndtrack</p>
+                    <span>music licensing</span>
+                </a>
+            </div>
+			
+        </div>
+		<div class="inner-nave"><p>Logged in as:  <?php echo $first_name." ".$last_name; ?></p>  
+		<p>Go to <a class="dash-cls" href="<?php echo base_url(); ?>dashboard">Dashboard</a></p>
+		</div>
+        <div class="login_cont text-center help_cnt cstmr_settings">
+          	<div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
+			<?php	
+				$attributes = array('class' => 'login_form', 'id' => 'account_setting_form');
+				echo form_open_multipart('account', $attributes); 
+			?>
+
                 <div class="col-1-form col-sm-4 pdngg-left">
                     <h3>Contact details</h3>
                     <ul>
                         <li>
-                            <input type="text" id="first_name" value="<?php echo $first_name; ?>" maxlength="30" name="first_name" placeholder="First Name" required="">
+                            <input type="text" id="first_name" value="<?php echo $first_name; ?>" maxlength="30" name="first_name" tabindex='1' placeholder="First Name" required="">
 							<?php  echo form_error('first_name'); ?>
                         </li>
                         <li>
-                            <input type="text" name="first_address" value="<?php echo $first_address; ?>" placeholder="First Line Address">
+                            <input type="text" tabindex='3' name="first_address" value="<?php echo $first_address; ?>" placeholder="First Line Address">
 							<?php  echo form_error('first_address'); ?>
                         </li>
                         <li>
-                            <input type="text" maxlength="30" value="<?php echo $city; ?>" name="city" placeholder="City/State">
+                            <input type="text" tabindex='5' maxlength="30" value="<?php echo $city; ?>" name="city" placeholder="City/State">
 							<?php  echo form_error('city'); ?>
                         </li>
                         <li>
-                            <select name="country">
-							<option value=''>Select your country</option>
-                                <option>Country</option>
-                                <option>India</option>
-                                <option>Canada</option>
-                            </select>
+						<select name="country" tabindex='7' class="input-medium bfh-countries" data-country="<?php if($country==""){ echo "AF";}else{ echo $country; } ?>"></select>
+                         
 							<?php  echo form_error('country'); ?>
                         </li>
                         <li>
-                            <input type="text" value="<?php echo $phone; ?>"  maxlength="15" name="phone" placeholder="Phone Number" >
+                            <input type="text" tabindex='9' value="<?php echo $phone; ?>"  maxlength="15" name="phone" placeholder="Phone Number" >
 							<?php  echo form_error('phone'); ?>
                         </li>
 						
@@ -97,29 +100,30 @@ if(!empty($customerData)){
                     <h3>&nbsp;</h3>
                     <ul>
                         <li>
-                            <input type="text" maxlength="30" value="<?php echo $last_name; ?>" id="lastname" name="lastname" placeholder="Last Name">
+                            <input type="text" tabindex='2' maxlength="30" value="<?php echo $last_name; ?>" id="lastname" name="lastname" placeholder="Last Name">
 							<?php  echo form_error('lastname'); ?>
                         </li>
                         <li>
-                            <input type="text" name="second_address" value="<?php echo $second_address; ?>" placeholder="Second Line Name">
+                            <input type="text" tabindex='4' name="second_address" value="<?php echo $second_address; ?>" placeholder="Second Line Name">
 							<?php  echo form_error('second_address'); ?>
                         </li>
                         <li>
-                            <input type="text" maxlength="15" value="<?php echo $zip; ?>" name="zip" placeholder="Zip/Post Code" >
+                            <input type="text" tabindex='6' maxlength="15" value="<?php echo $zip; ?>" name="zip" placeholder="Zip/Post Code" >
 							<?php  echo form_error('zip'); ?>
                         </li>
                         <li>
-                            <input type="email" name="email" value="<?php echo $adminEmail; ?>" placeholder="Email Address" >
+                            <input type="email" name="email" tabindex='8' value="<?php echo $adminEmail; ?>" placeholder="Email Address" >
 							<?php  echo form_error('email'); ?>
                         </li>
 						 <li>
-							Uplaod Admin image: <input type="file" onchange="return ValidateImageUpload('customer_image')" name="customer_image" id="customer_image">
+						 <img src="<?php echo base_url(); ?>customer_images/<?php echo $customer_image; ?>" alt="<?php echo $first_name; ?>" style="width:200px;height:150px;"></br>
+							Uplaod image: <input type="file" tabindex='10' onchange="return ValidateImageUpload('customer_image')" name="customer_image" id="customer_image">
 								<?php  echo form_error('customer_image'); ?>
 						</li>
                         <li>
                             <button class="custom-button full-width" type="submit" id="Login" name="submit" >Update</button>
                         </li>
-                    </ul>
+                    </ul>	
                 </div>
 				
 				  <?php echo form_close();?>
@@ -194,6 +198,8 @@ if(!empty($customerData)){
     <script src="https://use.typekit.net/auo4nbe.js"></script>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/sweetalert.css">
 <script src="<?php echo base_url(); ?>js/sweetalert.min.js"></script>
+    <script src="<?php echo base_url(); ?>js/bootstrap-formhelpers-countries.js"></script>
+   <script src="<?php echo base_url(); ?>js/bootstrap-formhelpers.js"></script>	
     <script>
         try {
             Typekit.load({

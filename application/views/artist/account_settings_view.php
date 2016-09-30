@@ -40,13 +40,7 @@
                 </a>
             </div>
         </div>
-        <div class="login_cont text-center help_cnt cstmr_settings">
-          	<div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
-			<?php	
-				$attributes = array('class' => 'login_form', 'id' => 'account_setting_form');
-				echo form_open_multipart('artist/account_setting', $attributes); 
-			?>
-<?php
+		<?php
 $adminData	=	$this->ion_auth->user()->row();
 if(!empty($adminData)){
 	$adminId 		=		$adminData->user_id;
@@ -66,42 +60,48 @@ if(!empty($adminData)){
 }
 
 ?>
+<div class="inner-nave"><p>Logged in as:  <?php echo $first_name." ".$last_name; ?></p>  
+		<p>Go to <a class="dash-cls" href="<?php echo base_url(); ?>artist/dashboard">Dashboard</a></p>
+</div>
+        <div class="login_cont text-center help_cnt cstmr_settings">
+          	<div id="infoMessage"><?php echo $this->session->flashdata('item'); ?></div>
+			<?php	
+				$attributes = array('class' => 'login_form', 'id' => 'account_setting_form');
+				echo form_open_multipart('artist/account_setting', $attributes); 
+			?>
+
                 <div class="col-1-form col-sm-4 pdngg-left">
                     <h3>Contact details</h3>
                     <ul>
                         <li>
-                            <input type="text" id="first_name" value="<?php echo $first_name; ?>" maxlength="30" name="first_name" placeholder="First Name" required="">
+                            <input  tabindex="1" type="text" id="first_name" value="<?php echo $first_name; ?>" maxlength="30" name="first_name" placeholder="First Name" required="">
 							<?php  echo form_error('first_name'); ?>
                         </li>
                         <li>
-                            <input type="text" name="first_address" value="<?php echo $first_address; ?>" placeholder="First Line Address">
+                            <input type="text" tabindex="3" name="first_address" value="<?php echo $first_address; ?>" placeholder="First Line Address">
 							<?php  echo form_error('first_address'); ?>
                         </li>
                         <li>
-                            <input type="text" maxlength="30" value="<?php echo $city; ?>" name="city" placeholder="City/State">
+                            <input type="text" tabindex="5" maxlength="30" value="<?php echo $city; ?>" name="city" placeholder="City/State">
 							<?php  echo form_error('city'); ?>
                         </li>
                         <li>
-                            <select name="country">
-							<option value=''>Select your country</option>
-                                <option>Country</option>
-                                <option>India</option>
-                                <option>Canada</option>
-                            </select>
+						<select tabindex="7" name="country" tabindex='7' class="input-medium bfh-countries" data-country="<?php if($country==""){ echo "AF";}else{ echo $country; } ?>"></select>
+                           
 							<?php  echo form_error('country'); ?>
                         </li>
                         <li>
-                            <input type="text" value="<?php echo $phone; ?>"  maxlength="15" name="phone" placeholder="Phone Number" >
+                            <input type="text" tabindex="8" value="<?php echo $phone; ?>"  maxlength="15" name="phone" placeholder="Phone Number" >
 							<?php  echo form_error('phone'); ?>
                         </li>
 						 <li>
-                            <input type="text" name="facebook_link" value="<?php echo $facebook_link; ?>" placeholder="Facebook Url" >
+                            <input type="text" tabindex="9" name="facebook_link" value="<?php echo $facebook_link; ?>" placeholder="Facebook Url" >
 						 </li>
 						 <li>
-                            <input type="text" name="twitter_link" value="<?php echo $twitter_link; ?>" placeholder="Twitter Url" >
+                            <input type="text" tabindex="10" name="twitter_link" value="<?php echo $twitter_link; ?>" placeholder="Twitter Url" >
 						 </li>
 						  <li>
-                            <input type="text" name="instagram_link" value="<?php echo $instagram_link; ?>" placeholder="Instagram Url" >
+                            <input type="text" tabindex="11" name="instagram_link" value="<?php echo $instagram_link; ?>" placeholder="Instagram Url" >
 						 </li>
                     </ul>
                 </div>
@@ -109,19 +109,19 @@ if(!empty($adminData)){
                     <h3>&nbsp;</h3>
                     <ul>
                         <li>
-                            <input type="text" maxlength="30" value="<?php echo $last_name; ?>" id="lastname" name="lastname" placeholder="Last Name">
+                            <input tabindex="2" type="text" maxlength="30" value="<?php echo $last_name; ?>" id="lastname" name="lastname" placeholder="Last Name">
 							<?php  echo form_error('lastname'); ?>
                         </li>
                         <li>
-                            <input type="text" name="second_address" value="<?php echo $second_address; ?>" placeholder="Second Line Name">
+                            <input type="text" tabindex="4" name="second_address" value="<?php echo $second_address; ?>" placeholder="Second Line Name">
 							<?php  echo form_error('second_address'); ?>
                         </li>
                         <li>
-                            <input type="text" maxlength="15" value="<?php echo $zip; ?>" name="zip" placeholder="Zip/Post Code" >
+                            <input type="text" tabindex="6" maxlength="15" value="<?php echo $zip; ?>" name="zip" placeholder="Zip/Post Code" >
 							<?php  echo form_error('zip'); ?>
                         </li>
                         <li>
-                            <input type="email" name="email" value="<?php echo $adminEmail; ?>" placeholder="Email Address" >
+                            <input type="email" tabindex="12" name="email" value="<?php echo $adminEmail; ?>" placeholder="Email Address" >
 							<?php  echo form_error('email'); ?>
                         </li>
 						
@@ -205,6 +205,8 @@ if(!empty($adminData)){
     <script src="https://use.typekit.net/auo4nbe.js"></script>
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/sweetalert.css">
 <script src="<?php echo base_url(); ?>js/sweetalert.min.js"></script>
+<script src="<?php echo base_url(); ?>js/bootstrap-formhelpers-countries.js"></script>
+<script src="<?php echo base_url(); ?>js/bootstrap-formhelpers.js"></script>	
     <script>
         try {
             Typekit.load({
