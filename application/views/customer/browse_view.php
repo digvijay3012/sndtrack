@@ -19,9 +19,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 
 <link rel="stylesheet" href="<?php echo base_url(); ?>checkout_css/bootstrap-side-notes.css" />
 <div class="cstmr_cont header-margin">	
-        <div class="music-bar">
-            <figure><img src="<?php echo base_url(); ?>images/music-bar.jpg" alt="" title=""></figure>
-        </div>
+        
         <div class="container-fluid pdngg container-full">
             <div class="lft_sidebar">
               <div class="your_music">
@@ -228,8 +226,8 @@ $getPlaylist_id	= $this->uri->segment(3);
 								$last_name			=	$fectchPlaylist['last_name'];
 							?>
 						 <tr>
-                              <td>
-								<div class="audioplayer-tobe change-artst-bio auto-init" track_artst_id="<?php echo $musicId; ?>"  style="width:100%; margin-top:10px; margin-bottom: 10px;" data-bgimage="img/bg.jpg" data-scrubbg="waves/scrubbg.png" data-scrubprog="waves/scrubprog.png" data-type="audio"data-source="<?php echo base_url(); ?>music/<?php echo $getMusicFileName; ?>" data-fakeplayer="#ap1" data-sourceogg="<?php echo base_url(); ?>music/<?php echo $getMusicFileName; ?>" data-options='{
+                      <td>
+						<div class="audioplayer-tobe change-artst-bio auto-init" track_artst_id="<?php echo $musicId; ?>"  data-bgimage="img/bg.jpg" data-scrubbg="<?php echo base_url(); ?>waves/scrubbg.png" data-scrubprog="<?php echo base_url(); ?>waves/scrubprog.png" data-type="audio"data-source="<?php echo base_url(); ?>music/<?php echo $getMusicFileName; ?>" data-fakeplayer="#ap1" data-sourceogg="<?php echo base_url(); ?>music/<?php echo $getMusicFileName; ?>" data-options='{
 							disable_volume: "off"
 							,autoplay: "off"
 							,cue: "on"
@@ -240,16 +238,15 @@ $getPlaylist_id	= $this->uri->segment(3);
 							,settings_backup_type:"full"
 							,settings_useflashplayer:"auto"
 							,skinwave_spectrummultiplier: "4"
-							,skinwave_comments_enable:"off"
+							,skinwave_comments_enable:"on"
 							,skinwave_mode: "small"
-							
 							,action_audio_play: action_audio_play_func
 							}'>
 
 							<!--  data-sourceogg="sounds/adg3.ogg"  -->
 							<div class="the-comments">
 							</div>
-							<div track_id="<?php echo $musicId; ?>" class="meta-artist me_user draggable title_play"><span class="the-artist"><?php echo $first_name." ".$last_name; ?></span><span class="the-name"><?php echo $getMusicName; ?></span>
+							<div track_id="<?php echo $musicId; ?>" class="meta-artist  nme_user draggable title_play"><span class="the-artist"><?php echo $first_name." ".$last_name; ?></span><span class="the-name"><?php echo $getMusicName; ?></span>
 							</div>
 						</div>
 					</td>
@@ -445,7 +442,7 @@ $getPlaylist_id	= $this->uri->segment(3);
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <div class="modal-body">
                         <div class="logo text-center">
                             <a href="">
@@ -495,6 +492,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 
                 <!-- Modal content-->
                 <div class="modal-content">
+				 <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <!--button type="button" class="close" data-dismiss="modal">&times;</button
                     <div class="modal-body">
                         <div class="logo text-center">
@@ -549,7 +547,7 @@ $getPlaylist_id	= $this->uri->segment(3);
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <!--<button  class="close close_popup_3" type="button">×</button>-->
+                  <button type="button" class="close"  data-dismiss="modal">&times;</button>
                     <div class="modal-body popup_stage3">
                         
                     </div>
@@ -571,10 +569,11 @@ $getPlaylist_id	= $this->uri->segment(3);
                                 <span>music licensing</span>
                             </a>
                         </div>
+
 						<div class="chckout_pop text-center">
                             <p>Checkout</p>
                         </div>
-						<div class="login_cont text-center help_cnt cstmr_settings">
+							<div class="login_cont text-center help_cnt cstmr_settings">
 				<form action="" method="POST" id="payment-form" class="login_form">
                         <div class="alert alert-danger" id="a_x200" style="display: none;"> <strong>Error!</strong> <span class="payment-errors"></span> </div>
 				<div class="input_fields">
@@ -599,14 +598,14 @@ $getPlaylist_id	= $this->uri->segment(3);
   <!-- City -->
  <li>
 	<div class="form-group">
-      <input type="text" name="address_line1" tabindex="5" placeholder="First Line Address" class="address_line1 form-control">
+      <input type="text" name="address_line1" tabindex="4" placeholder="First Line Address" class="address_line1 form-control">
 	 	</div> 
    </li>	
   
   <!-- State -->
 	<li>
 	<div class="form-group">
-		<input type="text" name="city" tabindex="8" placeholder="City/State" class="city form-control">
+		<input type="text" name="city" tabindex="6" placeholder="City/State" class="city form-control">
      </div>
     </li>
   
@@ -638,18 +637,18 @@ $getPlaylist_id	= $this->uri->segment(3);
   <!-- State -->
 	<li>
 	<div class="form-group">
-      <input type="text" tabindex="6" name="second_address" placeholder="Second Line Address">
+      <input type="text" tabindex="5" name="second_address" placeholder="Second Line Address">
     </div>
 	</li>
   
   <!-- Postcal Code -->
 	<li>
      <div class="form-group"> 
-	  <input type="text" class="zip" tabindex="9" placeholder="Postal Code" tabindex="9" maxlength="9" name="zip" data-bv-field="zip">
+	  <input type="text" class="zip" tabindex="7" placeholder="Postal Code" maxlength="9" name="zip" data-bv-field="zip">
 	 </div>
     </li>
 	<li>
-		<input type="text" tabindex="11" name="vat" placeholder="VAT (if applicable)">
+		<input type="text" tabindex="8" name="vat" placeholder="VAT (if applicable)">
 	</li>
   </ul>
  </div>
@@ -658,17 +657,17 @@ $getPlaylist_id	= $this->uri->segment(3);
 		<ul>
 			<li>
 				<div class="form-group"> 			
-				 <input type="text" name="cardholdername" tabindex="4" maxlength="70" placeholder="Card Holder Name" class="card-holder-name form-control">
+				 <input type="text" name="cardholdername" tabindex="9" maxlength="70" placeholder="Card Holder Name" class="card-holder-name form-control">
 				</div>
 			</li>
 			<li>
 			<div class="form-group"> 	
-			 <input type="text" id="cardnumber" tabindex="7" maxlength="19" placeholder="Card Number" class="card-number">
+			 <input type="text" id="cardnumber" tabindex="10" maxlength="19" placeholder="Card Number" class="card-number">
 			 </div>
 			</li>
 			<li class="expiry_dat">
 			<div class="form-group"> 	
-				<select tabindex="10" name="select2" data-stripe="exp-month" class="card-expiry-month stripe-sensitive required pull-left">
+				<select tabindex="11" name="select2" data-stripe="exp-month" class="card-expiry-month stripe-sensitive required pull-left">
 					<option value="01" selected="selected">01</option>
 					<option value="02">02</option>
 					<option value="03">03</option>
@@ -683,13 +682,13 @@ $getPlaylist_id	= $this->uri->segment(3);
 					<option value="12">12</option>
 				  </select>
 				
-				  <select name="select2" data-stripe="exp-year" class="card-expiry-year stripe-sensitive required pull-right">
+				  <select name="select2" tabindex="12" data-stripe="exp-year" class="card-expiry-year stripe-sensitive required pull-right">
 				  </select>
 			</div>
 			</li>
 			<li>
 			<div class="form-group"> 
-				<input type="text" tabindex="12" id="cvv" placeholder="CVV" maxlength="4" class="card-cvc">
+				<input type="text" tabindex="13" id="cvv" placeholder="CVV" maxlength="4" class="card-cvc">
 			</div>
 			</li>
 		</ul>
@@ -697,9 +696,7 @@ $getPlaylist_id	= $this->uri->segment(3);
     <!-- Submit -->
     
       <div class="back_btn">
-			  <div style="display:none" class="pay_amount_loader">
-					<img src="<?php echo base_url(); ?>images/uploading.gif">
-			 </div>	
+  <a href="javascript:void(0);" data-target="#popup_stage_3" class="custom-button checkout_popup_backbtn" href="">Back</a> 
           <button class="custom-button" type="submit">Pay Now</button>
        
       </div>
@@ -760,7 +757,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 		<script src="<?php echo base_url(); ?>js/bootstrapValidator-min.js"></script>
 <link rel='stylesheet' type="text/css" href="<?php echo base_url(); ?>audioplayer/audioplayer.css"/>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="<?php echo base_url(); ?>audioplayer/audioplayer.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>audioplayer/audioplayer.js" type="text/javascript"></script>
 	
 			<section class="dzsap-sticktobottom dzsap-sticktobottom-for-skin-wave">
 				<div id="ap1" class="audioplayer-tobe" style="width:100%; " data-bgimage="img/bg.jpg" data-scrubbg="waves/scrubbg.png" data-scrubprog="waves/scrubprog.png" data-type="fake" data-source="fake" data-sourceogg="sounds/itsabeautifulday.ogg">
@@ -771,6 +768,7 @@ $getPlaylist_id	= $this->uri->segment(3);
 					</div>
 				</div>
 			</section>	
+<!--*********** Energy slider ********-->
 <script>
  $(function() {
     $("#slider-range").slider({
@@ -1401,7 +1399,7 @@ if(login_email_address !='' && login_password!=''){
 		}else{
 			 $('.error').show();
 		}
-		
+		//alert(license_type);
 		var loginStatus		=	'<?php echo $loginStatus; ?>';
 		 if(license_type !='' && loginStatus==1){
 			 var customer_id	=	'<?php echo $customerId; ?>';
@@ -1418,6 +1416,7 @@ if(login_email_address !='' && login_password!=''){
 										data: {data : data},                         // Setting the data attribute of ajax with file_data
 										type: 'post',
 										success:function(data){
+											//alert(data);
 											$('.popup_stage3').empty().append(data);
 										}
 									}); 
@@ -1517,7 +1516,7 @@ if(login_email_address !='' && login_password!=''){
 		var get_customer_id		=	$('#get_customer_id').val();
 		var get_music_amount	=	$('#get_music_amount').val();
 	
-		$('#popup_stage_3').hide();
+		$('#popup_stage_3').modal('hide');
 		$('#popup_stage_4').modal({backdrop: 'static',
 									keyboard: false
 								});
@@ -1795,6 +1794,17 @@ $(document).on('click','.cls-close-last-popup',function(){
 	});
 $(document).on('click','.close_playlist_mycls',function(){
 	 window.location.reload(); 
+});	
+
+/********** Popup back buton  *****************/
+$(document).on('click','.popup_backbtn_1',function(){
+	$('#popup_stage_3').modal('hide');
+	$('#popup_stage_1').modal('show');
+});
+$(document).on('click','.checkout_popup_backbtn',function(){
+	$('#popup_stage_4').modal('hide');
+	$('#popup_stage_3').modal('show');
+	
 });	
 </script>
 </body>

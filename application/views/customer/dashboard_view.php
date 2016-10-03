@@ -1,4 +1,4 @@
-<?php
+<?php	
 $customerData	=	$this->ion_auth->user()->row();
 $loginStatus	=	"";
 if(!empty($customerData)){
@@ -22,9 +22,7 @@ if($profileImg==''){
                     <p>Hi <?php echo $first_name; ?> ! </p>
                 </div>
             </div>
-            <div class="music-bar">
-                <figure><img title="" alt="" src="<?php echo base_url(); ?>images/music-bar.jpg"></figure>
-            </div>
+          
             <div class="lft_sidebar">
                     <div class="your_music">
                     <h3 class="rt_hdng">YOUR MUSIC</h3>
@@ -334,7 +332,7 @@ if($profileImg==''){
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <!--button type="button" class="close" data-dismiss="modal">&times;</button-->
+                   <button type="button" class="close"  data-dismiss="modal">&times;</button>
                     <div class="modal-body">
                         <div class="logo text-center">
                             <a href="">
@@ -384,7 +382,7 @@ if($profileImg==''){
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                  <button type="button" class="close"  data-dismiss="modal">&times;</button>
                     <div class="modal-body">
                         <div class="logo text-center">
                             <a href="">
@@ -434,7 +432,7 @@ if($profileImg==''){
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <!--button type="button" class="close" data-dismiss="modal">&times;</button
+                    <button type="button" class="close"  data-dismiss="modal">&times;</button>
                     <div class="modal-body">
                         <div class="logo text-center">
                             <a href="">
@@ -482,13 +480,13 @@ if($profileImg==''){
                     </div>
                 </div>
             </div>
-      
+       </div>
       <!--Popup satge 3 cart  Modal -->
         <div class="modal fade" id="popup_stage_3" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <!--<button  class="close close_popup_3" type="button">×</button>-->
+                  <button type="button" class="close"  data-dismiss="modal">&times;</button>
                     <div class="modal-body popup_stage3">
                         
                     </div>
@@ -538,14 +536,14 @@ if($profileImg==''){
   <!-- City -->
  <li>
 	<div class="form-group">
-      <input type="text" name="address_line1" tabindex="5" placeholder="First Line Address" class="address_line1 form-control">
+      <input type="text" name="address_line1" tabindex="4" placeholder="First Line Address" class="address_line1 form-control">
 	 	</div> 
    </li>	
   
   <!-- State -->
 	<li>
 	<div class="form-group">
-		<input type="text" name="city" tabindex="8" placeholder="City/State" class="city form-control">
+		<input type="text" name="city" tabindex="6" placeholder="City/State" class="city form-control">
      </div>
     </li>
   
@@ -577,18 +575,18 @@ if($profileImg==''){
   <!-- State -->
 	<li>
 	<div class="form-group">
-      <input type="text" tabindex="6" name="second_address" placeholder="Second Line Address">
+      <input type="text" tabindex="5" name="second_address" placeholder="Second Line Address">
     </div>
 	</li>
   
   <!-- Postcal Code -->
 	<li>
      <div class="form-group"> 
-	  <input type="text" class="zip" tabindex="9" placeholder="Postal Code" tabindex="9" maxlength="9" name="zip" data-bv-field="zip">
+	  <input type="text" class="zip" tabindex="7" placeholder="Postal Code" maxlength="9" name="zip" data-bv-field="zip">
 	 </div>
     </li>
 	<li>
-		<input type="text" tabindex="11" name="vat" placeholder="VAT (if applicable)">
+		<input type="text" tabindex="8" name="vat" placeholder="VAT (if applicable)">
 	</li>
   </ul>
  </div>
@@ -597,17 +595,17 @@ if($profileImg==''){
 		<ul>
 			<li>
 				<div class="form-group"> 			
-				 <input type="text" name="cardholdername" tabindex="4" maxlength="70" placeholder="Card Holder Name" class="card-holder-name form-control">
+				 <input type="text" name="cardholdername" tabindex="9" maxlength="70" placeholder="Card Holder Name" class="card-holder-name form-control">
 				</div>
 			</li>
 			<li>
 			<div class="form-group"> 	
-			 <input type="text" id="cardnumber" tabindex="7" maxlength="19" placeholder="Card Number" class="card-number">
+			 <input type="text" id="cardnumber" tabindex="10" maxlength="19" placeholder="Card Number" class="card-number">
 			 </div>
 			</li>
 			<li class="expiry_dat">
 			<div class="form-group"> 	
-				<select tabindex="10" name="select2" data-stripe="exp-month" class="card-expiry-month stripe-sensitive required pull-left">
+				<select tabindex="11" name="select2" data-stripe="exp-month" class="card-expiry-month stripe-sensitive required pull-left">
 					<option value="01" selected="selected">01</option>
 					<option value="02">02</option>
 					<option value="03">03</option>
@@ -622,13 +620,13 @@ if($profileImg==''){
 					<option value="12">12</option>
 				  </select>
 				
-				  <select name="select2" data-stripe="exp-year" class="card-expiry-year stripe-sensitive required pull-right">
+				  <select name="select2" tabindex="12" data-stripe="exp-year" class="card-expiry-year stripe-sensitive required pull-right">
 				  </select>
 			</div>
 			</li>
 			<li>
 			<div class="form-group"> 
-				<input type="text" tabindex="12" id="cvv" placeholder="CVV" maxlength="4" class="card-cvc">
+				<input type="text" tabindex="13" id="cvv" placeholder="CVV" maxlength="4" class="card-cvc">
 			</div>
 			</li>
 		</ul>
@@ -636,7 +634,7 @@ if($profileImg==''){
     <!-- Submit -->
     
       <div class="back_btn">
-  
+  <a href="javascript:void(0);" data-target="#popup_stage_3" class="custom-button checkout_popup_backbtn" href="">Back</a> 
           <button class="custom-button" type="submit">Pay Now</button>
        
       </div>
@@ -1287,13 +1285,16 @@ if(login_email_address !='' && login_password!=''){
 										data: {data : data},                         // Setting the data attribute of ajax with file_data
 										type: 'post',
 										success:function(data){
+											//alert(data);
 											$('.popup_stage3').empty().append(data);
+										
 										}
 									}); 
-						$('#popup_stage_3').modal({
-								backdrop: 'static',
-								keyboard: false
-							});
+									$('#popup_stage_3').modal({
+												backdrop: 'static',
+												keyboard: false
+											});
+									
 					}
 				}); 
 		 }if(license_type !='' && loginStatus==''){
@@ -1383,7 +1384,7 @@ if(login_email_address !='' && login_password!=''){
 		var get_customer_id		=	$('#get_customer_id').val();
 		var get_music_amount	=	$('#get_music_amount').val();
 	
-		$('#popup_stage_3').hide();
+		$('#popup_stage_3').modal('hide');
 		$('#popup_stage_4').modal({backdrop: 'static',
 									keyboard: false
 								});
@@ -1642,6 +1643,16 @@ $(document).ready(function() {
 $(document).on('click','.close_playlist_mycls',function(){
 		$('.added-playlist').modal('hide');
 	});	
+	/********** Popup back buton  *****************/
+$(document).on('click','.popup_backbtn_1',function(){
+	$('#popup_stage_3').modal('hide');
+	$('#popup_stage_1').modal('show');
+});
+$(document).on('click','.checkout_popup_backbtn',function(){
+	$('#popup_stage_4').modal('hide');
+	$('#popup_stage_3').modal('show');
+	
+});	
 </script>
 </body>
 	

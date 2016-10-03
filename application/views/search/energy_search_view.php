@@ -237,15 +237,6 @@ if(!empty($customerData)){
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="<?php echo base_url(); ?>audioplayer/audioplayer.js" type="text/javascript"></script>
 	
-			<section class="dzsap-sticktobottom dzsap-sticktobottom-for-skin-wave">
-				<div id="ap1" class="audioplayer-tobe" style="width:100%; " data-bgimage="img/bg.jpg" data-scrubbg="waves/scrubbg.png" data-scrubprog="waves/scrubprog.png" data-type="fake" data-source="fake" data-sourceogg="sounds/itsabeautifulday.ogg">
-					<!--  data-sourceogg="sounds/adg3.ogg"  -->
-					<div class="the-comments">
-					</div>	
-					<div class="meta-artist"><span class="the-artist">Tim McMorris</span><span class="the-name"><a href="http://codecanyon.net/item/zoomsounds-wordpress-audio-player/6181433?ref=ZoomIt" target="_blank">It's a beautiful day</a></span>
-					</div>
-				</div>
-			</section>	
 <script>
 					 function action_audio_play_func(arg){
 					//        console.info("action_audio_play_func", arg);

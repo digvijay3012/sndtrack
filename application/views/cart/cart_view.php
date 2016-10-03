@@ -43,7 +43,7 @@
                                 </div>
                             </div>
                             <div class="back_btn">
-                                
+                                <a href="javascript:void(0);" class="custom-button popup_backbtn_1" href="">Back</a>
                                 <a href="javascript:void(0);" class="custom-button purchase_button">Purchase</a>
                             </div>
                             <div class="standard_info">

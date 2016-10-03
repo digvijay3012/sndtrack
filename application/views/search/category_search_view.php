@@ -1,4 +1,4 @@
- <?php 
+<?php 
 $getAllMusic	=	get_artists_music_by_catid($catId); 
 if(!empty($getAllMusic)){
  $customerData	=	$this->ion_auth->user()->row();
@@ -58,15 +58,31 @@ if(!empty($customerData)){
 								$last_name			=	$fectchPlaylist['last_name'];
 							?>
 								 
-                                    <tr>
-                                        <td class="icons_play">
-                                            <a href=""><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                                        </td>
-                                        <td track_id="<?php echo $musicId; ?>" class="nme_user draggable title_play"><?php echo $first_name." ".$last_name; ?>
-                                            <p><?php echo $getMusicName; ?></p>
-                                        </td>
-                                        <td class="text-center"><img src="images/play_vibrate.jpg" alt=""></td>
-                                        <td>3:54</td>
+                 <tr>
+							 <td>
+								<div class="audioplayer-tobe change-artst-bio auto-init" track_artst_id="<?php echo $musicId; ?>"  data-bgimage="img/bg.jpg" data-scrubbg="<?php echo base_url(); ?>waves/scrubbg.png" data-scrubprog="<?php echo base_url(); ?>waves/scrubprog.png" data-type="audio"data-source="<?php echo base_url(); ?>music/<?php echo $getMusicFileName; ?>" data-fakeplayer="#ap1" data-sourceogg="<?php echo base_url(); ?>music/<?php echo $getMusicFileName; ?>" data-options='{
+									disable_volume: "off"
+									,autoplay: "off"
+									,cue: "on"
+									,disable_scrub: "default"
+									,design_skin: "skin-wave"
+									,skinwave_dynamicwaves:"on"
+									,skinwave_enableSpectrum: "off"
+									,settings_backup_type:"full"
+									,settings_useflashplayer:"auto"
+									,skinwave_spectrummultiplier: "4"
+									,skinwave_comments_enable:"on"
+									,skinwave_mode: "small"
+									,action_audio_play: action_audio_play_func
+									}'>
+
+									<!--  data-sourceogg="sounds/adg3.ogg"  -->
+									<div class="the-comments">
+									</div>
+									<div track_id="<?php echo $musicId; ?>" class="meta-artist  nme_user draggable title_play"><span class="the-artist"><?php echo $first_name." ".$last_name; ?></span><span class="the-name"><?php echo $getMusicName; ?></span>
+									</div>
+								</div>
+							</td>
                                         <td class="dwnld_cont">
                                             <ul>
                                                 <li clsss="dwnld_icns">
@@ -216,4 +232,38 @@ if(!empty($customerData)){
                 </div>
             </div>
 	</div>
-</div>				
+</div>		
+<link rel='stylesheet' type="text/css" href="<?php echo base_url(); ?>audioplayer/audioplayer.css"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <script src="<?php echo base_url(); ?>audioplayer/audioplayer.js" type="text/javascript"></script>		
+ <script>
+	 function action_audio_play_func(arg){
+	//        console.info("action_audio_play_func", arg);
+
+	//        setTimeout(function(){
+	//            console.info("playmedia()", arg);
+	//           arg.get(0).api_play_media({
+	//               'api_report_play_media' : false
+	//           });
+	//        },2000);
+		}
+	jQuery(document).ready(function ($) {
+
+		var settings_ap = {
+			disable_volume: 'off'
+			,autoplay: 'off'
+			,cue: 'off'
+			,disable_scrub: 'default'
+			,design_skin: 'skin-wave'
+			,skinwave_dynamicwaves:'on'
+			,skinwave_enableSpectrum: "off"
+			,settings_backup_type:'full'
+			,settings_useflashplayer:'auto'
+			,skinwave_spectrummultiplier: '4'
+			,skinwave_comments_enable:'off'
+			,skinwave_mode: 'small'
+			,scrubbar_tweak_overflow_hidden : "on"
+		};
+		dzsap_init('#ap1',settings_ap);
+	});
+</script>	

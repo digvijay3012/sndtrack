@@ -74,12 +74,17 @@ class Browse extends CI_Controller {
 		$customer_id				=	$this->input->post('customer_id');
 		$amount						=	$this->input->post('amount');
 		$license_type_value			=	$this->input->post('license_type_value');
-		$track_id					=	$this->input->post('track_id');		
+		$track_id					=	$this->input->post('track_id');	
+		$this->session->set_userdata(array('track_id' => $track_id ));		
 		$data						=	$this->browse_model->store_temp_license_type($session_id, $license_type, $customer_id, $amount, $license_type_value, $track_id);
 				
 	}
 	public function get_cart_view_by_customer($customerId=null,$track_id=null){
 		
+		return $this->load->view('cart/cart_view', array('customer_id'=>$customerId, 'track_id'=>$track_id));
+	}
+	public function get_back_popup_stage_3($customerId=null){
+		$track_id  =   $this->session->userdata('track_id'); 
 		return $this->load->view('cart/cart_view', array('customer_id'=>$customerId, 'track_id'=>$track_id));
 	}
 	public function save_cart(){

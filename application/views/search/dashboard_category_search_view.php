@@ -260,7 +260,8 @@ if(!empty($customerData)){
 	exit;
 } ?>
 <link rel='stylesheet' type="text/css" href="<?php echo base_url(); ?>audioplayer/audioplayer.css"/>
-    <script src="<?php echo base_url(); ?>audioplayer/audioplayer.js" type="text/javascript"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="<?php echo base_url(); ?>audioplayer/audioplayer.js" type="text/javascript"></script>
 	
 				<script>
 					 function action_audio_play_func(arg){

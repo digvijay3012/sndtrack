@@ -227,43 +227,34 @@ if(!empty($data)){
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="<?php echo base_url(); ?>audioplayer/audioplayer.js" type="text/javascript"></script>
 	
-			<section class="dzsap-sticktobottom dzsap-sticktobottom-for-skin-wave">
-				<div id="ap1" class="audioplayer-tobe" style="width:100%; " data-bgimage="img/bg.jpg" data-scrubbg="waves/scrubbg.png" data-scrubprog="waves/scrubprog.png" data-type="fake" data-source="fake" data-sourceogg="sounds/itsabeautifulday.ogg">
-					<!--  data-sourceogg="sounds/adg3.ogg"  -->
-					<div class="the-comments">
-					</div>	
-					<div class="meta-artist"><span class="the-artist">Tim McMorris</span><span class="the-name"><a href="http://codecanyon.net/item/zoomsounds-wordpress-audio-player/6181433?ref=ZoomIt" target="_blank">It's a beautiful day</a></span>
-					</div>
-				</div>
-			</section>	
 <script>
-					 function action_audio_play_func(arg){
-					//        console.info("action_audio_play_func", arg);
+	 function action_audio_play_func(arg){
+	//        console.info("action_audio_play_func", arg);
 
-					//        setTimeout(function(){
-					//            console.info("playmedia()", arg);
-					//           arg.get(0).api_play_media({
-					//               'api_report_play_media' : false
-					//           });
-					//        },2000);
-						}
-					jQuery(document).ready(function ($) {
+	//        setTimeout(function(){
+	//            console.info("playmedia()", arg);
+	//           arg.get(0).api_play_media({
+	//               'api_report_play_media' : false
+	//           });
+	//        },2000);
+		}
+	jQuery(document).ready(function ($) {
 
-						var settings_ap = {
-							disable_volume: 'off'
-							,autoplay: 'off'
-							,cue: 'off'
-							,disable_scrub: 'default'
-							,design_skin: 'skin-wave'
-							,skinwave_dynamicwaves:'on'
-							,skinwave_enableSpectrum: "off"
-							,settings_backup_type:'full'
-							,settings_useflashplayer:'auto'
-							,skinwave_spectrummultiplier: '4'
-							,skinwave_comments_enable:'off'
-							,skinwave_mode: 'small'
-							,scrubbar_tweak_overflow_hidden : "on"
-						};
-						dzsap_init('#ap1',settings_ap);
-					});
-				</script>			
+		var settings_ap = {
+			disable_volume: 'off'
+			,autoplay: 'off'
+			,cue: 'off'
+			,disable_scrub: 'default'
+			,design_skin: 'skin-wave'
+			,skinwave_dynamicwaves:'on'
+			,skinwave_enableSpectrum: "off"
+			,settings_backup_type:'full'
+			,settings_useflashplayer:'auto'
+			,skinwave_spectrummultiplier: '4'
+			,skinwave_comments_enable:'off'
+			,skinwave_mode: 'small'
+			,scrubbar_tweak_overflow_hidden : "on"
+		};
+		dzsap_init('#ap1',settings_ap);
+	});
+</script>			
